@@ -5,14 +5,47 @@ const section = () => {
     <div>
         <div className=' col-3 p-2'>
             <div className='card-home'>
-                <div className='overflow-hidden '>
+                <div className='overflow-hidden'>
                     <div>
-                    <span><i class="fa-solid fa-angle-left"></i></span>
-                    <span><i class="fa-solid fa-angle-right"></i></span>
+                    <span><i className="fa-solid fa-angle-left"></i></span>
+                    <span><i className="fa-solid fa-angle-right"></i></span>
                     </div>
-                    <div>
-                         <img className='w-100' src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                    <div >
+                        <div >
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
+                        <div>
+                            <img  src="https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg" alt="" />
+                        </div>
                     </div>
+                        
+
+                
+                   
                 </div>
                 <div>
                    <p>Qiymet:<span className='price-home'>500</span></p> 

@@ -5,7 +5,7 @@ import React from 'react'
         <nav className='row w-100 mt-2 mb-3'>
             <div className='d-flex flex-column-reverse align-items-center'>
                 <div className='col-2 mt-3 d-flex flex-column justify-content-center align-items-center img-div-for-height'>
-                <img src={require('./logo.home/Logo-white.PNG')} class="w-100 h-100"/>
+                <img src={require('./logo.home/Logo-white.PNG')} className="w-100 h-100"/>
                     <span className='logo-in-header'>
                     HomeLand
                     </span>
@@ -17,10 +17,10 @@ import React from 'react'
                     <li><a href="">Kiraye</a></li>
                     <li><a href="">Obyekt</a></li>
                 </ul>
-                <button className='download-ads btn btn-success'><span><i class="fa-solid fa-plus"></i></span>Elan yerləşdirmək</button>
+                <button className='download-ads btn btn-success'><span><i className="fa-solid fa-plus"></i></span>Elan yerləşdirmək</button>
             </div>
             </div>
-            <div class="up-arrow"></div>
+            <div className="up-arrow"></div>
         </nav>
     
     </div>
