@@ -119,7 +119,7 @@
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding-bottom: 2%;
-  height: 35vh !important;
+  height: 330px !important;
 }
 .card-home div {
   height: 50%;
@@ -158,12 +158,6 @@
   height: 100%;
   width: 100%;
   position: absolute;
-}
-.card-home div:nth-child(1) div:nth-child(2) div img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 .card-home div:nth-child(2) p {
   padding-left: 2%;

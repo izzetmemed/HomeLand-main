@@ -2,6 +2,7 @@ import Header from './header';
 import Search from './search';
 import Footer from './footer';
 import Cards from './cards';
+import Pagenation from './pagenation';
 import './fontawesome-free-6.4.2-web/fontawesome-free-6.4.2-web/css/fontawesome.min.css';
 import './fontawesome-free-6.4.2-web/fontawesome-free-6.4.2-web/css/solid.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -12,6 +13,7 @@ function App() {
         <Header/>
         <Search/>
         <Cards/>
+        <Pagenation/>
         <Footer/>
       </div>
   );
