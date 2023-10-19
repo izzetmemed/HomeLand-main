@@ -5,7 +5,7 @@ const Search = () => {
     <div>
 
       <div className="search-part ">
-        <div className='col-8'>
+        <div className='col-12'>
           <div className="col-12">
             <button className='btn w-100 text-white btn-success search-btn-click'  onClick={()=>{setisActive(!isActive)}}><span><i className="fa-solid fa-magnifying-glass"></i></span>Axtarış etmək </button>
           </div>
