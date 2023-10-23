@@ -3,8 +3,7 @@ import Section from './section';
 const cards = () => {
   return (
     <div>
-      <div className='d-flex justify-content-center'>
-        <div className='col-12 d-flex flex-wrap'>
+      
            <Section/>
            <Section/>
            <Section/>
@@ -77,8 +76,8 @@ const cards = () => {
            <Section/>
            <Section/>
            <Section/>
-        </div>
-      </div>
+    
+     
         
     </div>
   )

@@ -98,6 +98,7 @@
   padding: 0.5% 1%;
   border-radius: 0% !important;
   width: 20%;
+  position: relative;
 }
 .download-ads span {
   display: inline-block;
@@ -113,6 +114,23 @@
 
 .img-div-for-height {
   height: 200px;
+}
+
+.download-ads-elements {
+  position: absolute;
+  left: 0;
+  top: 103.2%;
+  background-color: rgb(95, 173, 129);
+  width: 100%;
+}
+.download-ads-elements ul {
+  padding-left: 0;
+}
+.download-ads-elements ul li {
+  padding: 3%;
+}
+.download-ads-elements ul li:hover {
+  background-color: rgb(112, 194, 148);
 }
 
 .card-home {
@@ -224,4 +242,8 @@
 .page-link:last-child {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.page-active {
+  background-color: aquamarine;
 }/*# sourceMappingURL=main.css.map */

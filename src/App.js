@@ -17,7 +17,7 @@ function App() {
         <Header/> 
         {/* <Answer/> */}
         <Search/>
-        <Cards/>
+        {/* <Cards/> */}
         <Pagenation/>
         <Footer/>
         </div>

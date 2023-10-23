@@ -49,6 +49,7 @@
     padding: 0.5% 1%;
     border-radius: 0% !important;
     width: 20%;
+    position: relative;
     span{
         display: inline-block;
         width: 28px;
@@ -64,4 +65,21 @@
 
 .img-div-for-height {
     height: 200px;
+}
+.download-ads-elements{
+    position: absolute;
+   
+    left: 0;
+    top: 103.2%;
+    background-color: rgb(95, 173, 129);
+    width: 100%;
+    ul{
+        padding-left: 0;
+        li{
+            padding: 3%;
+            &:hover{
+                background-color: rgb(112, 194, 148);
+            }
+        }
+    }
 }

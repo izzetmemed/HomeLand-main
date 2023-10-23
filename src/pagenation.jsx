@@ -1,27 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import Cards from './cards';
 
-const pagenation = () => {
+const itemsPerPage = 20;
+
+const Pagination = () => {
+  const [MyArrayCard, setMyArrayCard] = useState([]);
+
+  useEffect(() => {
+
+    if (Array.isArray(Cards)) {
+      setMyArrayCard(Cards);
+    } else {
+
+      console.error('Cards is not an array!');
+    }
+  }, []);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = MyArrayCard.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(MyArrayCard.length / itemsPerPage);
+
+  const handleClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div>
-      <div className='col-12 d-flex justify-content-center mt-5'>
-        <div class="pagination">
-          <ul className='d-flex'>
-            <li class="page-link">&laquo; Previous</li>
-            <li class="page-link">1</li>
-            <li class="page-link">2</li>
-            <li class="page-link">3</li>
-            <li class="page-link">4</li>
-            <li class="page-link">5</li>
-            <li class="page-link">6</li>
-            <li class="page-link">7</li>
-            <li class="page-link">8</li>
-            <li class="page-link">Next &raquo;</li>
-          </ul>
+      <ul>
+        {currentItems.map((card, index) => (
+          <li key={index}>{card}</li>
+        ))}
+      </ul>
 
-        </div>
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button key={index} onClick={() => handleClick(index + 1)}>
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default pagenation
+export default Pagination;

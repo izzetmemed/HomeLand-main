@@ -1,5 +1,7 @@
 import React from 'react'
- const header = () => {
+import { useState } from 'react';
+ const Header = () => {
+    const [isActive,setisActive]=useState(false);
   return (
     <div>
         <nav className='row w-100 mt-2 mb-3'>
@@ -17,7 +19,17 @@ import React from 'react'
                     <li><a href="">Kiraye</a></li>
                     <li><a href="">Obyekt</a></li>
                 </ul>
-                <button className='download-ads btn btn-success'><span><i className="fa-solid fa-plus"></i></span>Elan yerləşdirmək</button>
+                <button className='download-ads btn btn-success' onClick={()=>{setisActive(!isActive)}}><span><i className="fa-solid fa-plus"></i></span>Elan yerləşdirmək 
+                {isActive && (
+                <div className='download-ads-elements'>
+                    <ul>
+                        <li>Kiraye ev elanı yerləşdirmək</li>
+                        <li>Satılıq ev elanı yerləşdirmək</li>
+                        <li>Kiraye obyekt elanı yerləşdirmək</li>
+                        <li>Satılıq obyekt elanı yerləşdirmək</li>
+                        </ul>
+                    </div>)}
+                </button>
             </div>
             </div>
             <div className="up-arrow"></div>
@@ -26,4 +38,4 @@ import React from 'react'
     </div>
   )
 }
-export default header;
+export default Header;
