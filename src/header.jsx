@@ -23,10 +23,10 @@ import { useState } from 'react';
                 {isActive && (
                 <div className='download-ads-elements'>
                     <ul>
-                        <li>Kiraye ev elanı yerləşdirmək</li>
-                        <li>Satılıq ev elanı yerləşdirmək</li>
-                        <li>Kiraye obyekt elanı yerləşdirmək</li>
-                        <li>Satılıq obyekt elanı yerləşdirmək</li>
+                        <li>Kiraye ev</li>
+                        <li>Satılıq ev</li>
+                        <li>Kiraye obyekt</li>
+                        <li>Satılıq obyekt</li>
                         </ul>
                     </div>)}
                 </button>
