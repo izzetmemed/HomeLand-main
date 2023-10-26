@@ -15,9 +15,9 @@ function App() {
           <div className='col-8  '>
           
         <Header/> 
-        {/* <Answer/> */}
+        <Answer/>
         <Search/>
-        {/* <Cards/> */}
+        <Cards/>
         <Pagenation/>
         <Footer/>
         </div>

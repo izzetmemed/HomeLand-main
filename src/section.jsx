@@ -32,7 +32,8 @@ const Section = () => {
         }
     };
   return (
-        <div className=' col-3 p-2 mt-4'>
+    <div>
+         <div className=' col-3 p-2 mt-4'>
             <div className='card-home'>
                 <div className='overflow-hidden'>
                     <div>
@@ -47,7 +48,7 @@ const Section = () => {
                 
                    
                 </div>
-                <div>
+                <div className='pb-2'>
                    <p>Qiymet:<span className='price-home'>500</span></p> 
                    <p>Unvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p> 
                    <p>Metro:<span className='address-home'>28 May</span></p> 
@@ -57,6 +58,8 @@ const Section = () => {
                 </div>
             </div>
         </div>
+    </div>
+       
   )
 }
 

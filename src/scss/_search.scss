@@ -48,6 +48,10 @@ flex-wrap:wrap;
 }
 .search-btn-click{
     font-size: 120%;
+    background-color:rgb(79, 189, 89)  ;
+    &:hover{
+        background-color:rgb(79, 173, 87)  ;
+    }
 span{
     margin-right: 0.5%;
     i{
@@ -56,13 +60,13 @@ span{
 }
 span{
 display: inline-block;
-width: 28px;
+width: 29px;
 height: 28px;
 border-radius: 50%;
-background-color:rgb(161, 236, 194,0.2);
+padding-left: 0.2%;
+padding-bottom: 1%;
 i{
-    margin-bottom: 10%;
-    margin-left: 10%;
+   
 }
 }
 
@@ -79,9 +83,37 @@ i{
     div{
         display: flex;
         flex-direction: row;
+        input{
+            width: 20px;
+            height: 20px;
+           
+        }
     }
 }
-.forOverFlow{
+.btn-mycolor{
+    background-color:rgb(79, 189, 89) ;
+    color: white;
+    &:hover{
+        background-color: rgb(112, 211, 121);
+    }
+}
+.forOverFlow {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+/* Webkit-specific styles for the custom scrollbar */
+.forOverFlow::-webkit-scrollbar {
+    width: 10px;
+    background-color:rgb(79, 189, 89); 
+}
+
+.forOverFlow::-webkit-scrollbar-thumb {
+    background-color:rgb(255, 255, 255); 
+}
+
+.forOverFlow::-webkit-scrollbar-track {
+    background-color:rgb(79, 189, 89);
+}
+
+

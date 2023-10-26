@@ -32,7 +32,7 @@ const rent = () => {
                                 <label htmlFor="customerName">Ev sahibinin əlaqə nömrəsi:</label>
                             </div>
                             <div className='col-12 div-in-input'>
-                                <input type="number" placeholder='xxx-xxx-xx-xx' />
+                                <input type="number" placeholder='0xx-xxx-xx-xx' />
                             </div>
                         </div>
                         <div className='mt-3'>
@@ -63,7 +63,7 @@ const rent = () => {
                             </div>
                         </div>
                         <div className='mt-3'>
-                        <MapComponent/>
+                            <MapComponent />
                         </div>
 
                         <div className='mt-3'>
@@ -171,57 +171,57 @@ const rent = () => {
                             <div className='div-in-label'>
                                 <label htmlFor="customerName">Evdə hansı əşyalar var?</label>
                             </div>
-                            <div className='col-12 div-in-select ms-2'>
-                                <div> <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Yataq</label>
+                            <div className='col-12 main-div-for-chechbox ms-2'>
+                                <div> <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Yataq</label>
                                 </div>
-                                <div> <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Paltar Şkafı</label>
+                                <div> <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Paltar Şkafı</label>
                                 </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Stol</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Stul</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Mərkəzi istilik sistemi</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Qaz isidicisi (peçi)</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Kombi</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>TV</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Paltaryuyan</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Kondisaner</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Divan və kreslo</label>
-                               </div>
-                               <div>
-                                <input type="checkbox" name="" id="" />  
-                                <label for="vehicle1" className='ms-1'>Quraşdırılmış Vifi</label>
-                               </div>
-                                
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Stol</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Stul</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Mərkəzi istilik sistemi</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Qaz isidicisi (peçi)</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Kombi</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>TV</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Paltaryuyan</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Kondisaner</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Divan və kreslo</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="" id="" />
+                                    <label for="vehicle1" className='ms-1'>Quraşdırılmış Vifi</label>
+                                </div>
+
                             </div>
                         </div >
-                        
+
                         <div className='mt-3'>
                             <div className='div-in-label'>
                                 <label htmlFor="customerName">Evin sahəsi:</label>
@@ -230,6 +230,12 @@ const rent = () => {
                                 <input type="text" />
                             </div>
                         </div>
+                        <div className='d-flex justify-content-center col-12 mb-5'>
+                            <div className=' mt-5'>
+                                <button className='btn btn-mycolor pe-5 ps-5'>Elan yerləşdirmək</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import React from 'react'
 const footer = () => {
   return (
     <div>
+      <hr />
       <div className='p-5 '>
          <div className='d-flex  col-12  align-items-center  justify-content-around p-3 for-bottom-border '>
         <div className='col-3 d-flex flex-column justify-content-center align-items-center img-div-for-height '>
@@ -14,11 +15,17 @@ const footer = () => {
         </div>
       </div>
         <div>
+          <hr />
         <div className='col-12 d-flex flex-column justify-content-center align-items-center img-div-for-height '>
           <span className='logo-in-header'>
             HomeLand
           </span>
         </div>
+        </div>
+        <hr />
+        <div className='col-12 footer-end-part'>
+            <p>Evi görmədən ödəniş etməyin.</p>
+            <p>Elanlar haqqında məsuliyyət daşımırıq.</p>
         </div>
       </div>
      

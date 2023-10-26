@@ -12,14 +12,14 @@ import { useState } from 'react';
                     HomeLand
                     </span>
                 </div>
-                <div className='d-flex justify-content-between col-12  align-items-center for-height-header bg-danger px-3'>
+                <div className='d-flex justify-content-between col-12  align-items-center for-height-header  px-3'>
                 <span>HomeLand.az</span>
                 <ul className='header-ul col-4 ' >
                     <li><a href="">Alqı-satqı</a></li>
                     <li><a href="">Kiraye</a></li>
                     <li><a href="">Obyekt</a></li>
                 </ul>
-                <button className='download-ads btn btn-success' onClick={()=>{setisActive(!isActive)}}><span><i className="fa-solid fa-plus"></i></span>Elan yerləşdirmək 
+                <button className='download-ads btn ' onClick={()=>{setisActive(!isActive)}}><span><i className="fa-solid fa-plus"></i></span>Elan yerləşdirmək 
                 {isActive && (
                 <div className='download-ads-elements'>
                     <ul>

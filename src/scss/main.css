@@ -49,6 +49,10 @@
 
 .search-btn-click {
   font-size: 120%;
+  background-color: rgb(79, 189, 89);
+}
+.search-btn-click:hover {
+  background-color: rgb(79, 173, 87);
 }
 .search-btn-click span {
   margin-right: 0.5%;
@@ -58,16 +62,12 @@
 }
 .search-btn-click span {
   display: inline-block;
-  width: 28px;
+  width: 29px;
   height: 28px;
   border-radius: 50%;
-  background-color: rgba(161, 236, 194, 0.2);
+  padding-left: 0.2%;
+  padding-bottom: 1%;
 }
-.search-btn-click span i {
-  margin-bottom: 10%;
-  margin-left: 10%;
-}
-
 .MakeHandSelect {
   background-color: rgb(79, 189, 89);
 }
@@ -82,14 +82,45 @@
   display: flex;
   flex-direction: row;
 }
+.chechAndLabel div input {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-mycolor {
+  background-color: rgb(79, 189, 89);
+  color: white;
+}
+.btn-mycolor:hover {
+  background-color: rgb(112, 211, 121);
+}
 
 .forOverFlow {
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
-.for-bottom-border {
-  border-bottom: 1px solid black;
+/* Webkit-specific styles for the custom scrollbar */
+.forOverFlow::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(79, 189, 89);
+}
+
+.forOverFlow::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 255, 255);
+}
+
+.forOverFlow::-webkit-scrollbar-track {
+  background-color: rgb(79, 189, 89);
+}
+
+.footer-end-part {
+  padding: 3%;
+}
+.footer-end-part p {
+  color: rgb(0, 0, 0);
+  text-align: center;
+  margin-bottom: 0%;
 }
 
 * {
@@ -112,11 +143,12 @@
   color: white;
 }
 .header-ul li a:hover {
-  color: #5ba9b3;
+  color: rgb(160, 248, 167);
 }
 
 .for-height-header {
   height: 50px;
+  background-color: rgb(79, 189, 89);
 }
 .for-height-header span {
   color: white;
@@ -132,17 +164,24 @@
 }
 
 .download-ads {
-  padding: 0.5% 1%;
+  padding: 0.5% 0%;
   border-radius: 0% !important;
-  width: 20%;
+  width: 16%;
+  color: white;
   position: relative;
+  background-color: rgb(79, 145, 85);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.download-ads:hover {
+  background-color: rgb(128, 229, 136);
+  color: white;
 }
 .download-ads span {
   display: inline-block;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: rgb(95, 173, 129);
+  background-color: rgb(72, 180, 81);
   margin-right: 3%;
 }
 .download-ads span i {
@@ -157,13 +196,14 @@
   position: absolute;
   left: 0;
   top: 103.2%;
-  background-color: rgb(95, 173, 129);
+  background-color: rgb(72, 180, 81);
   width: 100%;
 }
 .download-ads-elements ul {
   padding-left: 0;
 }
 .download-ads-elements ul li {
+  list-style-type: none;
   padding: 3%;
 }
 .download-ads-elements ul li:hover {
@@ -174,7 +214,7 @@
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding-bottom: 2%;
-  height: 330px !important;
+  height: 340px !important;
 }
 .card-home div {
   height: 50%;
@@ -199,7 +239,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: rgba(161, 236, 194, 0.5);
+  background-color: rgba(171, 173, 172, 0.5);
 }
 .card-home div:nth-child(1) div span i {
   margin-top: 20%;
@@ -249,6 +289,11 @@
   outline: none;
   border: 1px solid rgb(163, 163, 163);
   padding-left: 0.5%;
+}
+
+.main-div-for-chechbox div input {
+  height: 15px;
+  width: 15px;
 }
 
 .pagination {

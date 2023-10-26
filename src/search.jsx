@@ -12,30 +12,30 @@ const Search = () => {
       <div className="search-part">
         <div className='col-12'>
           <div className="col-12">
-            <button className='btn w-100 text-white btn-success search-btn-click' onClick={() => setIsActive(!isActive)}>
+            <button className='btn w-100 text-white  search-btn-click' onClick={() => setIsActive(!isActive)}>
               <span><i className="fa-solid fa-magnifying-glass"></i></span>Axtarış etmək
             </button>
           </div>
           {isActive && (
             <div className='d-flex flex-wrap search-flex-part bg-success'>
               <div className="col-3">
-                <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect"onClick={() => setIsHomeOrFlat(!isHomeOrFlat)} >
+                <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" onClick={() => setIsHomeOrFlat(!isHomeOrFlat)} >
                   <span>Həyət yoxsa bina evi?</span>
                   <span><i className="fa-solid fa-chevron-down"></i></span>
                 </div>
                 {isHomeOrFlat && (
                   <div className='mt-3 col-12'>
-                  <div className='col-12 div-in-select chechAndLabel ms-1'>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Bina evi</label>
+                    <div className='col-12 div-in-select chechAndLabel ms-1'>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Bina evi</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Həyət evi</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Həyət evi</label>
                       </div>
-                  </div>
-              </div >
+                    </div>
+                  </div >
                 )}
               </div>
 
@@ -46,57 +46,57 @@ const Search = () => {
                 </div>
                 {isMetro && (
                   <div className='mt-3 col-12 pe-2'>
-                  <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>28 May</label>
+                    <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>28 May</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Gənclik</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Gənclik</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Nərmanov</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Nərmanov</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Ulduz</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Ulduz</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Koroğlu</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Koroğlu</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                  </div>
-              </div >
+                    </div>
+                  </div >
                 )}
               </div>
               <div className="col-3">
@@ -106,57 +106,57 @@ const Search = () => {
                 </div>
                 {isRayon && (
                   <div className='mt-3 col-12 pe-2'>
-                  <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>28 May</label>
+                    <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>28 May</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Gənclik</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Gənclik</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Nərmanov</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Nərmanov</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Ulduz</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Ulduz</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Koroğlu</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Koroğlu</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>Qarayev</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>Qarayev</label>
                       </div>
-                  </div>
-              </div >
+                    </div>
+                  </div >
                 )}
               </div>
               <div className="col-3">
@@ -166,45 +166,50 @@ const Search = () => {
                 </div>
                 {isRoom && (
                   <div className='mt-3 col-12 pe-2'>
-                  <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>1 Otaqlı</label>
+                    <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>1 Otaqlı</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>2 Otaqlı</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>2 Otaqlı</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>3 Otaqlı</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>3 Otaqlı</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>4 Otaqlı</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>4 Otaqlı</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>5 Otaqlı</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>5 Otaqlı</label>
                       </div>
-                      <div > 
-                      <input type="checkbox" name="" id="" />  
-                      <label for="vehicle1" className='ms-1'>6 və çox Otaqlı</label>
+                      <div >
+                        <input type="checkbox" name="" id="" />
+                        <label for="vehicle1" className='ms-1'>6 və çox Otaqlı</label>
                       </div>
-                      
-                  </div>
-              </div >
+
+                    </div>
+                  </div >
                 )}
               </div>
-
-              <div className='col-3 mt-4'>
-                <label htmlFor="">Qiymet:</label>
-                <div className='d-flex flex-row max-min-input mt-1'>
-                  <input type="number" placeholder='Max' />
-                  <input type="number" placeholder='Min' />
+              <div className=' d-flex flex-row justify-content-between col-12'>
+                <div className='col-3 mt-4'>
+                  <label htmlFor="">Qiymet:</label>
+                  <div className='d-flex flex-row max-min-input mt-1'>
+                    <input type="number" placeholder='Max' />
+                    <input type="number" placeholder='Min' />
+                  </div>
+                </div>
+                <div className='col-3 mt-5'>
+                  <button className='btn btn-mycolor'>Axtarmaq</button>
                 </div>
               </div>
             </div>
+
           )}
         </div>
       </div>
