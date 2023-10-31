@@ -9,7 +9,7 @@ const Search = () => {
 
   return (
     <div>
-      <div className="search-part">
+      <div className="search-part pe-2">
         <div className='col-12'>
           <div className="col-12">
             <button className='btn w-100 text-white  search-btn-click' onClick={() => setIsActive(!isActive)}>
@@ -18,7 +18,7 @@ const Search = () => {
           </div>
           {isActive && (
             <div className='d-flex flex-wrap search-flex-part bg-success'>
-              <div className="col-3">
+              <div className="col-12 col-lg-3">
                 <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" onClick={() => setIsHomeOrFlat(!isHomeOrFlat)} >
                   <span>Həyət yoxsa bina evi?</span>
                   <span><i className="fa-solid fa-chevron-down"></i></span>
@@ -39,7 +39,7 @@ const Search = () => {
                 )}
               </div>
 
-              <div className="col-3">
+              <div className="col-12 col-lg-3">
                 <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" onClick={() => setIsMetro(!isMetro)}>
                   <span>Metro</span>
                   <span ><i className="fa-solid fa-chevron-down"></i></span>
@@ -99,7 +99,7 @@ const Search = () => {
                   </div >
                 )}
               </div>
-              <div className="col-3">
+              <div className="col-12 col-lg-3">
                 <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" onClick={() => setIsRayon(!isRayon)}>
                   <span>Rayon:</span>
                   <span ><i className="fa-solid fa-chevron-down"></i></span>
@@ -159,7 +159,7 @@ const Search = () => {
                   </div >
                 )}
               </div>
-              <div className="col-3">
+              <div className="col-12 col-lg-3">
                 <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" onClick={() => setIsRoom(!isRoom)}>
                   <span>Otaq sayı:</span>
                   <span ><i className="fa-solid fa-chevron-down"></i></span>
@@ -196,18 +196,21 @@ const Search = () => {
                   </div >
                 )}
               </div>
-              <div className=' d-flex flex-row justify-content-between col-12'>
-                <div className='col-3 mt-4'>
+              <div className=' d-flex flex-row justify-content-center col-12'>
+                <div className='col-12 col-lg-8 mt-4'>
                   <label htmlFor="">Qiymet:</label>
                   <div className='d-flex flex-row max-min-input mt-1'>
                     <input type="number" placeholder='Max' />
                     <input type="number" placeholder='Min' />
                   </div>
                 </div>
-                <div className='col-3 mt-5'>
-                  <button className='btn btn-mycolor'>Axtarmaq</button>
-                </div>
               </div>
+              <div className='d-flex align-items-center col-12'>
+                <div className='col-12 col-lg-6 mt-5 pt-1'>
+                  <button className='btn btn-mycolor'>Axtarmaq</button>
+              </div>
+              </div>
+              
             </div>
 
           )}

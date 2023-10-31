@@ -6,65 +6,7 @@ const cards = () => {
       
            <Section/>
            <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
-           <Section/>
+       
            <Section/>
            <Section/>
            <Section/>
