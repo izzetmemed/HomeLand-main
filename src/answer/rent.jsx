@@ -63,6 +63,14 @@ const rent = () => {
                             </div>
                         </div>
                         <div className='mt-3'>
+                            <div className='div-in-label'>
+                                <label htmlFor="customerName">Mərtəbə:</label>
+                            </div>
+                            <div className='col-12 div-in-input'>
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <div className='mt-3'>
                             <MapComponent />
                         </div>
 
@@ -149,6 +157,19 @@ const rent = () => {
                                     <option value="">Təmirsiz</option>
                                     <option value="">Orta təmirli</option>
                                     <option value="">Təmirli</option>
+                                </select>
+                            </div>
+                        </div >
+                        <div className='mt-3'>
+
+                            <div className='div-in-label'>
+                                <label htmlFor="customerName">Bina:</label>
+                            </div>
+                            <div className='col-12 div-in-select'>
+                                <select name="" id="">
+                                    <option value=""></option>
+                                    <option value="">Yeni tikili.</option>
+                                    <option value="">Köhnə tikili.</option>
                                 </select>
                             </div>
                         </div >

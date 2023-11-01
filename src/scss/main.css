@@ -341,4 +341,72 @@
   width: 30%;
   margin: 0.5%;
   padding-left: 0.5%;
+}
+
+.LinkTree div {
+  display: flex;
+  justify-content: center;
+}
+.LinkTree div a {
+  text-decoration: none;
+}
+
+.insideCard-home {
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding-bottom: 2%;
+  height: 300vw !important;
+}
+.insideCard-home div {
+  height: 25%;
+}
+.insideCard-home div:nth-child(1) {
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.insideCard-home div:nth-child(1) div {
+  width: 90%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.insideCard-home div:nth-child(1) div span {
+  z-index: 5000;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(171, 173, 172, 0.5);
+}
+.insideCard-home div:nth-child(1) div span i {
+  margin-top: 20%;
+  margin-left: 30%;
+}
+.insideCard-home div:nth-child(1) div:nth-child(2) {
+  height: 100%;
+  width: 100%;
+}
+.insideCard-home div:nth-child(1) div:nth-child(2) div {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.insideCard-home div:nth-child(1) div:nth-child(2) div img {
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
+}
+.insideCard-home div:nth-child(2) p {
+  padding-left: 2%;
+  margin-bottom: 0%;
+  font-weight: 600;
+  font-style: italic;
+}
+.insideCard-home div:nth-child(2) p span {
+  font-weight: 400;
+  margin-left: 2%;
+  font-style: normal;
 }/*# sourceMappingURL=main.css.map */
