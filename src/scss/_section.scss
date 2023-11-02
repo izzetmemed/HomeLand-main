@@ -2,7 +2,7 @@
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding-bottom: 2%;
-    height: 340px !important;
+    height: 400px !important;
      div{
         height: 50%;
     &:nth-child(1){
@@ -62,4 +62,32 @@
     }   
     }
     
+}
+@media(max-width:576px) {
+    .card-home{
+        height:500px !important;
+        div{
+            height: 65%;}
+    }
+}
+@media(max-width:400px) {
+    .card-home{
+        height:450px !important;
+        div{
+            height: 60%;}
+    }
+}
+@media(max-width:370px) {
+    .card-home{
+        height:450px !important;
+        div{
+            height: 55%;}
+    }
+}
+@media(max-width:300px) {
+    .card-home{
+        height:450px !important;
+        div{
+            height: 50%;}
+    }
 }

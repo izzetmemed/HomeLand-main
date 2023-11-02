@@ -3,10 +3,7 @@ import Section from './section';
 const cards = () => {
   return (
     <div>
-      
-           <Section/>
-           <Section/>
-       
+      <div className='d-flex flex-wrap'>
            <Section/>
            <Section/>
            <Section/>
@@ -18,9 +15,12 @@ const cards = () => {
            <Section/>
            <Section/>
            <Section/>
-    
-     
-        
+           <Section/>
+           <Section/>
+           <Section/>
+           <Section/>
+           <Section/>
+      </div>
     </div>
   )
 }

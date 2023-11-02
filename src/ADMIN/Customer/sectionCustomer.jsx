@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
-const Section = () => {
+const SectionCustomer = () => {
+    const [isButtonClicked, setIsButtonClicked] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsButtonClicked(true);
+  };
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
         'https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp',
@@ -31,6 +36,12 @@ const Section = () => {
             setImgSourceIndex(keepingImgSource.length - 1);
         }
     };
+    const buttonStyle = {
+        backgroundColor: isButtonClicked ? 'green' : 'red',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        color:'white',
+      };
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
          <div className=' p-2 mt-4'>
@@ -52,10 +63,12 @@ const Section = () => {
                    <p>Qiymet:<span className='price-home'>500</span></p> 
                    <p>Unvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p> 
                    <p>Metro:<span className='address-home'>28 May</span></p> 
-                    <p>Otaq sayi:<span className='room-home'>5 otaq</span></p> 
-                    <p>Sahe:<span className='measure-home'>80 km</span></p>
-                    <p>Əşya:<span className='time-home'>Tam Əşyalı</span></p>
+                    <p>Kod:<span className='room-home'>120</span></p> 
                     <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
+                    <div className='p-2'>
+                         <button className='btn ' style={buttonStyle} onClick={handleButtonClick}>Danışıldı</button>
+                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -64,4 +77,4 @@ const Section = () => {
   )
 }
 
-export default Section
+export default SectionCustomer

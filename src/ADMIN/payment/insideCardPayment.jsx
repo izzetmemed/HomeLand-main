@@ -1,7 +1,8 @@
+
 import { useState } from "react"
 import React from 'react'
-import Coordinate from "./answer/coordinate"
-const İnsideCard = () => {
+import Coordinate from "../../answer/coordinate";
+const İnsideCardPayment = () => {
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
         'https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp',
@@ -50,7 +51,10 @@ const İnsideCard = () => {
 
                     </div>
                     <div className='pb-2 mt-3'>
+                        <p>Ev sahibi:<span className='price-home'>Quliyev Mezahir</span></p>
+                        <p>Nomre:<span className='price-home'>055 555 55 55</span></p>
                         <p>Qiymet:<span className='price-home'>500</span></p>
+                        <p>Kod:<span className='price-home'>120</span></p>
                         <p>Unvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p>
                         <p>Metro:<span className='address-home'>28 May</span></p>
                         <p>Otaq sayi:<span className='room-home'>5 otaq</span></p>
@@ -63,13 +67,42 @@ const İnsideCard = () => {
                         <p>Bina:<span className='time-home'>Yeni tikili</span></p>
                         <p>Evdə olan Əşyalar:<span className='time-home'>..........</span></p>
                         <p>Evi tutduğunuz halda əmlakşıya verəcəyiniz ödəniş:<span className='time-home'>100</span></p>
+                        <div className="col-12 d-flex justify-content-center">
+                            <div className="col-6 d-flex mt-3">
+                                <table className="table table-dark table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Müştərinin adı soyadı</th>
+                                            <th>Nömrə</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>izzet memmedov</td>
+                                            <td>055 555 55 55</td>
+                                        </tr>
+                                        <tr>
+                                            <td>izzet memmedov</td>
+                                            <td>055 555 55 55</td>
+                                        </tr>
+                                        <tr>
+                                            <td>izzet memmedov</td>
+                                            <td>055 555 55 55</td>
+                                        </tr>
+                                        <tr>
+                                            <td>izzet memmedov</td>
+                                            <td>055 555 55 55</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+                       
                         <div className="height-for-coordiante mt-2 mb-2 p-4">
                             <Coordinate />
-                        </div>
-                        <div>
-                            <div className='d-flex justify-content-center w-100'>
-                                    <button className='btn btn-mycolor height-for-calling fs-5'><i class="fa-solid fa-phone"></i> Əmlakçıya zəng etmək.</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,4 +111,4 @@ const İnsideCard = () => {
     )
 }
 
-export default İnsideCard
+export default İnsideCardPayment

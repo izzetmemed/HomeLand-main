@@ -217,7 +217,7 @@
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding-bottom: 2%;
-  height: 340px !important;
+  height: 400px !important;
 }
 .card-home div {
   height: 50%;
@@ -269,6 +269,38 @@
   font-style: normal;
 }
 
+@media (max-width: 576px) {
+  .card-home {
+    height: 500px !important;
+  }
+  .card-home div {
+    height: 65%;
+  }
+}
+@media (max-width: 400px) {
+  .card-home {
+    height: 450px !important;
+  }
+  .card-home div {
+    height: 60%;
+  }
+}
+@media (max-width: 370px) {
+  .card-home {
+    height: 450px !important;
+  }
+  .card-home div {
+    height: 55%;
+  }
+}
+@media (max-width: 300px) {
+  .card-home {
+    height: 450px !important;
+  }
+  .card-home div {
+    height: 50%;
+  }
+}
 .div-in-input input {
   width: 98%;
   border-radius: 0px;
@@ -353,12 +385,11 @@
 
 .insideCard-home {
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding-bottom: 2%;
-  height: 300vw !important;
+  height: 110vw !important;
 }
 .insideCard-home div {
-  height: 25%;
+  height: 40%;
 }
 .insideCard-home div:nth-child(1) {
   border-radius: 5px;
@@ -407,6 +438,93 @@
 }
 .insideCard-home div:nth-child(2) p span {
   font-weight: 400;
-  margin-left: 2%;
+  margin-left: 1%;
   font-style: normal;
+}
+
+.height-for-coordiante {
+  height: 490px !important;
+}
+
+.height-for-calling {
+  height: 50px;
+}
+
+@media (max-width: 1600px) {
+  .insideCard-home {
+    height: 120vw !important;
+  }
+}
+@media (max-width: 1400px) {
+  .insideCard-home {
+    height: 140vw !important;
+  }
+  .insideCard-home div {
+    height: 35%;
+  }
+}
+@media (max-width: 1100px) {
+  .insideCard-home {
+    height: 170vw !important;
+  }
+}
+@media (max-width: 900px) {
+  .insideCard-home {
+    height: 200vw !important;
+  }
+  .insideCard-home div {
+    height: 30%;
+  }
+}
+@media (max-width: 800px) {
+  .insideCard-home {
+    height: 220vw !important;
+  }
+}
+@media (max-width: 700px) {
+  .insideCard-home {
+    height: 250vw !important;
+  }
+}
+@media (max-width: 600px) {
+  .insideCard-home {
+    height: 290vw !important;
+  }
+  .insideCard-home div {
+    height: 25%;
+  }
+}
+@media (max-width: 500px) {
+  .insideCard-home {
+    height: 340vw !important;
+  }
+  .insideCard-home div {
+    height: 23%;
+  }
+}
+@media (max-width: 430px) {
+  .insideCard-home {
+    height: 370vw !important;
+  }
+  .insideCard-home div {
+    height: 20%;
+  }
+}
+@media (max-width: 370px) {
+  .insideCard-home {
+    height: 400vw !important;
+  }
+  .insideCard-home div {
+    height: 18%;
+  }
+}
+@media (max-width: 340px) {
+  .insideCard-home {
+    height: 450vw !important;
+  }
+}
+@media (max-width: 310px) {
+  .insideCard-home {
+    height: 500vw !important;
+  }
 }/*# sourceMappingURL=main.css.map */
