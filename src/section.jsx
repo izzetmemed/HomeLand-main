@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
+import InsideCard from './İnsideCard';
 const Section = () => {
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
@@ -33,6 +34,7 @@ const Section = () => {
     };
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
+        <Link to='/Kart'>
          <div className=' p-2 mt-4'>
             <div className='card-home'>
                 <div className='overflow-hidden'>
@@ -59,6 +61,8 @@ const Section = () => {
                 </div>
             </div>
         </div>
+        </Link>
+        
     </div>
        
   )

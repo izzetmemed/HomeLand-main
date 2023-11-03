@@ -1,9 +1,45 @@
 import React from 'react'
+import { useState,useRef } from 'react';
 import MapComponent from './coordinate'
-const rent = () => {
+const Rent = () => {
+
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const triggerFileInput = () => {
+        fileInputRef.current.click();
+    };
+    const onImageChange = (event) => {
+        if (event.target.files) {
+            const selectedImages = Array.from(event.target.files).slice(0, 10); // Limit to 10 images
+            const newImageUrls = selectedImages.map((image) => URL.createObjectURL(image));
+            if (images.length > 9) {
+                return;
+            }
+            setImages((prevImages) => [...prevImages, ...newImageUrls]);
+        }
+    };
+
+    const keepingImgSource = images;
+
+    const [ImgSourceIndex, setImgSourceIndex] = useState(0);
+    const btnLeftIcon = () => {
+        if (ImgSourceIndex < keepingImgSource.length - 1) {
+            setImgSourceIndex(ImgSourceIndex + 1);
+        } else {
+            setImgSourceIndex(0);
+        }
+    };
+
+    const btnRightIcon = () => {
+        if (ImgSourceIndex > 0) {
+            setImgSourceIndex(ImgSourceIndex - 1);
+        } else {
+            setImgSourceIndex(keepingImgSource.length - 1);
+        }
+    };
     return (
         <div>
-            <div className='mt-5'>
+            <div className='mt-5 ms-1'>
                 <div className='d-flex flex-column align-items-center '>
                     <div className='col-5'>
                         <p className='text-center text-danger'>
@@ -33,6 +69,42 @@ const rent = () => {
                             </div>
                             <div className='col-12 div-in-input'>
                                 <input type="number" placeholder='0xx-xxx-xx-xx' />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='d-flex flex-column align-items-center mt-3'>
+                                <p className='text-danger fs-5'>Evinizə aid 10 şəkil əlavə edin. (Salon, yataq otağı, mətbəxt, hamam, tualet, balkon və.s)</p>
+                                <div className="custom-file-input" onClick={triggerFileInput}>
+                                    Şəkil əlavə etmək.
+                                </div>
+                                <input
+                                    type="file"
+                                    onChange={onImageChange}
+                                    className="filetype"
+                                    multiple
+                                    ref={fileInputRef}
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
+
+                        </div>
+                        <div>
+                            <div className=' col-12 p-2 mt-4 ps-2'>
+                                <div className='answer-images-rent'>
+                                    <div className='overflow-hidden backgrounImgDefault'>
+                                        <div>
+                                            <span onClick={btnLeftIcon}><i className="fa-solid fa-angle-left"></i></span>
+                                            <span onClick={btnRightIcon}><i className="fa-solid fa-angle-right"></i></span>
+                                        </div>
+                                        <div>
+                                            <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100' />
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className='mt-3'>
@@ -264,4 +336,4 @@ const rent = () => {
     )
 }
 
-export default rent
+export default Rent
