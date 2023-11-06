@@ -1,6 +1,7 @@
 import React from 'react'
-import Section from './section';
-import Search  from './search';
+import Section from '../section';
+import Search  from '../search';
+import { Outlet } from 'react-router-dom';
 const cards = () => {
   return (
     <div>
@@ -23,6 +24,7 @@ const cards = () => {
            <Section/>
            <Section/>
       </div>
+      <Outlet/>
     </div>
   )
 }

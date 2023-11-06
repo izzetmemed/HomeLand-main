@@ -63,18 +63,23 @@
     }
     
 }
+@media(max-width:860px) {
+    .card-home{
+        height:440px !important;
+    }
+}
 @media(max-width:576px) {
     .card-home{
         height:500px !important;
         div{
-            height: 65%;}
+            height: 62%;}
     }
 }
 @media(max-width:400px) {
     .card-home{
         height:450px !important;
         div{
-            height: 60%;}
+            height: 57%;}
     }
 }
 @media(max-width:370px) {

@@ -88,6 +88,9 @@
         li{
             list-style-type: none;
             padding: 3%;
+            a{
+                color: white;
+            }
             &:hover{
                 background-color: rgb(112, 194, 148);
             }

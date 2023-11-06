@@ -209,6 +209,9 @@
   list-style-type: none;
   padding: 3%;
 }
+.download-ads-elements ul li a {
+  color: white;
+}
 .download-ads-elements ul li:hover {
   background-color: rgb(112, 194, 148);
 }
@@ -269,12 +272,17 @@
   font-style: normal;
 }
 
+@media (max-width: 860px) {
+  .card-home {
+    height: 440px !important;
+  }
+}
 @media (max-width: 576px) {
   .card-home {
     height: 500px !important;
   }
   .card-home div {
-    height: 65%;
+    height: 62%;
   }
 }
 @media (max-width: 400px) {
@@ -282,7 +290,7 @@
     height: 450px !important;
   }
   .card-home div {
-    height: 60%;
+    height: 57%;
   }
 }
 @media (max-width: 370px) {
@@ -493,6 +501,7 @@ a {
   border-radius: 5px;
   padding-bottom: 2%;
   height: 110vw !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .insideCard-home div {
   height: 40%;
@@ -544,7 +553,7 @@ a {
 }
 .insideCard-home div:nth-child(2) p span {
   font-weight: 400;
-  margin-left: 1%;
+  margin-left: 0.5%;
   font-style: normal;
 }
 

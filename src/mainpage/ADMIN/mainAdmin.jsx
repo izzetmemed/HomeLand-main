@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 const MainAdmin = () => {
   const [isRentHome, setIsRentHome] = useState(false);
   const [isSellHome, setIsSellHome] = useState(false);
@@ -17,13 +17,13 @@ const MainAdmin = () => {
                   <div className='mt-3 col-12 pe-2'>
                     <div className='col-12 div-in-select LinkTree ms-1 pe-1'>
                       <div >
-                       <a href="">Ev sahibi:</a>
+                      <Link to="/login/MainAdmin/Own">Ev sahibi:</Link>
                       </div>
                       <div >
-                        <a href="">Müştəri:</a>
+                      <Link to="/login/MainAdmin/Customer">Müştəri:</Link>
                       </div>
                       <div >
-                       <a href="">Ödəniş:</a>
+                      <Link to="/login/MainAdmin/Payment">Ödəniş:</Link>
                       </div>
                     </div>
                   </div >
@@ -38,13 +38,13 @@ const MainAdmin = () => {
                   <div className='mt-3 col-12 pe-2'>
                     <div className='col-12 div-in-select LinkTree ms-1 pe-1'>
                       <div >
-                       <a href="">Ev sahibi:</a>
+                       <Link to="/Own">Ev sahibi:</Link>
                       </div>
                       <div >
-                        <a href="">Müştəri:</a>
+                      <Link to="/Customer">Müştəri:</Link>
                       </div>
                       <div >
-                       <a href="">Ödəniş:</a>
+                      <Link to="/Payment">Ödəniş:</Link>
                       </div>
                     </div>
                   </div >

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import InsideCard from './İnsideCard';
+import InsideCard from './mainpage/İnsideCard';
 const Section = () => {
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
@@ -32,6 +32,10 @@ const Section = () => {
             setImgSourceIndex(keepingImgSource.length - 1);
         }
     };
+    const price="Aze";
+    const teratory="km";
+    const address='Nesimi Rayon, eliiskenderov kucesi';
+    const AddressLength=address.slice(0,12)+"...";
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
         <Link to='/Kart'>
@@ -51,11 +55,12 @@ const Section = () => {
                    
                 </div>
                 <div className='pb-2'>
-                   <p>Qiymet:<span className='price-home'>500</span></p> 
-                   <p>Unvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p> 
+                   <p>Qiymet:<span className='price-home' >500</span><span>{price}</span></p> 
+                   <p>Ünvan:<span className='address-home'>{AddressLength}</span></p> 
                    <p>Metro:<span className='address-home'>28 May</span></p> 
                     <p>Otaq sayi:<span className='room-home'>5 otaq</span></p> 
-                    <p>Sahe:<span className='measure-home'>80 km</span></p>
+                    <p>Kiraye verilir:<span className='time-home'>Aile ve telebe</span></p>
+                    <p>Sahe:<span className='measure-home'>80<span>{teratory}</span></span></p>
                     <p>Əşya:<span className='time-home'>Tam Əşyalı</span></p>
                     <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
                 </div>

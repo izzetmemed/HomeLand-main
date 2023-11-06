@@ -2,6 +2,7 @@
     border-radius: 5px;
     padding-bottom: 2%;
     height:110vw !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
      div{
         height: 40%;
     &:nth-child(1){
@@ -53,7 +54,7 @@
         font-style: italic;
         span{
             font-weight: 400;
-            margin-left: 1%;
+            margin-left: 0.5%;
             font-style: normal;
           }
        }

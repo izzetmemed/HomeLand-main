@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link,NavLink } from 'react-router-dom';
-import InsideCard from './İnsideCard'
+import InsideCard from './mainpage/İnsideCard'
  const Header = () => {
     const [isActive,setisActive]=useState(false);
   return (
@@ -25,7 +25,7 @@ import InsideCard from './İnsideCard'
                 {isActive && (
                 <div className='download-ads-elements'>
                     <ul>
-                        <li><NavLink to="/Sorğu">Kiraye ev</NavLink></li>
+                        <li><NavLink to="/form">Kiraye ev</NavLink></li>
                         <li>Satılıq ev</li>
                         <li>Kiraye obyekt</li>
                         <li>Satılıq obyekt</li>

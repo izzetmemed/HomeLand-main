@@ -1,6 +1,7 @@
 import { useState } from "react"
 import React from 'react'
-import Coordinate from "./answer/coordinate"
+import Coordinate from "./answer/coordinate";
+import Cards from "./cards";
 const İnsideCard = () => {
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
@@ -32,6 +33,8 @@ const İnsideCard = () => {
             setImgSourceIndex(keepingImgSource.length - 1);
         }
     };
+    const price="Aze";
+    const teratory="km";
     return (
         <div>
             <div className=' col-12 p-2 mt-4 ps-2'>
@@ -50,11 +53,11 @@ const İnsideCard = () => {
 
                     </div>
                     <div className='pb-2 mt-3'>
-                        <p>Qiymet:<span className='price-home'>500</span></p>
-                        <p>Unvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p>
+                        <p>Qiymet:<span className='price-home' >500</span><span>{price}</span></p> 
+                        <p>Ünvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p>
                         <p>Metro:<span className='address-home'>28 May</span></p>
                         <p>Otaq sayi:<span className='room-home'>5 otaq</span></p>
-                        <p>Sahe:<span className='measure-home'>80 km</span></p>
+                        <p>Sahe:<span className='measure-home'>80<span>{teratory}</span></span></p>
                         <p>Ətraflı:<span className='measure-home'>Lorem ipsum dolor sit, amet consectetur lorem200 adipisicing elit. Amet excepturi a quos mollitia dicta facere, nostrum quibusdam laborum sint vel at sequi, pariatur quo vero nulla, labore earum veniam! Facilis, facere ex? Deserunt consequuntur sint dolorum distinctio optio dignissimos corrupti.</span></p>
                         <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
                         <p>Ev kim' verilir:<span className='time-home'>Aile ve telebe</span></p>
@@ -62,7 +65,7 @@ const İnsideCard = () => {
                         <p>Təmir:<span className='time-home'>Orta təmir</span></p>
                         <p>Bina:<span className='time-home'>Yeni tikili</span></p>
                         <p>Evdə olan Əşyalar:<span className='time-home'>..........</span></p>
-                        <p>Evi tutduğunuz halda əmlakşıya verəcəyiniz ödəniş:<span className='time-home'>100</span></p>
+                        <p>Evi tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:<span className='time-home'>100<span>{price}</span></span></p>
                         <div className="height-for-coordiante mt-2 mb-2 p-4">
                             <Coordinate />
                         </div>
@@ -73,6 +76,9 @@ const İnsideCard = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="mt-5">
+                 <Cards/>
             </div>
         </div>
     )
