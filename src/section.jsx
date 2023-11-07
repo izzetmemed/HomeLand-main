@@ -38,7 +38,7 @@ const Section = () => {
     const AddressLength=address.slice(0,12)+"...";
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
-        <Link to='/Kart'>
+      
          <div className=' p-2 mt-4'>
             <div className='card-home'>
                 <div className='overflow-hidden'>
@@ -54,7 +54,8 @@ const Section = () => {
                 
                    
                 </div>
-                <div className='pb-2'>
+                  
+                <div className='pb-2'><Link to='/Kart'>
                    <p>Qiymet:<span className='price-home' >500</span><span>{price}</span></p> 
                    <p>Ünvan:<span className='address-home'>{AddressLength}</span></p> 
                    <p>Metro:<span className='address-home'>28 May</span></p> 
@@ -63,10 +64,12 @@ const Section = () => {
                     <p>Sahe:<span className='measure-home'>80<span>{teratory}</span></span></p>
                     <p>Əşya:<span className='time-home'>Tam Əşyalı</span></p>
                     <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
+                                     </Link>
                 </div>
+
             </div>
         </div>
-        </Link>
+       
         
     </div>
        

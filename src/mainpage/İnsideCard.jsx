@@ -47,6 +47,9 @@ const İnsideCard = () => {
                         <div>
                             <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100' />
                         </div>
+                        <div className="logo-on-images">
+                            <p>HomeLand.az</p>
+                        </div>
 
 
 
@@ -59,13 +62,14 @@ const İnsideCard = () => {
                         <p>Otaq sayi:<span className='room-home'>5 otaq</span></p>
                         <p>Sahe:<span className='measure-home'>80<span>{teratory}</span></span></p>
                         <p>Ətraflı:<span className='measure-home'>Lorem ipsum dolor sit, amet consectetur lorem200 adipisicing elit. Amet excepturi a quos mollitia dicta facere, nostrum quibusdam laborum sint vel at sequi, pariatur quo vero nulla, labore earum veniam! Facilis, facere ex? Deserunt consequuntur sint dolorum distinctio optio dignissimos corrupti.</span></p>
-                        <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
                         <p>Ev kim' verilir:<span className='time-home'>Aile ve telebe</span></p>
                         <p>Əşya:<span className='time-home'>Əşyalı</span></p>
                         <p>Təmir:<span className='time-home'>Orta təmir</span></p>
+                        <p>Mərtəbə:<span className='time-home'>5</span></p>
                         <p>Bina:<span className='time-home'>Yeni tikili</span></p>
-                        <p>Evdə olan Əşyalar:<span className='time-home'>..........</span></p>
+                        <p>Evdə olan Əşyalar:<span className='time-home'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero deleniti molestiae iusto maxime dignissimos suscipit.</span></p>
                         <p>Evi tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:<span className='time-home'>100<span>{price}</span></span></p>
+                        <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
                         <div className="height-for-coordiante mt-2 mb-2 p-4">
                             <Coordinate />
                         </div>

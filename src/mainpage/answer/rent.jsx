@@ -85,6 +85,9 @@ const Rent = () => {
                                     ref={fileInputRef}
                                     style={{ display: 'none' }}
                                 />
+                                <div className='mt-4'>
+                                    <p>Yüklədiyiniz şəkil sayı: {images.length}</p>
+                                </div>
                             </div>
 
                         </div>

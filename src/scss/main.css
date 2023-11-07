@@ -127,6 +127,7 @@
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
+  font-weight: 600;
 }
 
 .header-ul {
@@ -216,6 +217,10 @@
   background-color: rgb(112, 194, 148);
 }
 
+html, body {
+  width: 100% !important;
+}
+
 .card-home {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -240,7 +245,7 @@
   justify-content: space-between;
 }
 .card-home div:nth-child(1) div span {
-  z-index: 5000;
+  z-index: 500;
   display: inline-block;
   width: 28px;
   height: 28px;
@@ -500,7 +505,7 @@ a {
 .insideCard-home {
   border-radius: 5px;
   padding-bottom: 2%;
-  height: 110vw !important;
+  height: 105vw !important;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .insideCard-home div {
@@ -567,28 +572,58 @@ a {
 
 @media (max-width: 1600px) {
   .insideCard-home {
-    height: 120vw !important;
+    height: 110vw !important;
+  }
+}
+@media (max-width: 1500px) {
+  .insideCard-home {
+    height: 125vw !important;
   }
 }
 @media (max-width: 1400px) {
   .insideCard-home {
-    height: 140vw !important;
+    height: 125vw !important;
   }
   .insideCard-home div {
     height: 35%;
   }
 }
+@media (max-width: 1250px) {
+  .insideCard-home {
+    height: 130vw !important;
+  }
+}
+@media (max-width: 1180px) {
+  .insideCard-home {
+    height: 135vw !important;
+  }
+}
+@media (max-width: 1180px) {
+  .insideCard-home {
+    height: 140vw !important;
+  }
+}
 @media (max-width: 1100px) {
+  .insideCard-home {
+    height: 150vw !important;
+  }
+}
+@media (max-width: 1040px) {
+  .insideCard-home {
+    height: 160vw !important;
+  }
+}
+@media (max-width: 970px) {
   .insideCard-home {
     height: 170vw !important;
   }
-}
-@media (max-width: 900px) {
-  .insideCard-home {
-    height: 200vw !important;
-  }
   .insideCard-home div {
     height: 30%;
+  }
+}
+@media (max-width: 870px) {
+  .insideCard-home {
+    height: 180vw !important;
   }
 }
 @media (max-width: 800px) {
@@ -611,7 +646,15 @@ a {
 }
 @media (max-width: 500px) {
   .insideCard-home {
-    height: 340vw !important;
+    height: 330vw !important;
+  }
+  .insideCard-home div {
+    height: 23%;
+  }
+}
+@media (max-width: 450px) {
+  .insideCard-home {
+    height: 350vw !important;
   }
   .insideCard-home div {
     height: 23%;
@@ -619,7 +662,15 @@ a {
 }
 @media (max-width: 430px) {
   .insideCard-home {
-    height: 370vw !important;
+    height: 380vw !important;
+  }
+  .insideCard-home div {
+    height: 20%;
+  }
+}
+@media (max-width: 400px) {
+  .insideCard-home {
+    height: 400vw !important;
   }
   .insideCard-home div {
     height: 20%;
@@ -627,19 +678,36 @@ a {
 }
 @media (max-width: 370px) {
   .insideCard-home {
-    height: 400vw !important;
+    height: 430vw !important;
   }
   .insideCard-home div {
     height: 18%;
   }
 }
-@media (max-width: 340px) {
+@media (max-width: 350px) {
   .insideCard-home {
-    height: 450vw !important;
+    height: 480vw !important;
   }
 }
-@media (max-width: 310px) {
+@media (max-width: 320px) {
   .insideCard-home {
-    height: 500vw !important;
+    height: 550vw !important;
   }
+}
+@media (max-width: 290px) {
+  .insideCard-home {
+    height: 600vw !important;
+  }
+}
+.logo-on-images {
+  position: absolute;
+  top: 80%;
+  left: 5%;
+  height: 20% !important;
+  z-index: 60000;
+}
+.logo-on-images p {
+  font-size: 200%;
+  color: white;
+  opacity: 0.6;
 }/*# sourceMappingURL=main.css.map */

@@ -15,7 +15,7 @@ import Own from '../mainpage/ADMIN/RentHomeOwn' ;
 import Payment from '../mainpage/ADMIN/RentPayment' ;
 const route = () => {
   return (
-    <div>
+    <div >
         <Header/>
         <Routes>
           <Route path='/' element={<Index/>}>
@@ -27,11 +27,10 @@ const route = () => {
                     <Route path='MainAdmin' element={<IndexHome/>}>
                       <Route index={true} element={<MainAdmin/>}/>
                       
-                      <Route path='Costumer' element={<Costumer/>}/>
+                      <Route path='Customer' element={<Costumer/>}/>
                       <Route path='Own' element={<Own/>}/>
                       <Route path='Payment' element={<Payment/>}/>
                     </Route>
-                   
                   </Route>
           </Route>
           
