@@ -92,3 +92,30 @@
             height: 50%;}
     }
 }
+.mybasketOnImg{
+    position: absolute;
+    z-index: 5001;
+    top: 5%;
+    left:85%;
+    background-color: rgb(122, 122, 122);
+    padding: 5px 8px 5px 8px;
+    border-radius: 50%;
+    i{
+        color: white;
+    }
+}
+.mydeleteOnImg{
+    position: absolute;
+    z-index: 5001;
+    top: 5%;
+    left:85%;
+    background-color: rgb(122, 122, 122);
+    padding: 5px 10px 5px 10px;
+    border-radius: 50%;
+    i{
+        color: white;
+    }
+}
+.mydeleteOnImg{
+    display: none;
+}

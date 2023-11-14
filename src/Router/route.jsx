@@ -13,6 +13,7 @@ import IndexHome from '../mainpage/ADMIN/indexrentHome';
 import Costumer from '../mainpage/ADMIN/RentHomeCustomer' ;
 import Own from '../mainpage/ADMIN/RentHomeOwn' ;
 import Payment from '../mainpage/ADMIN/RentPayment' ;
+import Basket from '../Sebet/Basket';
 const route = () => {
   return (
     <div >
@@ -22,6 +23,7 @@ const route = () => {
               <Route index={true} element={<Cards/>}/>
                 <Route path='/Kart' element={<InsideCard/>}/>
                   <Route  path='/form' element={<Rent/>}/>
+                  <Route  path='/səbət' element={<Basket/>}/>
                   <Route  path='/Login' element={<IndexAdmin/>}>
                    <Route index={true} element={<Login/>}/>
                     <Route path='MainAdmin' element={<IndexHome/>}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 const Search = () => {
   const [isActive, setIsActive] = useState(false);
   const [isHomeOrFlat, setIsHomeOrFlat] = useState(false);
@@ -216,6 +216,11 @@ const Search = () => {
           )}
         </div>
       </div>
+      <div className="col-12 mt-3 pe-2">
+            <Link to="Səbət" className='btn w-100 text-white  search-btn-click' >
+              Mənim səbətim
+            </Link>
+          </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import InsideCard from './mainpage/İnsideCard';
-const Section = () => {
+const Section = ({priceHome,address,MetroHome,roomHome,WhoCanTake,measureHome,Items,dateTime,deleteBasket}) => {
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
         'https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp',
@@ -34,8 +34,39 @@ const Section = () => {
     };
     const price="Aze";
     const teratory="km";
-    const address='Nesimi Rayon, eliiskenderov kucesi';
-    const AddressLength=address.slice(0,12)+"...";
+  
+    const [changeColor,setchangeColor]=useState(false);
+    const [userData, setUserData] = useState([]);
+    const [CheckRptrData, setCheckRptrData] = useState([]);
+    const newData = [
+      [keepingImgSource, priceHome, address, MetroHome, roomHome, WhoCanTake, measureHome, Items, dateTime],
+    ];
+    
+    const SendBasket = () => {
+      setchangeColor(!changeColor);
+      const LastinfoLocal = JSON.parse(localStorage.getItem("Section")) || [];
+      setCheckRptrData(LastinfoLocal);
+      console.log(CheckRptrData);
+      console.log(newData)
+      const isDuplicate = CheckRptrData.some(x => x.MetroHome == newData.MetroHome && x.address == newData.address);
+      console.log(isDuplicate)
+      if(isDuplicate){
+        return 
+      }else{
+        setUserData([...LastinfoLocal, ...newData]);
+        localStorage.setItem('Section', JSON.stringify([...LastinfoLocal, ...newData]));
+      }
+    };
+    
+   const mybasketOnImg={
+     backgroundColor:changeColor?"rgb(79, 189, 89)":"",
+    
+   }
+   
+
+        
+   
+ 
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
       
@@ -49,21 +80,26 @@ const Section = () => {
                     <div>
                             <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100'/>
                     </div>
-                        
+                    <span className='mybasketOnImg' style={mybasketOnImg} onClick={SendBasket} >
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    </span> 
+                    <span className='mydeleteOnImg' onClick={deleteBasket} >
+                    <i class="fa-solid fa-trash"></i>
+                    </span> 
 
                 
                    
                 </div>
                   
                 <div className='pb-2'><Link to='/Kart'>
-                   <p>Qiymet:<span className='price-home' >500</span><span>{price}</span></p> 
-                   <p>Ünvan:<span className='address-home'>{AddressLength}</span></p> 
-                   <p>Metro:<span className='address-home'>28 May</span></p> 
-                    <p>Otaq sayi:<span className='room-home'>5 otaq</span></p> 
-                    <p>Kiraye verilir:<span className='time-home'>Aile ve telebe</span></p>
-                    <p>Sahe:<span className='measure-home'>80<span>{teratory}</span></span></p>
-                    <p>Əşya:<span className='time-home'>Tam Əşyalı</span></p>
-                    <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
+                   <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
+                   <p>Ünvan:<span >{address}</span></p> 
+                   <p>Metro:<span >{MetroHome}</span></p> 
+                    <p>Otaq sayi:<span>{roomHome}</span></p> 
+                    <p>Kiraye verilir:<span >{WhoCanTake}</span></p>
+                    <p>Sahe:<span>{measureHome}<span>{teratory}</span></span></p>
+                    <p>Əşya:<span >{Items}</span></p>
+                    <p>Tarix:<span >{dateTime}</span></p>
                                      </Link>
                 </div>
 

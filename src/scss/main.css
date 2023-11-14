@@ -314,6 +314,36 @@ html, body {
     height: 50%;
   }
 }
+.mybasketOnImg {
+  position: absolute;
+  z-index: 5001;
+  top: 5%;
+  left: 85%;
+  background-color: rgb(122, 122, 122);
+  padding: 5px 8px 5px 8px;
+  border-radius: 50%;
+}
+.mybasketOnImg i {
+  color: white;
+}
+
+.mydeleteOnImg {
+  position: absolute;
+  z-index: 5001;
+  top: 5%;
+  left: 85%;
+  background-color: rgb(122, 122, 122);
+  padding: 5px 10px 5px 10px;
+  border-radius: 50%;
+}
+.mydeleteOnImg i {
+  color: white;
+}
+
+.mydeleteOnImg {
+  display: none;
+}
+
 .div-in-input input {
   width: 98%;
   border-radius: 0px;
