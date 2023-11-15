@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .search-part {
   display: flex;
   justify-content: center;
@@ -342,6 +343,10 @@ html, body {
 
 .mydeleteOnImg {
   display: none;
+}
+
+.BasketİsEmpty {
+  height: 50vh !important;
 }
 
 .div-in-input input {
