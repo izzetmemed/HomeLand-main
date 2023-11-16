@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Section from '../section';
+import SectionObyekt from '../Obyekt/SectionObyekt';
+import SectionSell from '../SellHome/SectionSell';
 
 const Basket = () => {
   const [getData, setgetData] = useState([]);
@@ -16,25 +18,72 @@ const Basket = () => {
         </div>
       </div>
       <div className='d-flex flex-wrap'>
-        {getData.map((x, index) => (
-          <Section
-            key={index} 
-            priceHome={x[2]}
-            address={x[3]}
-            MetroHome={x[4]}
-            roomHome={x[5]}
-            WhoCanTake={x[6]}
-            measureHome={x[7]}
-            Items={x[8]}
-            dateTime={x[9]}
-            deleteBasket={() => {
-              const updatedData = [...getData];
-              updatedData.splice(index, 1);
-              setgetData(updatedData);
-              localStorage.setItem("Section", JSON.stringify(updatedData));
-            }}
-          />
-        ))}
+        {getData.map((x, index) => {
+          console.log(x[2]);
+          if (x[2] == "obyekt") {
+            return (
+              <SectionObyekt
+                key={index} 
+                priceHome={x[3]}
+                address={x[4]}
+                MetroHome={x[5]}
+                roomHome={x[6]}
+                SellorRent={x[7]}
+                Region={x[8]}
+                measureHome={x[9]}
+                dateTime={x[10]}
+                deleteBasket={() => {
+                  const updatedData = [...getData];
+                  updatedData.splice(index, 1);
+                  setgetData(updatedData);
+                  localStorage.setItem("Section", JSON.stringify(updatedData));
+                }}
+              />
+            );
+          }
+          if (x[2] == "sellHome") {
+            console.log(x[9])
+            return (
+              <SectionSell
+                key={index} 
+                priceHome={x[3]}
+                address={x[4]}
+                MetroHome={x[5]}
+                roomHome={x[6]}
+                kindofHome={x[7]}
+                measureHome={x[8]}
+                Sənəd={x[9]}
+                dateTime={x[10]}
+                deleteBasket={() => {
+                  const updatedData = [...getData];
+                  updatedData.splice(index, 1);
+                  setgetData(updatedData);
+                  localStorage.setItem("Section", JSON.stringify(updatedData));
+                }}
+              />
+            );
+          }
+
+          return (
+            <Section
+              key={index} 
+              priceHome={x[3]}
+              address={x[4]}
+              MetroHome={x[5]}
+              roomHome={x[6]}
+              WhoCanTake={x[7]}
+              measureHome={x[8]}
+              Items={x[9]}
+              dateTime={x[10]}
+              deleteBasket={() => {
+                const updatedData = [...getData];
+                updatedData.splice(index, 1);
+                setgetData(updatedData);
+                localStorage.setItem("Section", JSON.stringify(updatedData));
+              }}
+            />
+          );
+        })}
       </div>
       <div>
         {getData.length === 0 && (

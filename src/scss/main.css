@@ -124,6 +124,21 @@
   margin-bottom: 0%;
 }
 
+.Error-massage {
+  height: 50vh;
+}
+.Error-massage button {
+  margin-top: 4%;
+  background-color: rgb(79, 189, 89);
+}
+.Error-massage button:hover {
+  background-color: rgb(75, 172, 83);
+}
+.Error-massage button a {
+  color: white;
+  font-size: 120%;
+}
+
 * {
   padding: 0%;
   margin: 0%;
@@ -343,6 +358,8 @@ html, body {
 
 .mydeleteOnImg {
   display: none;
+  background-color: red !important;
+  opacity: 0.8;
 }
 
 .BasketİsEmpty {

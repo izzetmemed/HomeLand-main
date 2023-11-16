@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import InsideCard from './mainpage/İnsideCard';
-const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measureHome,Items,dateTime,deleteBasket}) => {
+const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,measureHome,Sənəd,dateTime,deleteBasket}) => {
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
         'https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp',
@@ -39,7 +38,7 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
     const [userData, setUserData] = useState([]);
     const [CheckRptrData, setCheckRptrData] = useState(true);
     const newData = [
-      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, WhoCanTake, measureHome, Items, dateTime],
+      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, kindofHome, measureHome, Sənəd, dateTime],
     ];
    
     const SendBasket = () => {
@@ -104,9 +103,9 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
                    <p>Ünvan:<span >{address}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Otaq sayi:<span>{roomHome}</span></p> 
-                    <p>Kiraye verilir:<span >{WhoCanTake}</span></p>
+                    <p>Ev:<span >{kindofHome}</span></p>
                     <p>Sahe:<span>{measureHome}<span>{teratory}</span></span></p>
-                    <p>Əşya:<span >{Items}</span></p>
+                    <p>Sənəd:<span >{Sənəd}</span></p>
                     <p>Tarix:<span >{dateTime}</span></p>
                                      </Link>
                 </div>
@@ -120,4 +119,4 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
   )
 }
 
-export default Section
+export default SectionSell

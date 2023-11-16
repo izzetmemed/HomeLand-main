@@ -1,7 +1,7 @@
+import { type } from '@testing-library/user-event/dist/type';
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import InsideCard from './mainpage/İnsideCard';
-const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measureHome,Items,dateTime,deleteBasket}) => {
+const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,measureHome,Region,dateTime,deleteBasket}) => {
     const keepingImgSource = [
         'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
         'https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp',
@@ -39,7 +39,7 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
     const [userData, setUserData] = useState([]);
     const [CheckRptrData, setCheckRptrData] = useState(true);
     const newData = [
-      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, WhoCanTake, measureHome, Items, dateTime],
+      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, SellorRent,Region, measureHome, dateTime],
     ];
    
     const SendBasket = () => {
@@ -55,6 +55,7 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
         const updatedData =LastinfoLocal;
         setUserData(updatedData);
         const indexToRemove = updatedData.findIndex(item => item[1] === id && item[2]===type);
+        console.log(indexToRemove);
         if (indexToRemove !== -1) {
           updatedData.splice(indexToRemove, 1);
           setUserData(updatedData);
@@ -65,6 +66,7 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
     };
      useEffect(() => {
       const isHave = (JSON.parse(localStorage.getItem("Section")) || []).some((x) => (x[1] == id && x[2]===type));
+      console.log(isHave);
       if (isHave) {
         setchangeColor(true);
         setCheckRptrData(false);
@@ -101,12 +103,12 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
                   
                 <div className='pb-2'><Link to='/Kart'>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
+                    <p>Obyekt:<span >{SellorRent}</span></p>
                    <p>Ünvan:<span >{address}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Otaq sayi:<span>{roomHome}</span></p> 
-                    <p>Kiraye verilir:<span >{WhoCanTake}</span></p>
+                    <p>Rayon:<span >{Region}</span></p>
                     <p>Sahe:<span>{measureHome}<span>{teratory}</span></span></p>
-                    <p>Əşya:<span >{Items}</span></p>
                     <p>Tarix:<span >{dateTime}</span></p>
                                      </Link>
                 </div>
@@ -120,4 +122,4 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
   )
 }
 
-export default Section
+export default SectionObyekt

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useRef } from 'react';
-import MapComponent from './coordinate'
-const Rent = () => {
+import MapComponent from '../mainpage/answer/coordinate'
+const Sell = () => {
 
     const fileInputRef = useRef(null);
     const [images, setImages] = useState([]);
@@ -51,7 +51,7 @@ const Rent = () => {
                     </div>
                     <div className='col-12'>
                         <div>
-                            <p> <strong>Evinizi kiraye vermək üçün aşağıdakı sualları cavablandırın:</strong></p>
+                            <p> <strong>Evinizi satmaq üçün aşağıdakı sualları cavablandırın:</strong></p>
                         </div>
                     </div>
                     <div className='col-12'>
@@ -117,7 +117,7 @@ const Rent = () => {
                             </div>
                             <div className='col-12 div-in-select'>
                                 <select name="" id="">
-                                <option value=""></option>
+                                    <option value=""></option>
                                     <option value="">Digər Rayon</option>
                                     <option value="">Nəsimi Rayon</option>
                                     <option value="">Nizami Rayon</option>
@@ -144,6 +144,14 @@ const Rent = () => {
                         </div>
                         <div className='mt-3'>
                             <div className='div-in-label'>
+                                <label htmlFor="customerName">Evin qiyməti:</label>
+                            </div>
+                            <div className='col-12 div-in-input'>
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <div className='mt-3'>
+                            <div className='div-in-label'>
                                 <label htmlFor="customerName">Mərtəbə:</label>
                             </div>
                             <div className='col-12 div-in-input'>
@@ -161,7 +169,7 @@ const Rent = () => {
                             </div>
                             <div className='col-12 div-in-select'>
                                 <select name="" id="">
-                                <option value=""></option>
+                                    <option value=""></option>
                                     <option value="">Metroya yaxın deyil</option>
                                     <option value="">Həzi Aslanov Metrosu</option>
                                     <option value="">Əhmədli Metrosu</option>
@@ -188,6 +196,7 @@ const Rent = () => {
                                     <option value="">8 Noyabr Metrosu</option>
                                     <option value="">Avtovağzal Metrosu</option>
                                     <option value="">Xocəsən Metrosu</option>
+
                                 </select>
                             </div>
                         </div>
@@ -243,84 +252,22 @@ const Rent = () => {
                         <div className='mt-3'>
 
                             <div className='div-in-label'>
-                                <label htmlFor="customerName">Əşya:</label>
+                                <label htmlFor="customerName">Sənəd:</label>
                             </div>
                             <div className='col-12 div-in-select'>
                                 <select name="" id="">
                                     <option value=""></option>
-                                    <option value="">Ev əşyasız verilir.</option>
-                                    <option value="">Ev yarı əşyalı verilir.</option>
-                                    <option value="">Ev əşyalı verilir.</option>
+                                    <option value="">Kupça var.</option>
+                                    <option value="">Kupça yoxdur.</option>
+                                  
                                 </select>
                             </div>
                         </div >
-                        <div className='mt-3'>
-
-                            <div className='div-in-label'>
-                                <label htmlFor="customerName">Evdə hansı əşyalar var?</label>
-                            </div>
-                            <div className='col-12 main-div-for-chechbox ms-2'>
-                                <div> <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Yataq</label>
-                                </div>
-                                <div> <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Paltar Şkafı</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Stol</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Stul</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Mərkəzi istilik sistemi</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Qaz isidicisi (peçi)</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Kombi</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>TV</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Paltaryuyan</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Kondisaner</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Divan və kreslo</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Quraşdırılmış Vifi</label>
-                                </div>
-
-                            </div>
-                        </div >
+                      
 
                         <div className='mt-3'>
                             <div className='div-in-label'>
                                 <label htmlFor="customerName">Evin sahəsi:</label>
-                            </div>
-                            <div className='col-12 div-in-input'>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div className='mt-3'>
-                            <div className='div-in-label'>
-                                <label htmlFor="customerName">Evin Aylıq qiyməti:</label>
                             </div>
                             <div className='col-12 div-in-input'>
                                 <input type="text" />
@@ -347,4 +294,4 @@ const Rent = () => {
     )
 }
 
-export default Rent
+export default Sell

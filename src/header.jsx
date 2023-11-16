@@ -17,18 +17,17 @@ import InsideCard from './mainpage/İnsideCard'
                 <div className='d-flex flex-column flex-lg-row justify-content-between col-12  align-items-center for-height-header me-0 px-2'>
                 <span className='d-lg-block d-none'>HomeLand.az</span>
                 <ul className='header-ul col-4 ' >
-                    <li><NavLink to="/Selling">Alqı-satqı</NavLink></li>
+                    <li><NavLink to="/Satılıq-ev">Alqı-satqı</NavLink></li>
                     <li><NavLink to="/">Kiraye</NavLink></li>
-                    <li><NavLink to="/Warehouse">Obyekt</NavLink></li>
+                    <li><NavLink to="/obyekt">Obyekt</NavLink></li>
                 </ul>
                 <button className='download-ads btn' onClick={()=>{setisActive(!isActive)}}><span><i className="fa-solid fa-plus"></i></span>Elan yerləşdirmək 
                 {isActive && (
                 <div className='download-ads-elements'>
                     <ul>
-                        <li><NavLink to="/form">Kiraye ev</NavLink></li>
-                        <li>Satılıq ev</li>
-                        <li>Kiraye obyekt</li>
-                        <li>Satılıq obyekt</li>
+                        <li><NavLink to="/kiraye-ev-form">Kiraye ev</NavLink></li>
+                        <li><NavLink to="/satılıq-ev-form">Satılıq ev</NavLink></li>
+                        <li><NavLink to="/obyekt-form">Obyekt</NavLink></li>
                         </ul>
                     </div>)}
                 </button>

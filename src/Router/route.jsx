@@ -14,6 +14,11 @@ import Costumer from '../mainpage/ADMIN/RentHomeCustomer' ;
 import Own from '../mainpage/ADMIN/RentHomeOwn' ;
 import Payment from '../mainpage/ADMIN/RentPayment' ;
 import Basket from '../Sebet/Basket';
+import CardsSell from '../SellHome/CardsSell';
+import Sell from "../SellHome/Sell";
+import Obyekt from "../Obyekt/CardsObyekt";
+import ObyektForm from "../Obyekt/ObyektForm";
+import Error from '../Error/Error';
 const route = () => {
   return (
     <div >
@@ -22,8 +27,17 @@ const route = () => {
           <Route path='/' element={<Index/>}>
               <Route index={true} element={<Cards/>}/>
                 <Route path='/Kart' element={<InsideCard/>}/>
-                  <Route  path='/form' element={<Rent/>}/>
+                <Route path='/satılıq-ev' element={<CardsSell/>}/>
+                <Route path='/satılıq-ev/səbət' element={<Basket/>}/>
+                  <Route  path='/kiraye-ev-form' element={<Rent/>}/>
+
+                  <Route path="*" element={<Error />} />
+
+                  <Route  path='/satılıq-ev-form' element={<Sell/>}/>
                   <Route  path='/səbət' element={<Basket/>}/>
+                  <Route  path='/Obyekt' element={<Obyekt/>}/>
+                  <Route  path='/Obyekt/səbət' element={<Basket/>}/>
+                  <Route  path='/Obyekt-form' element={<ObyektForm/>}/>
                   <Route  path='/Login' element={<IndexAdmin/>}>
                    <Route index={true} element={<Login/>}/>
                     <Route path='MainAdmin' element={<IndexHome/>}>
