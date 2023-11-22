@@ -1,18 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-const Search = () => {
+const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice }) => {
   const [isActive, setIsActive] = useState(false);
+  const myRef = useRef([]);
+  const HomeOrFlat = useRef([]);
+  const Region = useRef([]);
+  const Room = useRef([]);
+  const Price= useRef([]);
 
+  const GetDataFromSearch = (e) => {
+    const ArrayNewBool=[]
+    const ArrayNewSetHomeOrFlat=[]
+    const ArrayNewSetSendDataRegion=[]
+    const ArrayNewSetSendDataRoom=[]
+    const ArrayNewSetSendDataPrice=[]
 
-  const [selectedIds, setSelectedIds] = useState([]);
-  const handleCheckboxChange = (id) => {
-    if (selectedIds.includes(id)) {
-      return;
-    } else {
-      const selected = [...selectedIds, id];
-      setSelectedIds(selected);
+    for (var i = 1; i < myRef.current.length; i++) {
+      if (myRef.current[i].checked) {
+       ArrayNewBool.push(myRef.current[i].id);
+      }
     }
+
+    for (var i = 1; i < HomeOrFlat.current.length; i++) {
+      if (HomeOrFlat.current[i].checked) {
+       ArrayNewSetHomeOrFlat.push(HomeOrFlat.current[i].id);
+      }
+    }
+    for (var i = 1; i < Region.current.length; i++) {
+      if (Region.current[i].checked) {
+        ArrayNewSetSendDataRegion.push(Region.current[i].id);
+      }
+    }
+    for (var i = 1; i < Room.current.length; i++) {
+      if (Room.current[i].checked) {
+        ArrayNewSetSendDataRoom.push(Room.current[i].id);
+      }
+    }
+    for (var i = 1; i < Price.current.length; i++) {
+      if(Price.current[i].value==""){
+      //???????????????????????????????????????????????????????? sweet aler
+      }else{
+         ArrayNewSetSendDataPrice.push(Price.current[i].value);
+      }
+       
+    }
+    setPrice(ArrayNewSetSendDataPrice);
+    setRoom(ArrayNewSetSendDataRoom);
+    setRegion(ArrayNewSetSendDataRegion);
+    setFunc(ArrayNewBool);
+    setHomeOrFlat(ArrayNewSetHomeOrFlat);
+
   };
+  
+
+
   return (
     <div>
       <div className="search-part pe-2">
@@ -29,20 +70,20 @@ const Search = () => {
                   <span>Həyət yoxsa bina evi?</span>
                   <span><i className="fa-solid fa-chevron-down"></i></span>
                 </div>
-               
-                  <div className='mt-3 col-12'>
-                    <div className='col-12 div-in-select chechAndLabel ms-1'>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Bina evi</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Həyət evi</label>
-                      </div>
+
+                <div className='mt-3 col-12'>
+                  <div className='col-12 div-in-select chechAndLabel ms-1'>
+                    <div >
+                      <input type="checkbox" name="" id="Bina" ref={(element) =>  HomeOrFlat.current[1] = element} />
+                      <label for="vehicle1" className='ms-1'>Bina evi</label>
                     </div>
-                  </div >
-             
+                    <div >
+                      <input type="checkbox" name="" id="Həyət" ref={(element) => HomeOrFlat.current[2] = element}/>
+                      <label for="vehicle1" className='ms-1'>Həyət evi</label>
+                    </div>
+                  </div>
+                </div >
+
               </div>
 
               <div className="col-12 col-lg-3">
@@ -50,266 +91,243 @@ const Search = () => {
                   <span>Metro</span>
                   <span ><i className="fa-solid fa-chevron-down"></i></span>
                 </div>
-                
-                  <div className='mt-3 col-12 pe-2'>
-                    <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
-                      <div >
-                        <input type="checkbox" name="" id="0"  onChange={() => handleCheckboxChange("0")}
-                                                              checked={selectedIds.includes("0")} />
-                        <label for="vehicle1" className='ms-1'>Metroya yaxın olmasada olar.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Həzi"  onChange={() => handleCheckboxChange("Həzi")}
-                                                                 checked={selectedIds.includes("Həzi")}/>
-                        <label for="vehicle1" className='ms-1'>Həzi Aslanov Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Əhmədli"  onChange={() => handleCheckboxChange("Əhmədli")}
-            checked={selectedIds.includes("Əhmədli")}/>
-                        <label for="vehicle1" className='ms-1'>Əhmədli Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Xalqlar" onChange={() => handleCheckboxChange("Xalqlar")}
-            checked={selectedIds.includes("Xalqlar")} />
-                        <label for="vehicle1" className='ms-1'>Xalqlar dostluğu Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Neftçilər" onChange={() => handleCheckboxChange("Neftçilər")}
-            checked={selectedIds.includes("Neftçilər")} />
-                        <label for="vehicle1" className='ms-1'>Neftçilər Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Qarayev"  onChange={() => handleCheckboxChange("Qarayev")}
-            checked={selectedIds.includes("Qarayev")}/>
-                        <label for="vehicle1" className='ms-1'>Qara qarayev Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Koroğlu"  onChange={() => handleCheckboxChange("Koroğlu")}
-            checked={selectedIds.includes("Koroğlu")}/>
-                        <label for="vehicle1" className='ms-1'>Koroğlu Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Ulduz"  onChange={() => handleCheckboxChange("Ulduz")}
-            checked={selectedIds.includes("Ulduz")}/>
-                        <label for="vehicle1" className='ms-1'>Ulduz Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Bakmil" onChange={() => handleCheckboxChange("Bakmil")}
-            checked={selectedIds.includes("Bakmil")}/>
-                        <label for="vehicle1" className='ms-1'>Bakmil Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Nərmanov"  onChange={() => handleCheckboxChange("Nərmanov")}
-            checked={selectedIds.includes("Nərmanov")}/>
-                        <label for="vehicle1" className='ms-1'>Nərman Nərmanov Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Gənçlik"  onChange={() => handleCheckboxChange("Gənçlik")}
-            checked={selectedIds.includes("Gənçlik")}/>
-                        <label for="vehicle1" className='ms-1'>Gənçlik Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="28"  onChange={() => handleCheckboxChange("28")}
-            checked={selectedIds.includes("28")}/>
-                        <label for="vehicle1" className='ms-1'>28 May Metrosu.</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Xətai" onChange={() => handleCheckboxChange("Xətai")}
-            checked={selectedIds.includes("Xətai")} />
-                        <label for="vehicle1" className='ms-1'>Şah İsmayıl Xətai Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Sahil" onChange={() => handleCheckboxChange("Sahil")}
-            checked={selectedIds.includes("Sahil")} />
-                        <label for="vehicle1" className='ms-1'>Sahil Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="İçərişəhər"  onChange={() => handleCheckboxChange("İçərişəhər")}
-            checked={selectedIds.includes("İçərişəhər")}/>
-                        <label for="vehicle1" className='ms-1'>İçərişəhər Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Nizami"  onChange={() => handleCheckboxChange("Nizami")}
-            checked={selectedIds.includes("Nizami")}/>
-                        <label for="vehicle1" className='ms-1'>Nizami Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Elmlər"  onChange={() => handleCheckboxChange("Elmlər")}
-            checked={selectedIds.includes("Elmlər")}/>
-                        <label for="vehicle1" className='ms-1'>Elmlər Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="İnşaatçılar" onChange={() => handleCheckboxChange("İnşaatçılar")}
-            checked={selectedIds.includes("İnşaatçılar")} />
-                        <label for="vehicle1" className='ms-1'>İnşaatçılar Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Yanvar" onChange={() => handleCheckboxChange("Yanvar")}
-            checked={selectedIds.includes("Yanvar")} />
-                        <label for="vehicle1" className='ms-1'>20 Yanvar Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Əcəmi" onChange={() => handleCheckboxChange("Əcəmi")}
-            checked={selectedIds.includes("Əcəmi")} />
-                        <label for="vehicle1" className='ms-1'>Memar Əcəmi Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Nəsimi" onChange={() => handleCheckboxChange("Nəsimi")}
-            checked={selectedIds.includes("Nəsimi")} />
-                        <label for="vehicle1" className='ms-1'>Nəsimi Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Azadlıq" onChange={() => handleCheckboxChange("Azadlıq")}
-            checked={selectedIds.includes("Azadlıq")} />
-                        <label for="vehicle1" className='ms-1'>Azadlıq Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Dərnəgül" onChange={() => handleCheckboxChange("Dərnəgül")}
-            checked={selectedIds.includes("Dərnəgül")} />
-                        <label for="vehicle1" className='ms-1'>Dərnəgül Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Noyabr" onChange={() => handleCheckboxChange("Noyabr")}
-            checked={selectedIds.includes("Noyabr")} />
-                        <label for="vehicle1" className='ms-1'>8 Noyabr Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Avtovağzal" onChange={() =>handleCheckboxChange("Avtovağzal")}
-            checked={selectedIds.includes("Avtovağzal")} />
-                        <label for="vehicle1" className='ms-1'>Avtovağzal Metrosu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="Xocəsən" onChange={() => handleCheckboxChange("Xocəsən")}
-            checked={selectedIds.includes("Xocəsən")} />
-                        <label for="vehicle1" className='ms-1'>Xocəsən Metrosu</label>
-                      </div>
-                     
+
+                <div className='mt-3 col-12 pe-2'>
+                  <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
+                    <div >
+                      <input type="checkbox" name="" id="0" ref={(element) => myRef.current[1] = element}
+                      />
+                      <label for="vehicle1" className='ms-1'>Metroya yaxın olmasada olar.</label>
                     </div>
-                  </div >
-              
+                    <div >
+                      <input type="checkbox" name="" id="Həzi" ref={(element) => myRef.current[2] = element}
+                      />
+                      <label for="vehicle1" className='ms-1'>Həzi Aslanov Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Əhmədli" ref={(element) => myRef.current[3] = element} />
+                      <label for="vehicle1" className='ms-1'>Əhmədli Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Xalqlar" ref={(element) => myRef.current[4] = element} />
+                      <label for="vehicle1" className='ms-1'>Xalqlar dostluğu Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Neftçilər" ref={(element) => myRef.current[5] = element} />
+                      <label for="vehicle1" className='ms-1'>Neftçilər Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Qarayev" ref={(element) => myRef.current[6] = element} />
+                      <label for="vehicle1" className='ms-1'>Qara qarayev Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Koroğlu" ref={(element) => myRef.current[7] = element} />
+                      <label for="vehicle1" className='ms-1'>Koroğlu Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Bakmil" ref={(element) => myRef.current[8] = element} />
+                      <label for="vehicle1" className='ms-1'>Bakmil Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Nərmanov" ref={(element) => myRef.current[9] = element} />
+                      <label for="vehicle1" className='ms-1'>Nərman Nərmanov Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Gənçlik" ref={(element) => myRef.current[10] = element} />
+                      <label for="vehicle1" className='ms-1'>Gənçlik Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="28" ref={(element) => myRef.current[11] = element} />
+                      <label for="vehicle1" className='ms-1'>28 May Metrosu.</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Xətai" ref={(element) => myRef.current[12] = element} />
+                      <label for="vehicle1" className='ms-1'>Şah İsmayıl Xətai Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Sahil" ref={(element) => myRef.current[13] = element} />
+                      <label for="vehicle1" className='ms-1'>Sahil Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="İçərişəhər" ref={(element) => myRef.current[14] = element} />
+                      <label for="vehicle1" className='ms-1'>İçərişəhər Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Nizami" ref={(element) => myRef.current[15] = element} />
+                      <label for="vehicle1" className='ms-1'>Nizami Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Elmlər" ref={(element) => myRef.current[16] = element} />
+                      <label for="vehicle1" className='ms-1'>Elmlər Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="İnşaatçılar" ref={(element) => myRef.current[17] = element} />
+                      <label for="vehicle1" className='ms-1'>İnşaatçılar Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Yanvar" ref={(element) => myRef.current[18] = element} />
+                      <label for="vehicle1" className='ms-1'>20 Yanvar Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Əcəmi" ref={(element) => myRef.current[19] = element} />
+                      <label for="vehicle1" className='ms-1'>Memar Əcəmi Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Nəsimi" ref={(element) => myRef.current[20] = element} />
+                      <label for="vehicle1" className='ms-1'>Nəsimi Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Azadlıq" ref={(element) => myRef.current[21] = element} />
+                      <label for="vehicle1" className='ms-1'>Azadlıq Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Dərnəgül" ref={(element) => myRef.current[22] = element} />
+                      <label for="vehicle1" className='ms-1'>Dərnəgül Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Noyabr" ref={(element) => myRef.current[23] = element} />
+                      <label for="vehicle1" className='ms-1'>8 Noyabr Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Avtovağzal" ref={(element) => myRef.current[24] = element} />
+                      <label for="vehicle1" className='ms-1'>Avtovağzal Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Xocəsən" ref={(element) => myRef.current[25] = element} />
+                      <label for="vehicle1" className='ms-1'>Xocəsən Metrosu</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Ulduz" ref={(element) => myRef.current[26] = element} />
+                      <label for="vehicle1" className='ms-1'>Ulduz Metrosu.</label>
+                    </div>
+
+                  </div>
+                </div >
+
               </div>
               <div className="col-12 col-lg-3">
                 <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" >
                   <span>Rayon:</span>
                   <span ><i className="fa-solid fa-chevron-down"></i></span>
                 </div>
-                
-                  <div className='mt-3 col-12 pe-2'>
-                    <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>28 May</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Gənclik</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Nərmanov</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Ulduz</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Koroğlu</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Qarayev</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Qarayev</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Qarayev</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Qarayev</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Qarayev</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Qarayev</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>Qarayev</label>
-                      </div>
+
+                <div className='mt-3 col-12 pe-2'>
+                  <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
+                    <div >
+                      <input type="checkbox" name="" id="Nəsimi"  ref={(element) => Region.current[1] = element} />
+                      <label for="vehicle1" className='ms-1'>Nəsimi Rayon</label>
                     </div>
-                  </div >
-              
+                    <div >
+                      <input type="checkbox" name="" id="Nizami"  ref={(element) => Region.current[2] = element} />
+                      <label for="vehicle1" className='ms-1'>Nizami Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Xətai"  ref={(element) => Region.current[3] = element} />
+                      <label for="vehicle1" className='ms-1'>Xətai Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Nərmanov"  ref={(element) => Region.current[4] = element} />
+                      <label for="vehicle1" className='ms-1'>Nərmanov Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Yasamal"  ref={(element) => Region.current[5] = element} />
+                      <label for="vehicle1" className='ms-1'>Yasamal Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Pirallahı"  ref={(element) => Region.current[6] = element} />
+                      <label for="vehicle1" className='ms-1'>Pirallahı Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Suraxanı"  ref={(element) => Region.current[7] = element} />
+                      <label for="vehicle1" className='ms-1'>Suraxanı Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Sabunçu"  ref={(element) => Region.current[8] = element} />
+                      <label for="vehicle1" className='ms-1'>Sabunçu Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Səbail"  ref={(element) => Region.current[9] = element} />
+                      <label for="vehicle1" className='ms-1'>Səbail Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Xəzər"  ref={(element) => Region.current[10] = element} />
+                      <label for="vehicle1" className='ms-1'>Xəzər Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Qaradağ"  ref={(element) => Region.current[11] = element} />
+                      <label for="vehicle1" className='ms-1'>Qaradağ Rayon</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="Binəqədi"  ref={(element) => Region.current[12] = element} />
+                      <label for="vehicle1" className='ms-1'>Binəqədi Rayon</label>
+                    </div>
+                  
+                  </div>
+                </div >
+
               </div>
               <div className="col-12 col-lg-3">
                 <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" >
                   <span>Otaq sayı:</span>
                   <span ><i className="fa-solid fa-chevron-down"></i></span>
                 </div>
-              
-                  <div className='mt-3 col-12 pe-2'>
-                    <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>1 Otaqlı</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>2 Otaqlı</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>3 Otaqlı</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>4 Otaqlı</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>5 Otaqlı</label>
-                      </div>
-                      <div >
-                        <input type="checkbox" name="" id="" />
-                        <label for="vehicle1" className='ms-1'>6 və çox Otaqlı</label>
-                      </div>
 
+                <div className='mt-3 col-12 pe-2'>
+                  <div className='col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1'>
+                    <div >
+                      <input type="checkbox" name="" id="1" ref={(element) => Room.current[1] = element}/>
+                      <label for="vehicle1" className='ms-1'>1 Otaqlı</label>
                     </div>
-                  </div >
-                
+                    <div >
+                      <input type="checkbox" name="" id="2" ref={(element) => Room.current[2] = element} />
+                      <label for="vehicle1" className='ms-1'>2 Otaqlı</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="3" ref={(element) => Room.current[3] = element}/>
+                      <label for="vehicle1" className='ms-1'>3 Otaqlı</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="4"ref={(element) => Room.current[4] = element} />
+                      <label for="vehicle1" className='ms-1'>4 Otaqlı</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="5" ref={(element) => Room.current[5] = element}/>
+                      <label for="vehicle1" className='ms-1'>5 Otaqlı</label>
+                    </div>
+                    <div >
+                      <input type="checkbox" name="" id="6" ref={(element) => Room.current[6] = element}/>
+                      <label for="vehicle1" className='ms-1'>6 və çox Otaqlı</label>
+                    </div>
+
+                  </div>
+                </div >
+
               </div>
               <div className=' d-flex flex-row justify-content-center col-12'>
                 <div className='col-12 col-lg-8 mt-4'>
                   <label htmlFor="">Qiymet:</label>
                   <div className='d-flex flex-row max-min-input mt-1'>
-                    <input type="number" placeholder='Max' />
-                    <input type="number" placeholder='Min' />
+                    <input type="number" placeholder='Max' ref={(element) => Price.current[1] = element} />
+                    <input type="number" placeholder='Min' ref={(element) => Price.current[2] = element} />
                   </div>
                 </div>
               </div>
               <div className='d-flex align-items-center col-12'>
                 <div className='col-12 col-lg-6 mt-5 pt-1'>
-                  <button className='btn btn-mycolor' >Axtarmaq</button>
+                  <button className='btn btn-mycolor' onClick={GetDataFromSearch}>Axtarmaq</button>
+                </div>
               </div>
-              </div>
-              
+
             </div>
 
           )}
         </div>
       </div>
       <div className="col-12 mt-3 pe-2">
-            <Link to="Səbət" className='btn w-100 text-white  search-btn-click' >
-              Mənim səbətim
-            </Link>
-          </div>
+        <Link to="Səbət" className='btn w-100 text-white  search-btn-click' >
+          Mənim səbətim
+        </Link>
+      </div>
     </div>
   );
 }
