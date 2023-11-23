@@ -12,7 +12,10 @@ const Cards = () => {
   const [Region, setRegion] = useState([]);
   const [Room, setRoom] = useState([]);
   const [Price, setPrice] = useState([]);
- 
+ const [click, setClick]=useState();
+  const ClickFunc=(x)=>{
+    setClick(x)
+  }
   const sendDataToSelecedids=(x)=>{
     setSelectedIds(x)
   }
@@ -29,41 +32,43 @@ const Cards = () => {
     setPrice(x)
   }
   useEffect(() => {
-    console.log(Price);
     const fetchData = async () => {
       try {
-        const resp = await axios.get("http://localhost:3000/Rent");
-        if(selectedIds.length!=0 || HomeOrFlat.length!=0){  
-        const filtered = resp.data.filter((x) =>{if (selectedIds.length !== 0 ) {
-          if(selectedIds.includes(x.Metro)){
-             return true;
-          }else{
-            return false
-          }
-         
-         
-        }
-        if (HomeOrFlat.length !== 0  ) {
-          if(HomeOrFlat.includes(x.Bina)){
-            return true;
-          }else{
-            return false
-          }
-        
+       const ArrayData=[];
+      const resp = await axios.get("http://localhost:3000/Rent");
+        if(click){
+          const filteredArray = Array.from(resp.data).filter((x) => {
+            if (!(Number(x.Price) >= Array.from(Price)[1] && Number(x.Price) <= Array.from(Price)[0])) {
+              return false
+            }
+            if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(x.Bina)) {
+              return false;
+            }
           
-        }});
-        
-        setFilteredData(filtered); 
+            if (Room.length !== 0 && !Room.includes(x.Room)) {
+              return false;
+            }
+          
+            if (Region.length !== 0 && !Region.includes(x.Region)) {
+              return false;
+            }
+          
+            if (selectedIds.length !== 0 && !selectedIds.includes(x.Metro)) {
+              return false;
+            }
+          
+            return true;
+          });
+          ArrayData.push(...filteredArray);
+          
+         setFilteredData(ArrayData);
+        }else{
+          setFilteredData(resp.data)
         }
 
-        else{
-        setFilteredData(resp.data);
-        }
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-      console.log(HomeOrFlat);
     };
   
     fetchData();
@@ -72,7 +77,7 @@ const Cards = () => {
 
   return (
     <div>
-      <Search   setFunc={sendDataToSelecedids} setHomeOrFlat={sendDataToHomeOrFlat} setRegion={sendDataRegion} setRoom={sendDataRoom} setPrice={sendDataPrice}/>
+      <Search   setFunc={sendDataToSelecedids} setHomeOrFlat={sendDataToHomeOrFlat} setRegion={sendDataRegion} setRoom={sendDataRoom} setPrice={sendDataPrice} setClick={ClickFunc}/>
       <div className='d-flex flex-wrap'>
         {filteredData.map((x) => (
           <Section

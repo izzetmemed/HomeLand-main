@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice }) => {
+const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) => {
   const [isActive, setIsActive] = useState(false);
   const myRef = useRef([]);
   const HomeOrFlat = useRef([]);
@@ -44,6 +44,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice }) => {
       }
        
     }
+    setClick(true);
     setPrice(ArrayNewSetSendDataPrice);
     setRoom(ArrayNewSetSendDataRoom);
     setRegion(ArrayNewSetSendDataRegion);
