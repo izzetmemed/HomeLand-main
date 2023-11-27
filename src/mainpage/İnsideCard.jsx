@@ -75,7 +75,7 @@ const İnsideCard = () => {
                         </div>
                         <div>
                             <div className='d-flex justify-content-center w-100'>
-                                    <button className='btn btn-mycolor height-for-calling fs-5'><i class="fa-solid fa-phone"></i> Əmlakçıya zəng etmək.</button>
+                                    <button className='btn btn-mycolor height-for-calling fs-5'><i className="fa-solid fa-phone"></i> Əmlakçıya zəng etmək.</button>
                             </div>
                         </div>
                     </div>

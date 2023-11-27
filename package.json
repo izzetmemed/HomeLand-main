@@ -16,10 +16,13 @@
     "react-router-dom": "^6.18.0",
     "react-scripts": "^5.0.1",
     "react-select": "^5.7.7",
+    "sweetalert2": "^11.10.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "scss": "node-sass src/scss/main.scss -w",
     "json": "json-server --watch src/Api/rent.json",
+    "jsonSell": "json-server --watch src/Api/sell.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Section from '../section';
 import Search from '../search';
 import axios from 'axios';
+import Pagenation from '../pagenation';
 
 const Cards = () => {
 
@@ -29,7 +30,7 @@ const Cards = () => {
     setRoom(x)
   }
   const sendDataPrice=(x)=>{
-    setPrice(x)
+    setPrice(x);
   }
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +38,9 @@ const Cards = () => {
        const ArrayData=[];
       const resp = await axios.get("http://localhost:3000/Rent");
         if(click){
-          const filteredArray = Array.from(resp.data).filter((x) => {
-            if (!(Number(x.Price) >= Array.from(Price)[1] && Number(x.Price) <= Array.from(Price)[0])) {
-              return false
+          const filteredArray = Array.from(resp.data).filter((x) => { 
+            if (!(Number(x.Price) > Array.from(Price)[1] && Number(x.Price) < Array.from(Price)[0])) {
+              return false;
             }
             if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(x.Bina)) {
               return false;
@@ -74,12 +75,19 @@ const Cards = () => {
     fetchData();
   }, [selectedIds]);
   
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemCount, setItemCount] = useState(2);
+  
 
+const lastIndex=currentPage*itemCount;
+const firstItem=lastIndex-itemCount;
+const filteredDataSlice=filteredData.slice(firstItem,lastIndex);
+const countOfPagenation =Math.ceil(filteredData.length/itemCount);
   return (
     <div>
       <Search   setFunc={sendDataToSelecedids} setHomeOrFlat={sendDataToHomeOrFlat} setRegion={sendDataRegion} setRoom={sendDataRoom} setPrice={sendDataPrice} setClick={ClickFunc}/>
       <div className='d-flex flex-wrap'>
-        {filteredData.map((x) => (
+        {filteredDataSlice.map((x) => (
           <Section
             id={x.id}
             type={"rentHome"}
@@ -94,8 +102,14 @@ const Cards = () => {
             key={x.Id} 
           />
         ))}
+        {filteredData.length === 0 && (
+          <div className='w-100 BasketİsEmpty d-flex justify-content-center align-items-center'> 
+            <p className='fs-3 text-danger'>Ev tapılmadı!!!</p>
+          </div>
+        )}
       </div>
       <Outlet />
+      <Pagenation countOfPagenation={countOfPagenation} setCurrentP={setCurrentPage}/>
     </div>
   );
 };

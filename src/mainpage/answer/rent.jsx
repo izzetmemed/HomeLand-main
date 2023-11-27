@@ -261,50 +261,50 @@ const Rent = () => {
                             </div>
                             <div className='col-12 main-div-for-chechbox ms-2'>
                                 <div> <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Yataq</label>
+                                    <label className='ms-1'>Yataq</label>
                                 </div>
                                 <div> <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Paltar Şkafı</label>
+                                    <label className='ms-1'>Paltar Şkafı</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Stol</label>
+                                    <label className='ms-1'>Stol</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Stul</label>
+                                    <label className='ms-1'>Stul</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Mərkəzi istilik sistemi</label>
+                                    <label className='ms-1'>Mərkəzi istilik sistemi</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Qaz isidicisi (peçi)</label>
+                                    <label className='ms-1'>Qaz isidicisi (peçi)</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Kombi</label>
+                                    <label className='ms-1'>Kombi</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>TV</label>
+                                    <label className='ms-1'>TV</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Paltaryuyan</label>
+                                    <label className='ms-1'>Paltaryuyan</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Kondisaner</label>
+                                    <label className='ms-1'>Kondisaner</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Divan və kreslo</label>
+                                    <label className='ms-1'>Divan və kreslo</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="" id="" />
-                                    <label for="vehicle1" className='ms-1'>Quraşdırılmış Vifi</label>
+                                    <label className='ms-1'>Quraşdırılmış Vifi</label>
                                 </div>
 
                             </div>

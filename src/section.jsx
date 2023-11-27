@@ -89,10 +89,10 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
                             <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100'/>
                     </div>
                     <span className='mybasketOnImg' style={mybasketOnImg} onClick={SendBasket} >
-                    <i class="fa-solid fa-basket-shopping"></i>
+                    <i className="fa-solid fa-basket-shopping"></i>
                     </span> 
                     <span className='mydeleteOnImg' onClick={deleteBasket} >
-                    <i class="fa-solid fa-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                     </span> 
 
                 
