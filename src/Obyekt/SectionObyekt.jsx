@@ -34,7 +34,20 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
     };
     const price="Aze";
     const teratory="km";
-  
+    function cutString(inputString, maxLength) {
+      if (typeof inputString !== 'string') {
+        console.error("Error: Input is not a string");
+        return inputString;
+      }
+    
+      if (inputString.length <= maxLength) {
+        return inputString;
+      }
+    
+      return inputString.slice(0, maxLength) + '...';
+    }
+    
+    
     const [changeColor,setchangeColor]=useState(false);
     const [userData, setUserData] = useState([]);
     const [CheckRptrData, setCheckRptrData] = useState(true);
@@ -87,8 +100,9 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
                     <span onClick={btnLeftIcon}><i className="fa-solid fa-angle-left"></i></span>
                     <span onClick={btnRightIcon}><i className="fa-solid fa-angle-right"></i></span>
                     </div>
+                    
                     <div>
-                            <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100'/>
+                    <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100'/>
                     </div>
                     <span className='mybasketOnImg' style={mybasketOnImg} onClick={SendBasket} >
                     <i className="fa-solid fa-basket-shopping"></i>
@@ -100,11 +114,11 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
                 
                    
                 </div>
-                  
+                 
                 <div className='pb-2'><Link to='/Kart'>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
                     <p>Obyekt:<span >{SellorRent}</span></p>
-                   <p>Ünvan:<span >{address}</span></p> 
+                   <p>Ünvan:<span >{cutString(address,20)}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Otaq sayi:<span>{roomHome}</span></p> 
                     <p>Rayon:<span >{Region}</span></p>

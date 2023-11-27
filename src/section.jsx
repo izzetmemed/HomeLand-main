@@ -74,7 +74,18 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
    const mybasketOnImg={
      backgroundColor:changeColor?"rgb(79, 189, 89)":"",
    }
- 
+   function cutString(inputString, maxLength) {
+    if (typeof inputString !== 'string') {
+      console.error("Error: Input is not a string");
+      return inputString;
+    }
+  
+    if (inputString.length <= maxLength) {
+      return inputString;
+    }
+  
+    return inputString.slice(0, maxLength) + '...';
+  }
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
       
@@ -101,7 +112,7 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
                   
                 <div className='pb-2'><Link to='/Kart'>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
-                   <p>Ünvan:<span >{address}</span></p> 
+                   <p>Ünvan:<span >{cutString(address,20)}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Otaq sayi:<span>{roomHome}</span></p> 
                     <p>Kiraye verilir:<span >{WhoCanTake}</span></p>

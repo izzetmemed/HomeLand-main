@@ -78,7 +78,9 @@ const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemCount, setItemCount] = useState(2);
   
-
+  const setPage=(x)=>{
+    setCurrentPage(x)
+   }
 const lastIndex=currentPage*itemCount;
 const firstItem=lastIndex-itemCount;
 const filteredDataSlice=filteredData.slice(firstItem,lastIndex);
@@ -102,14 +104,14 @@ const countOfPagenation =Math.ceil(filteredData.length/itemCount);
             key={x.Id} 
           />
         ))}
-        {filteredData.length === 0 && (
+        {filteredDataSlice.length === 0 && (
           <div className='w-100 BasketİsEmpty d-flex justify-content-center align-items-center'> 
             <p className='fs-3 text-danger'>Ev tapılmadı!!!</p>
           </div>
         )}
       </div>
       <Outlet />
-      <Pagenation countOfPagenation={countOfPagenation} setCurrentP={setCurrentPage}/>
+      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage}/>
     </div>
   );
 };

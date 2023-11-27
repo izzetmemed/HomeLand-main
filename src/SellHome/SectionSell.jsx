@@ -74,6 +74,18 @@ const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,me
      backgroundColor:changeColor?"rgb(79, 189, 89)":"",
    }
  
+   function cutString(inputString, maxLength) {
+    if (typeof inputString !== 'string') {
+      console.error("Error: Input is not a string");
+      return inputString;
+    }
+  
+    if (inputString.length <= maxLength) {
+      return inputString;
+    }
+  
+    return inputString.slice(0, maxLength) + '...';
+  }
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
       
@@ -84,6 +96,7 @@ const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,me
                     <span onClick={btnLeftIcon}><i className="fa-solid fa-angle-left"></i></span>
                     <span onClick={btnRightIcon}><i className="fa-solid fa-angle-right"></i></span>
                     </div>
+                    
                     <div>
                             <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100'/>
                     </div>
@@ -100,7 +113,7 @@ const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,me
                   
                 <div className='pb-2'><Link to='/Kart'>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
-                   <p>Ünvan:<span >{address}</span></p> 
+                   <p>Ünvan:<span >{cutString(address,20)}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Otaq sayi:<span>{roomHome}</span></p> 
                     <p>Ev:<span >{kindofHome}</span></p>

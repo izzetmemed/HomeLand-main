@@ -23,6 +23,7 @@
     "scss": "node-sass src/scss/main.scss -w",
     "json": "json-server --watch src/Api/rent.json",
     "jsonSell": "json-server --watch src/Api/sell.json",
+    "jsonObyekt": "json-server --watch src/Api/obyekt.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

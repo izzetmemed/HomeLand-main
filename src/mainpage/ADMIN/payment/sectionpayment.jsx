@@ -84,6 +84,19 @@ const SectionPayment = () => {
         height:'50px',
         color:'white',
       };
+      function cutString(inputString, maxLength) {
+        if (typeof inputString !== 'string') {
+          console.error("Error: Input is not a string");
+          return inputString;
+        }
+      
+        if (inputString.length <= maxLength) {
+          return inputString;
+        }
+      
+        return inputString.slice(0, maxLength) + '...';
+      }
+      const price="Aze";
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
          <div className=' p-2 mt-4'>

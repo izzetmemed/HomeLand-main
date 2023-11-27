@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SectionCustomer = () => {
+const SectionCustomer = (({id,priceHome,address,MetroHome,code,dateTime}) => {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const handleButtonClick = () => {
@@ -42,6 +42,19 @@ const SectionCustomer = () => {
         cursor: 'pointer',
         color:'white',
       };
+      function cutString(inputString, maxLength) {
+        if (typeof inputString !== 'string') {
+          console.error("Error: Input is not a string");
+          return inputString;
+        }
+      
+        if (inputString.length <= maxLength) {
+          return inputString;
+        }
+      
+        return inputString.slice(0, maxLength) + '...';
+      }
+      const price="Aze";
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
          <div className=' p-2 mt-4'>
@@ -60,11 +73,11 @@ const SectionCustomer = () => {
                    
                 </div>
                 <div className='pb-2'>
-                   <p>Qiymet:<span className='price-home'>500</span></p> 
-                   <p>Unvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p> 
-                   <p>Metro:<span className='address-home'>28 May</span></p> 
-                    <p>Kod:<span className='room-home'>120</span></p> 
-                    <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
+                <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
+                   <p>Ünvan:<span >{cutString(address,20)}</span></p> 
+                   <p>Metro:<span >{MetroHome}</span></p> 
+                    <p>Kod:<span>{code}</span></p> 
+                    <p>Tarix:<span >{dateTime}</span></p>
                     <div className='p-2'>
                          <button className='btn ' style={buttonStyle} onClick={handleButtonClick}>Danışıldı</button>
                     </div>
@@ -77,4 +90,5 @@ const SectionCustomer = () => {
   )
 }
 
+)
 export default SectionCustomer
