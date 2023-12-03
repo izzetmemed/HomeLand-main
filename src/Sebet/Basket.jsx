@@ -19,12 +19,11 @@ const Basket = () => {
       </div>
       <div className='d-flex flex-wrap'>
         {getData.map((x, index) => {
-          console.log(x[2]);
-          if (x[2] == "obyekt") {
+          if (x[2] === "obyekt") {
             return (
               <SectionObyekt
                 key={index} 
-                priceHome={x[3]}
+                priceHome={x[1]}
                 address={x[4]}
                 MetroHome={x[5]}
                 roomHome={x[6]}

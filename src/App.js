@@ -10,6 +10,7 @@ function App() {
           <div className='  col-12 col-xl-10  col-xxl-8'>
            <Route/>
         </div>
+        
         </div>
         
       </div> 

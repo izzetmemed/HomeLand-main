@@ -100,7 +100,7 @@ const Rent = () => {
                                             <span onClick={btnRightIcon}><i className="fa-solid fa-angle-right"></i></span>
                                         </div>
                                         <div>
-                                            <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100' />
+                                            <img src={keepingImgSource[ImgSourceIndex]}  className='w-100 h-100' />
                                         </div>
 
 
@@ -309,6 +309,7 @@ const Rent = () => {
 
                             </div>
                         </div >
+                       
 
                         <div className='mt-3'>
                             <div className='div-in-label'>
@@ -326,6 +327,36 @@ const Rent = () => {
                                 <input type="text" />
                             </div>
                         </div>
+
+                         <div className='mt-3'>
+
+                            <div className='div-in-label'>
+                                <label htmlFor="customerName">Evinizi kim kirayə götürə bilər?</label>
+                            </div>
+                            <div className='col-12 main-div-for-chechbox ms-2'>
+                                <div> 
+                                    <input type="checkbox" name="" id="" />
+                                    <label className='ms-1'>Oğlan tələbələr</label>
+                                    
+                                </div>
+                                <div> 
+                                    <input type="checkbox" name="" id="" />
+                                    <label className='ms-1'>Qadın tələbələr</label>
+                                    
+                                </div>
+                                <div> 
+                                    <input type="checkbox" name="" id="" />
+                                    <label className='ms-1'>Ailə</label>
+                                    
+                                </div>
+                                <div> 
+                                    <input type="checkbox" name="" id="" />
+                                    <label className='ms-1'>İşləyən bəylər</label>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div >
                         <div className='mt-3'>
                             <div className='div-in-label'>
                                 <label htmlFor="customerName">Ev Haqqında əlavə məlumat yaza bilərsiniz:</label>

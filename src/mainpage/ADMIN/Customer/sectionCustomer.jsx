@@ -78,9 +78,7 @@ const SectionCustomer = (({id,priceHome,address,MetroHome,code,dateTime}) => {
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Kod:<span>{code}</span></p> 
                     <p>Tarix:<span >{dateTime}</span></p>
-                    <div className='p-2'>
-                         <button className='btn ' style={buttonStyle} onClick={handleButtonClick}>Danışıldı</button>
-                    </div>
+                    
                    
                 </div>
             </div>

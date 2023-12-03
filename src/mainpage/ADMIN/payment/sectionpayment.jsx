@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SectionPayment = () => {
+const SectionPayment = ({id,priceHome,OwnNumber,Code}) => {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [isButtonTwoClicked, setIsButtonTwoClicked] = useState(false);
     const [isButtonThreeClicked, setIsButtonThreeClicked] = useState(false);
@@ -84,18 +84,7 @@ const SectionPayment = () => {
         height:'50px',
         color:'white',
       };
-      function cutString(inputString, maxLength) {
-        if (typeof inputString !== 'string') {
-          console.error("Error: Input is not a string");
-          return inputString;
-        }
       
-        if (inputString.length <= maxLength) {
-          return inputString;
-        }
-      
-        return inputString.slice(0, maxLength) + '...';
-      }
       const price="Aze";
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
@@ -115,9 +104,9 @@ const SectionPayment = () => {
                    
                 </div>
                 <div className='pb-2'>
-                   <p>Qiymet:<span className='price-home'>500</span></p> 
-                   <p>Unvan:<span className='address-home'>Nesimi Rayon, eliiskenderov kucesi</span></p> 
-                    <p>Tarix:<span className='time-home'>06.09.2023 17:23</span></p>
+                <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
+                    <p>Kod:<span>{Code}</span></p> 
+                    <p>Ev sahibi:<span >{OwnNumber}</span></p>
                     <div className=' d-flex flex-wrap'>
                          <button className='btn col-5' style={buttonStyle} onClick={handleButtonClick}> Ev sahibi <br /> ilə danışıldı</button>
                          <button className='btn col-5' style={buttonTwoStyle} onClick={handleTwoButtonClick}>Müştərilə <br /> danışıldı</button>

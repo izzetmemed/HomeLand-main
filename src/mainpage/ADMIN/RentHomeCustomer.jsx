@@ -37,7 +37,7 @@ const RentHomeCustomer = () => {
     <div>
         <div>
           <div className="col-12 d-flex justify-content-center mt-5">
-            <input type="number" ref={inputValue}/>
+            <input type="number"  placeholder='kod' ref={inputValue}/>
             <button className='btn btn-success' onClick={searchCode}> Axtarmaq</button>
           </div>
           <div className='d-flex flex-wrap'>

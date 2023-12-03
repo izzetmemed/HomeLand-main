@@ -74,24 +74,29 @@ const İnsideCardPayment = () => {
                                         <tr>
                                             <th>Müştərinin adı soyadı</th>
                                             <th>Nömrə</th>
+                                            <th>Tarix</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>izzet memmedov</td>
                                             <td>055 555 55 55</td>
+                                            <th>Tarix</th>
                                         </tr>
                                         <tr>
                                             <td>izzet memmedov</td>
                                             <td>055 555 55 55</td>
+                                            <th>Tarix</th>
                                         </tr>
                                         <tr>
                                             <td>izzet memmedov</td>
                                             <td>055 555 55 55</td>
+                                            <th>Tarix</th>
                                         </tr>
                                         <tr>
                                             <td>izzet memmedov</td>
                                             <td>055 555 55 55</td>
+                                            <th>Tarix</th>
                                         </tr>
                                     </tbody>
                                 </table>

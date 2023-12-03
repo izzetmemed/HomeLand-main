@@ -64,7 +64,7 @@ const Section = ({id,type,priceHome,address,MetroHome,roomHome,WhoCanTake,measur
      
     };
      useEffect(() => {
-      const isHave = (JSON.parse(localStorage.getItem("Section")) || []).some((x) => (x[1] == id && x[2]===type));
+      const isHave = (JSON.parse(localStorage.getItem("Section")) || []).some((x) => (x[1] === id && x[2]===type));
       if (isHave) {
         setchangeColor(true);
         setCheckRptrData(false);

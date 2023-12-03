@@ -91,7 +91,7 @@ const countOfPagenation =Math.ceil(filteredData.length/itemCount);
       <div className='d-flex flex-wrap'>
         {filteredDataSlice.map((x) => (
           <Section
-            id={x.id}
+            id={x.Id}
             type={"rentHome"}
             priceHome={x.Price}
             address={x.Street}
