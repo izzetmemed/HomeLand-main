@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import React from 'react';
-import Coordinate from "../../answer/coordinate";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import Update from '../../../mainpage/answer/rent';
-const İnsideCardOwn = () => {
+import Update from '../../../SellHome/Sell';
+const SellInside = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [keepingImgSource,setKeepingImgSource] = useState([]);
@@ -34,7 +33,7 @@ const İnsideCardOwn = () => {
         try {
   
           const response = await fetch(
-            `http://localhost:5224/api/RentHome/Admin/${id}`
+            `http://localhost:5224/api/Sell/Admin/${id}`
           );
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -54,7 +53,7 @@ const İnsideCardOwn = () => {
       const fetchData = async () => {
           try {
             if(getById.img.length>0){
-              const response = await fetch(`http://localhost:5224/api/RentHomeImg/DownloadImages?imgNames=${getById.img}`);
+              const response = await fetch(`http://localhost:5224/api/SellImg/DownloadImages?imgNames=${getById.img}`);
               const data = await response.json();
               setKeepingImgSource(data.imageUrls);
             }
@@ -73,7 +72,7 @@ const İnsideCardOwn = () => {
     };
     const deleteItem = async () => {
         try {
-          const response = await fetch(`http://localhost:5224/api/RentHome/${getById.id}`, {
+          const response = await fetch(`http://localhost:5224/api/Sell/${getById.id}`, {
             method: 'DELETE'
           });
           
@@ -81,7 +80,7 @@ const İnsideCardOwn = () => {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
       
-             navigate('/login/MainAdmin/Own');
+             navigate('/homelogin/MainAdmin/Sell/Own');
           if (response.status === 204) { 
             console.log("Item deleted successfully");
         
@@ -160,7 +159,7 @@ const İnsideCardOwn = () => {
             )
             }
            <p>
-             Əşya:<span className="time-home">{getById.item}</span>
+             Əşya:<span className="time-home">{getById.İtem}</span>
            </p>
            <p>
              Təmir:<span className="time-home">{getById.repair}</span>
@@ -176,41 +175,6 @@ const İnsideCardOwn = () => {
              Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
              <span className="time-home">
              {getById.price * 20 /100}<span>{price}</span>
-             </span>
-           </p>
-           <p>
-             Ev kimə verilir:
-             <span className="time-home">
-               {[
-                 getById.family && "Ailə",
-                 getById.boy && "Oğlan tələbələrə",
-                 getById.girl && "Xanım tələbələrə",
-                 getById.workingBoy && "İşləyən bəylərə",
-               ]
-                 .filter(Boolean)
-                 .join(", ")
-                 .replace(/, (?=[^,]*$)/, " və ")}
-             </span>
-           </p>
-           <p>
-             Evdə olan Əşyalar:
-             <span className="time-home">
-               {[
-                 getById.bed && "Yataq",
-                 getById.wardrobe && "Dolab",
-                 getById.tableChair && "Masa və Stol",
-                 getById.centralHeating && "Mərkəzi İstilik sistemi",
-                 getById.gasHeating && "Qaz İstilik sistemi",
-                 getById.combi && "Kombi",
-                 getById.tv && "Televizor",
-                 getById.washingClothes && "Paltar Yuyan",
-                 getById.airConditioning && "Kondisioner",
-                 getById.sofa && "Divan",
-                 getById.wifi && "Wi-Fi",
-               ]
-                 .filter(Boolean)
-                 .join(", ")
-                 .replace(/, (?=[^,]*$)/, " və ")}
              </span>
            </p>
            <p>
@@ -247,4 +211,4 @@ const İnsideCardOwn = () => {
     )
 }
 
-export default İnsideCardOwn
+export default SellInside

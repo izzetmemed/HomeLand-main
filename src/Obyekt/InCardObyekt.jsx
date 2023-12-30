@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import Coordinate from "./answer/coordinate";
-import Cards from "./cards";
+import Coordinate from "../mainpage/answer/coordinate";
+import Cards from "./CardsObyekt";
 import { useParams } from "react-router-dom";
-const İnsideCard = () => {
+const InCardObyekt = () => {
   const { id } = useParams();
 
   const [keepingImgSource,setKeepingImgSource] = useState([]);
@@ -32,14 +32,13 @@ const İnsideCard = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5224/api/RentHome/${id}`
+          `http://localhost:5224/api/Obyekt/${id}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setGetById(data);
-        console.log(data);
       } catch (error) {
         console.error("Error in fetchData:", error);
       }
@@ -50,7 +49,7 @@ const İnsideCard = () => {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:5224/api/RentHomeImg/DownloadImages?imgNames=${GetById.img}`);
+            const response = await fetch(`http://localhost:5224/api/ObyektImg/DownloadImages?imgNames=${GetById.img}`);
             const data = await response.json();
             setKeepingImgSource(data.imageUrls);
 
@@ -119,58 +118,28 @@ const İnsideCard = () => {
                )
                }
              
-              <p>
-                Ev kimə verilir:
-                <span className="time-home">
-                  {[
-                    GetById.family && "Ailə",
-                    GetById.boy && "Oğlan tələbələrə",
-                    GetById.girl && "Xanım tələbələrə",
-                    GetById.workingBoy && "İşləyən bəylərə",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")
-                    .replace(/, (?=[^,]*$)/, " və ")}
-                </span>
-              </p>
+             
 
               <p>
-                Əşya:<span className="time-home">{GetById.item}</span>
+                Obyekt:<span className="time-home">{GetById.sellorRent}</span>
               </p>
+              {GetById.sellorRent==="Satılır" && (
+                <p>
+                Sənəd:<span className="time-home">{GetById.document}</span>
+              </p>
+              )
+
+              }
               <p>
                 Təmir:<span className="time-home">{GetById.repair}</span>
               </p>
+              
+              
+              
               <p>
-                Mərtəbə:<span className="time-home">{GetById.floor}</span>
-              </p>
-              <p>
-                Bina:<span className="time-home">{GetById.building}</span>
-              </p>
-              <p>
-                Evdə olan Əşyalar:
+                Obyekti tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                  {[
-                    GetById.bed && "Yataq",
-                    GetById.wardrobe && "Dolab",
-                    GetById.tableChair && "Masa və Stol",
-                    GetById.centralHeating && "Mərkəzi İstilik sistemi",
-                    GetById.gasHeating && "Qaz İstilik sistemi",
-                    GetById.combi && "Kombi",
-                    GetById.tv && "Televizor",
-                    GetById.washingClothes && "Paltar Yuyan",
-                    GetById.airConditioning && "Kondisioner",
-                    GetById.sofa && "Divan",
-                    GetById.wifi && "Wi-Fi",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")
-                    .replace(/, (?=[^,]*$)/, " və ")}
-                </span>
-              </p>
-              <p>
-                Evi tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
-                <span className="time-home">
-                {GetById.price * 20 /100}<span>{price}</span>
+                {GetById.price * 1 /100}<span>{price}</span>
                 </span>
               </p>
               <p>
@@ -197,4 +166,4 @@ const İnsideCard = () => {
   );
 };
 
-export default İnsideCard;
+export default InCardObyekt;

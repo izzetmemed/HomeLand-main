@@ -1,9 +1,8 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,measureHome,Region,dateTime,deleteBasket,imgNames}) => {
+const SellSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measureHome,Sənəd,dateTime,deleteBasket,imgNames,data}) => {
   const [keepingImgSource, setKeepingImgSource] = useState([]);
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,7 +22,7 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
     };
     fetchData();
   }, [imgNames]);
-      
+
     const [ImgSourceIndex, setImgSourceIndex] = useState(0);
       const btnLeftIcon = () => {
         if (ImgSourceIndex < keepingImgSource.length - 1) {
@@ -42,25 +41,12 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
     };
     const price="Aze";
     const teratory="km";
-    function cutString(inputString, maxLength) {
-      if (typeof inputString !== 'string') {
-        console.error("Error: Input is not a string");
-        return inputString;
-      }
-    
-      if (inputString.length <= maxLength) {
-        return inputString;
-      }
-    
-      return inputString.slice(0, maxLength) + '...';
-    }
-    
-    
+  
     const [changeColor,setchangeColor]=useState(false);
     const [userData, setUserData] = useState([]);
     const [CheckRptrData, setCheckRptrData] = useState(true);
     const newData = [
-      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, SellorRent,Region, measureHome, dateTime],
+      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, Region, measureHome, Sənəd, dateTime],
     ];
    
     const SendBasket = () => {
@@ -76,7 +62,6 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
         const updatedData =LastinfoLocal;
         setUserData(updatedData);
         const indexToRemove = updatedData.findIndex(item => item[1] === id && item[2]===type);
-        console.log(indexToRemove);
         if (indexToRemove !== -1) {
           updatedData.splice(indexToRemove, 1);
           setUserData(updatedData);
@@ -97,6 +82,53 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
      backgroundColor:changeColor?"rgb(79, 189, 89)":"",
    }
  
+   function cutString(inputString, maxLength) {
+    if (typeof inputString !== 'string') {
+      console.error("Error: Input is not a string");
+      return inputString;
+    }
+  
+    if (inputString.length <= maxLength) {
+      return inputString;
+    }
+  
+    return inputString.slice(0, maxLength) + '...';
+  }
+  var Data=data
+  const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnFirstStep)
+  const handleButtonClick = () => {
+    Data.IsCalledWithHomeOwnFirstStep=!sendTrueOrFalse;
+    setSendTrueOrFalse(!sendTrueOrFalse);
+    fetch("http://localhost:5224/api/Sell", {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response;
+        })
+        .then((responseData) => {
+          console.log("Data uploaded successfully:", responseData);
+        })
+        .catch((error) => {
+          console.error("Error uploading data:", error);
+        });
+  };
+  const buttonStyle = {
+    backgroundColor: Data.IsCalledWithHomeOwnFirstStep ? 'red' : 'green',
+    borderRadius: '5px',
+    padding:'0',
+    cursor: 'pointer',
+    marginLeft:'5px',
+    height:'50px',
+    color:'white',
+  };
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
       
@@ -113,7 +145,7 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
                 src={
                   keepingImgSource.length > 0
                     ? keepingImgSource[ImgSourceIndex]
-                    : require("../logo.home/Logo-white.PNG")
+                    : require("../../../logo.home/Logo-white.PNG")
                 }
                 alt=""
                 className="w-100 h-100"
@@ -124,22 +156,18 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
                     </span> 
                     <span className='mydeleteOnImg' onClick={deleteBasket} >
                     <i className="fa-solid fa-trash"></i>
-                    </span> 
-
-                
-                   
-                </div>
-                 
-                <div className='pb-2'><Link to={`/Obyekt/Kart/${id}`}>
+                    </span>      
+                </div> 
+                <div className='pb-2'><Link to={`/Homelogin/MainAdmin/Sell/Own/Kart/${id}`}>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
-                    <p>Obyekt:<span >{SellorRent}</span></p>
                    <p>Ünvan:<span >{cutString(address,20)}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Otaq sayi:<span>{roomHome}</span></p> 
-                    <p>Rayon:<span >{Region}</span></p>
-                    <p>Sahe:<span>{measureHome}<span>{teratory}</span></span></p>
+                    <p>Region:<span >{Region}</span></p>
                     <p>Tarix:<span >{dateTime}</span></p>
-                                     </Link>
+                     </Link>
+                     <button className='btn col-5' style={buttonStyle} onClick={handleButtonClick}> Ev sahibi ilə danışıldı</button>
+
                 </div>
 
             </div>
@@ -151,4 +179,4 @@ const SectionObyekt = ({id,type,priceHome,address,MetroHome,roomHome,SellorRent,
   )
 }
 
-export default SectionObyekt
+export default SellSectionOwn

@@ -17,13 +17,13 @@ const MainAdmin = () => {
                   <div className='mt-3 col-12 pe-2'>
                     <div className='col-12 div-in-select LinkTree ms-1 pe-1'>
                       <div >
-                      <Link to="/login/MainAdmin/Own">Ev sahibi:</Link>
+                      <Link to="HomeLogin/MainAdmin/Renthome/Own">Ev sahibi:</Link>
                       </div>
                       <div >
-                      <Link to="/login/MainAdmin/Customer">Müştəri:</Link>
+                      <Link to="/HomeLogin/MainAdmin/Renthome/Customer">Müştəri:</Link>
                       </div>
                       <div >
-                      <Link to="/login/MainAdmin/Payment">Ödəniş:</Link>
+                      <Link to="/HomeLogin/MainAdmin/Renthome/Payment">Ödəniş:</Link>
                       </div>
                     </div>
                   </div >
@@ -38,13 +38,13 @@ const MainAdmin = () => {
                   <div className='mt-3 col-12 pe-2'>
                     <div className='col-12 div-in-select LinkTree ms-1 pe-1'>
                       <div >
-                       <Link to="/Own">Ev sahibi:</Link>
+                       <Link to="HomeLogin/MainAdmin/Sell/Own">Ev sahibi:</Link>
                       </div>
                       <div >
-                      <Link to="/Customer">Müştəri:</Link>
+                      <Link to="HomeLogin/MainAdmin/Sell/Customer">Müştəri:</Link>
                       </div>
                       <div >
-                      <Link to="/Payment">Ödəniş:</Link>
+                      <Link to="HomeLogin/MainAdmin/Sell/Payment">Ödəniş:</Link>
                       </div>
                     </div>
                   </div >

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Pagenation from "../pagenation";
+import {Load} from "../Load/Load";
 const CardsSell = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -36,7 +37,7 @@ const CardsSell = () => {
     const fetchData = async () => {
       try {
         const ArrayData = [];
-        const resp = await axios.get("http://localhost:3000/Sell");
+        const resp = await axios.get("http://localhost:5224/api/Sell");
         if (click) {
           const filteredArray = Array.from(resp.data).filter((x) => {
             if (
@@ -81,16 +82,32 @@ const CardsSell = () => {
 
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemCount, setItemCount] = useState(1);
+  const [itemCount, setItemCount] = useState(20);
 
   const lastIndex = currentPage * itemCount;
   const firstItem = lastIndex - itemCount;
   const filteredDataSlice = filteredData.slice(firstItem, lastIndex);
   const countOfPagenation = Math.ceil(filteredData.length / itemCount);
+  const convertDate = (x) => {
+    return x.toString().replace("T", " ").substring(0, 16);
+  };
+  const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
 
  const setPage=(x)=>{
   setCurrentPage(x)
  }
+ const [showLoad, setShowLoad] = useState(true);
+
+useEffect(() => {
+  if (filteredDataSlice.length === 0) {
+    const timer = setTimeout(() => setShowLoad(false), 5000);
+    return () => clearTimeout(timer);
+  } else {
+    setShowLoad(false);
+  }
+}, [filteredDataSlice.length]);
+
+
   return (
     <div>
       <Search
@@ -102,25 +119,26 @@ const CardsSell = () => {
         setClick={ClickFunc}
       />
       <div className="d-flex flex-wrap">
-        {filteredDataSlice.map((x) => (
+        {parsedData.map((x) => (
           <SectionSell
-            id={x.id}
+            id={x.Id}
             type={"sellHome"}
             priceHome={x.Price}
-            address={x.Street}
+            address={x.Address}
             MetroHome={x.Metro}
-            Items={x.Furniture}
+            Items={x.Item}
             roomHome={x.Room}
-            WhoCanTake={x.WhoCan}
+            Region={x.Region}
             measureHome={x.Area}
-            Sənəd={x.Sənəd}
-            dateTime={x.Date}
+            Sənəd={x.Document}
+            dateTime={convertDate(x.Date)}
+            imgNames={x.Img}
             key={x.Id}
           />
         ))}
         {filteredDataSlice.length === 0 && (
           <div className="w-100 BasketİsEmpty d-flex justify-content-center align-items-center">
-            <p className="fs-3 text-danger">Ev tapılmadı!!!</p>
+            {showLoad ? <Load/> :  <p className='fs-3 text-danger'>Ev tapılmadı!!!</p>} 
           </div>
         )}
       </div>

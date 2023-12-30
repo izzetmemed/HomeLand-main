@@ -1,20 +1,28 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,measureHome,Sənəd,dateTime,deleteBasket}) => {
-    const keepingImgSource = [
-        'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
-        'https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp',
-        'https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPRSAAg1MOr6nFfMv7L131kZl7O3se-oYEf0V0ZLW7jDUVmh7vtnwLZ1uJHUI7Ji_-pTE&usqp=CAU',
-        'https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg',
-        'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
-        'https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp',
-        'https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg',
-        'https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg',
-        'https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg',
-        
-      ];
+const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,Region,measureHome,Sənəd,dateTime,deleteBasket,imgNames}) => {
+  const [keepingImgSource, setKeepingImgSource] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if(imgNames.length!==0){
+          const response = await fetch(
+            `http://localhost:5224/api/SellImg/DownloadImages?imgNames=${imgNames}`
+          );
+
+          const data = await response.json();
+          setKeepingImgSource(data.imageUrls);
+
+        }
       
+      } catch (error) {
+        console.error("Error downloading images:", error);
+      }
+    };
+    fetchData();
+  }, [imgNames]);
+
     const [ImgSourceIndex, setImgSourceIndex] = useState(0);
       const btnLeftIcon = () => {
         if (ImgSourceIndex < keepingImgSource.length - 1) {
@@ -38,7 +46,7 @@ const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,me
     const [userData, setUserData] = useState([]);
     const [CheckRptrData, setCheckRptrData] = useState(true);
     const newData = [
-      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, kindofHome, measureHome, Sənəd, dateTime],
+      [keepingImgSource,id,type, priceHome, address, MetroHome, roomHome, Region, measureHome, Sənəd, dateTime],
     ];
    
     const SendBasket = () => {
@@ -98,7 +106,15 @@ const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,me
                     </div>
                     
                     <div>
-                            <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100'/>
+                    <img
+                src={
+                  keepingImgSource.length > 0
+                    ? keepingImgSource[ImgSourceIndex]
+                    : require("../logo.home/Logo-white.PNG")
+                }
+                alt=""
+                className="w-100 h-100"
+              />
                     </div>
                     <span className='mybasketOnImg' style={mybasketOnImg} onClick={SendBasket} >
                     <i className="fa-solid fa-basket-shopping"></i>
@@ -111,12 +127,12 @@ const SectionSell = ({id,type,priceHome,address,MetroHome,roomHome,kindofHome,me
                    
                 </div>
                   
-                <div className='pb-2'><Link to='/Kart'>
+                <div className='pb-2'><Link to={`/Satılıq-ev/Kart/${id}`}>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
                    <p>Ünvan:<span >{cutString(address,20)}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
                     <p>Otaq sayi:<span>{roomHome}</span></p> 
-                    <p>Ev:<span >{kindofHome}</span></p>
+                    <p>Region:<span >{Region}</span></p>
                     <p>Sahe:<span>{measureHome}<span>{teratory}</span></span></p>
                     <p>Sənəd:<span >{Sənəd}</span></p>
                     <p>Tarix:<span >{dateTime}</span></p>

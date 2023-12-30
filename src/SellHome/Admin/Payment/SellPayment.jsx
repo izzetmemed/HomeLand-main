@@ -1,10 +1,10 @@
 import React from "react";
-import SectionPayment from "./payment/sectionpayment";
+import SectionPayment from "./SellSectionPayment";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import {Load} from '../../Load/Load';
-import Pagination from "../../pagenation";
-const RentPayment = () => {
+import {Load} from '../../../Load/Load';
+import Pagination from "../../../pagenation";
+const SellPayment = () => {
   const inputValue = useRef(null);
   const inputOwnValue = useRef(null);
   const inputCustomerValue = useRef(null);
@@ -16,7 +16,7 @@ const RentPayment = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axios.get("http://localhost:5224/api/RentHome/Normal");
+        const resp = await axios.get("http://localhost:5224/api/Sell/Normal");
         if (input != null) {
           const filteredArray = Array.from(resp.data).filter(
             (x) => x.Id === input
@@ -153,4 +153,4 @@ useEffect(() => {
   );
 };
 
-export default RentPayment;
+export default SellPayment;

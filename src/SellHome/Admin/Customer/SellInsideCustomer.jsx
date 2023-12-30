@@ -1,10 +1,11 @@
 import { useState, useEffect,useRef } from "react";
 import React from "react";
-import Coordinate from "../../answer/coordinate";
 import { useParams } from "react-router-dom";
-const İnsideCardPayment = () => {
+const SellinsideCustomer = () => {
   const { id } = useParams();
 
+  const customerName=useRef(null);
+  const customerNumber=useRef(null);
   const keepingImgSource = [
     "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
     "https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp",
@@ -39,7 +40,7 @@ const İnsideCardPayment = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5224/api/RentHome/Admin/${id}`
+          `http://localhost:5224/api/Sell/Admin/${id}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -58,6 +59,38 @@ const İnsideCardPayment = () => {
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
   };
+
+  const addCustomer=()=>{
+    setstate(!state);
+    const customerObject={
+        SecondStepCustomerForeignId:id,
+        FullName:customerName.current.value,
+        Number:customerNumber.current.value
+    }
+  
+    fetch("http://localhost:5224/api/SellCustomer", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(customerObject),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          setstate(!state);
+          return response;
+        })
+        .then((responseData) => {
+          console.log("Data uploaded successfully:", responseData);
+        })
+        .catch((error) => {
+          console.error("Error uploading data:", error);
+        });
+  }
+
 
   return (
     <div>
@@ -138,41 +171,6 @@ const İnsideCardPayment = () => {
                 </span>
               </p>
               <p>
-                Ev kimə verilir:
-                <span className="time-home">
-                  {[
-                    getById.family && "Ailə",
-                    getById.boy && "Oğlan tələbələrə",
-                    getById.girl && "Xanım tələbələrə",
-                    getById.workingBoy && "İşləyən bəylərə",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")
-                    .replace(/, (?=[^,]*$)/, " və ")}
-                </span>
-              </p>
-              <p>
-                Evdə olan Əşyalar:
-                <span className="time-home">
-                  {[
-                    getById.bed && "Yataq",
-                    getById.wardrobe && "Dolab",
-                    getById.tableChair && "Masa və Stol",
-                    getById.centralHeating && "Mərkəzi İstilik sistemi",
-                    getById.gasHeating && "Qaz İstilik sistemi",
-                    getById.combi && "Kombi",
-                    getById.tv && "Televizor",
-                    getById.washingClothes && "Paltar Yuyan",
-                    getById.airConditioning && "Kondisioner",
-                    getById.sofa && "Divan",
-                    getById.wifi && "Wi-Fi",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")
-                    .replace(/, (?=[^,]*$)/, " və ")}
-                </span>
-              </p>
-              <p>
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
@@ -204,10 +202,21 @@ const İnsideCardPayment = () => {
               </table>
             </div>
           </div>
+
+          <div className="col-12 d-flex justify-content-center mt-2 h-auto">
+            <div className="h-25 ">
+              <input type="Text" placeholder="Müştərinin adı soyadı:" ref={customerName}/>
+              <input type="number" placeholder="Nömrəs:" ref={customerNumber}/>
+              <button className="btn btn-success" onClick={addCustomer}> Əlavə etmək</button>
+            </div>
+          </div>
+          {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
+                            <Coordinate />
+                        </div> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default İnsideCardPayment;
+export default SellinsideCustomer;

@@ -5,6 +5,7 @@ import SearchObyekt  from './searchObyekt';
 import { Outlet } from 'react-router-dom';
 import Pagenation from '../pagenation';
 import  axios from 'axios';
+import {Load} from '../Load/Load';
 const CardsObyekt = () => {
 
   const [filteredData, setFilteredData] = useState([]);
@@ -37,7 +38,7 @@ const CardsObyekt = () => {
     const fetchData = async () => {
       try {
         const ArrayData = [];
-        const resp = await axios.get("http://localhost:3000/obyekt");
+        const resp = await axios.get("http://localhost:5224/api/Obyekt");
         if (click) {
           const filteredArray = Array.from(resp.data).filter((x) => {
             if (
@@ -82,7 +83,7 @@ const CardsObyekt = () => {
 
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemCount, setItemCount] = useState(1);
+  const [itemCount, setItemCount] = useState(20);
 
   const lastIndex = currentPage * itemCount;
   const firstItem = lastIndex - itemCount;
@@ -92,6 +93,21 @@ const CardsObyekt = () => {
  const setPage=(x)=>{
   setCurrentPage(x)
  }
+ const convertDate = (x) => {
+  return x.toString().replace("T", " ").substring(0, 16);
+};
+const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
+
+const [showLoad, setShowLoad] = useState(true);
+
+useEffect(() => {
+  if (filteredDataSlice.length === 0) {
+    const timer = setTimeout(() => setShowLoad(false), 5000);
+    return () => clearTimeout(timer);
+  } else {
+    setShowLoad(false);
+  }
+}, [filteredDataSlice.length]);
   return (
     <div>
       <SearchObyekt
@@ -103,21 +119,22 @@ const CardsObyekt = () => {
       setClick={ClickFunc}
       />
       <div className='d-flex flex-wrap'>
-      {filteredDataSlice.map((x) => (
+      {parsedData.map((x) => (
           <SectionObyect
-            id={x.id}
+            id={x.Id}
             type={"obyekt"}
             priceHome={x.Price}
             Region={x.Region}
-            address={x.Street}
+            address={x.Address}
             SellorRent={x.SellorRent}
             MetroHome={x.Metro}
-            Items={x.Furniture}
+            Items={x.İtem}
             roomHome={x.Room}
             WhoCanTake={x.WhoCan}
             measureHome={x.Area}
-            Sənəd={x.Sənəd}
-            dateTime={x.Date}
+            Sənəd={x.Document}
+            dateTime={convertDate(x.Date)}
+            imgNames={x.Img}
             key={x.Id}
           />
         ))}
@@ -125,7 +142,7 @@ const CardsObyekt = () => {
       
       {filteredDataSlice.length === 0 && (
           <div className="w-100 BasketİsEmpty d-flex justify-content-center align-items-center">
-            <p className="fs-3 text-danger">Ev tapılmadı!!!</p>
+            {showLoad ? <Load/> :  <p className='fs-3 text-danger'>Ev tapılmadı!!!</p>} 
           </div>
         )}
       </div>

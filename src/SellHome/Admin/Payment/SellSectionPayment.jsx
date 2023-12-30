@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-const SectionPayment = ({id,Name,Number,Code , data}) => {
+const SellSectionPayment = ({id,Name,Number,Code , data}) => {
     
     var Data=data
     const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnThirdStep)
@@ -31,7 +31,7 @@ const SectionPayment = ({id,Name,Number,Code , data}) => {
   };
 
   const fetchFunc=()=>{
-    fetch("http://localhost:5224/api/RentHome", {
+    fetch("http://localhost:5224/api/Sell", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -137,7 +137,7 @@ const SectionPayment = ({id,Name,Number,Code , data}) => {
                    
                 </div>
                 <div className='pb-2'>
-                <Link to={`/homelogin/MainAdmin/Renthome/Payment/Kart/${id}`}>
+                <Link to={`/homelogin/MainAdmin/Sell/Payment/Kart/${id}`}>
                 <p>Ev sahibi:<span >{Name}</span></p> 
                     <p>Kod:<span>{Code}</span></p> 
                     <p>Nömrəsi<span >{Number}</span></p>
@@ -157,4 +157,4 @@ const SectionPayment = ({id,Name,Number,Code , data}) => {
   )
 }
 
-export default SectionPayment
+export default SellSectionPayment

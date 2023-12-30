@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-const SectionCustomer = (({id,priceHome,address,MetroHome,roomHome,Region,dateTime , imgNames}) => {
+const SellSectionCustomer = (({id,priceHome,address,MetroHome,roomHome,Region,dateTime , imgNames}) => {
   const [keepingImgSource, setKeepingImgSource] = useState([]);
  
   useEffect(() => {
@@ -8,7 +8,7 @@ const SectionCustomer = (({id,priceHome,address,MetroHome,roomHome,Region,dateTi
       try {
         if(imgNames.length!==0){
           const response = await fetch(
-            `http://localhost:5224/api/RentHomeImg/DownloadImages?imgNames=${imgNames}`
+            `http://localhost:5224/api/SellImg/DownloadImages?imgNames=${imgNames}`
           );
 
           const data = await response.json();
@@ -66,7 +66,7 @@ const SectionCustomer = (({id,priceHome,address,MetroHome,roomHome,Region,dateTi
                     </div>
   
                 </div>
-                <div className='pb-2'><Link to={`/HomeLogin/MainAdmin/Renthome/Customer/Kart/${id}`}>
+                <div className='pb-2'><Link to={`/HomeLogin/MainAdmin/Sell/Customer/Kart/${id}`}>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
                    <p>Ünvan:<span >{cutString(address,20)}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
@@ -87,4 +87,4 @@ const SectionCustomer = (({id,priceHome,address,MetroHome,roomHome,Region,dateTi
 }
 
 )
-export default SectionCustomer
+export default SellSectionCustomer

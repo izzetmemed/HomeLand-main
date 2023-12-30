@@ -1,10 +1,10 @@
 import React from 'react'
-import SectionCustomer from './Customer/sectionCustomer';
+import SectionCustomer from './SellSectionCustomer';
 import axios from 'axios';
 import { useEffect,useState,useRef } from 'react';
-import Pagenation from '../../pagenation';
-import {Load} from '../../Load/Load';
-const RentHomeCustomer = () => {
+import Pagenation from '../../../pagenation';
+import {Load} from '../../../Load/Load';
+const SellCustomer = () => {
   const inputValue=useRef(null);
   const [filteredData, setFilteredData] = useState([]);
   const [input, setInput] = useState(null);
@@ -12,7 +12,7 @@ const RentHomeCustomer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-      const resp = await axios.get("http://localhost:5224/api/RentHome/Normal");
+      const resp = await axios.get("http://localhost:5224/api/Sell/Normal");
       if(input!==null){
         const filteredArray = Array.from(resp.data).filter((x) =>  x.Id===input
         );
@@ -72,7 +72,6 @@ useEffect(() => {
           {parsedData.map((x) => ( 
           <SectionCustomer
             id={x.Id}
-            type={"RentHome"}
             priceHome={x.Price}
             address={x.Address}
             MetroHome={x.Metro}
@@ -103,4 +102,4 @@ useEffect(() => {
   )
 }
 
-export default RentHomeCustomer
+export default SellCustomer

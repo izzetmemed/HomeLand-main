@@ -1,8 +1,7 @@
 import { useState, useEffect,useRef } from "react";
 import React from "react";
-import Coordinate from "../../answer/coordinate";
 import { useParams } from "react-router-dom";
-const İnsideCardPayment = () => {
+const SellInsidePayment = () => {
   const { id } = useParams();
 
   const keepingImgSource = [
@@ -39,7 +38,7 @@ const İnsideCardPayment = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5224/api/RentHome/Admin/${id}`
+          `http://localhost:5224/api/Sell/Admin/${id}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -210,4 +209,4 @@ const İnsideCardPayment = () => {
   );
 };
 
-export default İnsideCardPayment;
+export default SellInsidePayment;

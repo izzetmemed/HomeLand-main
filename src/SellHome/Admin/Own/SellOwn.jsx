@@ -1,42 +1,41 @@
 import React from "react";
-import SectionSell from "./Own/sectionOwn";
+import SellSectionOwn from "./SellSectionOwn";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import Pagenation from "../../pagenation";
-import {Load} from "../../Load/Load";
+import Pagenation from "../../../pagenation";
+import {Load} from "../../../Load/Load";
 const RentHomeOwn = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
-  // const [HomeOrFlat, setHomeOrFlat] = useState([]);
-  // const [Region, setRegion] = useState([]);
-  // const [Room, setRoom] = useState([]);
-  // const [Price, setPrice] = useState([]);
-  // const [click, setClick] = useState();
+//   const [HomeOrFlat, setHomeOrFlat] = useState([]);
+//   const [Region, setRegion] = useState([]);
+//   const [Room, setRoom] = useState([]);
+//   const [Price, setPrice] = useState([]);
+//   const [click, setClick] = useState();
 
-  // const ClickFunc = (x) => {
-  //   setClick(x);
-  // };
-  // const sendDataToSelecedids = (x) => {
-  //   setSelectedIds(x);
-  // };
-  // const sendDataToHomeOrFlat = (x) => {
-  //   setHomeOrFlat(x);
-  // };
-  // const sendDataRegion = (x) => {
-  //   setRegion(x);
-  // };
-  // const sendDataRoom = (x) => {
-  //   setRoom(x);
-  // };
-  // const sendDataPrice = (x) => {
-  //   setPrice(x);
-  // };
+//   const ClickFunc = (x) => {
+//     setClick(x);
+//   };
+//   const sendDataToSelecedids = (x) => {
+//     setSelectedIds(x);
+//   };
+//   const sendDataToHomeOrFlat = (x) => {
+//     setHomeOrFlat(x);
+//   };
+//   const sendDataRegion = (x) => {
+//     setRegion(x);
+//   };
+//   const sendDataRoom = (x) => {
+//     setRoom(x);
+//   };
+//   const sendDataPrice = (x) => {
+//     setPrice(x);
+//   };
   useEffect(() => {
     const fetchData = async () => {
       try {
         const ArrayData = [];
-        const resp = await axios.get("http://localhost:5224/api/RentHome/Normal");
+        const resp = await axios.get("http://localhost:5224/api/Sell/Normal");
         // if (click) {
         //   const filteredArray = Array.from(resp.data).filter((x) => {
         //     if (
@@ -70,7 +69,7 @@ const RentHomeOwn = () => {
         //   setFilteredData(ArrayData);
         // } else {
           setFilteredData(resp.data);
-       
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -111,7 +110,7 @@ useEffect(() => {
     <div>
       <div className="d-flex flex-wrap">
         {parsedData.map((x) => ( 
-          <SectionSell
+          <SellSectionOwn
             id={x.Id}
             priceHome={x.Price}
             address={x.Address}
