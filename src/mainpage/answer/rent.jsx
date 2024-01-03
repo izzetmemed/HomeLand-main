@@ -1,14 +1,12 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import MapComponent from "./coordinate";
-import { useNavigate } from 'react-router-dom';
-
+import Coordinate from "./coordinate";
+import FetchPostImg from "../../MyComponents/FetchPostImg";
 import Swal from "sweetalert2";
-
+import FetchPostAll from "../../MyComponents/FetchPostAll";
+import TurnImgIn from "../../MyComponents/TurnImgIn";
+import NumberTurn from "../../MyComponents/NumberTurn";
 const Rent = ({ Data, IsUpdating, SendFalse}) => {
-
-  const navigate=useNavigate();
-
   const FullName = useRef(null);
   const Number = useRef(null);
   const Region = useRef(null);
@@ -111,28 +109,20 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
     }
   };
-
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
-    }
-  };
-
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
-
+ const [CoordinateX,setCoordinateX]=useState(null);
+ const [CoordinateY,setCoordinateY]=useState(null);
+ const SendX=(x)=>{
+  setCoordinateX(x)
+ };
+ const SendY=(y)=>{
+  setCoordinateY(y)
+ };
   const UploadInformation = () => {
     const formData = {
       FullName: FullName.current.value,
-      Number: Number.current.value,
+      Number:NumberTurn(Number.current.value),
+      CoordinateX:CoordinateX,
+      CoordinateY:CoordinateY,
       Region: Region.current.value,
       Address: Address.current.value,
       Floor: Floor.current.value,
@@ -160,45 +150,33 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       WorkingBoy: WorkingBoy.current.checked,
       Addition: Addition.current.value,
     };
+    console.log(formData.Number)
     if (
       formData.FullName !== "" &&
+      formData.FullName.length<50 &&
       formData.Number !== "" &&
+      formData.Number.length<30 &&
       formData.Address !== "" &&
+      formData.Address.length<50 &&
       formData.Metro !== "" &&
       formData.Price !== "" &&
-      formData.FullName !== "" &&
+      formData.Price<40000000 &&
       formData.Floor !== "" &&
+      formData.Floor.length<50 &&
       formData.Area !== "" &&
+      formData.Area<30000 &&
       formData.İtem !== "" &&
+      formData.İtem.length<50 &&
       formData.Repair !== "" &&
       formData.Address !== "" &&
+      formData.Address.length<50 &&
+      formData.Addition.length<500 &&
       images.length > 4 &&
       !isNaN(parseFloat(formData.Price)) &&
       !isNaN(parseFloat(formData.Area)) &&
       !isNaN(parseFloat(formData.Room))
     ) {
-      fetch("http://localhost:5224/api/RentHome", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => {
-          console.log(response.ok);
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          imgFunc();
-          return response;
-        })
-        .then((responseData) => {
-          console.log("Data uploaded successfully:", responseData);
-        })
-        .catch((error) => {
-          console.error("Error uploading data:", error);
-        });
+      FetchPostAll(formData,"RentHome",imgFunc);
       setTimeout(() => {
         Swal.fire({
           title: "Uğurlu",
@@ -250,17 +228,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     for (let i = 0; i < imagesFile.length; i++) {
       formData.append(`image`, imagesFile[i]);
     }
-    fetch("http://localhost:5224/api/RentHomeImg", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response)
-      .then((data) => {
-        console.log("Image uploaded successfully:", data);
-      })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
-      });
+    FetchPostImg(formData,"RentHomeImg");
   };
 
   const updateload = () => {
@@ -315,7 +283,6 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
         body: JSON.stringify(Data),
       })
         .then((response) => {
-          console.log(response.ok);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -419,7 +386,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </label>
               </div>
               <div className="col-12 div-in-input">
-                <input type="number" placeholder="0xx-xxx-xx-xx" ref={Number} />
+                <input type="text" placeholder="0xx-xxx-xx-xx" ref={Number} inputmode="numeric"/>
               </div>
             </div>
             <div>
@@ -447,18 +414,8 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className=" col-12 p-2 mt-4 ps-2">
                 <div className="answer-images-rent">
-                  <div className="overflow-hidden backgrounImgDefault">
-                    <div>
-                      <span onClick={btnLeftIcon}>
-                        <i className="fa-solid fa-angle-left"></i>
-                      </span>
-                      <span onClick={btnRightIcon}>
-                        <i className="fa-solid fa-angle-right"></i>
-                      </span>
-                    </div>
-                    <div className="d-flex justify-content-center align-items-center">
-                      <img src={keepingImgSource[ImgSourceIndex]} />
-                    </div>
+                  <div className="overflow-hidden">
+                  <TurnImgIn keepingImgSource={keepingImgSource} />
                   </div>
                 </div>
               </div>
@@ -470,19 +427,19 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Region}>
                   <option value=""></option>
-                  <option value="Digər Rayon">Digər Rayon</option>
-                  <option value="Nəsimi Rayon">Nəsimi Rayon</option>
-                  <option value="Nizami Rayon">Nizami Rayon</option>
-                  <option value="Xətai Rayon">Xətai Rayon</option>
-                  <option value="Nərmanov Rayon">Nərmanov Rayon</option>
-                  <option value="Yasamal Rayon">Yasamal Rayon</option>
-                  <option value="Pirallahı Rayon">Pirallahı Rayon</option>
-                  <option value="Suraxanı Rayon">Suraxanı Rayon</option>
-                  <option value="Sabunçu Rayon">Sabunçu Rayon</option>
-                  <option value="Səbail Rayon">Səbail Rayon</option>
-                  <option value="Xəzər Rayon">Xəzər Rayon</option>
-                  <option value="Qaradağ Rayon">Qaradağ Rayon</option>
-                  <option value="Binəqədi Rayon">Binəqədi Rayon</option>
+                  <option value="Digər">Digər Rayon</option>
+                  <option value="Nəsimi">Nəsimi Rayon</option>
+                  <option value="Nizami">Nizami Rayon</option>
+                  <option value="Xətai">Xətai Rayon</option>
+                  <option value="Nərmanov">Nərmanov Rayon</option>
+                  <option value="Yasamal">Yasamal Rayon</option>
+                  <option value="Pirallahı">Pirallahı Rayon</option>
+                  <option value="Suraxanı">Suraxanı Rayon</option>
+                  <option value="Sabunçu">Sabunçu Rayon</option>
+                  <option value="Səbail">Səbail Rayon</option>
+                  <option value="Xəzər">Xəzər Rayon</option>
+                  <option value="Qaradağ">Qaradağ Rayon</option>
+                  <option value="Binəqədi">Binəqədi Rayon</option>
                 </select>
               </div>
             </div>
@@ -505,7 +462,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
               </div>
             </div>
             <div className="mt-3">
-              <MapComponent />
+              <Coordinate x={SendX} y={SendY} CanClick={true}/>
             </div>
 
             <div className="mt-3">
@@ -531,10 +488,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="28">28 May Metrosu</option>
                   <option value="Xətai">Şah İsmayıl Xətai Metrosu</option>
                   <option value="Sahil">Sahil Metrosu</option>
-                  <option value="İşərişəhər">İçərişəhər Metrosu</option>
+                  <option value="İçərişəhər">İçərişəhər Metrosu</option>
                   <option value="Nizami">Nizami Metrosu</option>
                   <option value="Elmlər">Elmlər Metrosu</option>
-                  <option value="İnşaatçlılar">İnşaatçılar Metrosu</option>
+                  <option value="İnşaatçılar">İnşaatçılar Metrosu</option>
                   <option value="Yanvar">20 Yanvar Metrosu</option>
                   <option value="Əcəmi">Memar Əcəmi Metrosu</option>
                   <option value="Nəsimi">Nəsimi Metrosu</option>
@@ -562,10 +519,19 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="6"> 6 otaqlı</option>
                   <option value="7"> 7 otaqlı</option>
                   <option value="8"> 8 otaqlı</option>
-                  <option value="9 və daha çox otaqlı">
-                    {" "}
-                    9 və daha çox otaqlı
-                  </option>
+                  <option value="9"> 9 otaqlı</option>
+                  <option value="10"> 10 otaqlı</option>
+                  <option value="11"> 11 otaqlı</option>
+                  <option value="12"> 12 otaqlı</option>
+                  <option value="13"> 13 otaqlı</option>
+                  <option value="14"> 14 otaqlı</option>
+                  <option value="15"> 15 otaqlı</option>
+                  <option value="16"> 16 otaqlı</option>
+                  <option value="17"> 17 otaqlı</option>
+                  <option value="18"> 18 otaqlı</option>
+                  <option value="19"> 19 otaqlı</option>
+                  <option value="20"> 20 otaqlı</option>
+                 
                 </select>
               </div>
             </div>
@@ -672,7 +638,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <label htmlFor="customerName">*Evin sahəsi: (m²)</label>
               </div>
               <div className="col-12 div-in-input">
-                <input type="Number" ref={Area} />
+                <input type="Number" ref={Area} inputmode="numeric"/>
               </div>
             </div>
             <div className="mt-3">
@@ -680,7 +646,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <label htmlFor="customerName">*Evin Aylıq qiyməti:(Aze)</label>
               </div>
               <div className="col-12 div-in-input">
-                <input type="number" ref={Price} />
+                <input type="number" ref={Price} inputmode="numeric" />
               </div>
             </div>
 

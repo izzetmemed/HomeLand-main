@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measureHome,Sənəd,dateTime,deleteBasket,imgNames,data}) => {
+const ObyektSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measureHome,Sənəd,dateTime,deleteBasket,imgNames,data}) => {
   const [keepingImgSource, setKeepingImgSource] = useState([]);
  
   useEffect(() => {
@@ -8,7 +8,7 @@ const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measure
       try {
         if(imgNames.length!==0){
           const response = await fetch(
-            `http://localhost:5224/api/RentHomeImg/DownloadImages?imgNames=${imgNames}`
+            `http://localhost:5224/api/ObyektImg/DownloadImages?imgNames=${imgNames}`
           );
 
           const data = await response.json();
@@ -99,7 +99,8 @@ const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measure
   const handleButtonClick = () => {
     Data.IsCalledWithHomeOwnFirstStep=!sendTrueOrFalse;
     setSendTrueOrFalse(!sendTrueOrFalse);
-    fetch("http://localhost:5224/api/RentHome", {
+
+    fetch("http://localhost:5224/api/Obyekt", {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -121,7 +122,7 @@ const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measure
         });
   };
   const buttonStyle = {
-    backgroundColor: Data.IsCalledWithHomeOwnFirstStep ? 'red' : 'green',
+    backgroundColor: Data.IsCalledWithHomeOwnFirstStep ? 'green' : 'red',
     borderRadius: '5px',
     padding:'0',
     cursor: 'pointer',
@@ -162,7 +163,7 @@ const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measure
                    
                 </div>
                   
-                <div className='pb-2'><Link to={`/Homelogin/MainAdmin/Renthome/Own/Kart/${id}`}>
+                <div className='pb-2'><Link to={`/Homelogin/MainAdmin/Obyekt/Own/Kart/${id}`}>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
                    <p>Ünvan:<span >{cutString(address,20)}</span></p> 
                    <p>Metro:<span >{MetroHome}</span></p> 
@@ -183,4 +184,4 @@ const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measure
   )
 }
 
-export default SectionOwn
+export default ObyektSectionOwn

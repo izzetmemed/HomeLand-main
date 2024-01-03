@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Section from '../section';
 import Search from '../search';
-import axios from 'axios';
 import Pagenation from '../pagenation';
 import {Load} from "../Load/Load"
-
+import FetchGetAll from '../MyComponents/FetchGetAll';
+import Scroll from '../MyComponents/Scroll';
 const Cards = () => {
-
+  Scroll();
   const [filteredData, setFilteredData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [HomeOrFlat, setHomeOrFlat] = useState([]);
@@ -33,30 +33,32 @@ const Cards = () => {
   const sendDataPrice=(x)=>{
     setPrice(x);
   }
+
   useEffect(() => {
+    const RoomInt=Room.map(x=>Number(x));
     const fetchData = async () => {
       try {
        const ArrayData=[];
-      const resp = await axios.get("http://localhost:5224/api/RentHome");
+      const resp = await FetchGetAll("RentHome");
         if(click){
-          const filteredArray = Array.from(resp.data).filter((x) => { 
+          const filteredArray = Array.from(resp.data).filter((x) => {
             
-            if (!(Number(x.Price) > Array.from(Price)[1] && Number(x.Price) < Array.from(Price)[0])) {
+            if (!(Number(JSON.parse(x).Price) > Array.from(Price)[1] && Number(JSON.parse(x).Price) < Array.from(Price)[0])) {
               return false;
             }
-            if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(x.Bina)) {
-              return false;
-            }
-          
-            if (Room.length !== 0 && !Room.includes(x.Room)) {
+            if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(JSON.parse(x).Building)) {
               return false;
             }
           
-            if (Region.length !== 0 && !Region.includes(x.Region)) {
+            if (RoomInt.length !== 0 && !RoomInt.includes(JSON.parse(x).Room)) {
               return false;
             }
           
-            if (selectedIds.length !== 0 && !selectedIds.includes(x.Metro)) {
+            if (Region.length !== 0 && !Region.includes(JSON.parse(x).Region)) {
+              return false;
+            }
+          
+            if (selectedIds.length !== 0 && !selectedIds.includes(JSON.parse(x).Metro)) {
               return false;
             }
           

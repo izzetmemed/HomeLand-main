@@ -25,9 +25,9 @@ import InsideCard from './mainpage/İnsideCard'
                 {isActive && (
                 <div className='download-ads-elements'>
                     <ul>
-                        <li><NavLink to="/kiraye-ev-form">Kiraye ev</NavLink></li>
-                        <li><NavLink to="/satılıq-ev-form">Satılıq ev</NavLink></li>
-                        <li><NavLink to="/obyekt-form">Obyekt</NavLink></li>
+                    <NavLink to="/kiraye-ev-form"> <li>Kiraye ev</li></NavLink>
+                    <NavLink to="/satılıq-ev-form"> <li>Satılıq ev</li></NavLink>
+                    <NavLink to="/obyekt-form"> <li>Obyekt</li></NavLink>
                         </ul>
                     </div>)}
                 </button>

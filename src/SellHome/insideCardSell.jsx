@@ -3,67 +3,31 @@ import React from "react";
 import Coordinate from "../mainpage/answer/coordinate";
 import CardsSell from "./CardsSell";
 import { useParams } from "react-router-dom";
+import GetBack from "../MyComponents/GetBack";
+import Scroll from "../MyComponents/Scroll";
+import TurnImgIn from "../MyComponents/TurnImgIn";
+import CallToMakler from "../MyComponents/CallToMakler";
+import FetchGetId from "../MyComponents/FetchGetId";
+import UseFetchData from "../MyComponents/FetchImg";
 const İnsideCardSell = () => {
   const { id } = useParams();
-
+  Scroll();
   const [keepingImgSource,setKeepingImgSource] = useState([]);
-
- 
-
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
-    }
-  };
-
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
   var [getById, setGetById] = useState(null);
+  const [MaklerNumber,setMaklerNumber]=useState(false)
+ 
+  const getByIdData = FetchGetId(id, 'Sell');
+  useEffect(() => {
+    setGetById(getByIdData);
+   }, [getByIdData]);
+   
+
+  const imageUrls = UseFetchData(getById?.img, 'SellImg');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-
-        const response = await fetch(
-          `http://localhost:5224/api/Sell/${id}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setGetById(data);
-        
-      } catch (error) {
-        console.error("Error in fetchData:", error);
-      }
-    };
-    fetchData();
-  }, [id]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-          if(getById.img.length>0){
-            const response = await fetch(`http://localhost:5224/api/SellImg/DownloadImages?imgNames=${getById.img}`);
-            const data = await response.json();
-            setKeepingImgSource(data.imageUrls);
-          }
-           
-
-        } catch (error) {
-            console.error("Error downloading images:", error);
-        }
-    };
-    fetchData();
-}, [getById]);
+   setKeepingImgSource(imageUrls);
+  }, [getById, imageUrls]);
+  
   const price = "Aze";
   const teratory = "m²";
   const convertDate = (x) => {
@@ -74,26 +38,12 @@ const İnsideCardSell = () => {
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-            <div>
-              <span onClick={btnLeftIcon}>
-                <i className="fa-solid fa-angle-left"></i>
-              </span>
-              <span onClick={btnRightIcon}>
-                <i className="fa-solid fa-angle-right"></i>
-              </span>
-            </div>
-            <div className="d-flex justify-content-center">
-              <img
-                src={keepingImgSource[ImgSourceIndex]}
-                alt=""
-             
-              />
-            </div>
+          <TurnImgIn keepingImgSource={keepingImgSource}/>
             <div className="logo-on-images d-flex justify-content-center ">
               <p >HomeLand.az</p>
             </div>
           </div>
-          {getById && (
+          {getById && ( 
             <div className="pb-2 mt-3">
               <p>
                 Qiymet:<span className="price-home">{getById.price}</span>
@@ -136,22 +86,28 @@ const İnsideCardSell = () => {
               </p>
               
               <p>
-                Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
+                Obyekti tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                        1%
+                {getById.price * 1 /100}<span>{price}</span>
                 </span>
               </p>
               <p>
                 Tarix:<span className="time-home">{convertDate(getById.date)}</span>
               </p>
               <div className="height-for-coordiante mt-2 mb-2 p-4">
-                <Coordinate />
+                <Coordinate CanClick={false} Xvalue={getById.coordinateX} Yvalue={getById.coordinateY}/>
               </div>
-              <div>
-                <div className="d-flex justify-content-center w-100">
-                  <button className="btn btn-mycolor height-for-calling fs-5">
+              <GetBack Direct={"/Satılıq-ev"}/>
+              <div className="d-flex justify-content-center w-100 ">
+                <div >
+                  <button className="btn btn-mycolor height-for-calling fs-5" onClick={()=>{setMaklerNumber(!MaklerNumber)}}>
                     <i className="fa-solid fa-phone"></i> Əmlakçıya zəng etmək.
                   </button>
+                 {
+                  MaklerNumber &&(
+                   <CallToMakler id={getById.id}/>
+                  )
+                 } 
                 </div>
               </div>
             </div>

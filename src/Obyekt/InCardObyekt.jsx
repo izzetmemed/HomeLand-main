@@ -3,62 +3,32 @@ import React from "react";
 import Coordinate from "../mainpage/answer/coordinate";
 import Cards from "./CardsObyekt";
 import { useParams } from "react-router-dom";
+import GetBack from "../MyComponents/GetBack";
+import Scroll from "../MyComponents/Scroll";
+import TurnImgIn from "../MyComponents/TurnImgIn";
+import CallToMakler from "../MyComponents/CallToMakler";
+import FetchGetId from "../MyComponents/FetchGetId";
+import UseFetchData from "../MyComponents/FetchImg";
 const InCardObyekt = () => {
   const { id } = useParams();
-
+  const [MaklerNumber,setMaklerNumber]=useState(false)
   const [keepingImgSource,setKeepingImgSource] = useState([]);
 
- 
-
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
-    }
-  };
-
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
+ Scroll()
   var [GetById, setGetById] = useState(null);
+  const getByIdData = FetchGetId(id, 'Obyekt');
+  useEffect(() => {
+    setGetById(getByIdData);
+   }, [getByIdData]);
+   
+
+  const imageUrls = UseFetchData(GetById?.img, 'ObyektImg');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5224/api/Obyekt/${id}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setGetById(data);
-      } catch (error) {
-        console.error("Error in fetchData:", error);
-      }
-    };
-    fetchData();
-  }, [id]);
+   setKeepingImgSource(imageUrls);
+  }, [GetById, imageUrls]);
+  
 
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const response = await fetch(`http://localhost:5224/api/ObyektImg/DownloadImages?imgNames=${GetById.img}`);
-            const data = await response.json();
-            setKeepingImgSource(data.imageUrls);
-
-        } catch (error) {
-            console.error("Error downloading images:", error);
-        }
-    };
-    fetchData();
-}, [GetById]);
   const price = "Aze";
   const teratory = "m²";
   const convertDate = (x) => {
@@ -69,21 +39,7 @@ const InCardObyekt = () => {
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-            <div>
-              <span onClick={btnLeftIcon}>
-                <i className="fa-solid fa-angle-left"></i>
-              </span>
-              <span onClick={btnRightIcon}>
-                <i className="fa-solid fa-angle-right"></i>
-              </span>
-            </div>
-            <div className="d-flex justify-content-center">
-              <img
-                src={keepingImgSource[ImgSourceIndex]}
-                alt=""
-                
-              />
-            </div>
+          <TurnImgIn keepingImgSource={keepingImgSource}/>
             <div className="logo-on-images d-flex justify-content-center ">
               <p>HomeLand.az</p>
             </div>
@@ -145,14 +101,22 @@ const InCardObyekt = () => {
               <p>
                 Tarix:<span className="time-home">{convertDate(GetById.date)}</span>
               </p>
-              <div className="height-for-coordiante mt-2 mb-2 p-4">
-                <Coordinate />
+              <div className="h-auto mb-3">
+               
+              <Coordinate  CanClick={false} Xvalue={GetById.coordinateX} Yvalue={GetById.coordinateY}/>
               </div>
-              <div>
-                <div className="d-flex justify-content-center w-100">
-                  <button className="btn btn-mycolor height-for-calling fs-5">
+
+              <GetBack Direct={"/Obyekt"}/>
+              <div className="d-flex justify-content-center w-100 ">
+                <div >
+                  <button className="btn btn-mycolor height-for-calling fs-5" onClick={()=>{setMaklerNumber(!MaklerNumber)}}>
                     <i className="fa-solid fa-phone"></i> Əmlakçıya zəng etmək.
                   </button>
+                 {
+                  MaklerNumber &&(
+                   <CallToMakler id={GetById.id}/>
+                  )
+                 } 
                 </div>
               </div>
             </div>

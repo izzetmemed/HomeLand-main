@@ -94,16 +94,25 @@ const Search = ({
                       <input
                         type="checkbox"
                         name=""
-                        id="Bina"
+                        id="Yeni tikili bina."
                         ref={(element) => (HomeOrFlat.current[1] = element)}
                       />
-                      <label className="ms-1">Bina evi</label>
+                      <label className="ms-1">Yeni tikili bina.</label>
                     </div>
                     <div>
                       <input
                         type="checkbox"
                         name=""
-                        id="Həyət"
+                        id="Köhnə tikili bina."
+                        ref={(element) => (HomeOrFlat.current[3] = element)}
+                      />
+                      <label className="ms-1">Köhnə tikili bina.</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="Həyət evi"
                         ref={(element) => (HomeOrFlat.current[2] = element)}
                       />
                       <label className="ms-1">Həyət evi</label>
@@ -126,7 +135,7 @@ const Search = ({
                       <input
                         type="checkbox"
                         name=""
-                        id="0"
+                        id="Metroya yaxın deyil"
                         ref={(element) => (myRef.current[1] = element)}
                       />
                       <label className="ms-1">
@@ -479,6 +488,15 @@ const Search = ({
                       />
                       <label className="ms-1">Binəqədi Rayon</label>
                     </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="Digər"
+                        ref={(element) => (Region.current[13] = element)}
+                      />
+                      <label className="ms-1">Digər</label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -544,7 +562,133 @@ const Search = ({
                         id="6"
                         ref={(element) => (Room.current[6] = element)}
                       />
-                      <label className="ms-1">6 və çox Otaqlı</label>
+                      <label className="ms-1">6 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="7"
+                        ref={(element) => (Room.current[7] = element)}
+                      />
+                      <label className="ms-1">7 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="8"
+                        ref={(element) => (Room.current[8] = element)}
+                      />
+                      <label className="ms-1">8 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="9"
+                        ref={(element) => (Room.current[9] = element)}
+                      />
+                      <label className="ms-1">9 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="10"
+                        ref={(element) => (Room.current[10] = element)}
+                      />
+                      <label className="ms-1">10 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="11"
+                        ref={(element) => (Room.current[11] = element)}
+                      />
+                      <label className="ms-1">11 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="12"
+                        ref={(element) => (Room.current[12] = element)}
+                      />
+                      <label className="ms-1">12 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="13"
+                        ref={(element) => (Room.current[13] = element)}
+                      />
+                      <label className="ms-1">13 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="14"
+                        ref={(element) => (Room.current[14] = element)}
+                      />
+                      <label className="ms-1">14 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="15"
+                        ref={(element) => (Room.current[15] = element)}
+                      />
+                      <label className="ms-1">15 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="16"
+                        ref={(element) => (Room.current[16] = element)}
+                      />
+                      <label className="ms-1">16 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="17"
+                        ref={(element) => (Room.current[17] = element)}
+                      />
+                      <label className="ms-1">17 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="18"
+                        ref={(element) => (Room.current[18] = element)}
+                      />
+                      <label className="ms-1">18 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="19"
+                        ref={(element) => (Room.current[19] = element)}
+                      />
+                      <label className="ms-1">19 Otaqlı</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="20"
+                        ref={(element) => (Room.current[20] = element)}
+                      />
+                      <label className="ms-1">20 Otaqlı</label>
                     </div>
                   </div>
                 </div>
@@ -556,11 +700,13 @@ const Search = ({
                     <input
                       type="number"
                       placeholder="Max"
+                      inputmode="numeric"
                       ref={(element) => (Price.current[1] = element)}
                     />
                     <input
                       type="number"
                       placeholder="Min"
+                      inputmode="numeric"
                       ref={(element) => (Price.current[2] = element)}
                     />
                   </div>

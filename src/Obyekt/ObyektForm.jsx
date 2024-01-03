@@ -1,8 +1,29 @@
 import React from "react";
-import { useState, useRef } from "react";
-import MapComponent from "../mainpage/answer/coordinate";
+import { useState, useRef,useEffect } from "react";
 import Swal from "sweetalert2";
-const ObyektForm = () => {
+import FetchPostImg from "../MyComponents/FetchPostImg";
+import FetchPostAll from "../MyComponents/FetchPostAll";
+import TurnImgIn from "../MyComponents/TurnImgIn";
+import Coordinate from "../mainpage/answer/coordinate";
+import NumberTurn from "../MyComponents/NumberTurn";
+const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
+
+  const FullName = useRef(null);
+  const Number = useRef(null);
+  const Region = useRef(null);
+  const Address = useRef(null);
+
+  const Metro = useRef(null);
+  const Room = useRef(null);
+  const Repair = useRef(null);
+  const Area = useRef(null);
+  const Price = useRef(null);
+  const Addition = useRef(null);
+  const Paper = useRef(null);
+  const SellorRent = useRef(null);
+  const İtem = useRef(null);
+
+
   const fileInputRef = useRef(null);
   const [images, setImages] = useState([]);
   const [imagesFile, setImagesFile] = useState([]);
@@ -23,38 +44,46 @@ const ObyektForm = () => {
     }
   };
 
-  const keepingImgSource = images;
-
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
+  var [keepingImgSource, setkeepingImgSource] = useState([]);
+  useEffect(() => {
+    setkeepingImgSource(images);
+   },[images]) 
+  useEffect(() => {
+    const fetchData = async () => {
+      if(Data.sellorRent==="Satılır"){
+        setSellOrRent(true);
+      }else{
+        setSellOrRent(false);
+      }
+      try {
+        if (Data.img.length > 0) {
+          const response = await fetch(
+            `http://localhost:5224/api/ObyektImg/DownloadImages?imgNames=${Data.img}`
+          );
+          const imageData = await response.json();
+          setkeepingImgSource(imageData.imageUrls);
+        }
+      } catch (error) {
+        console.error("Error downloading images:", error);
+      }
+    };
+    if (IsUpdating) {
+      fetchData();
+      FullName.current.value = Data.fullname;
+      Number.current.value = Data.number;
+      Region.current.value = Data.region;
+      Address.current.value = Data.address;
+      Metro.current.value = Data.metro;
+      Room.current.value = Data.room;
+      SellorRent.current.value=Data.sellorRent;
+      Repair.current.value = Data.repair;
+      İtem.current.value = Data.İtem;
+      Area.current.value = Data.area;
+      Price.current.value = Data.price;
+      Addition.current.value = Data.addition;
+     
     }
-  };
-
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
-  const FullName = useRef(null);
-  const Number = useRef(null);
-  const Region = useRef(null);
-  const Address = useRef(null);
-
-  const Metro = useRef(null);
-  const Room = useRef(null);
-  const Repair = useRef(null);
-  const Area = useRef(null);
-  const Price = useRef(null);
-  const Addition = useRef(null);
-  const Paper = useRef(null);
-  const SellorRent = useRef(null);
-  const İtem = useRef(null);
+  }, [IsUpdating, Data]);
 
   const [sellOrRent, setSellOrRent] = useState(false);
 
@@ -66,11 +95,20 @@ const ObyektForm = () => {
     }
     
   };
-
+  const [CoordinateX,setCoordinateX]=useState(null);
+  const [CoordinateY,setCoordinateY]=useState(null);
+  const SendX=(x)=>{
+   setCoordinateX(x)
+  };
+  const SendY=(y)=>{
+   setCoordinateY(y)
+  };
   const UploadInformation = () => {
     const formData = {
       FullName: FullName.current.value,
-      Number: Number.current.value,
+      Number:NumberTurn(Number.current.value),
+      CoordinateX:CoordinateX,
+      CoordinateY:CoordinateY,
       Region: Region.current.value,
       Address: Address.current.value,
       Metro: Metro.current.value,
@@ -86,43 +124,29 @@ const ObyektForm = () => {
 
     if (
       formData.FullName !== "" &&
+      formData.FullName.length<50 &&
       formData.Number !== "" &&
+      formData.Number.length<30 &&
       formData.Address !== "" &&
+      formData.Address.length<50 &&
       formData.Metro !== "" &&
       formData.Price !== "" &&
+      formData.Price<40000000 &&
       formData.Area !== "" &&
+      formData.Area<30000 &&
       formData.İtem !== "" &&
+      formData.İtem.length<50 &&
       formData.Repair !== "" &&
       formData.Paper !== "" &&
+      formData.Address.length<50 &&
+      formData.Addition.length<500 &&
       formData.SellorRent !== "" &&
       images.length > 4 &&
       !isNaN(parseFloat(formData.Price)) &&
       !isNaN(parseFloat(formData.Area)) &&
       !isNaN(parseFloat(formData.Room))
     ) {
-      fetch("http://localhost:5224/api/Obyekt", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => {
-          console.log(response.ok);
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          imgFunc();
-          return response;
-        })
-        .then((responseData) => {
-          console.log("Data uploaded successfully:", responseData);
-        })
-        .catch((error) => {
-          console.error("Error uploading data:", error);
-        });
-
+      FetchPostAll(formData,"Obyekt",imgFunc)
       setTimeout(() => {
         Swal.fire({
           title: "Uğurlu",
@@ -157,20 +181,96 @@ const ObyektForm = () => {
     for (let i = 0; i < imagesFile.length; i++) {
       formData.append(`image`, imagesFile[i]);
     }
-    fetch("http://localhost:5224/api/ObyektImg", {
-      method: "POST",
-      body: formData,
-      mode: 'cors',
-    })
-      .then((response) => response)
-      .then((data) => {
-        console.log("Image uploaded successfully:", data);
-      })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
-      });
+    FetchPostImg(formData,"ObyektImg");
   };
- 
+  const updateload = () => {
+    Data.fullname = FullName.current.value;
+    Data.number = Number.current.value;
+    Data.region = Region.current.value;
+    Data.address = Address.current.value;
+    Data.metro = Metro.current.value;
+    Data.room = Room.current.value;
+    Data.repair = Repair.current.value;
+    Data.item = İtem.current.value;
+    Data.area = Area.current.value;
+    Data.price = Price.current.value;
+    Data.addition = Addition.current.value;
+    Data.sellorRent= SellorRent.current.value;
+    if (SellorRent.current.value === 'Satılır') {
+      Data.document = Paper.current.value===''? Data.document: Paper.current.value;
+    }
+
+    if (
+      Data.fullname !== "" &&
+      Data.number !== "" &&
+      Data.address !== "" &&
+      Data.metro !== "" &&
+      Data.price !== "" &&
+      Data.floor !== "" &&
+      Data.area !== "" &&
+      Data.item !== "" &&
+      Data.repair !== "" &&
+      Data.sellorRent !== "" &&
+      !isNaN(parseFloat(Data.price)) &&
+      !isNaN(parseFloat(Data.area)) &&
+      !isNaN(parseFloat(Data.room))
+    ) {
+      fetch("http://localhost:5224/api/Obyekt", {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Data),
+      })
+        .then((response) => {
+          console.log(response.ok);
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          imgFunc();
+          return response;
+        })
+        .then((responseData) => {
+          console.log("Data uploaded successfully:", responseData);
+        })
+        .catch((error) => {
+          console.error("Error uploading data:", error);
+        });
+      setTimeout(() => {
+        Swal.fire({
+          title: "Uğurlu",
+          text: "Elanınız yükləndi.",
+          icon: "success",
+        });
+      }, 500);
+
+      FullName.current.value = "";
+      Number.current.value = "";
+      Address.current.value = "";
+      Area.current.value = "";
+      Addition.current.value = "";
+      Price.current.value = "";
+      Metro.current.value = "";
+      Region.current.value = "";
+      Room.current.value = "";
+      Repair.current.value = "";
+      İtem.current.value = "";
+      Paper.current.value = "";
+      SellorRent.current.value = "";
+      setImages([]);
+      setImagesFile([]);
+
+      SendFalse();
+
+    } else {
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Bütün (*) xanaları doldurun.",
+        icon: "error",
+      });
+    }
+  };
   return (
     <div>
       <div className="mt-5 ms-1">
@@ -213,7 +313,7 @@ const ObyektForm = () => {
                 </label>
               </div>
               <div className="col-12 div-in-input">
-                <input type="number" placeholder="0xx-xxx-xx-xx" ref={Number} />
+                <input type="text" placeholder="0xx-xxx-xx-xx" ref={Number} inputmode="numeric"/>
               </div>
             </div>
             <div>
@@ -240,21 +340,9 @@ const ObyektForm = () => {
             <div>
               <div className=" col-12 p-2 mt-4 ps-2">
                 <div className="answer-images-rent">
-                  <div className="overflow-hidden backgrounImgDefault">
-                    <div>
-                      <span onClick={btnLeftIcon}>
-                        <i className="fa-solid fa-angle-left"></i>
-                      </span>
-                      <span onClick={btnRightIcon}>
-                        <i className="fa-solid fa-angle-right"></i>
-                      </span>
-                    </div>
-                    <div className="d-flex justify-content-center align-items-center">
-                      <img
-                        src={keepingImgSource[ImgSourceIndex]}
-                        
-                      />
-                    </div>
+                  <div className="overflow-hidden ">
+                  <TurnImgIn keepingImgSource={keepingImgSource}/>
+
                   </div>
                 </div>
               </div>
@@ -264,21 +352,21 @@ const ObyektForm = () => {
                 <label htmlFor="customerName">*Obyektin yerləşdiyi rayon:</label>
               </div>
               <div className="col-12 div-in-select">
-                <select name="" id="" ref={Region}>
+              <select name="" id="" ref={Region}>
                   <option value=""></option>
-                  <option value="Digər Rayon">Digər Rayon</option>
-                  <option value="Nəsimi Rayon">Nəsimi Rayon</option>
-                  <option value="Nizami Rayon">Nizami Rayon</option>
-                  <option value="Xətai Rayon">Xətai Rayon</option>
-                  <option value="Nərmanov Rayon">Nərmanov Rayon</option>
-                  <option value="Yasamal Rayon">Yasamal Rayon</option>
-                  <option value="Pirallahı Rayon">Pirallahı Rayon</option>
-                  <option value="Suraxanı Rayon">Suraxanı Rayon</option>
-                  <option value="Sabunçu Rayon">Sabunçu Rayon</option>
-                  <option value="Səbail Rayon">Səbail Rayon</option>
-                  <option value="Xəzər Rayon">Xəzər Rayon</option>
-                  <option value="Qaradağ Rayon">Qaradağ Rayon</option>
-                  <option value="Binəqədi Rayon">Binəqədi Rayon</option>
+                  <option value="Digər">Digər Rayon</option>
+                  <option value="Nəsimi">Nəsimi Rayon</option>
+                  <option value="Nizami">Nizami Rayon</option>
+                  <option value="Xətai">Xətai Rayon</option>
+                  <option value="Nərmanov">Nərmanov Rayon</option>
+                  <option value="Yasamal">Yasamal Rayon</option>
+                  <option value="Pirallahı">Pirallahı Rayon</option>
+                  <option value="Suraxanı">Suraxanı Rayon</option>
+                  <option value="Sabunçu">Sabunçu Rayon</option>
+                  <option value="Səbail">Səbail Rayon</option>
+                  <option value="Xəzər">Xəzər Rayon</option>
+                  <option value="Qaradağ">Qaradağ Rayon</option>
+                  <option value="Binəqədi">Binəqədi Rayon</option>
                 </select>
               </div>
             </div>
@@ -306,8 +394,8 @@ const ObyektForm = () => {
                 </select>
               </div>
             </div>
-
-            {sellOrRent  && (
+  
+            {sellOrRent && (
               <div className="mt-3">
                 <div className="div-in-label">
                   <label htmlFor="documentSelect">*Sənəd:</label>
@@ -321,6 +409,8 @@ const ObyektForm = () => {
                 </div>
               </div>
             )}
+        
+           
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">*Obyectinin qiyməti:</label>
@@ -344,7 +434,8 @@ const ObyektForm = () => {
               </div>
             </div>
             <div className="mt-3">
-              <MapComponent />
+            <p>*Evin konumunu qeyd edin.</p>
+              <Coordinate x={SendX} y={SendY} CanClick={true}/>
             </div>
 
             <div className="mt-3">
@@ -352,7 +443,7 @@ const ObyektForm = () => {
                 <label htmlFor="customerName">*Metro:</label>
               </div>
               <div className="col-12 div-in-select">
-                <select name="" id="" ref={Metro}>
+              <select name="" id="" ref={Metro}>
                   <option value=""></option>
                   <option value="Metroya yaxın deyil">
                     Metroya yaxın deyil
@@ -370,10 +461,10 @@ const ObyektForm = () => {
                   <option value="28">28 May Metrosu</option>
                   <option value="Xətai">Şah İsmayıl Xətai Metrosu</option>
                   <option value="Sahil">Sahil Metrosu</option>
-                  <option value="İşərişəhər">İçərişəhər Metrosu</option>
+                  <option value="İçərişəhər">İçərişəhər Metrosu</option>
                   <option value="Nizami">Nizami Metrosu</option>
                   <option value="Elmlər">Elmlər Metrosu</option>
-                  <option value="İnşaatçlılar">İnşaatçılar Metrosu</option>
+                  <option value="İnşaatçılar">İnşaatçılar Metrosu</option>
                   <option value="Yanvar">20 Yanvar Metrosu</option>
                   <option value="Əcəmi">Memar Əcəmi Metrosu</option>
                   <option value="Nəsimi">Nəsimi Metrosu</option>
@@ -391,7 +482,7 @@ const ObyektForm = () => {
                 <label htmlFor="customerName">*Otaq sayı:</label>
               </div>
               <div className="col-12 div-in-select">
-                <select name="" id="" ref={Room}>
+              <select name="" id="" ref={Room}>
                   <option value=""></option>
                   <option value="1"> 1 otaqlı</option>
                   <option value="2"> 2 otaqlı</option>
@@ -401,10 +492,19 @@ const ObyektForm = () => {
                   <option value="6"> 6 otaqlı</option>
                   <option value="7"> 7 otaqlı</option>
                   <option value="8"> 8 otaqlı</option>
-                  <option value="9 və daha çox otaqlı">
-                    {" "}
-                    9 və daha çox otaqlı
-                  </option>
+                  <option value="9"> 9 otaqlı</option>
+                  <option value="10"> 10 otaqlı</option>
+                  <option value="11"> 11 otaqlı</option>
+                  <option value="12"> 12 otaqlı</option>
+                  <option value="13"> 13 otaqlı</option>
+                  <option value="14"> 14 otaqlı</option>
+                  <option value="15"> 15 otaqlı</option>
+                  <option value="16"> 16 otaqlı</option>
+                  <option value="17"> 17 otaqlı</option>
+                  <option value="18"> 18 otaqlı</option>
+                  <option value="19"> 19 otaqlı</option>
+                  <option value="20"> 20 otaqlı</option>
+                 
                 </select>
               </div>
             </div>
@@ -441,14 +541,26 @@ const ObyektForm = () => {
               </div>
             </div>
             <div className="d-flex justify-content-center col-12 mb-5">
-              <div className=" mt-5">
-                <button
-                  className="btn btn-mycolor pe-5 ps-5"
-                  onClick={UploadInformation}
-                >
-                  Elan yerləşdirmək
-                </button>
-              </div>
+            {!IsUpdating && (
+                <div className=" mt-5">
+                  <button
+                    className="btn btn-mycolor pe-5 ps-5"
+                    onClick={UploadInformation}
+                  >
+                    Elan yerləşdirmək
+                  </button>
+                </div>
+              )}
+              {IsUpdating && (
+                <div className=" mt-5">
+                  <button
+                    className="btn btn-mycolor pe-5 ps-5"
+                    onClick={updateload}
+                  >
+                    Yenilənməni tamamla
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

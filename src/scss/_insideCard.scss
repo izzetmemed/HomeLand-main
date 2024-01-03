@@ -3,14 +3,13 @@
     padding-bottom: 2%;
     height:105vw !important;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-     div{
+    div{
         height: 40%;
     &:nth-child(1){
         border-radius: 5px;
         position: relative;
-        display: flex;
-        justify-content: center;
-        div{
+    
+        .imgDivInside{
             width: 90%;
             height: 100%;
             position: absolute;
@@ -61,6 +60,11 @@
     }   
     }
     
+}
+.overflow-hidden{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .height-for-coordiante{
     height: 490px !important;

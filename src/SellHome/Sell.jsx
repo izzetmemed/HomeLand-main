@@ -1,11 +1,15 @@
 import React from "react";
 import { useState, useRef,useEffect } from "react";
-import MapComponent from "../mainpage/answer/coordinate";
 import Swal from 'sweetalert2';
-
+import FetchPostAll from "../MyComponents/FetchPostAll";
+import FetchPostImg from "../MyComponents/FetchPostImg";
+import TurnImgIn from "../MyComponents/TurnImgIn";
+import Coordinate from "../mainpage/answer/coordinate";
+import Scroll from "../MyComponents/Scroll";
+import NumberTurn from "../MyComponents/NumberTurn";
 const Sell = ({ Data, IsUpdating, SendFalse}) => {
 
-  
+    Scroll();
   const fileInputRef = useRef(null);
   const [images, setImages] = useState([]);
   const [imagesFile, setImagesFile] = useState([]);
@@ -81,30 +85,21 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
   useEffect(() => {
     setkeepingImgSource(images);
    },[images]) 
-
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
-    }
-  };
-
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
-
-  
+   const [CoordinateX,setCoordinateX]=useState(null);
+ const [CoordinateY,setCoordinateY]=useState(null);
+ const SendX=(x)=>{
+  setCoordinateX(x)
+ };
+ const SendY=(y)=>{
+  setCoordinateY(y)
+ };
  
   const UploadInformation = () => {
     const formData = {
       FullName: FullName.current.value,
-      Number: Number.current.value,
+      Number: NumberTurn(Number.current.value),
+      CoordinateX:CoordinateX,
+      CoordinateY:CoordinateY,
       Region:Region.current.value,
       Address: Address.current.value,
       Floor:Floor.current.value,
@@ -122,44 +117,30 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
     if (
     
       formData.FullName !== "" &&
+      formData.FullName.length<50 &&
       formData.Number !== "" &&
+      formData.Number.length<30 &&
       formData.Address !== "" &&
+      formData.Address.length<50 &&
       formData.Metro !== "" &&
       formData.Price !== "" &&
+      formData.Price<40000000 &&
       formData.Floor !== "" &&
       formData.Area !== "" &&
+      formData.Floor.length<50 &&
+      formData.Area<30000 &&
       formData.İtem !== "" &&
+      formData.İtem.length<50 &&
       formData.Repair !== "" &&
       formData.Paper !== "" &&
+      formData.Address.length<50 &&
+      formData.Addition.length<500 &&
       images.length>4 &&
       !isNaN(parseFloat(formData.Price)) &&
       !isNaN(parseFloat(formData.Area)) &&
       !isNaN(parseFloat(formData.Room))
     ) {
-      fetch("http://localhost:5224/api/Sell", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(formData),
-      })
-        .then((response) => {
-          console.log(response.ok);
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          imgFunc();
-          return response;
-        })
-        .then((responseData) => {
-          console.log("Data uploaded successfully:", responseData);
-         
-        })
-        .catch((error) => {
-          console.error("Error uploading data:", error);
-        });
-       
+      FetchPostAll(formData,"Sell",imgFunc);
         setTimeout(() => {
           Swal.fire({
             title: "Uğurlu",
@@ -199,17 +180,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
      
         formData.append(`image`, imagesFile[i]);
     }
-        fetch('http://localhost:5224/api/SellImg', {
-          method: 'POST',
-          body:formData
-        })
-          .then(response => response)
-          .then(data => {
-            console.log('Image uploaded successfully:', data);
-          })
-          .catch(error => {
-            console.error('Error uploading image:', error);
-          });
+    FetchPostImg(formData,"SellImg");
    
    
     };
@@ -342,7 +313,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
                 </label>
               </div>
               <div className="col-12 div-in-input">
-                <input type="number" placeholder="0xx-xxx-xx-xx" ref={Number}/>
+                <input type="text" placeholder="0xx-xxx-xx-xx" ref={Number} inputmode="numeric"/>
               </div>
             </div>
             <div>
@@ -370,21 +341,8 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className=" col-12 p-2 mt-4 ps-2">
                 <div className="answer-images-rent">
-                  <div className="overflow-hidden backgrounImgDefault">
-                    <div>
-                      <span onClick={btnLeftIcon}>
-                        <i className="fa-solid fa-angle-left"></i>
-                      </span>
-                      <span onClick={btnRightIcon}>
-                        <i className="fa-solid fa-angle-right"></i>
-                      </span>
-                    </div>
-                    <div className="d-flex justify-content-center align-items-center">
-                      <img
-                        src={keepingImgSource[ImgSourceIndex]}
-                       
-                      />
-                    </div>
+                  <div className="overflow-hidden  ">
+                    <TurnImgIn keepingImgSource={keepingImgSource} />
                   </div>
                 </div>
               </div>
@@ -439,7 +397,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
               </div>
             </div>
             <div className="mt-3">
-              <MapComponent />
+              <Coordinate x={SendX} y={SendY} CanClick={true}/>
             </div>
 
             <div className="mt-3">

@@ -1,11 +1,12 @@
 import React from "react";
 import SectionSell from "./SectionSell";
 import Search from "./searchSell";
-import axios from "axios";
+import FetchGetAll from "../MyComponents/FetchGetAll";
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Pagenation from "../pagenation";
 import {Load} from "../Load/Load";
+import Scroll from "../MyComponents/Scroll";
 const CardsSell = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -14,7 +15,7 @@ const CardsSell = () => {
   const [Room, setRoom] = useState([]);
   const [Price, setPrice] = useState([]);
   const [click, setClick] = useState();
-
+  Scroll();
   const ClickFunc = (x) => {
     setClick(x);
   };
@@ -35,37 +36,64 @@ const CardsSell = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
+      const RoomInt=Room.map(x=>Number(x));
       try {
         const ArrayData = [];
-        const resp = await axios.get("http://localhost:5224/api/Sell");
+        const resp =  await FetchGetAll("Sell");
         if (click) {
-          const filteredArray = Array.from(resp.data).filter((x) => {
-            if (
-              !(
-                Number(x.Price) > Array.from(Price)[1] &&
-                Number(x.Price) < Array.from(Price)[0]
-              )
-            ) {
+          const filteredArray = Array.from(resp.data).filter((x) => {console.log(JSON.parse(x)) 
+            
+            if (!(Number(JSON.parse(x).Price) > Array.from(Price)[1] && Number(JSON.parse(x).Price) < Array.from(Price)[0])) {
               return false;
             }
-            if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(x.Bina)) {
+            if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(JSON.parse(x).Building)) {
               return false;
             }
-
-            if (Room.length !== 0 && !Room.includes(x.Room)) {
+          
+            if (RoomInt.length !== 0 && !RoomInt.includes(JSON.parse(x).Room)) {
               return false;
             }
-
-            if (Region.length !== 0 && !Region.includes(x.Region)) {
+          
+            if (Region.length !== 0 && !Region.includes(JSON.parse(x).Region)) {
               return false;
             }
-
-            if (selectedIds.length !== 0 && !selectedIds.includes(x.Metro)) {
+          
+            if (selectedIds.length !== 0 && !selectedIds.includes(JSON.parse(x).Metro)) {
               return false;
             }
-
+          
             return true;
           });
+          //   if (
+          //     !(
+          //       Number(JSON.parse(x).Price) > Array.from(Price)[1] &&
+          //       Number(JSON.parse(x).Price) < Array.from(Price)[0]
+          //     )
+          //   ) {
+          //     console.log("price")
+          //     return false;
+          //   }
+          //   console.log(JSON.parse(x).Building)
+          //   if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(JSON.parse(x).Building)) {
+          //     console.log(HomeOrFlat)
+              
+          //     return false;
+          //   }
+
+          //   if (Room.length !== 0 && !Room.includes(JSON.parse(x).Room)) {
+          //     return false;
+          //   }
+
+          //   if (Region.length !== 0 && !Region.includes(JSON.parse(x).Region)) {
+          //     return false;
+          //   }
+
+          //   if (selectedIds.length !== 0 && !selectedIds.includes(JSON.parse(x).Metro)) {
+          //     return false;
+          //   }
+
+          //   return true;
+          // });
           ArrayData.push(...filteredArray);
 
           setFilteredData(ArrayData);

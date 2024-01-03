@@ -27,7 +27,13 @@ import SellInside from '../SellHome/Admin/Own/SellInside';
 import SellCustomer from "../SellHome/Admin/Customer/SellCustomer";
 import SellinsideCustomer from "../SellHome/Admin/Customer/SellInsideCustomer";
 import SellPayment from "../SellHome/Admin/Payment/SellPayment";
-import SellinsidePayment from '../SellHome/Admin/Payment/SellInsidePayment'
+import SellinsidePayment from '../SellHome/Admin/Payment/SellInsidePayment';
+import ObyektOwn from "../Obyekt/Admin/Own/ObyektOwn";
+import ObyektInsideOwn from "../Obyekt/Admin/Own/ObyektInsideOwn";
+import ObyektCustomer from "../Obyekt/Admin/Costumer/ObyektCustomer";
+import ObyektCustomerInside from "../Obyekt/Admin/Costumer/ObyectCustomerInside";
+import ObyektPayment from '../Obyekt/Admin/Payment/ObyektPayment';
+import ObyektinsidePayment from "../Obyekt/Admin/Payment/ObyektInsidePayment";
 const route = () => {
   return (
     <div>
@@ -67,6 +73,15 @@ const route = () => {
 
           <Route path="/HomeLogin/MainAdmin/Sell/Payment" element={<SellPayment />} />
           <Route path="/HomeLogin/MainAdmin/Sell/Payment/Kart/:id" element={<SellinsidePayment />}/>
+
+          <Route path="/HomeLogin/MainAdmin/Obyekt/Own" element={<ObyektOwn />} />
+          <Route path="/HomeLogin/MainAdmin/Obyekt/Own/Kart/:id" element={<ObyektInsideOwn />}/>
+
+          <Route path="/HomeLogin/MainAdmin/Obyekt/Customer" element={<ObyektCustomer />} />
+          <Route path="/HomeLogin/MainAdmin/Obyekt/Customer/Kart/:id" element={<ObyektCustomerInside />}/>
+
+          <Route path="/HomeLogin/MainAdmin/Obyekt/Payment" element={<ObyektPayment />} />
+          <Route path="/HomeLogin/MainAdmin/Obyekt/Payment/Kart/:id" element={<ObyektinsidePayment />}/>
         </Route>
       </Routes>
       <Footer />

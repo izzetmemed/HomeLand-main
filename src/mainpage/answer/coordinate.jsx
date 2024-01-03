@@ -1,19 +1,65 @@
-import React from 'react';
-import ReactBingmaps  from "../../../node_modules/react-bingmaps/lib/components/ReactBingmaps";
+import React, { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const Coordinate = () => {
-  const bingMapKey = 'AlUU5d_9b-VeQwUMtzD6ouh7JsTEYn7DK2J_3pjH3P5ABXxkD7gJPgLXWlY9B731'; 
-  const centerCoordinates = [40.4039619, 49.864193]; 
-  return (
-    <div style={{ width: '100%', height: '400px' }}>
-      <ReactBingmaps
-        bingMapsKey={bingMapKey}
-        center={centerCoordinates}
-        zoom={12}
-      />
-    </div>
-  );
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+const Coordinate = ({x,y,CanClick,Xvalue,Yvalue}) => {
+    const mapRef = useRef(null);
+    const mapContainerRef = useRef(null);
+    useEffect(() => {
+        if (!mapRef.current) {
+            mapRef.current = L.map(mapContainerRef.current).setView([Number(Xvalue)? Number(Xvalue): 40.4093,Number(Yvalue)? Number(Yvalue):  49.8671], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(mapRef.current);
+
+            const defaultIcon = L.icon({
+                iconUrl: markerIcon,
+                shadowUrl: markerIconShadow,
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            const marker = L.marker([Number(Xvalue)? Number(Xvalue): 40.4093,Number(Yvalue)? Number(Yvalue):  49.8671], { icon: defaultIcon }).addTo(mapRef.current);
+            if(CanClick){
+              mapRef.current.on('click', function(e) {
+                marker.setLatLng(e.latlng);
+                x(e.latlng.lat.toString());
+                y(e.latlng.lng.toString());
+            });
+            }
+         
+        }
+
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.off();
+                mapRef.current.remove();
+                mapRef.current = null;
+            }
+        };
+    }, []);
+
+    return (
+     <>
+     <div className='px-4'>
+      
+          <div ref={mapContainerRef}  style={{ height: '400px', width: '100%' }}></div>
+       
+     </div>
+   
+     </>
+      
+     
+    )
 };
 
 export default Coordinate;
 
+ 
