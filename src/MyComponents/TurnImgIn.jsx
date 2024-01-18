@@ -31,6 +31,7 @@ const TurnImgIn = ({ keepingImgSource, WeightTrue }) => {
       </div>
       <div className="d-flex justify-content-center w-auto h-auto">
         <img
+        decoding="async"
           src={
             keepingImgSource.length > 0
               ? keepingImgSource[ImgSourceIndex]

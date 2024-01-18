@@ -22,18 +22,19 @@ import ObyektForm from "../Obyekt/ObyektForm";
 import InsideCardsSell from "../SellHome/insideCardSell";
 import InsideCardsObyekt from "../Obyekt/InCardObyekt";
 import Error from "../Error/Error";
-import SellOwn from '../SellHome/Admin/Own/SellOwn';
-import SellInside from '../SellHome/Admin/Own/SellInside';
+import SellOwn from "../SellHome/Admin/Own/SellOwn";
+import SellInside from "../SellHome/Admin/Own/SellInside";
 import SellCustomer from "../SellHome/Admin/Customer/SellCustomer";
 import SellinsideCustomer from "../SellHome/Admin/Customer/SellInsideCustomer";
 import SellPayment from "../SellHome/Admin/Payment/SellPayment";
-import SellinsidePayment from '../SellHome/Admin/Payment/SellInsidePayment';
+import SellinsidePayment from "../SellHome/Admin/Payment/SellInsidePayment";
 import ObyektOwn from "../Obyekt/Admin/Own/ObyektOwn";
 import ObyektInsideOwn from "../Obyekt/Admin/Own/ObyektInsideOwn";
 import ObyektCustomer from "../Obyekt/Admin/Costumer/ObyektCustomer";
 import ObyektCustomerInside from "../Obyekt/Admin/Costumer/ObyectCustomerInside";
-import ObyektPayment from '../Obyekt/Admin/Payment/ObyektPayment';
+import ObyektPayment from "../Obyekt/Admin/Payment/ObyektPayment";
 import ObyektinsidePayment from "../Obyekt/Admin/Payment/ObyektInsidePayment";
+import ProtectedRoute from "./ProtectedRoute";
 const route = () => {
   return (
     <div>
@@ -56,32 +57,87 @@ const route = () => {
           <Route path="/Obyekt/səbət" element={<Basket />} />
           <Route path="/Obyekt-form" element={<ObyektForm />} />
           <Route path="/HomeLogin" element={<Login />} />
-          <Route path="/HomeLogin/MainAdmin" element={<MainAdmin />} />
-          <Route path="/HomeLogin/MainAdmin/Renthome/Customer" element={<Costumer />} />
-          <Route path="/HomeLogin/MainAdmin/Renthome/Customer/Kart/:id" element={<InsideCostumer />}/>
+          <Route
+            path="/HomeLogin/MainAdmin"
+            element={
+              <ProtectedRoute>
+                <MainAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Renthome/Customer"
+            element={<ProtectedRoute><Costumer /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Renthome/Customer/Kart/:id"
+            element={<ProtectedRoute><InsideCostumer /></ProtectedRoute>}
+          />
 
-          <Route path="/HomeLogin/MainAdmin/Renthome/Own" element={<Own />} />
-          <Route path="/HomeLogin/MainAdmin/Renthome/Own/Kart/:id" element={<InsideCardOwn />}/>
-          <Route path="/HomeLogin/MainAdmin/Renthome/Payment" element={<Payment />} />
-          <Route path="/HomeLogin/MainAdmin/Renthome/Payment/Kart/:id" element={<InsideCardPayment />}/>
+          <Route path="/HomeLogin/MainAdmin/Renthome/Own" element={<ProtectedRoute><Own /></ProtectedRoute>} />
+          <Route
+            path="/HomeLogin/MainAdmin/Renthome/Own/Kart/:id"
+            element={<ProtectedRoute><InsideCardOwn /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Renthome/Payment"
+            element={<ProtectedRoute><Payment /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Renthome/Payment/Kart/:id"
+            element={<ProtectedRoute><InsideCardPayment /></ProtectedRoute>}
+          />
 
-          <Route path="/HomeLogin/MainAdmin/Sell/Own" element={<SellOwn />} />
-          <Route path="/HomeLogin/MainAdmin/Sell/Own/Kart/:id" element={<SellInside />}/>
+          <Route path="/HomeLogin/MainAdmin/Sell/Own" element={<ProtectedRoute><SellOwn /> </ProtectedRoute>} />
+          <Route
+            path="/HomeLogin/MainAdmin/Sell/Own/Kart/:id"
+            element={<ProtectedRoute><SellInside /></ProtectedRoute>}
+          />
 
-          <Route path="/HomeLogin/MainAdmin/Sell/Customer" element={<SellCustomer />} />
-          <Route path="/HomeLogin/MainAdmin/Sell/Customer/Kart/:id" element={<SellinsideCustomer />}/>
+          <Route
+            path="/HomeLogin/MainAdmin/Sell/Customer"
+            element={<ProtectedRoute><SellCustomer /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Sell/Customer/Kart/:id"
+            element={<ProtectedRoute><SellinsideCustomer /></ProtectedRoute>}
+          />
 
-          <Route path="/HomeLogin/MainAdmin/Sell/Payment" element={<SellPayment />} />
-          <Route path="/HomeLogin/MainAdmin/Sell/Payment/Kart/:id" element={<SellinsidePayment />}/>
+          <Route
+            path="/HomeLogin/MainAdmin/Sell/Payment"
+            element={<ProtectedRoute><SellPayment /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Sell/Payment/Kart/:id"
+            element={<ProtectedRoute><SellinsidePayment /></ProtectedRoute>}
+          />
 
-          <Route path="/HomeLogin/MainAdmin/Obyekt/Own" element={<ObyektOwn />} />
-          <Route path="/HomeLogin/MainAdmin/Obyekt/Own/Kart/:id" element={<ObyektInsideOwn />}/>
+          <Route
+            path="/HomeLogin/MainAdmin/Obyekt/Own"
+            element={<ProtectedRoute><ObyektOwn /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Obyekt/Own/Kart/:id"
+            element={<ProtectedRoute><ObyektInsideOwn /></ProtectedRoute>}
+          />
 
-          <Route path="/HomeLogin/MainAdmin/Obyekt/Customer" element={<ObyektCustomer />} />
-          <Route path="/HomeLogin/MainAdmin/Obyekt/Customer/Kart/:id" element={<ObyektCustomerInside />}/>
+          <Route
+            path="/HomeLogin/MainAdmin/Obyekt/Customer"
+            element={<ProtectedRoute><ObyektCustomer /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Obyekt/Customer/Kart/:id"
+            element={<ProtectedRoute><ObyektCustomerInside /></ProtectedRoute>}
+          />
 
-          <Route path="/HomeLogin/MainAdmin/Obyekt/Payment" element={<ObyektPayment />} />
-          <Route path="/HomeLogin/MainAdmin/Obyekt/Payment/Kart/:id" element={<ObyektinsidePayment />}/>
+          <Route
+            path="/HomeLogin/MainAdmin/Obyekt/Payment"
+            element={<ProtectedRoute><ObyektPayment /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Obyekt/Payment/Kart/:id"
+            element={<ProtectedRoute><ObyektinsidePayment /></ProtectedRoute>}
+          />
         </Route>
       </Routes>
       <Footer />

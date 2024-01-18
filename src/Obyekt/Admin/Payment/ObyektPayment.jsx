@@ -1,9 +1,9 @@
 import React from "react";
 import SectionPayment from "./ObyektSectionPayment";
-import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import {Load} from '../../../Load/Load';
 import Pagination from "../../../pagenation"; 
+import FetchGetAll from "../../../MyComponents/FetchGetAll";
 const RentPayment = () => {
   const inputValue = useRef(null);
   const inputOwnValue = useRef(null);
@@ -16,32 +16,18 @@ const RentPayment = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axios.get("http://localhost:5224/api/Obyekt/Normal");
+        const resp = await FetchGetAll('Obyekt/Normal');
+        const data = resp.data;
+        let filterCondition = null;
         if (input != null) {
-          const filteredArray = Array.from(resp.data).filter(
-            (x) => x.Id === input
-          );
+          filterCondition = (item) => JSON.parse(item).Id === input;
+        } else if (inputOwn != null) {
+          filterCondition = (item) => JSON.parse(item).Number === inputOwn;
+        } else if (inputCustomer != null) {
+          filterCondition = (item) => JSON.parse(item).Customer.some(x=>JSON.parse(x).Number.replace(/['"]+/g, '')=== inputCustomer);
+        } 
 
-          setFilteredData(filteredArray);
-          return;
-        }
-        if (inputOwn != null) {
-          const filteredArray = Array.from(resp.data).filter(
-            (x) => x.OwnNumber === inputOwn
-          );
-          setFilteredData(filteredArray);
-          return;
-        }
-        if (inputCustomer != null) {
-          const filteredArray = Array.from(resp.data).filter(
-            (x) => x.CustomerNumber === inputCustomer
-          );
-
-          setFilteredData(filteredArray);
-          return;
-        } else {
-          setFilteredData(resp.data);
-        }
+        setFilteredData(filterCondition ? data.filter(filterCondition) : data.filter(x=>JSON.parse(x).Customer.length>0 && (JSON.parse(x).IsPaidHomeOwnFirstStep===false || JSON.parse(x).IsPaidCustomerFirstStep===false )));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -69,6 +55,7 @@ const RentPayment = () => {
     setInput(null);
     setInputOwn(null);
     setInputCustomer(Value);
+   
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -132,7 +119,7 @@ useEffect(() => {
           {parsedData.map((x) => (
             <SectionPayment
               id={x.Id}
-              Name={x.FullName}
+              Name={x.Fullname}
               Number={x.Number}
               Code={x.Id}
               key={x.Id}

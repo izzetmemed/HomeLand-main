@@ -6,7 +6,17 @@ import FetchPostAll from "../MyComponents/FetchPostAll";
 import TurnImgIn from "../MyComponents/TurnImgIn";
 import Coordinate from "../mainpage/answer/coordinate";
 import NumberTurn from "../MyComponents/NumberTurn";
+import FetchPut from "../MyComponentsAdmin/FetchPut";
 const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
+
+  const [CoordinateX,setCoordinateX]=useState(null);
+  const [CoordinateY,setCoordinateY]=useState(null);
+  const SendX=(x)=>{
+   setCoordinateX(x)
+  };
+  const SendY=(y)=>{
+   setCoordinateY(y)
+  };
 
   const FullName = useRef(null);
   const Number = useRef(null);
@@ -49,28 +59,18 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
     setkeepingImgSource(images);
    },[images]) 
   useEffect(() => {
-    const fetchData = async () => {
+   
       if(Data.sellorRent==="Satılır"){
         setSellOrRent(true);
       }else{
         setSellOrRent(false);
       }
-      try {
-        if (Data.img.length > 0) {
-          const response = await fetch(
-            `http://localhost:5224/api/ObyektImg/DownloadImages?imgNames=${Data.img}`
-          );
-          const imageData = await response.json();
-          setkeepingImgSource(imageData.imageUrls);
-        }
-      } catch (error) {
-        console.error("Error downloading images:", error);
-      }
-    };
+      
     if (IsUpdating) {
-      fetchData();
       FullName.current.value = Data.fullname;
       Number.current.value = Data.number;
+      setCoordinateX(Data.coordinateX);
+      setCoordinateY(Data.coordinateY);
       Region.current.value = Data.region;
       Address.current.value = Data.address;
       Metro.current.value = Data.metro;
@@ -95,18 +95,12 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
     }
     
   };
-  const [CoordinateX,setCoordinateX]=useState(null);
-  const [CoordinateY,setCoordinateY]=useState(null);
-  const SendX=(x)=>{
-   setCoordinateX(x)
-  };
-  const SendY=(y)=>{
-   setCoordinateY(y)
-  };
+
   const UploadInformation = () => {
     const formData = {
       FullName: FullName.current.value,
       Number:NumberTurn(Number.current.value),
+      
       CoordinateX:CoordinateX,
       CoordinateY:CoordinateY,
       Region: Region.current.value,
@@ -187,6 +181,8 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
     Data.fullname = FullName.current.value;
     Data.number = Number.current.value;
     Data.region = Region.current.value;
+    Data.coordinateX=CoordinateX;
+    Data.coordinateY=CoordinateY;
     Data.address = Address.current.value;
     Data.metro = Metro.current.value;
     Data.room = Room.current.value;
@@ -196,9 +192,12 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
     Data.price = Price.current.value;
     Data.addition = Addition.current.value;
     Data.sellorRent= SellorRent.current.value;
-    if (SellorRent.current.value === 'Satılır') {
-      Data.document = Paper.current.value===''? Data.document: Paper.current.value;
-    }
+    if (SellorRent && SellorRent.current && Paper && Paper.current) {
+      if (SellorRent.current.value === 'Satılır') {
+          Data.document = Paper.current.value === '' ? Data.document : Paper.current.value;
+      }}
+  
+  
 
     if (
       Data.fullname !== "" &&
@@ -215,28 +214,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
       !isNaN(parseFloat(Data.area)) &&
       !isNaN(parseFloat(Data.room))
     ) {
-      fetch("http://localhost:5224/api/Obyekt", {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Data),
-      })
-        .then((response) => {
-          console.log(response.ok);
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          imgFunc();
-          return response;
-        })
-        .then((responseData) => {
-          console.log("Data uploaded successfully:", responseData);
-        })
-        .catch((error) => {
-          console.error("Error uploading data:", error);
-        });
+      const PutData=async()=>{
+        await FetchPut(Data,"Obyekt");
+       }
+       PutData();
       setTimeout(() => {
         Swal.fire({
           title: "Uğurlu",
@@ -244,20 +225,6 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
           icon: "success",
         });
       }, 500);
-
-      FullName.current.value = "";
-      Number.current.value = "";
-      Address.current.value = "";
-      Area.current.value = "";
-      Addition.current.value = "";
-      Price.current.value = "";
-      Metro.current.value = "";
-      Region.current.value = "";
-      Room.current.value = "";
-      Repair.current.value = "";
-      İtem.current.value = "";
-      Paper.current.value = "";
-      SellorRent.current.value = "";
       setImages([]);
       setImagesFile([]);
 

@@ -44,7 +44,7 @@ const İnsideCardSell = () => {
             </div>
           </div>
           {getById && ( 
-            <div className="pb-2 mt-3">
+            <div className="pb-2 mt-3 pe-2">
               <p>
                 Qiymet:<span className="price-home">{getById.price}</span>
                 <span>{price}</span>
@@ -86,7 +86,7 @@ const İnsideCardSell = () => {
               </p>
               
               <p>
-                Obyekti tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
+                Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
                 {getById.price * 1 /100}<span>{price}</span>
                 </span>
@@ -114,9 +114,9 @@ const İnsideCardSell = () => {
           )}
         </div>
       </div>
-      <div className="mt-5">
+      {/* <div className="mt-5">
         <CardsSell />
-      </div>
+      </div> */}
     </div>
   );
 };

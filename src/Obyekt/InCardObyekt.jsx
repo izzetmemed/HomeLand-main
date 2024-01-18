@@ -45,7 +45,7 @@ const InCardObyekt = () => {
             </div>
           </div>
           {GetById && (
-            <div className="pb-2 mt-3">
+            <div className="pb-2 mt-3 pe-2">
               <p>
                 Qiymet:<span className="price-home">{GetById.price}</span>
                 <span>{price}</span>
@@ -123,9 +123,9 @@ const InCardObyekt = () => {
           )}
         </div>
       </div>
-      <div className="mt-5">
+      {/* <div className="mt-5">
         <Cards />
-      </div>
+      </div> */}
     </div>
   );
 };

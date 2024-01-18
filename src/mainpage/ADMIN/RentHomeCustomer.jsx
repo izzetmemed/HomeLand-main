@@ -1,6 +1,6 @@
 import React from 'react'
 import SectionCustomer from './Customer/sectionCustomer';
-import axios from 'axios';
+import FetchGetAll from '../../MyComponents/FetchGetAll';
 import { useEffect,useState,useRef } from 'react';
 import Pagenation from '../../pagenation';
 import {Load} from '../../Load/Load';
@@ -12,24 +12,23 @@ const RentHomeCustomer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-      const resp = await axios.get("http://localhost:5224/api/RentHome/Normal");
-      if(input!==null){
-        const filteredArray = Array.from(resp.data).filter((x) =>  x.Id===input
-        );
-    
-        setFilteredData(filteredArray)
-      }
-      else{
-        setFilteredData(resp.data);
-      }
-      
+        const resp = await FetchGetAll('RentHome/Normal');
+        if (resp.data) {
+          let data = Array.isArray(resp.data) ? resp.data : JSON.parse(resp.data);
+          console.log(data)
+          const filteredArray = input !== null
+            ? data.filter(item => JSON.parse(item).Id === input)
+            : data;
+          setFilteredData(filteredArray);
+        }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data: ", error);
       }
     };
-  
+
     fetchData();
   }, [input]);
+
   const searchCode=()=>{
     const Value=Number(inputValue.current.value);
     setInput(Value);
@@ -95,7 +94,7 @@ useEffect(() => {
           </div>
         
       </div>
-      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage} />;
+      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage} />
          
         
        

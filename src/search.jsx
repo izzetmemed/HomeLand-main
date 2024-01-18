@@ -61,11 +61,12 @@ const Search = ({
     setRegion(ArrayNewSetSendDataRegion);
     setFunc(ArrayNewBool);
     setHomeOrFlat(ArrayNewSetHomeOrFlat);
+    console.log(ArrayNewSetHomeOrFlat);
   };
 
   return (
     <div>
-      <div className="search-part pe-2">
+      <div className="search-part pe-2 ps-2">
         <div className="col-12">
           <div className="col-12">
             <button
@@ -131,6 +132,15 @@ const Search = ({
 
                 <div className="mt-3 col-12 pe-2">
                   <div className="col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1">
+                  <div>
+                      <input
+                        type="checkbox"
+                       
+                      />
+                      <label className="ms-1">
+                        Bütün
+                      </label>
+                    </div>
                     <div>
                       <input
                         type="checkbox"
@@ -380,6 +390,15 @@ const Search = ({
 
                 <div className="mt-3 col-12 pe-2">
                   <div className="col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1">
+                  <div>
+                      <input
+                        type="checkbox"
+                       
+                      />
+                      <label className="ms-1">
+                        Bütün
+                      </label>
+                    </div>
                     <div>
                       <input
                         type="checkbox"
@@ -510,6 +529,15 @@ const Search = ({
 
                 <div className="mt-3 col-12 pe-2">
                   <div className="col-12 div-in-select chechAndLabel forOverFlow ms-1 pe-1">
+                  <div>
+                      <input
+                        type="checkbox"
+                       
+                      />
+                      <label className="ms-1">
+                        Bütün
+                      </label>
+                    </div>
                     <div>
                       <input
                         type="checkbox"
@@ -726,7 +754,7 @@ const Search = ({
           )}
         </div>
       </div>
-      <div className="col-12 mt-3 pe-2">
+      <div className="col-12 mt-3 pe-2 ps-2">
         <Link to="Səbət" className="btn w-100 text-white  search-btn-click">
           Mənim səbətim
         </Link>

@@ -6,7 +6,17 @@ import Swal from "sweetalert2";
 import FetchPostAll from "../../MyComponents/FetchPostAll";
 import TurnImgIn from "../../MyComponents/TurnImgIn";
 import NumberTurn from "../../MyComponents/NumberTurn";
+import FetchPut from "../../MyComponentsAdmin/FetchPut";
 const Rent = ({ Data, IsUpdating, SendFalse}) => {
+   const [CoordinateX,setCoordinateX]=useState(null);
+ const [CoordinateY,setCoordinateY]=useState(null);
+ const SendX=(x)=>{
+  setCoordinateX(x)
+ };
+ const SendY=(y)=>{
+  setCoordinateY(y)
+ };
+
   const FullName = useRef(null);
   const Number = useRef(null);
   const Region = useRef(null);
@@ -42,26 +52,15 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     setkeepingImgSource(images);
    },[images]) 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (Data.img.length > 0) {
-          const response = await fetch(
-            `http://localhost:5224/api/RentHomeImg/DownloadImages?imgNames=${Data.img}`
-          );
-          const imageData = await response.json();
-          setkeepingImgSource(imageData.imageUrls);
-        }
-      } catch (error) {
-        console.error("Error downloading images:", error);
-      }
-    };
+  
     if (IsUpdating) {
-      fetchData();
-      console.log(Data);
+      
       FullName.current.value = Data.fullname;
       Number.current.value = Data.number;
       Region.current.value = Data.region;
       Address.current.value = Data.address;
+      setCoordinateX(Data.coordinateX);
+      setCoordinateY(Data.coordinateY);
       Floor.current.value = Data.floor;
       Metro.current.value = Data.metro;
       Room.current.value = Data.room;
@@ -109,14 +108,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
     }
   };
- const [CoordinateX,setCoordinateX]=useState(null);
- const [CoordinateY,setCoordinateY]=useState(null);
- const SendX=(x)=>{
-  setCoordinateX(x)
- };
- const SendY=(y)=>{
-  setCoordinateY(y)
- };
+
   const UploadInformation = () => {
     const formData = {
       FullName: FullName.current.value,
@@ -150,7 +142,6 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       WorkingBoy: WorkingBoy.current.checked,
       Addition: Addition.current.value,
     };
-    console.log(formData.Number)
     if (
       formData.FullName !== "" &&
       formData.FullName.length<50 &&
@@ -235,6 +226,8 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     Data.fullname = FullName.current.value;
     Data.number = Number.current.value;
     Data.region = Region.current.value;
+    Data.coordinateX=CoordinateX;
+    Data.coordinateY=CoordinateY;
     Data.address = Address.current.value;
     Data.floor = Floor.current.value;
     Data.metro = Metro.current.value;
@@ -260,6 +253,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     Data.family = Family.current.checked;
     Data.workingBoy = WorkingBoy.current.checked;
     Data.addition = Addition.current.value;
+    Data.IsCalledWithHomeOwnFirstStep=Data.isCalledWithOwnFirstStep;
     if (
       Data.fullname !== "" &&
       Data.number !== "" &&
@@ -274,27 +268,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       !isNaN(parseFloat(Data.area)) &&
       !isNaN(parseFloat(Data.room))
     ) {
-      fetch("http://localhost:5224/api/RentHome", {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Data),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          imgFunc();
-          return response;
-        })
-        .then((responseData) => {
-          console.log("Data uploaded successfully:", responseData);
-        })
-        .catch((error) => {
-          console.error("Error uploading data:", error);
-        });
+      const PutData=async()=>{
+       await FetchPut(Data,"RentHome");
+      }
+      PutData();
       setTimeout(() => {
         Swal.fire({
           title: "Uğurlu",
@@ -462,7 +439,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
               </div>
             </div>
             <div className="mt-3">
-              <Coordinate x={SendX} y={SendY} CanClick={true}/>
+              <Coordinate x={SendX} y={SendY} CanClick={true} />
             </div>
 
             <div className="mt-3">

@@ -6,7 +6,7 @@ import InfoRent from "./MyComponents/InfoRent";
 import Shopping from './MyComponents/Shopping';
 const Section =(props) => {
   if(props.imgNames.length!==0){
-    var keepingImgSource =UseFetchData(props.imgNames,"RentHomeImg");  
+    var keepingImgSource =UseFetchData(props.imgNames,"RentHomeImg"); 
   }else{
     keepingImgSource=[];
   }
@@ -16,7 +16,7 @@ const Section =(props) => {
       <div className=" p-2 mt-4">
         <div className="card-home">
           <div className="overflow-hidden">
-            <TurnImg keepingImgSource={keepingImgSource}/>
+           <TurnImg keepingImgSource={keepingImgSource}/>
             <Shopping props={props} keepingImgSource={keepingImgSource}/>
           </div>
           <div className="pb-2">

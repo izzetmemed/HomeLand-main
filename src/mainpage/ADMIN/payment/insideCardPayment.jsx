@@ -1,85 +1,113 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
-import Coordinate from "../../answer/coordinate";
 import { useParams } from "react-router-dom";
+import FetchGetId from "../../../MyComponents/FetchGetId";
+import UseFetchData from "../../../MyComponents/FetchImg";
+import TurnImgIn from "../../../MyComponents/TurnImgIn";
+import FetchPostAll from "../../../MyComponents/FetchPostAll";
+import FetchPutImg from "../../../MyComponents/FetchPutImg";
+import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
+import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
+import GetBack from "../../../MyComponents/GetBack";
 const İnsideCardPayment = () => {
   const { id } = useParams();
+ const navigate = useNavigate();
+  const [keepingImgSource,setKeepingImgSource] = useState([]);
 
-  const keepingImgSource = [
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp",
-    "https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPRSAAg1MOr6nFfMv7L131kZl7O3se-oYEf0V0ZLW7jDUVmh7vtnwLZ1uJHUI7Ji_-pTE&usqp=CAU",
-    "https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg",
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp",
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg",
-    "https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg",
-  ];
-  const [state, setstate] = useState(true);
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
-    }
-  };
-
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
   var [getById, setGetById] = useState(null);
+  
+  const getByIdData = FetchGetId(id, 'RentHome/Admin');
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5224/api/RentHome/Admin/${id}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setGetById(data);
-      } catch (error) {
-        console.error("Error in fetchData:", error);
-      }
-    };
-    fetchData();
-  }, [id,state]);
+    setGetById(getByIdData);
+   }, [getByIdData]);
+   
 
+  const imageUrls = UseFetchData(getById?.img, 'RentHomeImg');
+
+  useEffect(() => {
+   setKeepingImgSource(imageUrls);
+  }, [getById, imageUrls]);
+  
   const price = "Aze";
   const teratory = "m²";
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
   };
 
+  const Reload=async()=>{
+    const ReloadData = {
+      FullName: getById.fullname,
+      Number:getById.number,
+      CoordinateX:getById.coordinateX,
+      CoordinateY:getById.coordinateY,
+      Region: getById.region,
+      Address: getById.address,
+      Floor: getById.floor,
+      Metro: getById.metro,
+      Room: getById.room,
+      Repair: getById.repair,
+      Building: getById.building,
+      İtem: getById.İtem,
+      Bed: getById.bed,
+      wardrobe: getById.wardrobe,
+      TableChair: getById.tableChair,
+      HeatingSystem: getById.heatingSystem,
+      GasHeating: getById.gasHeating,
+      Combi: getById.combi,
+      Tv: getById.tv,
+      WashingClothes: getById.washingClothes,
+      AirConditioning: getById.airConditioning,
+      Sofa: getById.sofa,
+      Wifi: getById.wifi,
+      Area: getById.area,
+      Price: getById.price,
+      Boy: getById.boy,
+      Girl: getById.girl,
+      Family: getById.family,
+      WorkingBoy: getById.workingBoy,
+      Addition: getById.addition,
+      IsCalledWithHomeOwnFirstStep:true
+    };
+    if (
+      ReloadData.FullName !== "" &&
+      ReloadData.Number !== "" &&
+      ReloadData.Address !== "" &&
+      ReloadData.Metro !== "" &&
+      ReloadData.Price !== "" &&
+      ReloadData.Floor !== "" &&
+      ReloadData.Building !== "" &&
+      ReloadData.Area !== "" &&
+      ReloadData.İtem !== "" &&
+      ReloadData.Repair !== "" &&
+      ReloadData.Address !== "" 
+    ) {
+      const fake=()=>{
+      }
+     await FetchPostAll(ReloadData,"RentHome",fake());
+     await FetchPutImg(getById.id,"RentHomeImg");
+      setTimeout(() => {
+     FetchDelete(getById.id, "RentHome"); 
+      }, 7000);
+    
+          navigate('/HomeLogin/MainAdmin/RentHome/Payment');
+    }else{
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Bütün (*) xanaları doldurun.",
+        icon: "error",
+      });
+    }
+    
+  }
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-            <div>
-              <span onClick={btnLeftIcon}>
-                <i className="fa-solid fa-angle-left"></i>
-              </span>
-              <span onClick={btnRightIcon}>
-                <i className="fa-solid fa-angle-right"></i>
-              </span>
-            </div>
-            <div>
-              <img
-                src={keepingImgSource[ImgSourceIndex]}
-                alt=""
-                className="w-100 h-100"
-              />
-            </div>
+          <TurnImgIn keepingImgSource={keepingImgSource}/>
           </div>
+      
           {getById && (
             <div className="pb-2 mt-3">
               <p>
@@ -118,7 +146,7 @@ const İnsideCardPayment = () => {
                 </p>
               )}
               <p>
-                Əşya:<span className="time-home">{getById.item}</span>
+                Əşya:<span className="time-home">{getById.İtem}</span>
               </p>
               <p>
                 Təmir:<span className="time-home">{getById.repair}</span>
@@ -203,8 +231,13 @@ const İnsideCardPayment = () => {
                 </tbody>
               </table>
             </div>
+           
           </div>
+          <GetBack Direct={"/HomeLogin/MainAdmin/RentHome/payment"}/>
+
+          <button className="p-2 mt-5 bg-success" onClick={Reload}>Yenidən yüklə</button>
         </div>
+        
       </div>
     </div>
   );

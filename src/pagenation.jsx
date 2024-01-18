@@ -46,12 +46,13 @@ const Pagination = ({ countOfPagenation,setPage }) => {
 
             {numOfPages.map((page, index) => (
               <li
-                class={
+              key={index}
+                className={
                   currentPage === page ? "page-item active-page" : "page-item"
                 }
               >
                 <button
-                  class="page-link"
+                  className="page-link"
                   onClick={() => {
                     setCurrentPage(page);
                   }}

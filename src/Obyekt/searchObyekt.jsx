@@ -65,7 +65,7 @@ const Search = ({
 
   return (
     <div>
-      <div className="search-part pe-2">
+      <div className="search-part pe-2 ps-2">
         <div className="col-12">
           <div className="col-12">
             <button
@@ -746,7 +746,7 @@ const Search = ({
           )}
         </div>
       </div>
-      <div className="col-12 mt-3 pe-2">
+      <div className="col-12 mt-3 pe-2 ps-2">
         <Link to="Səbət" className="btn w-100 text-white  search-btn-click">
           Mənim səbətim
         </Link>

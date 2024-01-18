@@ -416,11 +416,6 @@ html, body {
   background-color: #41ce3c;
 }
 
-.backgrounImgDefault {
-  background-image: url(../logo.home/Logo-white.PNG);
-  background-repeat: round;
-}
-
 .answer-images-rent {
   border-radius: 5px;
   padding-bottom: 2%;
@@ -539,8 +534,8 @@ html, body {
   height: 100vh;
 }
 .login-div input {
-  height: 4%;
-  width: 30%;
+  height: 5%;
+  width: 70%;
   margin: 0.5%;
   padding-left: 0.5%;
 }
@@ -670,12 +665,12 @@ a {
 }
 @media (max-width: 1040px) {
   .insideCard-home {
-    height: 160vw !important;
+    height: 150vw !important;
   }
 }
 @media (max-width: 970px) {
   .insideCard-home {
-    height: 170vw !important;
+    height: 160vw !important;
   }
   .insideCard-home div {
     height: 30%;
@@ -683,22 +678,22 @@ a {
 }
 @media (max-width: 870px) {
   .insideCard-home {
-    height: 180vw !important;
+    height: 170vw !important;
   }
 }
 @media (max-width: 800px) {
   .insideCard-home {
-    height: 220vw !important;
+    height: 200vw !important;
   }
 }
 @media (max-width: 700px) {
   .insideCard-home {
-    height: 250vw !important;
+    height: 230vw !important;
   }
 }
 @media (max-width: 600px) {
   .insideCard-home {
-    height: 290vw !important;
+    height: 270vw !important;
   }
   .insideCard-home div {
     height: 25%;
@@ -706,7 +701,7 @@ a {
 }
 @media (max-width: 500px) {
   .insideCard-home {
-    height: 330vw !important;
+    height: 310vw !important;
   }
   .insideCard-home div {
     height: 23%;
@@ -714,7 +709,7 @@ a {
 }
 @media (max-width: 450px) {
   .insideCard-home {
-    height: 350vw !important;
+    height: 330vw !important;
   }
   .insideCard-home div {
     height: 23%;
@@ -722,7 +717,7 @@ a {
 }
 @media (max-width: 430px) {
   .insideCard-home {
-    height: 380vw !important;
+    height: 360vw !important;
   }
   .insideCard-home div {
     height: 20%;
@@ -730,7 +725,7 @@ a {
 }
 @media (max-width: 400px) {
   .insideCard-home {
-    height: 400vw !important;
+    height: 380vw !important;
   }
   .insideCard-home div {
     height: 20%;
@@ -738,7 +733,7 @@ a {
 }
 @media (max-width: 370px) {
   .insideCard-home {
-    height: 430vw !important;
+    height: 410vw !important;
   }
   .insideCard-home div {
     height: 18%;
@@ -746,17 +741,17 @@ a {
 }
 @media (max-width: 350px) {
   .insideCard-home {
-    height: 480vw !important;
+    height: 460vw !important;
   }
 }
 @media (max-width: 320px) {
   .insideCard-home {
-    height: 550vw !important;
+    height: 520vw !important;
   }
 }
 @media (max-width: 290px) {
   .insideCard-home {
-    height: 600vw !important;
+    height: 580vw !important;
   }
 }
 .logo-on-images {
@@ -769,4 +764,66 @@ a {
   font-size: 100%;
   color: rgb(255, 255, 255);
   opacity: 0.8;
+}
+
+.GetNumberContainer {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgb(72, 180, 81);
+  border-radius: 15px;
+}
+
+.GetNumberData {
+  display: flex;
+  flex-direction: column;
+}
+.GetNumberData span {
+  color: white;
+  font-size: 20px;
+}
+
+.GetNumberDivInput {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.GetNumberDivInput input {
+  width: 27%;
+  height: 36px;
+  border-radius: 10px;
+  padding-left: 5px;
+  outline: none;
+  border: none;
+}
+
+.AllowOrNot {
+  display: flex;
+  margin-top: 10px;
+}
+.AllowOrNot button {
+  border-radius: 10px;
+  padding: 1% 4%;
+  margin-left: 2%;
+  background-color: white;
+  color: black;
+}
+.AllowOrNot button:nth-child(1) {
+  background-color: rgb(255, 255, 255);
+}
+.AllowOrNot button:nth-child(2) {
+  background-color: rgb(209, 40, 40);
+  color: white;
+}
+
+.audio-div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
 }/*# sourceMappingURL=main.css.map */

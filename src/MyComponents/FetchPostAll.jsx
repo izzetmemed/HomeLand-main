@@ -1,6 +1,7 @@
 
 async function  FetchPostAll(formData,Kind,imgFunc){
-  await  fetch(`http://localhost:5224/api/${Kind}`, {
+  const baseUrl = process.env.REACT_APP_API_KEY;
+  await  fetch(`${baseUrl}${Kind}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -12,7 +13,9 @@ async function  FetchPostAll(formData,Kind,imgFunc){
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        imgFunc();
+        
+          imgFunc();
+        
         return response;
       })
       .then((responseData) => {

@@ -38,7 +38,9 @@ const TurnImg = ({ keepingImgSource, WeightTrue }) => {
         </span>
       </div>
       <div style={WeightTrue ? middle : {}}>
+        
         <img
+        decoding="async"
           src={
             keepingImgSource.length > 0
               ? keepingImgSource[ImgSourceIndex]

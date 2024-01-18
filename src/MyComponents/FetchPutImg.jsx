@@ -1,9 +1,8 @@
 
-function FetchPostImg(formData,Kind) {
+function FetchPutImg(id,Kind) {
   const baseUrl = process.env.REACT_APP_API_KEY;
-    fetch(`${baseUrl}${Kind}`, {
-        method: "POST",
-        body: formData,
+    fetch(`${baseUrl}${Kind}/${id}`, {
+        method: "Put",
       })
         .then((response) => response)
         .then((data) => {
@@ -14,4 +13,4 @@ function FetchPostImg(formData,Kind) {
         });
 }
 
-export default FetchPostImg
+export default FetchPutImg

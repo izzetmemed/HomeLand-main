@@ -1,44 +1,16 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import UseFetchData from '../../../MyComponents/FetchImg.js';
+import TurnImg from '../../../MyComponents/TurnImg.jsx';
 const ObyektCustomerSection = (({id,priceHome,address,MetroHome,roomHome,Region,dateTime , imgNames}) => {
   const [keepingImgSource, setKeepingImgSource] = useState([]);
  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if(imgNames.length!==0){
-          const response = await fetch(
-            `http://localhost:5224/api/ObyektImg/DownloadImages?imgNames=${imgNames}`
-          );
-
-          const data = await response.json();
-          setKeepingImgSource(data.imageUrls);
-
-        }
-      
-      } catch (error) {
-        console.error("Error downloading images:", error);
-      }
-    };
-    fetchData();
-  }, [imgNames]);
+  const imageUrls = UseFetchData(imgNames, 'ObyektImg');
   
-    const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-      const btnLeftIcon = () => {
-        if (ImgSourceIndex < keepingImgSource.length - 1) {
-            setImgSourceIndex(ImgSourceIndex + 1);
-        } else {
-            setImgSourceIndex(0);
-        }
-    };
+  useEffect(() => {
+   setKeepingImgSource(imageUrls);
+  }, [imgNames, imageUrls]);
 
-    const btnRightIcon = () => {
-        if (ImgSourceIndex > 0) {
-            setImgSourceIndex(ImgSourceIndex - 1);
-        } else {
-            setImgSourceIndex(keepingImgSource.length - 1);
-        }
-    };
       function cutString(inputString, maxLength) {
         if (typeof inputString !== 'string') {
           console.error("Error: Input is not a string");
@@ -57,14 +29,7 @@ const ObyektCustomerSection = (({id,priceHome,address,MetroHome,roomHome,Region,
          <div className=' p-2 mt-4'>
             <div className='card-home'>
                 <div className='overflow-hidden'>
-                    <div>
-                    <span onClick={btnLeftIcon}><i className="fa-solid fa-angle-left"></i></span>
-                    <span onClick={btnRightIcon}><i className="fa-solid fa-angle-right"></i></span>
-                    </div>
-                    <div>
-                            <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100'/>
-                    </div>
-  
+            <TurnImg keepingImgSource={keepingImgSource}/>      
                 </div>
                 <div className='pb-2'><Link to={`/HomeLogin/MainAdmin/Obyekt/Customer/Kart/${id}`}>
                    <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 

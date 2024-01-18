@@ -1,9 +1,9 @@
 import React from 'react'
 import SectionCustomer from './SellSectionCustomer';
-import axios from 'axios';
 import { useEffect,useState,useRef } from 'react';
 import Pagenation from '../../../pagenation';
 import {Load} from '../../../Load/Load';
+import FetchGetAll from '../../../MyComponents/FetchGetAll';
 const SellCustomer = () => {
   const inputValue=useRef(null);
   const [filteredData, setFilteredData] = useState([]);
@@ -12,22 +12,20 @@ const SellCustomer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-      const resp = await axios.get("http://localhost:5224/api/Sell/Normal");
-      if(input!==null){
-        const filteredArray = Array.from(resp.data).filter((x) =>  x.Id===input
-        );
-    
-        setFilteredData(filteredArray)
-      }
-      else{
-        setFilteredData(resp.data);
-      }
-      
+        const resp = await FetchGetAll('Sell/Normal');
+
+        if (resp.data) {
+          let data = Array.isArray(resp.data) ? resp.data : JSON.parse(resp.data);
+          const filteredArray = input !== null
+            ? data.filter(item => JSON.parse(item).Id === input)
+            : data;
+          setFilteredData(filteredArray);
+        }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data: ", error);
       }
     };
-  
+
     fetchData();
   }, [input]);
   const searchCode=()=>{

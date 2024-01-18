@@ -24,11 +24,6 @@
         outline: none;
         border: 1px solid rgb(163, 163, 163);
         padding-left: 0.5%;
-        // option{
-        //     &:hover{
-        //         background-color: aqua !important;
-        //     }
-        // }
     }
 }
 .main-div-for-chechbox{
@@ -59,10 +54,6 @@
   
   .custom-file-input:active {
     background-color: #41ce3c;
-  }
-  .backgrounImgDefault{
-    background-image: url(../logo.home/Logo-white.PNG);
-    background-repeat:round;
   }
   .answer-images-rent{   
     border-radius: 5px;

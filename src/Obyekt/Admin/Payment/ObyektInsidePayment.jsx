@@ -1,82 +1,94 @@
 import { useState, useEffect,useRef } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
+import FetchGetId from "../../../MyComponents/FetchGetId";
+import UseFetchData from "../../../MyComponents/FetchImg";
+import TurnImgIn from "../../../MyComponents/TurnImgIn";
+import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
+import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
+import FetchPostAll from "../../../MyComponents/FetchPostAll";
+import GetBack from "../../../MyComponents/GetBack";
+import FetchPutImg from "../../../MyComponents/FetchPutImg";
 const ObyektinsidePayment = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [keepingImgSource,setKeepingImgSource] = useState([]);
 
-  const keepingImgSource = [
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp",
-    "https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPRSAAg1MOr6nFfMv7L131kZl7O3se-oYEf0V0ZLW7jDUVmh7vtnwLZ1uJHUI7Ji_-pTE&usqp=CAU",
-    "https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg",
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp",
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg",
-    "https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg",
-  ];
-  const [state, setstate] = useState(true);
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
-    }
-  };
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
   var [getById, setGetById] = useState(null);
+  const getByIdData = FetchGetId(id, 'Obyekt/Admin');
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5224/api/Obyekt/Admin/${id}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setGetById(data);
-      } catch (error) {
-        console.error("Error in fetchData:", error);
-      }
-    };
-    fetchData();
-  }, [id,state]);
+    setGetById(getByIdData);
+   }, [getByIdData]);
+   
 
+  const imageUrls = UseFetchData(getById?.img, 'ObyektImg');
+
+  useEffect(() => {
+   setKeepingImgSource(imageUrls);
+  }, [getById, imageUrls]);
+  
   const price = "Aze";
   const teratory = "m²";
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
   };
 
+  const Reload=async()=>{
+    const ReloadData = {
+      FullName: getById.fullname,
+      Number:getById.number,
+      CoordinateX:getById.coordinateX,
+      CoordinateY:getById.coordinateY,
+      Region: getById.region,
+      Address: getById.address,
+      Metro: getById.metro,
+      Room: getById.room,
+      Repair: getById.repair,
+      İtem: getById.İtem,
+      Area: getById.area,
+      Price: getById.price,
+      Addition: getById.addition,
+      Document:getById.document,
+      SellOrRent:getById.sellorRent,
+      IsCalledWithHomeOwnFirstStep:true
+
+    };
+    if (
+      ReloadData.FullName !== "" &&
+      ReloadData.Number !== "" &&
+      ReloadData.Address !== "" &&
+      ReloadData.Metro !== "" &&
+      ReloadData.Price !== "" &&
+      ReloadData.Area !== "" &&
+      ReloadData.İtem !== "" &&
+      ReloadData.Repair !== "" &&
+      ReloadData.SellOrRent !== "" &&
+      ReloadData.Address !== "" 
+    ) {
+      const fake=()=>{
+      }
+     await FetchPostAll(ReloadData,"Obyekt",fake);
+     await FetchPutImg(getById.id,"ObyektImg");
+      setTimeout(() => {
+     FetchDelete(getById.id, "Obyekt"); 
+      }, 7000);
+    
+          navigate('/HomeLogin/MainAdmin/Obyekt/Payment');
+    }else{
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Bütün (*) xanaları doldurun.",
+        icon: "error",
+      });
+    }
+  }
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-            <div>
-              <span onClick={btnLeftIcon}>
-                <i className="fa-solid fa-angle-left"></i>
-              </span>
-              <span onClick={btnRightIcon}>
-                <i className="fa-solid fa-angle-right"></i>
-              </span>
-            </div>
-            <div>
-              <img
-                src={keepingImgSource[ImgSourceIndex]}
-                alt=""
-                className="w-100 h-100"
-              />
-            </div>
+          <TurnImgIn keepingImgSource={keepingImgSource}/>
           </div>
           {getById && (
             <div className="pb-2 mt-3">
@@ -122,11 +134,22 @@ const ObyektinsidePayment = () => {
                 Təmir:<span className="time-home">{getById.repair}</span>
               </p>
               <p>
-                Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
-                {getById.sellorRent==='Satılır' ?  <span className="time-home">{getById.price * 1 /100}<span>{price}</span>
+             Obyekt:<span className="time-home">{getById.sellorRent}</span>
+           </p>
+           {getById.sellorRent==='Satılır' && (
+                 <p>
+                 Sened:<span className="time-home">{getById.document}</span>
+               </p>
+           )}
+          
+           <p>
+             Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
+             
+            {getById.sellorRent==='Satılır' ?  <span className="time-home">{getById.price * 1 /100}<span>{price}</span>
              </span> :  <span className="time-home">{getById.price * 20 /100}<span>{price}</span>
              </span>}
-              </p>
+            
+           </p>
               <p>
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
@@ -156,6 +179,8 @@ const ObyektinsidePayment = () => {
               </table>
             </div>
           </div>
+          <GetBack Direct={"/HomeLogin/MainAdmin/Obyekt/Payment"}/>
+          <button className="p-2 mt-5 bg-success" onClick={Reload}>Yenidən yüklə</button>
         </div>
       </div>
     </div>

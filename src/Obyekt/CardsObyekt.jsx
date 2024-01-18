@@ -35,9 +35,16 @@ const CardsObyekt = () => {
   const sendDataPrice = (x) => {
     setPrice(x);
   };
+  var works=true;
   useEffect(() => {
+  
     const fetchData = async () => {
       try {
+        if(click){
+          works=true
+        }
+        if(works){
+          works=false;
         const RoomInt=Room.map(x=>Number(x));
         const ArrayData = [];
         const resp =  await FetchGetAll("Obyekt");
@@ -74,14 +81,14 @@ const CardsObyekt = () => {
           setFilteredData(ArrayData);
         } else {
           setFilteredData(resp.data);
-        }
+        }}
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [selectedIds]);
+  }, [selectedIds,click]);
 
 
   const [currentPage, setCurrentPage] = useState(1);

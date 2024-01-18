@@ -1,17 +1,22 @@
-
+import { useNavigate } from 'react-router-dom';
 import { useEffect,useState } from 'react';
 const FetchGetId = (id,Kind) => {
     var [GetById, setGetById] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(() => {
       const fetchData = async () => {
         try {
+          const baseUrl = process.env.REACT_APP_API_KEY;
           const response = await fetch(
-            `http://localhost:5224/api/${Kind}/${id}`
+            `${baseUrl}${Kind}/${id}`
           );
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+                    if (response.status === 404) {
+                        navigate('/Error');
+                        return; 
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
           const data = await response.json();
           setGetById(data);
         } catch (error) {

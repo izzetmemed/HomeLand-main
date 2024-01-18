@@ -7,8 +7,9 @@ const UseFetchData = (imgNames, Kind) => {
     const fetchData = async () => {
       try {
         if (imgNames && imgNames.length > 0) {
+          const baseUrl = process.env.REACT_APP_API_KEY;
           const response = await fetch(
-            `http://localhost:5224/api/${Kind}/DownloadImages?imgNames=${imgNames}`
+            `${baseUrl}${Kind}/DownloadImages?imgNames=${imgNames}`
           );
           const data = await response.json();
           setKeepingImgSource(data.imageUrls);

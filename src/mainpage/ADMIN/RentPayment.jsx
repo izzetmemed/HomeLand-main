@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import {Load} from '../../Load/Load';
 import Pagination from "../../pagenation";
+import FetchGetAll from "../../MyComponents/FetchGetAll";
 const RentPayment = () => {
   const inputValue = useRef(null);
   const inputOwnValue = useRef(null);
@@ -16,37 +17,23 @@ const RentPayment = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axios.get("http://localhost:5224/api/RentHome/Normal");
+        const resp = await FetchGetAll('RentHome/Normal');
+        const data = resp.data;
+        let filterCondition = null;
         if (input != null) {
-          const filteredArray = Array.from(resp.data).filter(
-            (x) => x.Id === input
-          );
+          filterCondition = (item) => JSON.parse(item).Id === input;
+        } else if (inputOwn != null) {
+          filterCondition = (item) => JSON.parse(item).Number === inputOwn;
+        }else if (inputCustomer != null) {
+          filterCondition = (item) => JSON.parse(item).Customer.some(x=>JSON.parse(x).Number.replace(/['"]+/g, '')=== inputCustomer);
+        }  
 
-          setFilteredData(filteredArray);
-          return;
-        }
-        if (inputOwn != null) {
-          const filteredArray = Array.from(resp.data).filter(
-            (x) => x.OwnNumber === inputOwn
-          );
-          setFilteredData(filteredArray);
-          return;
-        }
-        if (inputCustomer != null) {
-          const filteredArray = Array.from(resp.data).filter(
-            (x) => x.CustomerNumber === inputCustomer
-          );
-
-          setFilteredData(filteredArray);
-          return;
-        } else {
-          setFilteredData(resp.data);
-        }
+        setFilteredData(filterCondition ? data.filter(filterCondition) : data.filter(x=>JSON.parse(x).Customer.length>0 && (JSON.parse(x).IsPaidHomeOwnFirstStep===false || JSON.parse(x).IsPaidCustomerFirstStep===false )));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchData();
   }, [input, inputCustomer, inputOwn]);
   const searchCode = () => {
@@ -69,7 +56,9 @@ const RentPayment = () => {
     setInput(null);
     setInputOwn(null);
     setInputCustomer(Value);
+   
   };
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemCount, setItemCount] = useState(20);
@@ -78,9 +67,6 @@ const RentPayment = () => {
   const firstItem = lastIndex - itemCount;
   const filteredDataSlice = filteredData.slice(firstItem, lastIndex);
   const countOfPagenation = Math.ceil(filteredData.length / itemCount);
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
   const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
 
  const setPage=(x)=>{
@@ -97,8 +83,7 @@ useEffect(() => {
   }
 }, [filteredDataSlice.length]);
 
-
-  return (
+return (
     <div>
       <div>
         <div className="col-12 d-flex justify-content-center mt-5">

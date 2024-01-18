@@ -61,7 +61,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
   };
   return (
     <div>
-      <div className="search-part pe-2">
+      <div className="search-part pe-2 ps-2">
         <div className='col-12'>
           <div className="col-12">
             <button className='btn w-100 text-white  search-btn-click' onClick={() => setIsActive(!isActive)}>
@@ -732,7 +732,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
           )}
         </div>
       </div>
-      <div className="col-12 mt-3 pe-2">
+      <div className="col-12 mt-3 pe-2 ps-2">
         <Link to="Səbət" className='btn w-100 text-white  search-btn-click' >
           Mənim səbətim
         </Link>

@@ -7,6 +7,7 @@ import TurnImgIn from "../MyComponents/TurnImgIn";
 import Coordinate from "../mainpage/answer/coordinate";
 import Scroll from "../MyComponents/Scroll";
 import NumberTurn from "../MyComponents/NumberTurn";
+import FetchPut from "../MyComponentsAdmin/FetchPut";
 const Sell = ({ Data, IsUpdating, SendFalse}) => {
 
     Scroll();
@@ -30,25 +31,21 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
   const Addition = useRef(null);
   const Paper = useRef(null);
  
+  const [CoordinateX,setCoordinateX]=useState(null);
+  const [CoordinateY,setCoordinateY]=useState(null);
+  const SendX=(x)=>{
+   setCoordinateX(x)
+  };
+  const SendY=(y)=>{
+   setCoordinateY(y)
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (Data.img.length > 0) {
-          const response = await fetch(
-            `http://localhost:5224/api/SellImg/DownloadImages?imgNames=${Data.img}`
-          );
-          const imageData = await response.json();
-          setkeepingImgSource(imageData.imageUrls);
-        }
-      } catch (error) {
-        console.error("Error downloading images:", error);
-      }
-    };
+    
     if (IsUpdating) {
-      fetchData();
-      console.log(Data);
       FullName.current.value = Data.fullname;
       Number.current.value = Data.number;
+      setCoordinateX(Data.coordinateX);
+      setCoordinateY(Data.coordinateY);
       Region.current.value = Data.region;
       Address.current.value = Data.address;
       Floor.current.value = Data.floor;
@@ -85,15 +82,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
   useEffect(() => {
     setkeepingImgSource(images);
    },[images]) 
-   const [CoordinateX,setCoordinateX]=useState(null);
- const [CoordinateY,setCoordinateY]=useState(null);
- const SendX=(x)=>{
-  setCoordinateX(x)
- };
- const SendY=(y)=>{
-  setCoordinateY(y)
- };
- 
+
   const UploadInformation = () => {
     const formData = {
       FullName: FullName.current.value,
@@ -189,13 +178,15 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       Data.fullname = FullName.current.value;
       Data.number = Number.current.value;
       Data.region = Region.current.value;
+      Data.coordinateX=CoordinateX;
+      Data.coordinateY=CoordinateY;
       Data.address = Address.current.value;
       Data.floor = Floor.current.value;
       Data.metro = Metro.current.value;
       Data.room = Room.current.value;
       Data.repair = Repair.current.value;
       Data.building = Building.current.value;
-      Data.item = İtem.current.value;
+      Data.İtem = İtem.current.value;
       Data.area = Area.current.value;
       Data.price = Price.current.value;
       Data.addition = Addition.current.value;
@@ -215,28 +206,10 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
         !isNaN(parseFloat(Data.area)) &&
         !isNaN(parseFloat(Data.room))
       ) {
-        fetch("http://localhost:5224/api/Sell", {
-          method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(Data),
-        })
-          .then((response) => {
-            console.log(response.ok);
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            imgFunc();
-            return response;
-          })
-          .then((responseData) => {
-            console.log("Data uploaded successfully:", responseData);
-          })
-          .catch((error) => {
-            console.error("Error uploading data:", error);
-          });
+        const PutData=async()=>{
+          await FetchPut(Data,"Sell");
+         }
+         PutData();
         setTimeout(() => {
           Swal.fire({
             title: "Uğurlu",
@@ -245,20 +218,6 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
           });
         }, 500);
   
-        FullName.current.value = "";
-        Number.current.value = "";
-        Address.current.value = "";
-        Floor.current.value = "";
-        Area.current.value = "";
-        Addition.current.value = "";
-        Price.current.value = "";
-        Metro.current.value = "";
-        Region.current.value = "";
-        Building.current.value = "";
-        Room.current.value = "";
-        Repair.current.value = "";
-        İtem.current.value = "";
-        Paper.current.value = "";
         setImages([]);
         setImagesFile([]);
   

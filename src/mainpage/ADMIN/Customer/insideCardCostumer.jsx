@@ -1,58 +1,32 @@
 import { useState, useEffect,useRef } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
+import FetchGetId from "../../../MyComponents/FetchGetId";
+import UseFetchData from "../../../MyComponents/FetchImg";
+import TurnImgIn from "../../../MyComponents/TurnImgIn";
+import FetchPostCustomer from "../../../MyComponentsAdmin/FetchPostCustomer";
+import GetBack from "../../../MyComponents/GetBack";
 const İnsideCardCostumer = () => {
   const { id } = useParams();
 
   const customerName=useRef(null);
   const customerNumber=useRef(null);
-  const keepingImgSource = [
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp",
-    "https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPRSAAg1MOr6nFfMv7L131kZl7O3se-oYEf0V0ZLW7jDUVmh7vtnwLZ1uJHUI7Ji_-pTE&usqp=CAU",
-    "https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg",
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://tjh.com/wp-content/uploads/2023/04/denver-new-home-Meade2.webp",
-    "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg",
-    "https://nh.rdcpix.com/0ca5883f9bf997505d554633ca1e8aa9l-f3652169346od-w480_h360.jpg",
-    "https://photos.zillowstatic.com/fp/99e328626c7284a24c908e885ecb489e-cc_ft_960.jpg",
-  ];
+  const [keepingImgSource,setKeepingImgSource] = useState([]);
   const [state, setstate] = useState(true);
-  const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-  const btnLeftIcon = () => {
-    if (ImgSourceIndex < keepingImgSource.length - 1) {
-      setImgSourceIndex(ImgSourceIndex + 1);
-    } else {
-      setImgSourceIndex(0);
-    }
-  };
-
-  const btnRightIcon = () => {
-    if (ImgSourceIndex > 0) {
-      setImgSourceIndex(ImgSourceIndex - 1);
-    } else {
-      setImgSourceIndex(keepingImgSource.length - 1);
-    }
-  };
+  
   var [getById, setGetById] = useState(null);
+  const getByIdData = FetchGetId(id, 'RentHome/Admin');
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5224/api/RentHome/Admin/${id}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setGetById(data);
-      } catch (error) {
-        console.error("Error in fetchData:", error);
-      }
-    };
-    fetchData();
-  }, [id,state]);
+    setGetById(getByIdData);
+   }, [getByIdData]);
+   
+
+  const imageUrls = UseFetchData(getById?.img, 'RentHomeImg');
+
+  useEffect(() => {
+   setKeepingImgSource(imageUrls);
+  }, [getById, imageUrls]);
+  
 
   const price = "Aze";
   const teratory = "m²";
@@ -67,27 +41,10 @@ const İnsideCardCostumer = () => {
         FullName:customerName.current.value,
         Number:customerNumber.current.value
     }
-  
-    fetch("http://localhost:5224/api/RentHomeCustomer", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(customerObject),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response;
-        })
-        .then((responseData) => {
-          console.log("Data uploaded successfully:", responseData);
-        })
-        .catch((error) => {
-          console.error("Error uploading data:", error);
-        });
+    const AddItem = async () => {
+      await FetchPostCustomer(customerObject,"RentHomeCustomer")
+    };
+    AddItem()
   }
 
 
@@ -96,24 +53,12 @@ const İnsideCardCostumer = () => {
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-            <div>
-              <span onClick={btnLeftIcon}>
-                <i className="fa-solid fa-angle-left"></i>
-              </span>
-              <span onClick={btnRightIcon}>
-                <i className="fa-solid fa-angle-right"></i>
-              </span>
-            </div>
-            <div>
-              <img
-                src={keepingImgSource[ImgSourceIndex]}
-                alt=""
-                className="w-100 h-100"
-              />
-            </div>
+          <TurnImgIn keepingImgSource={keepingImgSource}/>
           </div>
+       
           {getById && (
             <div className="pb-2 mt-3">
+                
               <p>
                 Qiymet:<span className="price-home">{getById.price}</span>
                 <span>{price}</span>
@@ -150,7 +95,7 @@ const İnsideCardCostumer = () => {
                 </p>
               )}
               <p>
-                Əşya:<span className="time-home">{getById.item}</span>
+                Əşya:<span className="time-home">{getById.İtem}</span>
               </p>
               <p>
                 Təmir:<span className="time-home">{getById.repair}</span>
@@ -247,7 +192,9 @@ const İnsideCardCostumer = () => {
           {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
                             <Coordinate />
                         </div> */}
+                        <div className="mt-3"> <GetBack Direct={"/HomeLogin/MainAdmin/RentHome/Customer"}/></div>
         </div>
+        
       </div>
     </div>
   );

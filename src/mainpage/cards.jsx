@@ -33,43 +33,53 @@ const Cards = () => {
   const sendDataPrice=(x)=>{
     setPrice(x);
   }
-
+  var works=true;
   useEffect(() => {
     const RoomInt=Room.map(x=>Number(x));
     const fetchData = async () => {
       try {
-       const ArrayData=[];
-      const resp = await FetchGetAll("RentHome");
         if(click){
-          const filteredArray = Array.from(resp.data).filter((x) => {
-            
-            if (!(Number(JSON.parse(x).Price) > Array.from(Price)[1] && Number(JSON.parse(x).Price) < Array.from(Price)[0])) {
-              return false;
-            }
-            if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(JSON.parse(x).Building)) {
-              return false;
-            }
-          
-            if (RoomInt.length !== 0 && !RoomInt.includes(JSON.parse(x).Room)) {
-              return false;
-            }
-          
-            if (Region.length !== 0 && !Region.includes(JSON.parse(x).Region)) {
-              return false;
-            }
-          
-            if (selectedIds.length !== 0 && !selectedIds.includes(JSON.parse(x).Metro)) {
-              return false;
-            }
-          
-            return true;
-          });
-          ArrayData.push(...filteredArray);
-          
-         setFilteredData(ArrayData);
-        }else{
-          setFilteredData(resp.data)
+          works=true
         }
+        if(works){
+         works=false;
+          
+          const ArrayData=[];
+          const resp = await FetchGetAll("RentHome");
+         
+            if(click){
+              const filteredArray = Array.from(resp.data).filter((x) => {
+                
+                if (!(Number(JSON.parse(x).Price) > Array.from(Price)[1] && Number(JSON.parse(x).Price) < Array.from(Price)[0])) {
+                  return false;
+                }
+                if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(JSON.parse(x).Building)) {
+                  return false;
+                }
+              
+                if (RoomInt.length !== 0 && !RoomInt.includes(JSON.parse(x).Room)) {
+                  return false;
+                }
+              
+                if (Region.length !== 0 && !Region.includes(JSON.parse(x).Region)) {
+                  return false;
+                }
+              
+                if (selectedIds.length !== 0 && !selectedIds.includes(JSON.parse(x).Metro)) {
+                  return false;
+                }
+              
+                return true;
+              });
+              ArrayData.push(...filteredArray);
+              
+             setFilteredData(ArrayData);
+            }else{
+              setFilteredData(resp.data)
+            }
+           
+        }
+       
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -78,7 +88,7 @@ const Cards = () => {
     };
   
     fetchData();
-  }, [selectedIds]);
+  }, [click,selectedIds]);
   
   const [currentPage, setCurrentPage] = useState(1);
   const [itemCount, setItemCount] = useState(20);

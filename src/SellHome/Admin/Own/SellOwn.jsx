@@ -1,83 +1,26 @@
 import React from "react";
 import SellSectionOwn from "./SellSectionOwn";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import Pagenation from "../../../pagenation";
 import {Load} from "../../../Load/Load";
+import FetchGetAll from "../../../MyComponents/FetchGetAll";
 const RentHomeOwn = () => {
   const [filteredData, setFilteredData] = useState([]);
-  const [selectedIds, setSelectedIds] = useState([]);
-//   const [HomeOrFlat, setHomeOrFlat] = useState([]);
-//   const [Region, setRegion] = useState([]);
-//   const [Room, setRoom] = useState([]);
-//   const [Price, setPrice] = useState([]);
-//   const [click, setClick] = useState();
 
-//   const ClickFunc = (x) => {
-//     setClick(x);
-//   };
-//   const sendDataToSelecedids = (x) => {
-//     setSelectedIds(x);
-//   };
-//   const sendDataToHomeOrFlat = (x) => {
-//     setHomeOrFlat(x);
-//   };
-//   const sendDataRegion = (x) => {
-//     setRegion(x);
-//   };
-//   const sendDataRoom = (x) => {
-//     setRoom(x);
-//   };
-//   const sendDataPrice = (x) => {
-//     setPrice(x);
-//   };
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const ArrayData = [];
-        const resp = await axios.get("http://localhost:5224/api/Sell/Normal");
-        // if (click) {
-        //   const filteredArray = Array.from(resp.data).filter((x) => {
-        //     if (
-        //       !(
-        //         Number(x.Price) > Array.from(Price)[1] &&
-        //         Number(x.Price) < Array.from(Price)[0]
-        //       )
-        //     ) {
-        //       return false;
-        //     }
-        //     if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(x.Bina)) {
-        //       return false;
-        //     }
-
-        //     if (Room.length !== 0 && !Room.includes(x.Room)) {
-        //       return false;
-        //     }
-
-        //     if (Region.length !== 0 && !Region.includes(x.Region)) {
-        //       return false;
-        //     }
-
-        //     if (selectedIds.length !== 0 && !selectedIds.includes(x.Metro)) {
-        //       return false;
-        //     }
-
-        //     return true;
-        //   });
-        //   ArrayData.push(...filteredArray);
-
-        //   setFilteredData(ArrayData);
-        // } else {
-          setFilteredData(resp.data);
-        
+        const resp = await FetchGetAll('Sell/Normal');
+        const data = resp.data;
+        setFilteredData(data);
       } catch (error) {
+        setFilteredData([]);
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [selectedIds]);
-
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemCount, setItemCount] = useState(20);

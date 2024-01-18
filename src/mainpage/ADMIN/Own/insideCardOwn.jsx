@@ -1,96 +1,43 @@
 import { useState, useEffect } from "react";
 import React from 'react';
-import Coordinate from "../../answer/coordinate";
+import FetchGetId from "../../../MyComponents/FetchGetId";
+import UseFetchData from "../../../MyComponents/FetchImg";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import Update from '../../../mainpage/answer/rent';
+import TurnImgIn from "../../../MyComponents/TurnImgIn";
+import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
+import GetBack from "../../../MyComponents/GetBack";
 const İnsideCardOwn = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [keepingImgSource,setKeepingImgSource] = useState([]);
   
-   
-  
-    const [ImgSourceIndex, setImgSourceIndex] = useState(0);
-    const btnLeftIcon = () => {
-      if (ImgSourceIndex < keepingImgSource.length - 1) {
-        setImgSourceIndex(ImgSourceIndex + 1);
-      } else {
-        setImgSourceIndex(0);
-      }
-    };
-  
-    const btnRightIcon = () => {
-      if (ImgSourceIndex > 0) {
-        setImgSourceIndex(ImgSourceIndex - 1);
-      } else {
-        setImgSourceIndex(keepingImgSource.length - 1);
-      }
-    };
+
     var [getById, setGetById] = useState(null);
   
+    const getByIdData = FetchGetId(id, 'RentHome/Admin');
     useEffect(() => {
-      const fetchData = async () => {
-        try {
+      setGetById(getByIdData);
+     }, [getByIdData]);
+     
   
-          const response = await fetch(
-            `http://localhost:5224/api/RentHome/Admin/${id}`
-          );
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data = await response.json();
-          setGetById(data);
-          console.log(data);
-          
-        } catch (error) {
-          console.error("Error in fetchData:", error);
-        }
-      };
-      fetchData();
-    }, [id]);
+    const imageUrls = UseFetchData(getById?.img, 'RentHomeImg');
   
     useEffect(() => {
-      const fetchData = async () => {
-          try {
-            if(getById.img.length>0){
-              const response = await fetch(`http://localhost:5224/api/RentHomeImg/DownloadImages?imgNames=${getById.img}`);
-              const data = await response.json();
-              setKeepingImgSource(data.imageUrls);
-            }
-             
-  
-          } catch (error) {
-              console.error("Error downloading images:", error);
-          }
-      };
-      fetchData();
-  }, [getById]);
+     setKeepingImgSource(imageUrls);
+    }, [getById, imageUrls]);
+
     const price = "Aze";
     const teratory = "m²";
     const convertDate = (x) => {
       return x.toString().replace("T", " ").substring(0, 16);
     };
     const deleteItem = async () => {
-        try {
-          const response = await fetch(`http://localhost:5224/api/RentHome/${getById.id}`, {
-            method: 'DELETE'
-          });
-          
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-      
-             navigate('/login/MainAdmin/Own');
-          if (response.status === 204) { 
-            console.log("Item deleted successfully");
-        
-          }
-      
-        } catch (error) {
-          console.error("Error in deleteItem:", error);
-        }
-      }
+      await FetchDelete(getById.id, "RentHome");
+        navigate('/HomeLogin/MainAdmin/RentHome/own');
+     
+    };
     const [isTrueUpdate, setIsTrueUpdate]=useState(false);
     const UpdateItem=()=>{
        setIsTrueUpdate(true);
@@ -105,21 +52,12 @@ const İnsideCardOwn = () => {
              <div className=' col-12 p-2 mt-4 ps-2'>
              <div className='insideCard-home'>
                  <div className='overflow-hidden'>
-                     <div>
-                         <span onClick={btnLeftIcon}><i className="fa-solid fa-angle-left"></i></span>
-                         <span onClick={btnRightIcon}><i className="fa-solid fa-angle-right"></i></span>
-                     </div>
-                     <div>
-                         <img src={keepingImgSource[ImgSourceIndex]} alt="" className='w-100 h-100' />
-                     </div>
-
-
-
-
+                 <TurnImgIn keepingImgSource={keepingImgSource}/>
                  </div>
-                
+              
                  {getById && (
          <div className="pb-2 mt-3">
+             <GetBack Direct={"/HomeLogin/MainAdmin/RentHome/Own"}/>
            <p>
              Qiymet:<span className="price-home">{getById.price}</span>
              <span>{price}</span>
@@ -160,7 +98,7 @@ const İnsideCardOwn = () => {
             )
             }
            <p>
-             Əşya:<span className="time-home">{getById.item}</span>
+             Əşya:<span className="time-home">{getById.İtem}</span>
            </p>
            <p>
              Təmir:<span className="time-home">{getById.repair}</span>
@@ -219,13 +157,6 @@ const İnsideCardOwn = () => {
            {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
              <Coordinate />
            </div> */}
-           <div>
-             <div className="d-flex justify-content-center w-100">
-               <button className="btn btn-mycolor height-for-calling fs-5">
-                 <i className="fa-solid fa-phone"></i> Əmlakçıya zəng etmək.
-               </button>
-             </div>
-           </div>
          </div>
        )}
                      <div className='p-2 m-3 d-flex h-auto'>

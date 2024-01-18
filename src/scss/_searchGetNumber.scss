@@ -1,0 +1,58 @@
+.GetNumberContainer{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgb(72, 180, 81);
+    border-radius: 15px;
+
+}
+.GetNumberData{
+    display: flex;
+    flex-direction: column;
+    span{
+        color: white;
+        font-size: 20px;
+    }
+}
+.GetNumberDivInput{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    input{
+       width: 27%; 
+       height: 36px;
+       border-radius: 10px;
+       padding-left: 5px;
+       outline: none;
+       border: none;
+    }
+}
+.AllowOrNot{
+    display: flex;
+    margin-top: 10px;
+    button{
+        border-radius: 10px;
+        padding: 1% 4%;
+        margin-left: 2%;
+        background-color: white;
+        color: black;
+        &:nth-child(1){
+            background-color: rgb(255, 255, 255);
+        }
+        &:nth-child(2){
+            background-color:rgb(209, 40, 40);
+            color: white;
+        }
+    }
+}
+.audio-div{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center; 
+    margin-bottom: 8px;
+}
