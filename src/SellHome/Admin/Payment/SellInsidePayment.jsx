@@ -1,4 +1,4 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
@@ -9,38 +9,37 @@ import FetchPostAll from "../../../MyComponents/FetchPostAll";
 import FetchPutImg from "../../../MyComponents/FetchPutImg";
 import GetBack from "../../../MyComponents/GetBack";
 import Swal from "sweetalert2";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 const SellInsidePayment = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [keepingImgSource,setKeepingImgSource] =useState([])
+  const [keepingImgSource, setKeepingImgSource] = useState([]);
 
   var [getById, setGetById] = useState(null);
-   const getByIdData = FetchGetId(id, 'Sell/Admin');
+  const getByIdData = FetchGetId(id, "Sell/Admin");
   useEffect(() => {
     setGetById(getByIdData);
-   }, [getByIdData]);
-   
+  }, [getByIdData]);
 
-  const imageUrls = UseFetchData(getById?.img, 'SellImg');
+  const imageUrls = UseFetchData(getById?.img, "SellImg");
 
   useEffect(() => {
-   setKeepingImgSource(imageUrls);
+    setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
-  
 
   const price = "Aze";
   const teratory = "m²";
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
   };
-  const Reload=async()=>{
+  const Reload = async () => {
     const ReloadData = {
+      Id:getById.id,
       FullName: getById.fullname,
-      Number:getById.number,
-      CoordinateX:getById.coordinateX,
-      CoordinateY:getById.coordinateY,
+      Number: getById.number,
+      CoordinateX: getById.coordinateX,
+      CoordinateY: getById.coordinateY,
       Region: getById.region,
       Address: getById.address,
       Floor: getById.floor,
@@ -52,8 +51,8 @@ const SellInsidePayment = () => {
       Area: getById.area,
       Price: getById.price,
       Addition: getById.addition,
-      Document:getById.document,
-      IsCalledWithHomeOwnFirstStep:true
+      Document: getById.document,
+      IsCalledWithHomeOwnFirstStep: true,
     };
     if (
       ReloadData.FullName !== "" &&
@@ -67,31 +66,34 @@ const SellInsidePayment = () => {
       ReloadData.İtem !== "" &&
       ReloadData.Repair !== "" &&
       ReloadData.Document !== "" &&
-      ReloadData.Address !== "" 
+      ReloadData.Address !== ""
     ) {
-      const fake=()=>{
-      }
-     await FetchPostAll(ReloadData,"Sell",fake);
-     await FetchPutImg(getById.id,"SellImg");
-      setTimeout(() => {
-     FetchDelete(getById.id, "Sell"); 
-      }, 7000);
+      const fake = async () => {};
+      async function executeSequentially() {
+        try {
+            await FetchPostAll(ReloadData, "Sell/Admin", fake);
+           
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    }
     
-          navigate('/HomeLogin/MainAdmin/Sell/Payment');
-    }else{
+    executeSequentially();
+      navigate("/HomeLogin/MainAdmin/Sell/Payment");
+    } else {
       Swal.fire({
         title: "Uğursuz",
         text: "Bütün (*) xanaları doldurun.",
         icon: "error",
       });
     }
-  }
+  };
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-          <TurnImgIn keepingImgSource={keepingImgSource}/>
+            <TurnImgIn keepingImgSource={keepingImgSource} />
           </div>
           {getById && (
             <div className="pb-2 mt-3">
@@ -189,37 +191,36 @@ const SellInsidePayment = () => {
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
-              {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-             <Coordinate />
-           </div> */}
+              <div className="col-12 d-flex justify-content-center h-auto mt-2">
+                <div className="col-12 col-sm-6 d-flex ">
+                  <table className="table table-dark table-striped">
+                    <thead>
+                      <tr>
+                        <th>Müştərinin adı soyadı</th>
+                        <th>Nömrə</th>
+                        <th>Tarix</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getById &&
+                        getById.customer.map((x, index) => (
+                          <tr key={index}>
+                            <td>{x.fullName}</td>
+                            <td>{x.number}</td>
+                            <td>{convertDate(x.directCustomerDate)}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <GetBack Direct={"/HomeLogin/MainAdmin/Sell/payment"} />
+
+              <button className="p-2 m-3 bg-success text-white" onClick={Reload}>
+                Yenidən yüklə
+              </button>
             </div>
           )}
-          <div className="col-12 d-flex justify-content-center h-auto">
-            <div className="col-6 d-flex ">
-              <table className="table table-dark table-striped">
-                <thead>
-                  <tr>
-                    <th>Müştərinin adı soyadı</th>
-                    <th>Nömrə</th>
-                    <th>Tarix</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {getById &&
-                    getById.customer.map((x, index) => (
-                      <tr key={index}>
-                        <td>{x.fullName}</td>
-                        <td>{x.number}</td>
-                        <td>{convertDate(x.directCustomerDate)}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <GetBack Direct={"/HomeLogin/MainAdmin/Sell/payment"}/>
-
-          <button className="p-2 mt-5 bg-success" onClick={Reload}>Yenidən yüklə</button>
         </div>
       </div>
     </div>

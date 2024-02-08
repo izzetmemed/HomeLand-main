@@ -1,11 +1,13 @@
 
 async function  FetchPostAll(formData,Kind,imgFunc){
   const baseUrl = process.env.REACT_APP_API_KEY;
+  var token=sessionStorage.getItem("Resp");
   await  fetch(`${baseUrl}${Kind}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${JSON.parse(token)}`,
         },
         body: JSON.stringify(formData),
       }) 

@@ -12,7 +12,7 @@ const InfoObyekt = (props) => {
     }
     return inputString.slice(0, maxLength) + "...";
   }
-  const price = "Aze";
+  const price = "Azn";
   const teratory = "m²";
   return (
     <>

@@ -115,6 +115,17 @@
   background-color: rgb(79, 189, 89);
 }
 
+.bg-map {
+  background-image: url("../logo.home/100-King-St-W-Google-Maps.png");
+  background-size: 100% auto;
+  background-clip: padding-box;
+  background-attachment: fixed;
+  border: 3px solid rgb(79, 189, 89);
+}
+.bg-map div {
+  width: 200px;
+}
+
 .footer-end-part {
   padding: 3%;
 }
@@ -147,7 +158,7 @@
 }
 
 .header-ul {
-  padding-left: 0%;
+  padding: 1%;
   margin: 0.5% 0 5px 0;
   height: auto;
   width: 250px;
@@ -156,12 +167,16 @@
   justify-content: space-between;
   align-items: center;
 }
+.header-ul li {
+  border-radius: 20px;
+  padding: 1% 4%;
+}
 .header-ul li a {
   text-decoration: none;
   color: white;
 }
 .header-ul li a:hover {
-  color: rgb(160, 248, 167);
+  color: rgb(217, 223, 218);
 }
 
 .for-height-header {
@@ -553,6 +568,113 @@ a {
   text-decoration: none;
 }
 
+@keyframes slideDown {
+  from {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+.Alert-media {
+  position: fixed;
+  top: 6%;
+  left: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: rgb(25, 26, 25);
+  background-color: rgb(214, 213, 213);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; /* Keeps the element in the final state of animation */
+  animation-timing-function: ease-out;
+}
+
+.close-btn-media {
+  background-color: rgb(79, 189, 89);
+  border: none;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 3px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: #5dc762;
+}
+
+.count {
+  font-size: 24px;
+  margin: 0 10px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.ShareOnWhatsapp {
+  position: fixed;
+  bottom: 50%;
+  transform: translateY(60%);
+  right: 0px;
+  z-index: 10000;
+}
+.ShareOnWhatsapp div {
+  width: 42px;
+  height: 40px !important;
+  border: 1px solid black;
+  border-top: none;
+  background-size: contain;
+}
+.ShareOnWhatsapp div:nth-child(2) {
+  background-image: url("../logo.home/Wp.PNG");
+}
+.ShareOnWhatsapp div:nth-child(3) {
+  background-image: url("../logo.home/inst.jpg");
+}
+.ShareOnWhatsapp button {
+  padding: 10px;
+  width: 42px;
+  height: 22px;
+  font-size: small;
+  border: 1px solid black;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.ShareOnWhatsapp button:hover {
+  background-color: #1da851;
+}
+
 .insideCard-home {
   border-radius: 5px;
   padding-bottom: 2%;
@@ -645,7 +767,7 @@ a {
 }
 @media (max-width: 1250px) {
   .insideCard-home {
-    height: 130vw !important;
+    height: 135vw !important;
   }
 }
 @media (max-width: 1180px) {
@@ -653,24 +775,19 @@ a {
     height: 135vw !important;
   }
 }
-@media (max-width: 1180px) {
-  .insideCard-home {
-    height: 140vw !important;
-  }
-}
 @media (max-width: 1100px) {
   .insideCard-home {
-    height: 150vw !important;
+    height: 155vw !important;
   }
 }
 @media (max-width: 1040px) {
   .insideCard-home {
-    height: 150vw !important;
+    height: 160vw !important;
   }
 }
 @media (max-width: 970px) {
   .insideCard-home {
-    height: 160vw !important;
+    height: 165vw !important;
   }
   .insideCard-home div {
     height: 30%;
@@ -678,12 +795,12 @@ a {
 }
 @media (max-width: 870px) {
   .insideCard-home {
-    height: 170vw !important;
+    height: 180vw !important;
   }
 }
 @media (max-width: 800px) {
   .insideCard-home {
-    height: 200vw !important;
+    height: 205vw !important;
   }
 }
 @media (max-width: 700px) {
@@ -747,11 +864,6 @@ a {
 @media (max-width: 320px) {
   .insideCard-home {
     height: 520vw !important;
-  }
-}
-@media (max-width: 290px) {
-  .insideCard-home {
-    height: 580vw !important;
   }
 }
 .logo-on-images {

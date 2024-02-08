@@ -19,7 +19,7 @@ const SectionSell = (props) => {
                 <Shopping props={props} keepingImgSource={keepingImgSource}/>
                 </div>
                 <div className='pb-2'>
-                <Link to={`/Satılıq-ev/Kart/${props.id}`}>
+                <Link to={`/Sell/Kart/${props.id}`}>
                   <InfoSell props={props}/>
                 </Link>
                 </div>

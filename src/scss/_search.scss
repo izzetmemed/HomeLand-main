@@ -115,5 +115,15 @@ i{
 .forOverFlow::-webkit-scrollbar-track {
     background-color:rgb(79, 189, 89);
 }
+.bg-map {
+    background-image: url("../logo.home/100-King-St-W-Google-Maps.png");
+    background-size: 100% auto;
+    background-clip: padding-box;
+    background-attachment: fixed;
+    border:3px solid rgb(79, 189, 89);
+    div{
+        width: 200px;
+    }
+}
 
 

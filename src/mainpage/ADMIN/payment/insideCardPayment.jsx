@@ -37,6 +37,7 @@ const İnsideCardPayment = () => {
 
   const Reload=async()=>{
     const ReloadData = {
+      Id:getById.id,
       FullName: getById.fullname,
       Number:getById.number,
       CoordinateX:getById.coordinateX,
@@ -82,15 +83,20 @@ const İnsideCardPayment = () => {
       ReloadData.Repair !== "" &&
       ReloadData.Address !== "" 
     ) {
-      const fake=()=>{
+      const fake= ()=>{
       }
-     await FetchPostAll(ReloadData,"RentHome",fake());
-     await FetchPutImg(getById.id,"RentHomeImg");
-      setTimeout(() => {
-     FetchDelete(getById.id, "RentHome"); 
-      }, 7000);
+      async function executeSequentially() {
+    try {
+        await FetchPostAll(ReloadData, "RentHome/Admin", fake);
+        
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+}
+
+executeSequentially();
     
-          navigate('/HomeLogin/MainAdmin/RentHome/Payment');
+    navigate('/HomeLogin/MainAdmin/RentHome/Payment');
     }else{
       Swal.fire({
         title: "Uğursuz",
@@ -204,13 +210,8 @@ const İnsideCardPayment = () => {
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
-              {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-             <Coordinate />
-           </div> */}
-            </div>
-          )}
-          <div className="col-12 d-flex justify-content-center h-auto">
-            <div className="col-6 d-flex ">
+              <div className="col-12 d-flex justify-content-center h-auto mt-3">
+            <div className="col-12 col-sm-6 d-flex ">
               <table className="table table-dark table-striped">
                 <thead>
                   <tr>
@@ -235,7 +236,10 @@ const İnsideCardPayment = () => {
           </div>
           <GetBack Direct={"/HomeLogin/MainAdmin/RentHome/payment"}/>
 
-          <button className="p-2 mt-5 bg-success" onClick={Reload}>Yenidən yüklə</button>
+          <button className="p-2 m-3 bg-success text-white" onClick={Reload}>Yenidən yüklə</button>
+            </div>
+          )}
+          
         </div>
         
       </div>

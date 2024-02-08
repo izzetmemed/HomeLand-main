@@ -313,19 +313,18 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Region}>
                   <option value=""></option>
-                  <option value="Digər Rayon">Digər Rayon</option>
-                  <option value="Nəsimi Rayon">Nəsimi Rayon</option>
-                  <option value="Nizami Rayon">Nizami Rayon</option>
-                  <option value="Xətai Rayon">Xətai Rayon</option>
-                  <option value="Nərmanov Rayon">Nərmanov Rayon</option>
-                  <option value="Yasamal Rayon">Yasamal Rayon</option>
-                  <option value="Pirallahı Rayon">Pirallahı Rayon</option>
-                  <option value="Suraxanı Rayon">Suraxanı Rayon</option>
-                  <option value="Sabunçu Rayon">Sabunçu Rayon</option>
-                  <option value="Səbail Rayon">Səbail Rayon</option>
-                  <option value="Xəzər Rayon">Xəzər Rayon</option>
-                  <option value="Qaradağ Rayon">Qaradağ Rayon</option>
-                  <option value="Binəqədi Rayon">Binəqədi Rayon</option>
+                  <option value="Nəsimi">Nəsimi Rayon</option>
+                  <option value="Nizami">Nizami Rayon</option>
+                  <option value="Xətai">Xətai Rayon</option>
+                  <option value="Nərmanov">Nərmanov Rayon</option>
+                  <option value="Yasamal">Yasamal Rayon</option>
+                  <option value="Pirallahı">Pirallahı Rayon</option>
+                  <option value="Suraxanı">Suraxanı Rayon</option>
+                  <option value="Sabunçu">Sabunçu Rayon</option>
+                  <option value="Səbail">Səbail Rayon</option>
+                  <option value="Xəzər">Xəzər Rayon</option>
+                  <option value="Qaradağ">Qaradağ Rayon</option>
+                  <option value="Binəqədi">Binəqədi Rayon</option>
                 </select>
               </div>
             </div>
@@ -411,7 +410,19 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="6"> 6 otaqlı</option>
                   <option value="7"> 7 otaqlı</option>
                   <option value="8"> 8 otaqlı</option>
-                  <option value="9 və daha çox otaqlı"> 9 və daha çox otaqlı</option>
+                  <option value="9"> 9 otaqlı</option>
+                  <option value="10"> 10 otaqlı</option>
+                  <option value="11"> 11 otaqlı</option>
+                  <option value="12"> 12 otaqlı</option>
+                  <option value="13"> 13 otaqlı</option>
+                  <option value="14"> 14 otaqlı</option>
+                  <option value="15"> 15 otaqlı</option>
+                  <option value="16"> 16 otaqlı</option>
+                  <option value="17"> 17 otaqlı</option>
+                  <option value="18"> 18 otaqlı</option>
+                  <option value="19"> 19 otaqlı</option>
+                  <option value="20"> 20 otaqlı</option>
+                 
                 </select>
               </div>
             </div>

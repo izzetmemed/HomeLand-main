@@ -9,6 +9,7 @@ import TurnImgIn from "../MyComponents/TurnImgIn";
 import CallToMakler from "../MyComponents/CallToMakler";
 import FetchGetId from "../MyComponents/FetchGetId";
 import UseFetchData from "../MyComponents/FetchImg";
+import Share from '../MyComponents/Share';
 const İnsideCardSell = () => {
   const { id } = useParams();
   Scroll();
@@ -28,7 +29,7 @@ const İnsideCardSell = () => {
    setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
   
-  const price = "Aze";
+  const price = "Azn";
   const teratory = "m²";
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
@@ -100,7 +101,7 @@ const İnsideCardSell = () => {
               <GetBack Direct={"/Satılıq-ev"}/>
               <div className="d-flex justify-content-center w-100 ">
                 <div >
-                  <button className="btn btn-mycolor height-for-calling fs-5" onClick={()=>{setMaklerNumber(!MaklerNumber)}}>
+                  <button className="btn btn-mycolor height-for-calling fs-5 " onClick={()=>{setMaklerNumber(!MaklerNumber)}}>
                     <i className="fa-solid fa-phone"></i> Əmlakçıya zəng etmək.
                   </button>
                  {
@@ -112,6 +113,7 @@ const İnsideCardSell = () => {
               </div>
             </div>
           )}
+          <Share Link={`HomeLand.az/Sell/Kart/${id}`}/>
         </div>
       </div>
       {/* <div className="mt-5">

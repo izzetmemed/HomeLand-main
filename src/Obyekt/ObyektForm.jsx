@@ -42,7 +42,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
   };
   const onImageChange = (event) => {
     if (event.target.files) {
-      const selectedImages = Array.from(event.target.files).slice(0, 10); // Limit to 10 images
+      const selectedImages = Array.from(event.target.files).slice(0, 10); 
       const newImageUrls = selectedImages.map((image) =>
         URL.createObjectURL(image)
       );
@@ -58,15 +58,15 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
   useEffect(() => {
     setkeepingImgSource(images);
    },[images]) 
-  useEffect(() => {
-   
+   const [sellOrRent, setSellOrRent] = useState(false);
+   useEffect(()=>{
+    if (IsUpdating) {
       if(Data.sellorRent==="Satılır"){
         setSellOrRent(true);
       }else{
         setSellOrRent(false);
       }
       
-    if (IsUpdating) {
       FullName.current.value = Data.fullname;
       Number.current.value = Data.number;
       setCoordinateX(Data.coordinateX);
@@ -82,10 +82,11 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
       Price.current.value = Data.price;
       Addition.current.value = Data.addition;
      
-    }
-  }, [IsUpdating, Data]);
-
-  const [sellOrRent, setSellOrRent] = useState(false);
+    
+}
+   },[Data])
+  
+ 
 
   const handleSellOrRentChange = (event) => {
     if(event.target.value==="Satılır"){
@@ -196,7 +197,6 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
       if (SellorRent.current.value === 'Satılır') {
           Data.document = Paper.current.value === '' ? Data.document : Paper.current.value;
       }}
-  
   
 
     if (
@@ -321,7 +321,6 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Region}>
                   <option value=""></option>
-                  <option value="Digər">Digər Rayon</option>
                   <option value="Nəsimi">Nəsimi Rayon</option>
                   <option value="Nizami">Nizami Rayon</option>
                   <option value="Xətai">Xətai Rayon</option>

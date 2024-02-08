@@ -1,63 +1,69 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import React from "react";
+import Swal from 'sweetalert2';
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
 import UseFetchData from "../../../MyComponents/FetchImg";
-import TurnImgIn from "../../../MyComponents/TurnImgIn";  
+import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchPostCustomer from "../../../MyComponentsAdmin/FetchPostCustomer";
 import GetBack from "../../../MyComponents/GetBack";
+
 const SellinsideCustomer = () => {
   const { id } = useParams();
 
-  const customerName=useRef(null);
-  const customerNumber=useRef(null);
-  const [keepingImgSource,setKeepingImgSource] =useState([])
+  const customerName = useRef(null);
+  const customerNumber = useRef(null);
+  const [keepingImgSource, setKeepingImgSource] = useState([]);
   const [state, setstate] = useState(true);
 
   var [getById, setGetById] = useState(null);
-  const getByIdData = FetchGetId(id, 'Sell/Admin');
+  const getByIdData = FetchGetId(id, "Sell/Admin");
   useEffect(() => {
     setGetById(getByIdData);
-   }, [getByIdData]);
-   
+  }, [getByIdData]);
 
-  const imageUrls = UseFetchData(getById?.img, 'SellImg');
+  const imageUrls = UseFetchData(getById?.img, "SellImg");
 
   useEffect(() => {
-   setKeepingImgSource(imageUrls);
+    setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
-  
+
   const price = "Aze";
   const teratory = "m²";
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
   };
 
-  const addCustomer=()=>{
+  const addCustomer = () => {
     setstate(!state);
-    const customerObject={
-        SecondStepCustomerForeignId:id,
-        FullName:customerName.current.value,
-        Number:customerNumber.current.value
-    }
-  
-    const AddItem = async () => {
-      await FetchPostCustomer(customerObject,"SellCustomer")
+    const customerObject = {
+      SecondStepCustomerForeignId: id,
+      FullName: customerName.current.value,
+      Number: customerNumber.current.value,
     };
-    AddItem()
-  }
-
+    if(customerObject.FullName.length>0 &&  !isNaN(parseFloat(customerObject.Number))){
+      const AddItem = async () => {
+        await FetchPostCustomer(customerObject, "SellCustomer");
+      };
+      AddItem();
+    }else{
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Bütün (*) xanaları doldurun.",
+        icon: "error"
+      });
+    }
+  };
 
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-          <TurnImgIn keepingImgSource={keepingImgSource}/>
+            <TurnImgIn keepingImgSource={keepingImgSource} />
           </div>
           {getById && (
             <div className="pb-2 mt-3">
-
               <p>
                 Qiymet:<span className="price-home">{getById.price}</span>
                 <span>{price}</span>
@@ -117,47 +123,54 @@ const SellinsideCustomer = () => {
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
-              {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-             <Coordinate />
-           </div> */}
+              <div className="col-12 d-flex justify-content-center h-auto">
+                <div className="col-6 d-flex ">
+                  <table className="table table-dark table-striped">
+                    <thead>
+                      <tr>
+                        <th>Müştərinin adı soyadı</th>
+                        <th>Nömrə</th>
+                        <th>Tarix</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getById &&
+                        getById.customer.map((x, index) => (
+                          <tr key={index}>
+                            <td>{x.fullName}</td>
+                            <td>{x.number}</td>
+                            <td>{convertDate(x.directCustomerDate)}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="col-12 d-flex justify-content-center mt-2 h-auto">
+                <div className="h-25 ">
+                  <input
+                    type="Text"
+                    placeholder="Müştərinin adı soyadı:"
+                    ref={customerName}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Nömrəsi:"
+                    ref={customerNumber}
+                  />
+                  <button className="btn btn-success ms-1" onClick={addCustomer}>
+                    {" "}
+                    Əlavə etmək
+                  </button>
+                </div>
+              </div>
+              <div className="mt-3">
+                {" "}
+                <GetBack Direct={"/HomeLogin/MainAdmin/Sell/customer"} />
+              </div>
             </div>
           )}
-          <div className="col-12 d-flex justify-content-center h-auto">
-            <div className="col-6 d-flex ">
-              <table className="table table-dark table-striped">
-                <thead>
-                  <tr>
-                    <th>Müştərinin adı soyadı</th>
-                    <th>Nömrə</th>
-                    <th>Tarix</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {getById &&
-                    getById.customer.map((x, index) => (
-                      <tr key={index}>
-                        <td>{x.fullName}</td>
-                        <td>{x.number}</td>
-                        <td>{convertDate(x.directCustomerDate)}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="col-12 d-flex justify-content-center mt-2 h-auto">
-            <div className="h-25 ">
-              <input type="Text" placeholder="Müştərinin adı soyadı:" ref={customerName}/>
-              <input type="number" placeholder="Nömrəs:" ref={customerNumber}/>
-              <button className="btn btn-success" onClick={addCustomer}> Əlavə etmək</button>
-            </div>
-          </div>
-          {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-                            <Coordinate />
-                        </div> */}
-                        <div className="mt-3">          <GetBack Direct={"/HomeLogin/MainAdmin/Sell/customer"}/>
-</div>
         </div>
       </div>
     </div>

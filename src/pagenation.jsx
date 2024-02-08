@@ -85,6 +85,6 @@ const Pagination = ({ countOfPagenation,setPage }) => {
       </nav>
     </div>
   );
-};
+}
 
 export default Pagination;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FetchPut from '../../../MyComponentsAdmin/FetchPut';
 import TurnImg from '../../../MyComponents/TurnImg';
 import UseFetchData from '../../../MyComponents/FetchImg';
-const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measureHome,Sənəd,dateTime,deleteBasket,imgNames,data}) => {
+const SectionOwn = ({id,priceHome,address,MetroHome,roomHome,Region,dateTime,imgNames,data}) => {
   const [keepingImgSource, setKeepingImgSource] = useState([]);
  
   const imageUrls = UseFetchData(imgNames, 'RentHomeImg');
@@ -27,6 +27,7 @@ const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measure
   var Data=data
   const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnFirstStep)
   const handleButtonClick = () => {
+    Data.İtem=Data.Item;
     Data.IsCalledWithHomeOwnFirstStep=!sendTrueOrFalse;
     setSendTrueOrFalse(!sendTrueOrFalse);
     const PutData=async()=>{
@@ -35,7 +36,7 @@ const SectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measure
      PutData();
   };
   const buttonStyle = {
-    backgroundColor: Data.IsCalledWithHomeOwnFirstStep ? 'green':'red',
+    backgroundColor: sendTrueOrFalse ? 'green':'red',
     borderRadius: '5px',
     padding:'0',
     cursor: 'pointer',
