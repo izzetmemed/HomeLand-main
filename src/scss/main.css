@@ -8,7 +8,7 @@
 .max-min-input input {
   width: 50%;
   height: 35px;
-  border: 1px solid black;
+  border: 1px solid rgb(0, 0, 0);
   background-color: rgb(79, 189, 89);
   outline: none;
   padding-left: 1%;
@@ -53,7 +53,7 @@
   background-color: rgb(79, 189, 89);
 }
 .search-btn-click:hover {
-  background-color: rgb(79, 173, 87);
+  background-color: rgb(79, 212, 101);
 }
 .search-btn-click span {
   margin-right: 0.5%;
@@ -93,7 +93,7 @@
   color: white;
 }
 .btn-mycolor:hover {
-  background-color: rgb(112, 211, 121);
+  background-color: rgb(79, 212, 101);
 }
 
 .forOverFlow {
@@ -101,14 +101,13 @@
   overflow-x: hidden;
 }
 
-/* Webkit-specific styles for the custom scrollbar */
 .forOverFlow::-webkit-scrollbar {
   width: 10px;
   background-color: rgb(79, 189, 89);
 }
 
 .forOverFlow::-webkit-scrollbar-thumb {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
 
 .forOverFlow::-webkit-scrollbar-track {
@@ -143,7 +142,7 @@
   background-color: rgb(79, 189, 89);
 }
 .Error-massage button:hover {
-  background-color: rgb(75, 172, 83);
+  background-color: rgb(79, 212, 101);
 }
 .Error-massage button a {
   color: white;
@@ -163,9 +162,9 @@
   height: auto;
   width: 250px;
   display: flex;
+  align-items: center;
   list-style-type: none;
   justify-content: space-between;
-  align-items: center;
 }
 .header-ul li {
   border-radius: 20px;
@@ -203,11 +202,11 @@
   width: 180px;
   color: white;
   position: relative;
-  background-color: rgb(79, 145, 85);
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: rgb(79, 212, 101);
+  box-shadow: rgb(0, 0, 0) 1px 1px 1px 1px;
 }
 .download-ads:hover {
-  background-color: rgb(128, 229, 136);
+  background-color: rgb(79, 181, 74);
   color: white;
 }
 .download-ads span {
@@ -216,7 +215,7 @@
   height: 28px;
   margin: 3px;
   border-radius: 50%;
-  background-color: rgb(72, 180, 81);
+  background-color: rgb(79, 189, 89);
   margin-right: 3%;
 }
 .download-ads span i {
@@ -231,7 +230,7 @@
   position: absolute;
   left: 0;
   top: 103.2%;
-  background-color: rgb(72, 180, 81);
+  background-color: rgb(79, 189, 89);
   width: 100%;
 }
 .download-ads-elements ul {
@@ -243,16 +242,39 @@
   color: white;
 }
 .download-ads-elements ul li:hover {
-  background-color: rgb(112, 194, 148);
+  background-color: rgb(79, 212, 101);
 }
 
 html, body {
   width: 100% !important;
 }
 
+Body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+Body::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(208, 212, 209);
+}
+
+Body::-webkit-scrollbar-thumb {
+  background-color: rgb(163, 163, 163);
+}
+
+Body::-webkit-scrollbar-track {
+  background-color: rgb(208, 212, 209);
+}
+
+.HomeLandColor {
+  background-color: rgb(79, 212, 101) !important;
+}
+
 .card-home {
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding-bottom: 2%;
   height: 400px !important;
 }
@@ -347,8 +369,8 @@ html, body {
   position: absolute;
   z-index: 5001;
   top: 5%;
-  left: 85%;
-  background-color: rgb(122, 122, 122);
+  right: 3%;
+  background-color: rgb(163, 163, 163);
   padding: 5px 8px 5px 8px;
   border-radius: 50%;
 }
@@ -360,8 +382,8 @@ html, body {
   position: absolute;
   z-index: 5001;
   top: 5%;
-  left: 85%;
-  background-color: rgb(122, 122, 122);
+  right: 3%;
+  background-color: rgb(163, 163, 163);
   padding: 5px 10px 5px 10px;
   border-radius: 50%;
 }
@@ -382,7 +404,7 @@ html, body {
 .div-in-input input {
   width: 98%;
   border-radius: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   height: 35px;
   outline: none;
   border: 1px solid rgb(163, 163, 163);
@@ -397,7 +419,7 @@ html, body {
 .div-in-select select {
   width: 98%;
   border-radius: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   height: 35px;
   outline: none;
   border: 1px solid rgb(163, 163, 163);
@@ -416,7 +438,7 @@ html, body {
 .custom-file-input {
   font-family: Arial, sans-serif;
   background-color: rgb(79, 189, 89);
-  border: 1px solid #7c7b7b;
+  border: 1px solid rgb(163, 163, 163);
   color: white;
   padding: 10px;
   border-radius: 5px;
@@ -424,11 +446,11 @@ html, body {
 }
 
 .custom-file-input:hover {
-  background-color: rgb(112, 211, 121);
+  background-color: rgb(79, 212, 101);
 }
 
 .custom-file-input:active {
-  background-color: #41ce3c;
+  background-color: rgb(79, 189, 89);
 }
 
 .answer-images-rent {
@@ -516,7 +538,7 @@ html, body {
   padding: 3px 6px;
   margin-left: 1px;
   margin: 0 4px;
-  border: 1px solid rgb(173, 172, 172);
+  border: 1px solid rgb(163, 163, 163);
   color: #333;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -564,7 +586,7 @@ html, body {
 }
 
 a {
-  color: black;
+  color: rgb(0, 0, 0);
   text-decoration: none;
 }
 
@@ -585,35 +607,35 @@ a {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 8px 10px;
   border-radius: 5px;
-  color: rgb(25, 26, 25);
-  background-color: rgb(214, 213, 213);
+  color: rgb(0, 0, 0);
+  background-color: rgb(163, 163, 163);
   z-index: 1000;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   animation-name: slideDown;
   animation-duration: 1s;
-  animation-fill-mode: forwards; /* Keeps the element in the final state of animation */
+  animation-fill-mode: forwards;
   animation-timing-function: ease-out;
 }
 
 .close-btn-media {
   background-color: rgb(79, 189, 89);
   border: none;
-  color: rgb(255, 255, 255);
+  color: white;
   cursor: pointer;
   margin: 5px 0;
 }
 
 .counter {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   margin: 20px;
 }
 
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: rgb(79, 189, 89);
   border: none;
   color: white;
   padding: 6px 10px;
@@ -628,7 +650,7 @@ a {
 }
 
 .button:hover {
-  background-color: #5dc762;
+  background-color: rgb(79, 212, 101);
 }
 
 .count {
@@ -648,7 +670,7 @@ a {
 .ShareOnWhatsapp div {
   width: 42px;
   height: 40px !important;
-  border: 1px solid black;
+  border: 0.2px solid rgb(0, 0, 0);
   border-top: none;
   background-size: contain;
 }
@@ -663,7 +685,7 @@ a {
   width: 42px;
   height: 22px;
   font-size: small;
-  border: 1px solid black;
+  border: 0.3px solid rgb(0, 0, 0);
   background-color: white;
   color: rgb(0, 0, 0);
   display: flex;
@@ -672,14 +694,15 @@ a {
   cursor: pointer;
 }
 .ShareOnWhatsapp button:hover {
-  background-color: #1da851;
+  background-color: #3b9e44;
+  color: white;
 }
 
 .insideCard-home {
   border-radius: 5px;
   padding-bottom: 2%;
   height: 105vw !important;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgb(0, 0, 0) 0px 3px 8px;
 }
 .insideCard-home div {
   height: 40%;
@@ -874,18 +897,18 @@ a {
 }
 .logo-on-images p {
   font-size: 100%;
-  color: rgb(255, 255, 255);
+  color: white;
   opacity: 0.8;
 }
 
 .GetNumberContainer {
   margin-top: 5px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 20px;
-  background-color: rgb(72, 180, 81);
+  background-color: rgb(79, 189, 89);
   border-radius: 15px;
 }
 
@@ -900,9 +923,9 @@ a {
 
 .GetNumberDivInput {
   display: flex;
-  width: 100%;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .GetNumberDivInput input {
   width: 27%;
@@ -925,7 +948,7 @@ a {
   color: black;
 }
 .AllowOrNot button:nth-child(1) {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
 .AllowOrNot button:nth-child(2) {
   background-color: rgb(209, 40, 40);
@@ -934,8 +957,68 @@ a {
 
 .audio-div {
   display: flex;
-  width: 100%;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-bottom: 8px;
+}
+
+.login-register-area {
+  padding-top: 85px;
+  padding-bottom: 90px;
+}
+.login-register-area .login-register-wrapper .login-register-button {
+  margin-bottom: 40px;
+}
+.login-register-area .login-register-wrapper .login-register-button a {
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  margin: 0 20px;
+  font-weight: bold;
+}
+.login-register-area .login-register-wrapper .login-register-button span {
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: lighter;
+}
+.login-register-area .login-register-wrapper .login-register-button .active {
+  color: rgb(79, 189, 89);
+}
+.login-register-area .login-register-wrapper .login-register-form-container {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  padding: 80px;
+  text-align: left;
+  display: none;
+}
+.login-register-area .login-register-wrapper .login-register-form-container .login-form-content .inp-box input {
+  background-color: transparent;
+  border: 1px solid white;
+  font-size: 14px;
+  height: 50px;
+  margin-bottom: 30px;
+  padding: 0 15px;
+  color: rgb(0, 0, 0);
+  outline: none;
+}
+.login-register-area .login-register-wrapper .login-register-form-container .login-form-content .button-box .login-btn {
+  padding: 10px 0 19px;
+}
+.login-register-area .login-register-wrapper .login-register-form-container .login-form-content .button-box .login-btn label,
+.login-register-area .login-register-wrapper .login-register-form-container .login-form-content .button-box .login-btn a {
+  font-size: 15px;
+  color: rgb(0, 0, 0);
+}
+.login-register-area .login-register-wrapper .login-register-form-container .login-form-content .button-box button {
+  padding: 13px 30px;
+  background-color: rgb(79, 189, 89);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+}
+.login-register-area .login-register-wrapper .login-register-form-container .login-form-content .button-box button:hover {
+  background-color: rgb(0, 0, 0);
+}
+.login-register-area .login-register-wrapper .login-register-form-container.active {
+  display: block;
 }/*# sourceMappingURL=main.css.map */

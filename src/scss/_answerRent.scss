@@ -1,29 +1,29 @@
 .div-in-input{
     input{
         width: 98%;
-        border-radius: 0px;
-        background-color: rgb(255, 255, 255);
+        border-radius: $ZeroPx;
+        background-color: $White;
         height: 35px;
-        outline: none;
-        border: 1px solid rgb(163, 163, 163);
-        padding-left: 0.5%;
+        outline: $None;
+        border: 1px $Solid $WhiteDark;
+        padding-left: $ZeroPointFive;
     }
 }
 .div-in-label{
     label{
-        padding-left: 0.5%;
+        padding-left: $ZeroPointFive;
         font-style: italic;
     }
 }
 .div-in-select{
     select{
         width: 98%;
-        border-radius: 0px;
-        background-color: rgb(255, 255, 255);
+        border-radius: $ZeroPx;
+        background-color: $White;
         height: 35px;
-        outline: none;
-        border: 1px solid rgb(163, 163, 163);
-        padding-left: 0.5%;
+        outline: $None;
+        border: 1px $Solid $WhiteDark;
+        padding-left: $ZeroPointFive;
     }
 }
 .main-div-for-chechbox{
@@ -35,25 +35,25 @@
     }
 }
 .filetype {
-    display: none; 
+    display: $None; 
   }
   
   .custom-file-input {
     font-family: Arial, sans-serif;
-    background-color: rgb(79, 189, 89) ;
-    border: 1px solid #7c7b7b;
-    color: white;
+    background-color: $HomeLandColor;
+    border: 1px $Solid $WhiteDark;
+    color: $White;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .custom-file-input:hover {
-    background-color:  rgb(112, 211, 121);
+    background-color:  $HomeLandColorWhite;
   }
   
   .custom-file-input:active {
-    background-color: #41ce3c;
+    background-color: $HomeLandColor;
   }
   .answer-images-rent{   
     border-radius: 5px;
@@ -64,14 +64,12 @@
     &:nth-child(1){
         border-radius: 5px;
         position: relative;
-        display: flex;
-        justify-content: center;
+        @include FlexJustify;
         div{
             width: 90%;
             height: 100%;
             position: absolute;
-            display: flex;
-            align-items: center;
+            @include FlexAlign;
             justify-content: space-between;
            
             span{
@@ -80,7 +78,7 @@
                 width: 28px;
                 height: 28px;
                 border-radius: 50%;
-                background-color:rgba(171, 173, 172, 0.5);
+                background-color:$WhiteDarker;
               
                 i{
                     margin-top: 20%;

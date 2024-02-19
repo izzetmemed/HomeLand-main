@@ -2,7 +2,7 @@
     border-radius: 5px;
     padding-bottom: 2%;
     height:105vw !important;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: $Black 0px 3px 8px;
     div{
         height: 40%;
     &:nth-child(1){
@@ -13,8 +13,7 @@
             width: 90%;
             height: 100%;
             position: absolute;
-            display: flex;
-            align-items: center;
+            @include FlexAlign;
             justify-content: space-between;
            
             span{
@@ -23,7 +22,7 @@
                 width: 28px;
                 height: 28px;
                 border-radius: 50%;
-                background-color:rgba(171, 173, 172, 0.5);
+                background-color:$WhiteDarker;
               
                 i{
                     margin-top: 20%;
@@ -53,7 +52,7 @@
         font-style: italic;
         span{
             font-weight: 400;
-            margin-left: 0.5%;
+            margin-left: $ZeroPointFive;
             font-style: normal;
           }
        }
@@ -192,7 +191,7 @@
     z-index: 60000;
     p{
         font-size: 100%;
-        color:rgb(255, 255, 255);
+        color:$White;
         opacity: 0.8;
     }
 }

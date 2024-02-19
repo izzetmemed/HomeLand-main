@@ -5,55 +5,69 @@ import SectionSell from '../SellHome/SectionSell';
 import FetchGetAll from '../MyComponents/FetchGetAll';
 
 const Basket = () => {
-  const [getData, setGetData] = useState([]);
+  const [getData, setGetData] = useState(JSON.parse(localStorage.getItem("Section")) || []);
   const [getAllRentHome, setGetAllRentHome] = useState([]);
   const [getAllSell, setGetAllSell] = useState([]);
   const [getAllObyekt, setGetAllObyekt] = useState([]);
-
-  
-  useEffect(() => {
-    setGetData(JSON.parse(localStorage.getItem("Section")) || []);
-  },[]);
+ 
 
   useEffect(() => {
     async function fetchRentHome() {
-      const resp = await FetchGetAll("RentHome");
-      const parsedData = resp.data.map(item => JSON.parse(item));
-      const BasketRentIds = getData
-        .filter(x => x[1] === 'rentHome')
-        .map(item => item[0]);
-      const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-      setGetAllRentHome(rentData);
+      try {
+        setTimeout(async() => {
+          const BasketRentIds =await getData
+          .filter(x => x[1] === 'rentHome')
+          .map(item => item[0]);
+            const resp = await FetchGetAll("RentHome");
+        const parsedData = resp.data.map(item => JSON.parse(item));
+        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
+        setGetAllRentHome(rentData);
+        }, 500);
+      } catch (error) {
+        console.error('Error fetching RentHome:', error);
+      }
     }
     fetchRentHome();
   }, [getData]);
-
+  
   useEffect(() => {
     async function fetchObyekt() {
-      const resp = await FetchGetAll("Obyekt");
-      const parsedData = resp.data.map(item => JSON.parse(item));
-      const BasketRentIds = getData
-        .filter(x => x[1] === 'obyekt')
-        .map(item => item[0]);
-      const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-      setGetAllObyekt(rentData);
+      try {
+        setTimeout(async() => {
+          const BasketRentIds =await getData
+          .filter(x => x[1] === 'obyekt')
+          .map(item => item[0]);
+            const resp = await FetchGetAll("Obyekt");
+        const parsedData = resp.data.map(item => JSON.parse(item));
+        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
+          setGetAllObyekt(rentData);
+        }, 600);
+      } catch (error) {
+        console.error('Error fetching Obyekt:', error);
+      }
     }
     fetchObyekt();
   }, [getData]); 
-
+  
   useEffect(() => {
     async function fetchSell() {
-      const resp = await FetchGetAll("Sell");
-      const parsedData = resp.data.map(item => JSON.parse(item));
-      const BasketRentIds = getData
-        .filter(x => x[1] === 'sellHome')
-        .map(item => item[0]);
-      const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-      setGetAllSell(rentData);
+      try {
+        setTimeout(async() => {
+          const BasketRentIds =await getData
+          .filter(x => x[1] === 'sellHome')
+          .map(item => item[0]);
+            const resp = await FetchGetAll("Sell");
+            const parsedData = resp.data.map(item => JSON.parse(item));
+            const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
+            setGetAllSell(rentData);
+        }, 700);
+      } catch (error) {
+        console.error('Error fetching Sell:', error);
+      }
     }
     fetchSell();
   }, [getData]); 
-
+  
   const handleDelete = (Id,type) => {
     var DatainLocal=JSON.parse(localStorage.getItem("Section")) || []
       var index=DatainLocal.findIndex(x=>x[0]===Id && x[1]===type)
@@ -65,6 +79,15 @@ const Basket = () => {
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
   };
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowMessage(true);
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
   return (
     <div>
        <div className="col-12 mt-3 pe-2 ">
@@ -115,7 +138,7 @@ const Basket = () => {
         address={x.Address}
         MetroHome={x.Metro}
         roomHome={x.Room}
-        item={x.Item}
+        Items={x.Item}
         region={x.Region}
         measureHome={x.Area}
         dateTime={convertDate(x.Date)}
@@ -124,6 +147,11 @@ const Basket = () => {
         deleteButton={true}
         />
       ))}
+      {getAllRentHome.length === 0 && getAllSell.length === 0 && getAllObyekt.length === 0 && (
+        <div className='w-100 BasketİsEmpty d-flex justify-content-center align-items-center'> 
+         {showMessage && <p className='fs-3'>Səbətiniz boşdur.</p>}
+       </div>
+      )}
       </div>
     </div>
   );

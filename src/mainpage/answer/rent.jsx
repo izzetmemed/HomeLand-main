@@ -415,6 +415,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Xəzər">Xəzər Rayon</option>
                   <option value="Qaradağ">Qaradağ Rayon</option>
                   <option value="Binəqədi">Binəqədi Rayon</option>
+                  <option value="Abşeron">Abşeron Rayon</option>
                 </select>
               </div>
             </div>
@@ -638,7 +639,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </div>
                 <div>
                   <input type="checkbox" name="" id="" ref={Girl} />
-                  <label className="ms-1">Qadın tələbələr</label>
+                  <label className="ms-1">Xanım</label>
                 </div>
                 <div>
                   <input type="checkbox" name="" id="" ref={Family} />

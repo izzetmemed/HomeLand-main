@@ -1,22 +1,21 @@
 .search-part{
-display:flex;
-justify-content:center;
+@include FlexJustify;
 flex-wrap:wrap;
 }
 .max-min-input{
     input{
        width: 50%; 
        height: 35px;
-       border: 1px solid black;
-       background-color:rgb(79, 189, 89) ;
-       outline: none;
+       border: 1px $Solid $Black;
+       background-color:$HomeLandColor;
+       outline: $None;
        padding-left: 1%;
-       color: white;
+       color:$White;
        &:nth-child(1){
-        border-right: none;
+        border-right: $None;
        }
        &::placeholder{
-        color: white;
+        color:$White;
         padding-left: 1%;
        }
     }
@@ -36,24 +35,21 @@ flex-wrap:wrap;
         select{
             border-radius: 0px;
             outline: 0px;
-            border: none;
-            // option{
-            //   padding-right: 20%;
-            // }
+            border: $None;
         }
         label{
-            color: white;
+            color:$White;
         }
     }
 }
 .search-btn-click{
     font-size: 120%;
-    background-color:rgb(79, 189, 89)  ;
+    background-color:$HomeLandColor;
     &:hover{
-        background-color:rgb(79, 173, 87)  ;
+        background-color:$HomeLandColorWhite ;
     }
 span{
-    margin-right: 0.5%;
+    margin-right: $ZeroPointFive;
     i{
          font-size: 80%; 
     }
@@ -72,9 +68,9 @@ i{
 
 }
 .MakeHandSelect{
-    background-color: rgb(79, 189, 89);
+    background-color: $HomeLandColor;
     span{
-        color: white;
+        color: $White;
     }
 }
 .chechAndLabel{
@@ -91,36 +87,34 @@ i{
     }
 }
 .btn-mycolor{
-    background-color:rgb(79, 189, 89) ;
-    color: white;
+    background-color:$HomeLandColor;
+    color:$White;
     &:hover{
-        background-color: rgb(112, 211, 121);
+        background-color: $HomeLandColorWhite;
     }
 }
 .forOverFlow {
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
-/* Webkit-specific styles for the custom scrollbar */
 .forOverFlow::-webkit-scrollbar {
     width: 10px;
-    background-color:rgb(79, 189, 89); 
+    background-color:$HomeLandColor; 
 }
 
 .forOverFlow::-webkit-scrollbar-thumb {
-    background-color:rgb(255, 255, 255); 
+    background-color: $White; 
 }
 
 .forOverFlow::-webkit-scrollbar-track {
-    background-color:rgb(79, 189, 89);
+    background-color:$HomeLandColor;
 }
 .bg-map {
     background-image: url("../logo.home/100-King-St-W-Google-Maps.png");
     background-size: 100% auto;
     background-clip: padding-box;
     background-attachment: fixed;
-    border:3px solid rgb(79, 189, 89);
+    border:3px $Solid $HomeLandColor;
     div{
         width: 200px;
     }

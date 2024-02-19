@@ -15,7 +15,7 @@ const CallToMakler = ({ id }) => {
         <p className="text-white mt-1 mb-1 text-center">Əmlakçının nömrəsi:<br></br> 070 571 56 10</p>
         <p
           onClick={copyToClipboard}
-          className="px-3 py-1  rounded-3 bg-info text-center"
+          className="px-3 py-1  rounded-3 HomeLandColor text-center"
         >
           Copy number
         </p>

@@ -213,7 +213,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
                         ref={(element) => (myRef.current[1] = element)}
                       />
                       <label className="ms-1">
-                        Metroya yaxın olmasada olar.
+                        Metroya yaxın olmasın.
                       </label>
                     </div>
                     <div>
@@ -572,10 +572,10 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
                       <input
                         type="checkbox"
                         name=""
-                        id="Digər Rayonlar"
+                        id="Abşeron"
                         ref={(element) => (Region.current[13] = element)}
                       />
-                      <label className="ms-1">Digər</label>
+                      <label className="ms-1">Abşeron Rayon</label>
                     </div>
                   </div>
                 </div>

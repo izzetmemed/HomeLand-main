@@ -4,38 +4,38 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 const Header = () => {
     const location = useLocation();
-    const backgroundColorStyle = { backgroundColor: "rgb(79, 145, 85)" };
+    const backgroundColorStyle = "HomeLandColor";
     
     const [isActive, setisActive] = useState(false);
-    const [color1, setColor1] = useState({});
-    const [color2, setColor2] = useState({});
-    const [color3, setColor3] = useState({});
+    const [color1, setColor1] = useState();
+    const [color2, setColor2] = useState();
+    const [color3, setColor3] = useState();
 
     useEffect(() => {
         const decodedPath = decodeURIComponent(location.pathname);
         switch(decodedPath) {
             case '/':
-                setColor1({});
+                setColor1();
                 setColor2(backgroundColorStyle);
-                setColor3({});
+                setColor3();
                 break;
             case '/obyekt':
-                setColor1({});
-                setColor2({});
+                setColor1();
+                setColor2();
                 setColor3(backgroundColorStyle);
                 break;
             
             case '/Sell':
                 setColor1(backgroundColorStyle);
-                setColor2({});
-                setColor3({});
+                setColor2();
+                setColor3();
                 break;
             
             default:
                 
-                setColor1({});
-                setColor2({});
-                setColor3({});
+                setColor1();
+                setColor2();
+                setColor3();
                 break;
         }
     }, [location]);
@@ -54,13 +54,13 @@ const Header = () => {
           <div className="d-flex flex-column flex-lg-row justify-content-between col-12  align-items-center for-height-header me-0 px-2">
             <span className="d-lg-block d-none">HomeLand.az</span>
             <ul className="header-ul col-4 ">
-              <li style={color1}>
+              <li className={color1}>
                 <NavLink to="/Sell">Alqı-satqı</NavLink>
               </li>
-              <li style={color2}>
+              <li className={color2}>
                 <NavLink to="/">Kiraye</NavLink>
               </li>
-              <li  style={color3}>
+              <li  className={color3}>
                 <NavLink to="/obyekt">Obyekt</NavLink>
               </li>
             </ul>

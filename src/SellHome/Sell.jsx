@@ -325,6 +325,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Xəzər">Xəzər Rayon</option>
                   <option value="Qaradağ">Qaradağ Rayon</option>
                   <option value="Binəqədi">Binəqədi Rayon</option>
+                  <option value="Abşeron">Abşeron Rayon</option>
                 </select>
               </div>
             </div>

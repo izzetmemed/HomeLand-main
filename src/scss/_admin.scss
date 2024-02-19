@@ -3,23 +3,21 @@
     input{
         height: 5%;
         width: 70%;
-        margin: 0.5%;
-        padding-left: 0.5%;
+        margin: $ZeroPointFive;
+        padding-left: $ZeroPointFive;
     }
 }
 .LinkTree{
     div{
-        display: flex;
-        justify-content: center;
+      @include FlexJustify;
         a{
-            text-decoration: none;
+            text-decoration: $None;
         }
     }
 }
-
 a {
-    color: black; 
-    text-decoration: none; 
+    color: $Black; 
+    text-decoration: $None; 
   
   }
   @keyframes slideDown {
@@ -39,39 +37,35 @@ a {
     left: 50%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    padding: 8px 10px;
     border-radius: 5px;
-    color: rgb(25, 26, 25);
-    background-color: rgb(214, 213, 213);
+    color: $Black;
+    background-color: $WhiteDark;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include FlexCenter;
     animation-name: slideDown;
     animation-duration: 1s;
-    animation-fill-mode: forwards; /* Keeps the element in the final state of animation */
+    animation-fill-mode: forwards; 
     animation-timing-function: ease-out;
   }
  
   .close-btn-media {
-    background-color:rgb(79, 189, 89) ;
-    border: none;
-    color: rgb(255, 255, 255);
+    background-color:$HomeLandColor;
+    border: $None;
+    color: $White;
     cursor: pointer;
     margin: 5px 0;
   }  
   .counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include FlexCenter;
     margin: 20px;
   }
   
   .button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
+    background-color: $HomeLandColor;
+    border: $None;
+    color: $White;
     padding: 6px 10px;
     text-align: center;
-    text-decoration: none;
+    text-decoration: $None;
     display: inline-block;
     font-size: 18px;
     margin: 3px;
@@ -81,7 +75,7 @@ a {
   }
   
   .button:hover {
-    background-color: #5dc762;
+    background-color:$HomeLandColorWhite;
   }
   
   .count {
@@ -100,15 +94,14 @@ a {
       div{
         width: 42px;
         height: 40px !important;
-        border: 1px solid black;
-        border-top: none;
+        border: 0.2px $Solid $Black;
+        border-top: $None;
         &:nth-child(2){
           background-image: url("../logo.home/Wp.PNG");
         }
         &:nth-child(3){
           background-image: url("../logo.home/inst.jpg");
         }
-       
         background-size:contain;
       }
       button {
@@ -116,16 +109,14 @@ a {
         width: 42px;
         height: 22px;
         font-size: small;
-        border: 1px solid black;
-        background-color: white;
-        color: rgb(0, 0, 0); 
-        display: flex;
-        justify-content: center; 
-        align-items: center;
+        border: 0.3px $Solid $Black;
+        background-color: $White;
+        color: $Black; 
+        @include FlexCenter;
         cursor: pointer; 
-  
         &:hover {
-          background-color: darken(#25D366, 10%); 
+          background-color: darken($HomeLandColor, 10%); 
+          color: $White;
         } 
     }
   }

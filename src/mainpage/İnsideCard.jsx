@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import Coordinate from "./answer/coordinate";
-import Cards from "./cards";
 import { useParams } from "react-router-dom";
 import GetBack from "../MyComponents/GetBack";
 import Scroll from "../MyComponents/Scroll";
@@ -83,7 +82,7 @@ const İnsideCard = () => {
                   {[
                     GetById.family && "Ailə",
                     GetById.boy && "Oğlan tələbələrə",
-                    GetById.girl && "Xanım tələbələrə",
+                    GetById.girl && "Xanımlar",
                     GetById.workingBoy && "İşləyən bəylərə",
                   ]
                     .filter(Boolean)

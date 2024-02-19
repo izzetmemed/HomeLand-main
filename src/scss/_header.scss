@@ -4,25 +4,22 @@
     box-sizing: border-box;
     font-weight: 600 ;
 }
-
 .header-ul {
     padding: 1%;
     margin:0.5% 0 5px 0;
     height: auto;
     width: 250px;
-    display: flex;
-    list-style-type: none;
+    @include FlexAlign;
+    list-style-type: $None;
     justify-content: space-between;
-    align-items: center;
+    
 
     li {
         border-radius: 20px;
-        
         padding: 1% 4%;
-      
         a {
-            text-decoration: none;
-            color: white; 
+            text-decoration: $None;
+            color: $White;
               &:hover{
             color:rgb(217, 223, 218);
         }
@@ -32,9 +29,9 @@
 
 .for-height-header {
     height: auto;
-    background-color: rgb(79, 189, 89);
+    background-color:$HomeLandColor;
     span{
-        color: white;
+        color: $White;
     }
 }
 
@@ -54,13 +51,13 @@
     margin: 0.5% 0 5px 0;
     border-radius: 0% !important;
     width: 180px; 
-    color: white;
+    color: $White;
     position: relative;
-    background-color:rgb(79, 145, 85) ;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color:$HomeLandColorWhite;
+    box-shadow: $Black 1px 1px 1px 1px;
     &:hover{
-        background-color:rgb(128, 229, 136) ;
-        color: white;
+        background-color:$HomeLandColorBlack ;
+        color: $White;
     }
     span{
         display: inline-block;
@@ -68,7 +65,7 @@
         height: 28px;
         margin: 3px;
         border-radius: 50%;
-        background-color:rgb(72, 180, 81);
+        background-color:$HomeLandColor;
         margin-right: 3%;
         i{
             margin-top: 20%;
@@ -81,23 +78,43 @@
 }
 .download-ads-elements{
     position: absolute;
-   
     left: 0;
     top: 103.2%;
-    background-color:rgb(72, 180, 81) ;
+    background-color:$HomeLandColor ;
     width: 100%;
     ul{
         padding-left: 0;
         li{
-            list-style-type: none;
+            list-style-type: $None;
             padding: 3%;
-            color: white;
+            color: $White;
             &:hover{
-                background-color: rgb(112, 194, 148);
+                background-color: $HomeLandColorWhite;
             }
         }
     }
 }
 html,body{
     width: 100% !important;
+}
+Body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+Body::-webkit-scrollbar {
+    width: 10px;
+    background-color:$ScrollbarColor ;
+}
+
+Body::-webkit-scrollbar-thumb {
+    background-color:$WhiteDark; 
+}
+
+Body::-webkit-scrollbar-track {
+    background-color:$ScrollbarColor;
+}
+.HomeLandColor{
+    background-color: $HomeLandColorWhite !important;
 }
