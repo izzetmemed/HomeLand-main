@@ -7,10 +7,10 @@ function FetchPostImg(formData,Kind) {
       })
         .then((response) => response)
         .then((data) => {
-          console.log("Image uploaded successfully:", data);
+          console.log("Image uploaded successfully:", );
         })
         .catch((error) => {
-          console.error("Error uploading image:", error);
+          console.error("Error uploading image:", );
         });
 }
 

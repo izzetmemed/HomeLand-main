@@ -11,7 +11,7 @@ const FetchDelete =async (Id,Kind) => {
             }
           });
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status:`);
           }
       
             
@@ -21,7 +21,7 @@ const FetchDelete =async (Id,Kind) => {
           }
       
         } catch (error) {
-          console.error("Error in deleteItem:", error);
+          console.error("Error in deleteItem:", );
         }
 }
 

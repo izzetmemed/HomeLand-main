@@ -14,15 +14,15 @@ const FetchPostCustomer = (Data,Kind) => {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error! Status: `);
           }
           return response;
         })
         .then((responseData) => {
-          console.log("Data uploaded successfully:", responseData);
+          console.log("Data uploaded successfully:", );
         })
         .catch((error) => {
-          console.error("Error uploading data:", error);
+          console.error("Error uploading data:", );
         });
   
 }

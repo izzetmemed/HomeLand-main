@@ -19,12 +19,12 @@ const FetchGetId = (id,Kind) => {
                         navigate('/Error');
                         return; 
                     }
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! status: `);
                 }
           const data = await response.json();
           setGetById(data);
         } catch (error) {
-          console.error("Error in fetchData:", error);
+          console.error("Error in fetchData:", );
         }
       };
       fetchData();

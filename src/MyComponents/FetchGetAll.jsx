@@ -9,7 +9,7 @@ const FetchGetAll = (Controller) => {
       }});
     return resp;
   } catch (error) {
-    console.error("Error fetching data: ", error);
+    console.error("Error fetching data: ", );
     return null; 
   }
 }
