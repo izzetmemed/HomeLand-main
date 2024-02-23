@@ -9,6 +9,7 @@ import TurnImgIn from "../MyComponents/TurnImgIn";
 import CallToMakler from "../MyComponents/CallToMakler";
 import FetchGetId from "../MyComponents/FetchGetId";
 import UseFetchData from "../MyComponents/FetchImg";
+import Share from '../MyComponents/Share';
 const InCardObyekt = () => {
   const { id } = useParams();
   const [MaklerNumber,setMaklerNumber]=useState(false)
@@ -29,7 +30,7 @@ const InCardObyekt = () => {
   }, [GetById, imageUrls]);
   
 
-  const price = "Aze";
+  const price = "Azn";
   const teratory = "m²";
   const convertDate = (x) => {
     return x.toString().replace("T", " ").substring(0, 16);
@@ -91,13 +92,15 @@ const InCardObyekt = () => {
               </p>
               
               
-              
+             
               <p>
-                Obyekti tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
-                <span className="time-home">
-                {GetById.price * 1 /100}<span>{price}</span>
-                </span>
-              </p>
+              Obyekti tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
+             
+            {GetById.sellorRent==='Satılır' ?  <span className="time-home">{GetById.price * 1 /100}<span>{price}</span>
+             </span> :  <span className="time-home">{GetById.price * 20 /100}<span>{price}</span>
+             </span>}
+            
+           </p>
               <p>
                 Tarix:<span className="time-home">{convertDate(GetById.date)}</span>
               </p>
@@ -121,6 +124,7 @@ const InCardObyekt = () => {
               </div>
             </div>
           )}
+          <Share Link={`HomeLand.az/Obyekt/Kart/${id}`}/>
         </div>
       </div>
       {/* <div className="mt-5">

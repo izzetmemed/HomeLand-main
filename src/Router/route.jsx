@@ -35,6 +35,8 @@ import ObyektCustomerInside from "../Obyekt/Admin/Costumer/ObyectCustomerInside"
 import ObyektPayment from "../Obyekt/Admin/Payment/ObyektPayment";
 import ObyektinsidePayment from "../Obyekt/Admin/Payment/ObyektInsidePayment";
 import ProtectedRoute from "./ProtectedRoute";
+import MapSection from "../mainpage/MapSection";
+import OnlyMyPage from "../Director/OnlyMyPage";
 const route = () => {
   return (
     <div>
@@ -43,20 +45,24 @@ const route = () => {
         <Route path="/" element={<Index />}>
           <Route index={true} element={<Cards />} />
           <Route path="/Kart/:id" element={<InsideCard />} />
-          <Route path="/satılıq-ev" element={<CardsSell />} />
-          <Route path="/Satılıq-ev/Kart/:id" element={<InsideCardsSell />} />
-          <Route path="/satılıq-ev/səbət" element={<Basket />} />
+          <Route path="/Sell" element={<CardsSell />} />
+          <Route path="/Sell/Kart/:id" element={<InsideCardsSell />} />
+          <Route path="/Sell/səbət" element={<Basket />} />
           <Route path="/kiraye-ev-form" element={<Rent />} />
 
           <Route path="*" element={<Error />} />
 
           <Route path="/satılıq-ev-form" element={<Sell />} />
           <Route path="/səbət" element={<Basket />} />
+          <Route path="/mapSearch" element={<MapSection link={"RentHome/Coordinate"} Rent={true}/>} />
+          <Route path="/Sell/mapSearch" element={<MapSection link={"Sell/Coordinate"} Sell={true}/>} />
+          <Route path="Obyekt/mapSearch" element={<MapSection link={"Obyekt/Coordinate"} Obyekt={true}/>} />
           <Route path="/Obyekt" element={<Obyekt />} />
           <Route path="/obyekt/Kart/:id" element={<InsideCardsObyekt />} />
           <Route path="/Obyekt/səbət" element={<Basket />} />
           <Route path="/Obyekt-form" element={<ObyektForm />} />
           <Route path="/HomeLogin" element={<Login />} />
+          <Route path="/HomeLogin/MainAdmin/Director" element={<ProtectedRoute><OnlyMyPage/></ProtectedRoute>} />
           <Route
             path="/HomeLogin/MainAdmin"
             element={

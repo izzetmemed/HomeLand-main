@@ -172,12 +172,12 @@ useEffect(() => {
         ))}
         {filteredDataSlice.length === 0 && (
           <div className="w-100 BasketİsEmpty d-flex justify-content-center align-items-center">
-            {showLoad ? <Load/> :  <p className='fs-3 text-danger'>Ev tapılmadı!!!</p>} 
+            {showLoad ? <Load/> :  <p className='fs-3 '>Ev tapılmadı.</p>} 
           </div>
         )}
       </div>
       <Outlet />
-      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage} />;
+      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage} />
     </div>
   );
 };

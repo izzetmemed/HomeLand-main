@@ -15,10 +15,10 @@ async function SendLog(formData, Kind) {
   
       const responseData = await response.json();
       console.log("Data uploaded successfully:", );
-      return responseData; // Return the response data
+      return responseData; 
     } catch (error) {
-      console.error("Error uploading data:", error);
-      throw error; // Rethrow the error for the caller to handle
+      console.error("Error uploading data:", );
+      throw error; 
     }
   }
   

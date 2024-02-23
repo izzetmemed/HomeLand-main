@@ -2,6 +2,7 @@ import { useState, useEffect,useRef } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
+import Swal from 'sweetalert2';
 import UseFetchData from "../../../MyComponents/FetchImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchPostCustomer from "../../../MyComponentsAdmin/FetchPostCustomer";
@@ -41,10 +42,18 @@ const İnsideCardCostumer = () => {
         FullName:customerName.current.value,
         Number:customerNumber.current.value
     }
-    const AddItem = async () => {
-      await FetchPostCustomer(customerObject,"RentHomeCustomer")
-    };
-    AddItem()
+    if(customerObject.FullName.length>0 &&  !isNaN(parseFloat(customerObject.Number))){
+      const AddItem = async () => {
+        await FetchPostCustomer(customerObject, "RentHomeCustomer");
+      };
+      AddItem();
+    }else{
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Bütün (*) xanaları doldurun.",
+        icon: "error"
+      });
+    }
   }
 
 
@@ -153,12 +162,7 @@ const İnsideCardCostumer = () => {
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
-              {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-             <Coordinate />
-           </div> */}
-            </div>
-          )}
-          <div className="col-12 d-flex justify-content-center h-auto">
+              <div className="col-12 d-flex justify-content-center h-auto mt-3">
             <div className="col-6 d-flex ">
               <table className="table table-dark table-striped">
                 <thead>
@@ -181,18 +185,18 @@ const İnsideCardCostumer = () => {
               </table>
             </div>
           </div>
-
           <div className="col-12 d-flex justify-content-center mt-2 h-auto">
             <div className="h-25 ">
               <input type="Text" placeholder="Müştərinin adı soyadı:" ref={customerName}/>
               <input type="number" placeholder="Nömrəs:" ref={customerNumber}/>
-              <button className="btn btn-success" onClick={addCustomer}> Əlavə etmək</button>
+              <button className="btn btn-success m-2" onClick={addCustomer}> Əlavə etmək</button>
             </div>
           </div>
-          {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-                            <Coordinate />
-                        </div> */}
-                        <div className="mt-3"> <GetBack Direct={"/HomeLogin/MainAdmin/RentHome/Customer"}/></div>
+          <div className="mt-3"> <GetBack Direct={"/HomeLogin/MainAdmin/RentHome/Customer"}/></div>
+            </div>
+          )}
+          
+          
         </div>
         
       </div>

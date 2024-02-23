@@ -1,6 +1,6 @@
 .card-home{   
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     padding-bottom: 2%;
     height: 400px !important;
      div{
@@ -8,14 +8,12 @@
     &:nth-child(1){
         border-radius: 10px;
         position: relative;
-        display: flex;
-        justify-content: center;
+        @include FlexJustify;
         div{
             width: 90%;
             height: 100%;
             position: absolute;
-            display: flex;
-            align-items: center;
+            @include FlexAlign;
             justify-content: space-between;
          
             span{
@@ -24,7 +22,7 @@
                 width: 28px;
                 height: 28px;
                 border-radius: 50%;
-                background-color:rgba(171, 173, 172, 0.5);
+                background-color:$WhiteDarker;
               
                 i{
                     margin-top: 20%;
@@ -96,28 +94,28 @@
     position: absolute;
     z-index: 5001;
     top: 5%;
-    left:85%;
-    background-color: rgb(122, 122, 122);
+    right:3%;
+    background-color: $WhiteDark;
     padding: 5px 8px 5px 8px;
     border-radius: 50%;
     i{
-        color: white;
+        color: $White;
     }
 }
 .mydeleteOnImg{
     position: absolute;
     z-index: 5001;
     top: 5%;
-    left:85%;
-    background-color: rgb(122, 122, 122);
+    right:3%;
+    background-color:$WhiteDark;
     padding: 5px 10px 5px 10px;
     border-radius: 50%;
     i{
-        color: white;
+        color: $White;
     }
 }
 .mydeleteOnImg{
-    display: none;
+    display: $None;
     background-color: red !important;
     opacity: 0.8;
 }

@@ -26,8 +26,6 @@ const Shopping = (props) => {
           const indexToRemove = updatedData.findIndex(
             (item) => item[0] === data.id && item[1] === data.type
           );
-          console.log(indexToRemove)
-          console.log(data.Id)
           if (indexToRemove !== -1) {
             updatedData.splice(indexToRemove, 1);
             localStorage.setItem("Section", JSON.stringify(updatedData));
@@ -44,7 +42,6 @@ const Shopping = (props) => {
         }
       }, []);
       const mybasketOnImg = {
-        backgroundColor: changeColor ? "rgb(79, 189, 89)" : "",
         display:data.deleteButton? "none": "block"
       };
       const MyTrashonImg={
@@ -53,7 +50,7 @@ const Shopping = (props) => {
   return (
     <>
             <span
-              className="mybasketOnImg"
+              className={"mybasketOnImg " + (changeColor ? "HomeLandColor" : "")}
               style={mybasketOnImg}
               onClick={SendBasket}
             >

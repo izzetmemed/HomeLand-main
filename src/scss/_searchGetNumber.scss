@@ -1,11 +1,9 @@
 .GetNumberContainer{
     margin-top: 5px;
-    display: flex;
+    @include FlexCenter;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
-    background-color: rgb(72, 180, 81);
+    background-color: $HomeLandColor;
     border-radius: 15px;
 
 }
@@ -13,22 +11,20 @@
     display: flex;
     flex-direction: column;
     span{
-        color: white;
+        color:$White;
         font-size: 20px;
     }
 }
 .GetNumberDivInput{
-    display: flex;
+    @include FlexCenter;
     width: 100%;
-    align-items: center;
-    justify-content: center;
     input{
        width: 27%; 
        height: 36px;
        border-radius: 10px;
        padding-left: 5px;
-       outline: none;
-       border: none;
+       outline: $None;
+       border: $None;
     }
 }
 .AllowOrNot{
@@ -38,21 +34,19 @@
         border-radius: 10px;
         padding: 1% 4%;
         margin-left: 2%;
-        background-color: white;
+        background-color: $White;
         color: black;
         &:nth-child(1){
-            background-color: rgb(255, 255, 255);
+            background-color: $White;
         }
         &:nth-child(2){
             background-color:rgb(209, 40, 40);
-            color: white;
+            color: $White;
         }
     }
 }
 .audio-div{
-    display: flex;
+    @include FlexCenter;
     width: 100%;
-    align-items: center;
-    justify-content: center; 
     margin-bottom: 8px;
 }

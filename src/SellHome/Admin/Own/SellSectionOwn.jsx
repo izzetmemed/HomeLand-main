@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FetchPut from '../../../MyComponentsAdmin/FetchPut';
 import UseFetchData from '../../../MyComponents/FetchImg';
 import TurnImg from '../../../MyComponents/TurnImg';
-const SellSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measureHome,Sənəd,dateTime,deleteBasket,imgNames,data}) => {
+const SellSectionOwn = ({id,priceHome,address,MetroHome,roomHome,Region,dateTime,imgNames,data}) => {
   const [keepingImgSource, setKeepingImgSource] = useState([]);
  
   const imageUrls = UseFetchData(imgNames, 'SellImg');
@@ -29,6 +29,7 @@ const SellSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,mea
   var Data=data
   const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnFirstStep)
   const handleButtonClick = () => {
+    Data.İtem=Data.Item;
     Data.IsCalledWithHomeOwnFirstStep=!sendTrueOrFalse;
     setSendTrueOrFalse(!sendTrueOrFalse);
     const PutData=async()=>{

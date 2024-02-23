@@ -17,12 +17,12 @@ const UseFetchData = (imgNames, Kind) => {
           setKeepingImgSource([]);
         }
       } catch (error) {
-        console.error("Error downloading images:", error);
-        setKeepingImgSource([]); // Set to empty in case of error
+        console.error("Error downloading images:", );
+        setKeepingImgSource([]); 
       }
     };
     fetchData();
-  }, [imgNames, Kind]); // Include all dependencies in the dependency array
+  }, [imgNames, Kind]); 
 
   return keepingImgSource;
 };

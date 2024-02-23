@@ -126,7 +126,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       Bed: Bed.current.checked,
       wardrobe: wardrobe.current.checked,
       TableChair: TableChair.current.checked,
-      HeatingSystem: HeatingSystem.current.checked,
+      CentralHeating: HeatingSystem.current.checked,
       GasHeating: GasHeating.current.checked,
       Combi: Combi.current.checked,
       Tv: Tv.current.checked,
@@ -174,7 +174,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
           text: "Elanınız yükləndi.",
           icon: "success",
         });
-      }, 500);
+      }, 1000);
 
       FullName.current.value = "";
       Number.current.value = "";
@@ -234,7 +234,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     Data.room = Room.current.value;
     Data.repair = Repair.current.value;
     Data.building = Building.current.value;
-    Data.item = İtem.current.value;
+    Data.İtem = İtem.current.value;
     Data.bed = Bed.current.checked;
     Data.wardrobe = wardrobe.current.checked;
     Data.tableChair = TableChair.current.checked;
@@ -253,7 +253,6 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     Data.family = Family.current.checked;
     Data.workingBoy = WorkingBoy.current.checked;
     Data.addition = Addition.current.value;
-    Data.IsCalledWithHomeOwnFirstStep=Data.isCalledWithOwnFirstStep;
     if (
       Data.fullname !== "" &&
       Data.number !== "" &&
@@ -404,7 +403,6 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Region}>
                   <option value=""></option>
-                  <option value="Digər">Digər Rayon</option>
                   <option value="Nəsimi">Nəsimi Rayon</option>
                   <option value="Nizami">Nizami Rayon</option>
                   <option value="Xətai">Xətai Rayon</option>
@@ -417,6 +415,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Xəzər">Xəzər Rayon</option>
                   <option value="Qaradağ">Qaradağ Rayon</option>
                   <option value="Binəqədi">Binəqədi Rayon</option>
+                  <option value="Abşeron">Abşeron Rayon</option>
                 </select>
               </div>
             </div>
@@ -640,7 +639,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </div>
                 <div>
                   <input type="checkbox" name="" id="" ref={Girl} />
-                  <label className="ms-1">Qadın tələbələr</label>
+                  <label className="ms-1">Xanım</label>
                 </div>
                 <div>
                   <input type="checkbox" name="" id="" ref={Family} />

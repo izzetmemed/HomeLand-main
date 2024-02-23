@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Scroll from '../../MyComponents/Scroll';
+import LogOut from '../../MyComponentsAdmin/LogOut';
 const MainAdmin = () => {
+  Scroll()
   const [isRentHome, setIsRentHome] = useState(false);
   const [isSellHome, setIsSellHome] = useState(false);
   const [isRentWarehouse, setIsRentWarehouse] = useState(false);
@@ -70,6 +73,7 @@ const MainAdmin = () => {
                   </div >
                 )}
       </div>
+      <LogOut/>
       </div>
     </div>
   )

@@ -3,23 +3,123 @@
     input{
         height: 5%;
         width: 70%;
-        margin: 0.5%;
-        padding-left: 0.5%;
+        margin: $ZeroPointFive;
+        padding-left: $ZeroPointFive;
     }
 }
 .LinkTree{
     div{
-        display: flex;
-        justify-content: center;
+      @include FlexJustify;
         a{
-            text-decoration: none;
+            text-decoration: $None;
         }
     }
 }
-
 a {
-    color: black; 
-    text-decoration: none; 
+    color: $Black; 
+    text-decoration: $None; 
   
   }
+  @keyframes slideDown {
+    from {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+  .Alert-media {
+    position: fixed;
+    top: 6%;
+    left: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    padding: 8px 10px;
+    border-radius: 5px;
+    color: $Black;
+    background-color: $WhiteDark;
+    z-index: 1000;
+    @include FlexCenter;
+    animation-name: slideDown;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; 
+    animation-timing-function: ease-out;
+  }
+ 
+  .close-btn-media {
+    background-color:$HomeLandColor;
+    border: $None;
+    color: $White;
+    cursor: pointer;
+    margin: 5px 0;
+  }  
+  .counter {
+    @include FlexCenter;
+    margin: 20px;
+  }
+  
+  .button {
+    background-color: $HomeLandColor;
+    border: $None;
+    color: $White;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: $None;
+    display: inline-block;
+    font-size: 18px;
+    margin: 3px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .button:hover {
+    background-color:$HomeLandColorWhite;
+  }
+  
+  .count {
+    font-size: 24px;
+    margin: 0 10px;
+    min-width: 50px;
+    text-align: center;
+  }
+  .ShareOnWhatsapp {
+    position: fixed;
+    bottom: 50%;
+    transform: translateY(60%);
+    right: 0px; 
+    z-index: 10000;
+   
+      div{
+        width: 42px;
+        height: 40px !important;
+        border: 0.2px $Solid $Black;
+        border-top: $None;
+        &:nth-child(2){
+          background-image: url("../logo.home/Wp.PNG");
+        }
+        &:nth-child(3){
+          background-image: url("../logo.home/inst.jpg");
+        }
+        background-size:contain;
+      }
+      button {
+        padding: 10px;
+        width: 42px;
+        height: 22px;
+        font-size: small;
+        border: 0.3px $Solid $Black;
+        background-color: $White;
+        color: $Black; 
+        @include FlexCenter;
+        cursor: pointer; 
+        &:hover {
+          background-color: darken($HomeLandColor, 10%); 
+          color: $White;
+        } 
+    }
+  }
+  
+  
   

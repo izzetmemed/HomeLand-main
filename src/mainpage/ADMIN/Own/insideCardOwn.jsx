@@ -109,6 +109,9 @@ const İnsideCardOwn = () => {
            <p>
              Bina:<span className="time-home">{getById.building}</span>
            </p>
+           <p>
+             Rayon:<span className="time-home">{getById.region}</span>
+           </p>
            
            <p>
              Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
@@ -154,15 +157,16 @@ const İnsideCardOwn = () => {
            <p>
              Tarix:<span className="time-home">{convertDate(getById.date)}</span>
            </p>
+           <div className='p-2 m-3 d-flex h-auto mt-5'>
+                      <button className='btn btn-danger me-2 h-100' onClick={deleteItem} >Silmək</button>
+                      <button className='btn btn-success me-2 h-100' onClick={UpdateItem} >Yeniləmək</button>
+                </div>
            {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
              <Coordinate />
            </div> */}
          </div>
        )}
-                     <div className='p-2 m-3 d-flex h-auto'>
-                      <button className='btn btn-danger me-2 h-100' onClick={deleteItem} >Silmək</button>
-                      <button className='btn btn-success me-2 h-100' onClick={UpdateItem} >Yeniləmək</button>
-                 </div>
+                
                 
             </div>
          </div>

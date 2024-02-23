@@ -15,7 +15,6 @@ const RentHomeCustomer = () => {
         const resp = await FetchGetAll('RentHome/Normal');
         if (resp.data) {
           let data = Array.isArray(resp.data) ? resp.data : JSON.parse(resp.data);
-          console.log(data)
           const filteredArray = input !== null
             ? data.filter(item => JSON.parse(item).Id === input)
             : data;

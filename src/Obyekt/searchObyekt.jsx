@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
+import Alert from "../MyComponents/Alert";
 const Search = ({
   setFunc,
   setHomeOrFlat,
@@ -9,20 +11,34 @@ const Search = ({
   setPrice,
   setClick,
 }) => {
+  const nav=useNavigate();
   const [isActive, setIsActive] = useState(false);
+  const [isMedia, setIsMedia] = useState(false);
   const myRef = useRef([]);
   const HomeOrFlat = useRef([]);
   const Region = useRef([]);
   const Room = useRef([]);
   const Price = useRef([]);
+  var isMediaPrice=true;
 
+  const ArrayNewBool = [];
+  const ArrayNewSetHomeOrFlat = [];
+  const ArrayNewSetSendDataRegion = [];
+  const ArrayNewSetSendDataRoom = [];
+  const ArrayNewSetSendDataPrice = [];
+
+
+  const[Metro2, setMetro2]=useState([]);
+  const[Price2, setPrice2]=useState([]);
+  const[Room2, setRoom2]=useState([]);
+  const[Building2, setBuilding2]=useState([]);
+  const[Region2, setRegion2]=useState([]);
+
+ const setIsActiveFunk=(x)=>{
+    setIsMedia(!isMedia)
+ }
   const GetDataFromSearch = (e) => {
-    const ArrayNewBool = [];
-    const ArrayNewSetHomeOrFlat = [];
-    const ArrayNewSetSendDataRegion = [];
-    const ArrayNewSetSendDataRoom = [];
-    const ArrayNewSetSendDataPrice = [];
-
+   isMediaPrice=true
     for (var i = 1; i < myRef.current.length; i++) {
       if (myRef.current[i].checked) {
         ArrayNewBool.push(myRef.current[i].id);
@@ -51,6 +67,7 @@ const Search = ({
           text: "Qiymət aralığı qeyd edilməlidir!!!",
           icon: "warning",
         });
+        isMediaPrice=false;
       } else {
         ArrayNewSetSendDataPrice.push(Price.current[i].value);
       }
@@ -61,8 +78,69 @@ const Search = ({
     setRegion(ArrayNewSetSendDataRegion);
     setFunc(ArrayNewBool);
     setHomeOrFlat(ArrayNewSetHomeOrFlat);
-  };
 
+    setBuilding2(ArrayNewSetHomeOrFlat);
+    setPrice2(ArrayNewSetSendDataPrice);
+    setRegion2(ArrayNewSetSendDataRegion);
+    setMetro2(ArrayNewBool);
+    setRoom2(ArrayNewSetSendDataRoom);
+    
+    if(!sessionStorage.getItem("FirstMediaObyekt") && isMediaPrice){
+      setIsMedia(!isMedia);
+      sessionStorage.setItem("FirstMediaObyekt",true);
+    }
+    if(isMediaPrice){
+    sessionStorage.setItem("PriceObyekt",ArrayNewSetSendDataPrice);
+    sessionStorage.setItem("RoomObyekt",ArrayNewSetSendDataRoom);
+    sessionStorage.setItem("RegionObyekt",ArrayNewSetSendDataRegion);
+    sessionStorage.setItem("HomeOrFlatObyekt",ArrayNewSetHomeOrFlat);
+    sessionStorage.setItem("MetroObyekt",ArrayNewBool);
+    sessionStorage.setItem("SearchObyekt",true);
+    }
+  };
+  useEffect(()=>{
+    if(sessionStorage.getItem("SearchObyekt")){
+      setClick(true);
+      var sessionPrice=sessionStorage.getItem("PriceObyekt")
+      var sessionRoom=sessionStorage.getItem("RoomObyekt")
+      var sessionRegion=sessionStorage.getItem("RegionObyekt")
+      var sessionMetro=sessionStorage.getItem("MetroObyekt")
+      var sessionHomeOrFlat=sessionStorage.getItem("HomeOrFlatObyekt")
+
+      if(sessionPrice!==""){
+         setPrice(sessionPrice.split(","));
+      }
+      if (sessionRoom !== "") {
+        const rooms = sessionRoom.split(",");
+        setRoom(rooms); 
+    }
+    
+      if(sessionRegion!==""){
+        const Region = sessionRegion.split(",");
+        setRegion(Region);
+      }
+      if(sessionMetro!==""){
+        const Metro = sessionMetro.split(",");
+        setFunc(Metro);
+      }
+      if(sessionHomeOrFlat!==""){
+        const HomeOrFlat = sessionHomeOrFlat.split(",");
+        setHomeOrFlat(HomeOrFlat);
+      }
+      setIsActive(true);
+    }
+  },[])
+ const RefuseSearch =()=>{
+  sessionStorage.removeItem("SearchObyekt");
+  sessionStorage.removeItem("PriceObyekt");
+  sessionStorage.removeItem("RoomObyekt");
+  sessionStorage.removeItem("MetroObyekt");
+  sessionStorage.removeItem("HomeOrFlatObyekt");
+  sessionStorage.removeItem("RegionObyekt");
+  setClick(false);
+  setIsActive(false);
+  nav("/obyekt");
+ }
   return (
     <div>
       <div className="search-part pe-2 ps-2">
@@ -141,7 +219,7 @@ const Search = ({
                         ref={(element) => (myRef.current[1] = element)}
                       />
                       <label className="ms-1">
-                        Metroya yaxın olmasada olar.
+                        Metroya yaxın olmasın.
                       </label>
                     </div>
                     <div>
@@ -503,10 +581,10 @@ const Search = ({
                       <input
                         type="checkbox"
                         name=""
-                        id="Digər"
+                        id="Abşeron"
                         ref={(element) => (Region.current[13] = element)}
                       />
-                      <label className="ms-1">Digər</label>
+                      <label className="ms-1">Abşeron Rayon</label>
                     </div>
                   </div>
                 </div>
@@ -732,8 +810,21 @@ const Search = ({
                   </div>
                 </div>
               </div>
+              {sessionStorage.getItem("SearchObyekt") && (
+                 <div className="d-flex align-items-center col-12">
+                 <div className="col-12 col-lg-6 mt-4 pt-1">
+                   <button
+                     className="btn btn-mycolor"
+                     onClick={RefuseSearch}
+                   >
+                     Əvvəlki axtarışı ləğv etmək
+                   </button>
+                 </div>
+               </div>
+             )
+             } 
               <div className="d-flex align-items-center col-12">
-                <div className="col-12 col-lg-6 mt-5 pt-1">
+                <div className="col-12 col-lg-6 mt-4 pt-1">
                   <button
                     className="btn btn-mycolor"
                     onClick={GetDataFromSearch}
@@ -743,12 +834,21 @@ const Search = ({
                 </div>
               </div>
             </div>
+          )}{isMedia && (
+            <Alert Room={Room2} Region={Region2} Metro={Metro2} HomeOrFlat={Building2} Price={Price2} setIsActiveFunk={setIsActiveFunk} isObyekt={true} Kind="Obyekt"/>
           )}
         </div>
       </div>
       <div className="col-12 mt-3 pe-2 ps-2">
         <Link to="Səbət" className="btn w-100 text-white  search-btn-click">
           Mənim səbətim
+        </Link>
+      </div>
+      <div className="col-12 mt-3 pe-2 ps-2 ">
+        <Link to="mapSearch" className="btn w-100 bg-map">
+          <div className="btn  text-white p-1  search-btn-click">
+          <i class="fa-solid fa-location-dot"></i> Xəritə üzrə baxmaq 
+          </div>
         </Link>
       </div>
     </div>

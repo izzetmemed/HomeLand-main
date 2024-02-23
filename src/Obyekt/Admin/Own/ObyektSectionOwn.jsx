@@ -12,7 +12,7 @@ const ObyektSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,m
    setKeepingImgSource(imageUrls);
   }, [imgNames, imageUrls]);
 
-    const price="Aze";
+    const price="Azn";
 
    function cutString(inputString, maxLength) {
     if (typeof inputString !== 'string') {
@@ -27,6 +27,7 @@ const ObyektSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,m
     return inputString.slice(0, maxLength) + '...';
   }
   var Data=data
+ 
   const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnFirstStep)
   const handleButtonClick = () => {
     Data.IsCalledWithHomeOwnFirstStep=!sendTrueOrFalse;

@@ -1,6 +1,7 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 import FetchGetId from "../../../MyComponents/FetchGetId";
 import UseFetchData from "../../../MyComponents/FetchImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
@@ -9,24 +10,22 @@ import GetBack from "../../../MyComponents/GetBack";
 const ObyektCustomerInside = () => {
   const { id } = useParams();
 
-  const customerName=useRef(null);
-  const customerNumber=useRef(null);
-  const [keepingImgSource,setKeepingImgSource] = useState([]);
+  const customerName = useRef(null);
+  const customerNumber = useRef(null);
+  const [keepingImgSource, setKeepingImgSource] = useState([]);
   const [state, setstate] = useState(true);
 
   var [getById, setGetById] = useState(null);
-  const getByIdData = FetchGetId(id, 'Obyekt/Admin');
-    useEffect(() => {
-      setGetById(getByIdData);
-     }, [getByIdData]);
-     
-  
-    const imageUrls = UseFetchData(getById?.img, 'ObyektImg');
-  
-    useEffect(() => {
-     setKeepingImgSource(imageUrls);
-    }, [getById, imageUrls]);
-    
+  const getByIdData = FetchGetId(id, "Obyekt/Admin");
+  useEffect(() => {
+    setGetById(getByIdData);
+  }, [getByIdData]);
+
+  const imageUrls = UseFetchData(getById?.img, "ObyektImg");
+
+  useEffect(() => {
+    setKeepingImgSource(imageUrls);
+  }, [getById, imageUrls]);
 
   const price = "Aze";
   const teratory = "m²";
@@ -34,27 +33,33 @@ const ObyektCustomerInside = () => {
     return x.toString().replace("T", " ").substring(0, 16);
   };
 
-  const addCustomer=()=>{
+  const addCustomer = () => {
     setstate(!state);
-    const customerObject={
-        SecondStepCustomerForeignId:id,
-        FullName:customerName.current.value,
-        Number:customerNumber.current.value
-    }
-  
-    const AddItem = async () => {
-      await FetchPostCustomer(customerObject,"ObyektCustomer")
+    const customerObject = {
+      SecondStepCustomerForeignId: id,
+      FullName: customerName.current.value,
+      Number: customerNumber.current.value,
     };
-    AddItem()
-  }
-
+    if(customerObject.FullName.length>0 &&  !isNaN(parseFloat(customerObject.Number))){
+      const AddItem = async () => {
+        await FetchPostCustomer(customerObject, "ObyektCustomer");
+      };
+      AddItem();
+    }else{
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Bütün (*) xanaları doldurun.",
+        icon: "error"
+      });
+    }
+  };
 
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
         <div className="insideCard-home">
           <div className="overflow-hidden">
-          <TurnImgIn keepingImgSource={keepingImgSource}/>
+            <TurnImgIn keepingImgSource={keepingImgSource} />
           </div>
           {getById && (
             <div className="pb-2 mt-3">
@@ -102,54 +107,69 @@ const ObyektCustomerInside = () => {
 
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
-                {getById.sellorRent==='Satılır' ?  <span className="time-home">{getById.price * 1 /100}<span>{price}</span>
-             </span> :  <span className="time-home">{getById.price * 20 /100}<span>{price}</span>
-             </span>}
+                {getById.sellorRent === "Satılır" ? (
+                  <span className="time-home">
+                    {(getById.price * 1) / 100}
+                    <span>{price}</span>
+                  </span>
+                ) : (
+                  <span className="time-home">
+                    {(getById.price * 20) / 100}
+                    <span>{price}</span>
+                  </span>
+                )}
               </p>
               <p>
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
-              {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-             <Coordinate />
-           </div> */}
+              <div className="col-12 d-flex justify-content-center h-auto mt-2">
+                <div className="col-6 d-flex ">
+                  <table className="table table-dark table-striped">
+                    <thead>
+                      <tr>
+                        <th>Müştərinin adı soyadı</th>
+                        <th>Nömrə</th>
+                        <th>Tarix</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getById &&
+                        getById.customer.map((x, index) => (
+                          <tr key={index}>
+                            <td>{x.fullName}</td>
+                            <td>{x.number}</td>
+                            <td>{convertDate(x.directCustomerDate)}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="col-12 d-flex justify-content-center mt-2 h-auto">
+                <div className="h-25 ">
+                  <input
+                    type="Text"
+                    placeholder="Müştərinin adı soyadı:"
+                    ref={customerName}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Nömrəsi:"
+                    ref={customerNumber}
+                  />
+                  <button className="btn btn-success" onClick={addCustomer}>
+                    {" "}
+                    Əlavə etmək
+                  </button>
+                </div>
+              </div>
+              <div className="mt-3">
+                {" "}
+                <GetBack Direct={"/HomeLogin/MainAdmin/Obyekt/Customer"} />
+              </div>
             </div>
           )}
-          <div className="col-12 d-flex justify-content-center h-auto">
-            <div className="col-6 d-flex ">
-              <table className="table table-dark table-striped">
-                <thead>
-                  <tr>
-                    <th>Müştərinin adı soyadı</th>
-                    <th>Nömrə</th>
-                    <th>Tarix</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {getById &&
-                    getById.customer.map((x, index) => (
-                      <tr key={index}>
-                        <td>{x.fullName}</td>
-                        <td>{x.number}</td>
-                        <td>{convertDate(x.directCustomerDate)}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="col-12 d-flex justify-content-center mt-2 h-auto">
-            <div className="h-25 ">
-              <input type="Text" placeholder="Müştərinin adı soyadı:" ref={customerName}/>
-              <input type="number" placeholder="Nömrəs:" ref={customerNumber}/>
-              <button className="btn btn-success" onClick={addCustomer}> Əlavə etmək</button>
-            </div>
-          </div>
-          {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-                            <Coordinate />
-                        </div> */}
-                        <div className="mt-3">  <GetBack Direct={"/HomeLogin/MainAdmin/Obyekt/Customer"}/></div>
         </div>
       </div>
     </div>

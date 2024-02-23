@@ -7,7 +7,7 @@ const footer = () => {
       <div className='p-2 '>
          <div className='d-flex  col-12 flex-lg-row flex-column align-items-center  justify-content-around p-3 for-bottom-border '>
         <div className='col-12 col-sm-8 col-md-6 col-lg-4 d-flex flex-column justify-content-center align-items-center img-div-for-height '>
-          <img src={require('./logo.home/Logo-white.PNG')} className="w-100 h-100" />
+          <img src={require('./logo.home/Logo-white.PNG')} className="w-100 h-100" loading="lazy"/>
         </div>
        
         <div className='col-lg-9 col-12 px-3 '>

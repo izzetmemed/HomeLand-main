@@ -13,22 +13,26 @@ const SellSectionPayment = ({id,Name,Number,Code , data}) => {
   
   const handleButtonClick = () => {
     Data.IsCalledWithHomeOwnThirdStep=!sendTrueOrFalse;
+    Data.İtem=Data.Item;
     setSendTrueOrFalse(!sendTrueOrFalse);
     fetchFunc();
   };
 
   const handleTwoButtonClick = () => {
     Data.IsCalledWithCustomerFirstStep=!isButtonTwoClicked;
+    Data.İtem=Data.Item;
     setIsButtonTwoClicked(!isButtonTwoClicked);
     fetchFunc();
   };
   const handleThreeButtonClick = () => {
     Data.IsPaidHomeOwnFirstStep=!isButtonThreeClicked;
+    Data.İtem=Data.Item;
     setIsButtonThreeClicked(!isButtonThreeClicked);
     fetchFunc();
   };
   const handleFourButtonClick = () => {
     Data.IsPaidCustomerFirstStep=!isButtonFourClicked;
+    Data.İtem=Data.Item;
     setIsButtonFourClicked(!isButtonFourClicked);
     fetchFunc();
   };

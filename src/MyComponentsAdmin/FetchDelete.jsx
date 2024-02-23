@@ -1,13 +1,17 @@
 
 
 const FetchDelete =async (Id,Kind) => {
+  var token=sessionStorage.getItem("Resp");
         try {
-          const response = await fetch(`http://localhost:5224/api/${Kind}/${Id}`, {
-            method: 'DELETE'
+          const baseUrl = process.env.REACT_APP_API_KEY;
+          const response = await fetch(`${baseUrl}${Kind}/${Id}`, {
+            method: 'DELETE',
+            headers: {
+              "Authorization": `Bearer ${JSON.parse(token)}`,
+            }
           });
-          console.log(response)
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status:`);
           }
       
             
@@ -17,7 +21,7 @@ const FetchDelete =async (Id,Kind) => {
           }
       
         } catch (error) {
-          console.error("Error in deleteItem:", error);
+          console.error("Error in deleteItem:", );
         }
 }
 
