@@ -2,6 +2,7 @@ import axios from 'axios';
 const FetchGetAll = (Controller) => {
   try {
     const baseUrl = process.env.REACT_APP_API_KEY;
+    console.log(baseUrl)
     const resp =  axios.get(`${baseUrl}${Controller}`);
     return resp;
   } catch (error) {
