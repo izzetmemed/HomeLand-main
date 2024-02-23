@@ -186,6 +186,11 @@
   color: white;
 }
 
+@media (max-width: 580px) {
+  .header-ul li {
+    margin-top: 10px;
+  }
+}
 .logo-in-header {
   font-family: "CustomFont";
   font-size: 151%;

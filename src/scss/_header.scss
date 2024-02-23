@@ -33,7 +33,11 @@
         color: $White;
     }
 }
-
+@media(max-width:580px) {
+    .header-ul {
+        li {
+            margin-top: 10px;
+        }}}
 .logo-in-header {
     @font-face {
         font-family: 'CustomFont';
