@@ -76,7 +76,7 @@ const Search = ({
       }
     }
     setClick(true);
-    setPrice(ArrayNewSetSendDataPrice);
+    setPrice(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     setRoom(ArrayNewSetSendDataRoom);
     setRegion(ArrayNewSetSendDataRegion);
     setFunc(ArrayNewBool);
@@ -84,13 +84,13 @@ const Search = ({
   
       
     setBuilding2(ArrayNewSetHomeOrFlat);
-    setPrice2(ArrayNewSetSendDataPrice);
+    setPrice2(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     setRegion2(ArrayNewSetSendDataRegion);
     setMetro2(ArrayNewBool);
     setRoom2(ArrayNewSetSendDataRoom);
     
    if(isMediaPrice){
-    sessionStorage.setItem("Price",ArrayNewSetSendDataPrice);
+    sessionStorage.setItem("Price",ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     sessionStorage.setItem("Room",ArrayNewSetSendDataRoom);
     sessionStorage.setItem("Region",ArrayNewSetSendDataRegion);
     sessionStorage.setItem("HomeOrFlat",ArrayNewSetHomeOrFlat);
@@ -319,7 +319,7 @@ const Search = ({
                       <input
                         type="checkbox"
                         name=""
-                        id="28"
+                        id="28 May"
                         ref={(element) => (myRef.current[11] = element)}
                       />
                       <label className="ms-1">28 May Metrosu.</label>
@@ -382,7 +382,7 @@ const Search = ({
                       <input
                         type="checkbox"
                         name=""
-                        id="Yanvar"
+                        id="20 Yanvar"
                         ref={(element) => (myRef.current[18] = element)}
                       />
                       <label className="ms-1">20 Yanvar Metrosu</label>

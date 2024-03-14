@@ -1,52 +1,52 @@
-.GetNumberContainer{
-    margin-top: 5px;
-    @include FlexCenter;
-    flex-direction: column;
-    padding: 20px;
-    background-color: $HomeLandColor;
-    border-radius: 15px;
+// .GetNumberContainer{
+//     margin-top: 5px;
+//     @include FlexCenter;
+//     flex-direction: column;
+//     padding: 20px;
+//     background-color:aqua !important;
+//     border-radius: 15px;
 
-}
-.GetNumberData{
-    display: flex;
-    flex-direction: column;
-    span{
-        color:$White;
-        font-size: 20px;
-    }
-}
-.GetNumberDivInput{
-    @include FlexCenter;
-    width: 100%;
-    input{
-       width: 27%; 
-       height: 36px;
-       border-radius: 10px;
-       padding-left: 5px;
-       outline: $None;
-       border: $None;
-    }
-}
-.AllowOrNot{
-    display: flex;
-    margin-top: 10px;
-    button{
-        border-radius: 10px;
-        padding: 1% 4%;
-        margin-left: 2%;
-        background-color: $White;
-        color: black;
-        &:nth-child(1){
-            background-color: $White;
-        }
-        &:nth-child(2){
-            background-color:rgb(209, 40, 40);
-            color: $White;
-        }
-    }
-}
-.audio-div{
-    @include FlexCenter;
-    width: 100%;
-    margin-bottom: 8px;
-}
+// }
+// .GetNumberData{
+//     display: flex;
+//     flex-direction: column;
+//     span{
+//         color:$White;
+//         font-size: 20px;
+//     }
+// }
+// .GetNumberDivInput{
+//     @include FlexCenter;
+//     width: 100%;
+//     input{
+//        width: 27%; 
+//        height: 36px;
+//        border-radius: 10px;
+//        padding-left: 5px;
+//        outline: $None;
+//        border: $None;
+//     }
+// }
+// .AllowOrNot{
+//     display: flex;
+//     margin-top: 10px;
+//     button{
+//         border-radius: 10px;
+//         padding: 1% 4%;
+//         margin-left: 2%;
+//         background-color: $White;
+//         color: black;
+//         &:nth-child(1){
+//             background-color: $White;
+//         }
+//         &:nth-child(2){
+//             background-color:rgb(209, 40, 40);
+//             color: $White;
+//         }
+//     }
+// }
+// .audio-div{
+//     @include FlexCenter;
+//     width: 100%;
+//     margin-bottom: 8px;
+// }

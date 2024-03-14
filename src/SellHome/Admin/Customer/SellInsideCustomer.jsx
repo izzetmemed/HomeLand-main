@@ -46,6 +46,8 @@ const SellinsideCustomer = () => {
         await FetchPostCustomer(customerObject, "SellCustomer");
       };
       AddItem();
+      customerName.current.value="";
+      customerNumber.current.value="";
     }else{
       Swal.fire({
         title: "Uğursuz",
@@ -115,7 +117,7 @@ const SellinsideCustomer = () => {
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                  {(getById.price * 20) / 100}
+                  {(getById.price * 1) / 100}
                   <span>{price}</span>
                 </span>
               </p>
@@ -124,7 +126,7 @@ const SellinsideCustomer = () => {
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto">
-                <div className="col-6 d-flex ">
+                <div className="col-12 col-sm-6 d-flex px-1">
                   <table className="table table-dark table-striped">
                     <thead>
                       <tr>
@@ -147,7 +149,7 @@ const SellinsideCustomer = () => {
                 </div>
               </div>
 
-              <div className="col-12 d-flex justify-content-center mt-2 h-auto">
+              <div className="col-12 d-flex justify-content-center mt-2 h-auto ms-1">
                 <div className="h-25 ">
                   <input
                     type="Text"

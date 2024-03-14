@@ -37,7 +37,7 @@ const InfoSell = (props) => {
         Sahe:
         <span>
           {data.measureHome}
-          <span>{teratory}</span>
+          <span >{teratory}</span>
         </span>
       </p>
       <p>

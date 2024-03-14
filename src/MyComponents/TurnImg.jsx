@@ -30,12 +30,14 @@ const TurnImg = ({ keepingImgSource, WeightTrue }) => {
   return (
     <>
       <div>
-        <span onClick={btnLeftIcon}>
+        <span onClick={btnRightIcon}>
           <i className="fa-solid fa-angle-left"></i>
         </span>
-        <span onClick={btnRightIcon}>
+        
+        <span onClick={btnLeftIcon}>
           <i className="fa-solid fa-angle-right"></i>
         </span>
+       
       </div>
       <div style={WeightTrue ? middle : {}}>
         
@@ -49,6 +51,9 @@ const TurnImg = ({ keepingImgSource, WeightTrue }) => {
           alt=""
           style={WeightTrue ? {} : weightHeight}
         />
+        <span className="CounterOnImg" >
+        {(Number(ImgSourceIndex) + 1) + "/" + (keepingImgSource.length)}
+        </span>
       </div>
     </>
   );

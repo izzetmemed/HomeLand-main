@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-const TurnImgIn = ({ keepingImgSource, WeightTrue }) => {
+const TurnImgIn = ({ keepingImgSource, WeightTrue ,Counter}) => {
   const [ImgSourceIndex, setImgSourceIndex] = useState(0);
   const btnLeftIcon = () => {
     if (ImgSourceIndex < keepingImgSource.length - 1) {
@@ -19,12 +19,12 @@ const TurnImgIn = ({ keepingImgSource, WeightTrue }) => {
   };
   return (
     <>
-      <div className="imgDivInside">
+      <div className="imgDivInside ">
         
-        <span onClick={btnLeftIcon}>
+        <span onClick={btnRightIcon}>
           <i className="fa-solid fa-angle-left"></i>
         </span>
-        <span onClick={btnRightIcon}>
+        <span onClick={btnLeftIcon}>
           <i className="fa-solid fa-angle-right"></i>
         </span>
      
@@ -38,8 +38,11 @@ const TurnImgIn = ({ keepingImgSource, WeightTrue }) => {
               : require("../logo.home/Logo-white.PNG")
           }
           alt=""
-          className="w-100 h-100"
+          className="w-100"
         />
+        <span className="CounterOnImg" style={{ display: Counter ? "none" : "block" }}>
+        {(Number(ImgSourceIndex) + 1) + "/" + (keepingImgSource.length)}
+        </span>
       </div>
     </>
   );

@@ -211,7 +211,7 @@ executeSequentially();
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto mt-3">
-            <div className="col-12 col-sm-6 d-flex ">
+            <div className="col-12 col-sm-6 d-flex px-1">
               <table className="table table-dark table-striped">
                 <thead>
                   <tr>

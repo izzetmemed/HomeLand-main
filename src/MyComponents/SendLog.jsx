@@ -1,6 +1,7 @@
 async function SendLog(formData, Kind) {
     try {
-      const response = await fetch(`http://localhost:5224/api/${Kind}`, {
+      const baseUrl = process.env.REACT_APP_API_KEY;
+      const response = await fetch(`${baseUrl}${Kind}`, {
         method: "POST",
         headers: {
           Accept: "application/json",

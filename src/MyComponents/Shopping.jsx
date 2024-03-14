@@ -26,6 +26,7 @@ const Shopping = (props) => {
           const indexToRemove = updatedData.findIndex(
             (item) => item[0] === data.id && item[1] === data.type
           );
+            setCheckRptrData(true);
           if (indexToRemove !== -1) {
             updatedData.splice(indexToRemove, 1);
             localStorage.setItem("Section", JSON.stringify(updatedData));

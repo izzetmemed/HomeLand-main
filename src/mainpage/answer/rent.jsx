@@ -1,15 +1,20 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 import Coordinate from "./coordinate";
+import {useNavigate} from 'react-router-dom';
 import FetchPostImg from "../../MyComponents/FetchPostImg";
 import Swal from "sweetalert2";
 import FetchPostAll from "../../MyComponents/FetchPostAll";
 import TurnImgIn from "../../MyComponents/TurnImgIn";
 import NumberTurn from "../../MyComponents/NumberTurn";
 import FetchPut from "../../MyComponentsAdmin/FetchPut";
+import UpLoad from "../../MyComponents/UpLoad";
 const Rent = ({ Data, IsUpdating, SendFalse}) => {
+  const nav=useNavigate();
+  const [IsLoading,setIsLoading]=useState(false);
    const [CoordinateX,setCoordinateX]=useState(null);
  const [CoordinateY,setCoordinateY]=useState(null);
+
  const SendX=(x)=>{
   setCoordinateX(x)
  };
@@ -165,47 +170,59 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       images.length > 4 &&
       !isNaN(parseFloat(formData.Price)) &&
       !isNaN(parseFloat(formData.Area)) &&
-      !isNaN(parseFloat(formData.Room))
+      !isNaN(parseFloat(formData.Room)) 
     ) {
-      FetchPostAll(formData,"RentHome",imgFunc);
-      setTimeout(() => {
+      if(!IsLoading){
+        setTimeout(() => {
+          setIsLoading(true);
+        }, 500);
+        FetchPostAll(formData,"RentHome",imgFunc);
+        
+        setTimeout(() => {
+          setIsLoading(false)
+          Swal.fire({
+            title: "Uğurlu",
+            text: "Elanınız yükləndi.",
+            icon: "success",
+          });
+          FullName.current.value = "";
+          Number.current.value = "";
+          Address.current.value = "";
+          Floor.current.value = "";
+          Area.current.value = "";
+          Addition.current.value = "";
+          Price.current.value = "";
+          Metro.current.value = "";
+          Region.current.value = "";
+          Building.current.value = "";
+          Room.current.value = "";
+          Repair.current.value = "";
+          İtem.current.value = "";
+          Bed.current.checked = false;
+          wardrobe.current.checked = false;
+          TableChair.current.checked = false;
+          HeatingSystem.current.checked = false;
+          GasHeating.current.checked = false;
+          Combi.current.checked = false;
+          Tv.current.checked = false;
+          WashingClothes.current.checked = false;
+          AirConditioning.current.checked = false;
+          Sofa.current.checked = false;
+          Wifi.current.checked = false;
+          Boy.current.checked = false;
+          Girl.current.checked = false;
+          Family.current.checked = false;
+          WorkingBoy.current.checked = false;
+       
+          nav("/");
+        }, 10000);
+      }else{
         Swal.fire({
-          title: "Uğurlu",
-          text: "Elanınız yükləndi.",
-          icon: "success",
+          title: "Gözləyin",
+          text: "Elanınız yüklənir...",
+          icon: "info",
         });
-      }, 1000);
-
-      FullName.current.value = "";
-      Number.current.value = "";
-      Address.current.value = "";
-      Floor.current.value = "";
-      Area.current.value = "";
-      Addition.current.value = "";
-      Price.current.value = "";
-      Metro.current.value = "";
-      Region.current.value = "";
-      Building.current.value = "";
-      Room.current.value = "";
-      Repair.current.value = "";
-      İtem.current.value = "";
-      Bed.current.checked = false;
-      wardrobe.current.checked = false;
-      TableChair.current.checked = false;
-      HeatingSystem.current.checked = false;
-      GasHeating.current.checked = false;
-      Combi.current.checked = false;
-      Tv.current.checked = false;
-      WashingClothes.current.checked = false;
-      AirConditioning.current.checked = false;
-      Sofa.current.checked = false;
-      Wifi.current.checked = false;
-      Boy.current.checked = false;
-      Girl.current.checked = false;
-      Family.current.checked = false;
-      WorkingBoy.current.checked = false;
-      setImages([]);
-      setImagesFile([]);
+    } 
     } else {
       Swal.fire({
         title: "Uğursuz",
@@ -348,7 +365,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Ev sahibinin adı və Soyadı:
+                  <span className="attention">* </span>Ev sahibinin adı və Soyadı:
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -358,7 +375,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Ev sahibinin əlaqə nömrəsi:(Nömrəniz gizlin saxlanılacaq)
+                <span className="attention">* </span>Ev sahibinin əlaqə nömrəsi:(Nömrəniz gizlin saxlanılacaq)
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -368,7 +385,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className="d-flex flex-column align-items-center mt-3">
                 <p className="text-danger fs-5">
-                  *Evinizə aid 5-10 şəkil əlavə edin. (Salon, yataq otağı,
+                  * Evinizə aid 5-10 şəkil əlavə edin. (Salon, yataq otağı,
                   mətbəxt, hamam, tualet, balkon və.s)
                 </p>
                 <div className="custom-file-input" onClick={triggerFileInput}>
@@ -388,17 +405,17 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
               </div>
             </div>
             <div>
-              <div className=" col-12 p-2 mt-4 ps-2">
-                <div className="answer-images-rent">
+              <div className=" col-12 p-2 mt-4 ps-2 ">
+                <div className="answer-images-rent shadowHomeColor">
                   <div className="overflow-hidden">
-                  <TurnImgIn keepingImgSource={keepingImgSource} />
+                  <TurnImgIn keepingImgSource={keepingImgSource} Counter={true}/>
                   </div>
                 </div>
               </div>
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Evin yerləşdiyi rayon:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Evin yerləşdiyi rayon:</label>
               </div>
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Region}>
@@ -422,7 +439,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Evin yerləşdiyi küçənin adı:
+                <span className="attention">* </span>Evin yerləşdiyi küçənin adı:
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -431,19 +448,20 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Mərtəbə:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Mərtəbə:</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="text" placeholder=" 1/10" ref={Floor} />
               </div>
             </div>
             <div className="mt-3">
+            <p><span className="attention">* </span>Evin konumunu qeyd edin.</p>
               <Coordinate x={SendX} y={SendY} CanClick={true} />
             </div>
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Metro:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Metro:</label>
               </div>
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Metro}>
@@ -461,14 +479,14 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Bakmil">Bakmil Metrosu</option>
                   <option value="Nərmanov">Nərman Nərmanov Metrosu</option>
                   <option value="Gənçlik">Gənçlik Metrosu</option>
-                  <option value="28">28 May Metrosu</option>
+                  <option value="28 May">28 May Metrosu</option>
                   <option value="Xətai">Şah İsmayıl Xətai Metrosu</option>
                   <option value="Sahil">Sahil Metrosu</option>
                   <option value="İçərişəhər">İçərişəhər Metrosu</option>
                   <option value="Nizami">Nizami Metrosu</option>
                   <option value="Elmlər">Elmlər Metrosu</option>
                   <option value="İnşaatçılar">İnşaatçılar Metrosu</option>
-                  <option value="Yanvar">20 Yanvar Metrosu</option>
+                  <option value="20 Yanvar">20 Yanvar Metrosu</option>
                   <option value="Əcəmi">Memar Əcəmi Metrosu</option>
                   <option value="Nəsimi">Nəsimi Metrosu</option>
                   <option value="Azadlıq">Azadlıq Metrosu</option>
@@ -482,7 +500,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Otaq sayı:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Otaq sayı:</label>
               </div>
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Room}>
@@ -513,7 +531,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Təmir:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Təmir:</label>
               </div>
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Repair}>
@@ -526,7 +544,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Bina:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Bina:</label>
               </div>
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Building}>
@@ -539,7 +557,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Əşya:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Əşya:</label>
               </div>
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={İtem}>
@@ -556,7 +574,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Evdə hansı əşyalar var?</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Evdə hansı əşyalar var?</label>
               </div>
               <div className="col-12 main-div-for-chechbox ms-2">
                 <div>
@@ -611,7 +629,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Evin sahəsi: (m²)</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Evin sahəsi: (m²)</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="Number" ref={Area} inputmode="numeric"/>
@@ -619,7 +637,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Evin Aylıq qiyməti:(Aze)</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Evin Aylıq qiyməti:(Azn)</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="number" ref={Price} inputmode="numeric" />
@@ -629,7 +647,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Evinizi kim kirayə götürə bilər?
+                <span className="attention">* </span>Evinizi kim kirayə götürə bilər?
                 </label>
               </div>
               <div className="col-12 main-div-for-chechbox ms-2">
@@ -661,6 +679,8 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="text" ref={Addition} />
               </div>
             </div>
+            {IsLoading && ( <UpLoad/>)}
+           
             <div className="d-flex justify-content-center col-12 mb-5">
               {!IsUpdating && (
                 <div className=" mt-5">

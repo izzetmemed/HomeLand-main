@@ -175,7 +175,7 @@
   color: white;
 }
 .header-ul li a:hover {
-  color: rgb(217, 223, 218);
+  color: rgb(0, 0, 0);
 }
 
 .for-height-header {
@@ -188,7 +188,7 @@
 
 @media (max-width: 580px) {
   .header-ul li {
-    margin-top: 10px;
+    margin-top: 6px;
   }
 }
 .logo-in-header {
@@ -208,7 +208,7 @@
   color: white;
   position: relative;
   background-color: rgb(79, 212, 101);
-  box-shadow: rgb(0, 0, 0) 1px 1px 1px 1px;
+  box-shadow: rgb(0, 0, 0) 0px 0px 1px 1px;
 }
 .download-ads:hover {
   background-color: rgb(79, 181, 74);
@@ -216,6 +216,7 @@
 }
 .download-ads span {
   display: inline-block;
+  box-shadow: rgb(0, 0, 0) 0px 0px 1px 1px;
   width: 28px;
   height: 28px;
   margin: 3px;
@@ -277,10 +278,19 @@ Body::-webkit-scrollbar-track {
   background-color: rgb(79, 212, 101) !important;
 }
 
+.shadowClassic {
+  box-shadow: #333 0px 0px 1px 1px;
+}
+
+.shadowHomeColor {
+  box-shadow: rgb(79, 189, 89) 0px 0px 1px 1px;
+}
+
 .card-home {
   border-radius: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding-bottom: 2%;
+  border: 1px solid rgb(79, 189, 89);
   height: 400px !important;
 }
 .card-home div {
@@ -311,6 +321,7 @@ Body::-webkit-scrollbar-track {
 .card-home div:nth-child(1) div span i {
   margin-top: 20%;
   margin-left: 30%;
+  color: rgb(79, 189, 89);
 }
 .card-home div:nth-child(1) div:nth-child(2) {
   height: 100%;
@@ -404,6 +415,24 @@ Body::-webkit-scrollbar-track {
 
 .BasketİsEmpty {
   height: 50vh !important;
+}
+
+.CounterOnImg {
+  position: absolute;
+  z-index: 5001;
+  width: -moz-max-content !important;
+  width: max-content !important;
+  bottom: 5%;
+  right: 45%;
+  background-color: rgb(79, 189, 89) !important;
+  color: white;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 5px;
+  border-radius: 50%;
+  height: auto !important;
 }
 
 .div-in-input input {
@@ -613,8 +642,8 @@ a {
   padding: 8px 10px;
   border-radius: 5px;
   color: rgb(0, 0, 0);
-  background-color: rgb(163, 163, 163);
-  z-index: 1000;
+  background-color: rgb(238, 237, 237);
+  z-index: 5002;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -670,7 +699,7 @@ a {
   bottom: 50%;
   transform: translateY(60%);
   right: 0px;
-  z-index: 10000;
+  z-index: 1000;
 }
 .ShareOnWhatsapp div {
   width: 42px;
@@ -701,6 +730,14 @@ a {
 .ShareOnWhatsapp button:hover {
   background-color: #3b9e44;
   color: white;
+}
+
+.HomeLandText {
+  color: rgb(79, 189, 89);
+}
+
+.attention {
+  color: red;
 }
 
 .insideCard-home {
@@ -904,68 +941,6 @@ a {
   font-size: 100%;
   color: white;
   opacity: 0.8;
-}
-
-.GetNumberContainer {
-  margin-top: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px;
-  background-color: rgb(79, 189, 89);
-  border-radius: 15px;
-}
-
-.GetNumberData {
-  display: flex;
-  flex-direction: column;
-}
-.GetNumberData span {
-  color: white;
-  font-size: 20px;
-}
-
-.GetNumberDivInput {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-.GetNumberDivInput input {
-  width: 27%;
-  height: 36px;
-  border-radius: 10px;
-  padding-left: 5px;
-  outline: none;
-  border: none;
-}
-
-.AllowOrNot {
-  display: flex;
-  margin-top: 10px;
-}
-.AllowOrNot button {
-  border-radius: 10px;
-  padding: 1% 4%;
-  margin-left: 2%;
-  background-color: white;
-  color: black;
-}
-.AllowOrNot button:nth-child(1) {
-  background-color: white;
-}
-.AllowOrNot button:nth-child(2) {
-  background-color: rgb(209, 40, 40);
-  color: white;
-}
-
-.audio-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 8px;
 }
 
 .login-register-area {

@@ -68,7 +68,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
       
     } 
     setClick(true);
-    setPrice(ArrayNewSetSendDataPrice);
+    setPrice(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     setRoom(ArrayNewSetSendDataRoom);
     setRegion(ArrayNewSetSendDataRegion);
     setFunc(ArrayNewBool);
@@ -76,13 +76,13 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
 
        
     setBuilding2(ArrayNewSetHomeOrFlat);
-    setPrice2(ArrayNewSetSendDataPrice);
+    setPrice2(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     setRegion2(ArrayNewSetSendDataRegion);
     setMetro2(ArrayNewBool);
     setRoom2(ArrayNewSetSendDataRoom);
     
     if(isMediaPrice){
-    sessionStorage.setItem("PriceSell",ArrayNewSetSendDataPrice);
+    sessionStorage.setItem("PriceSell",ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     sessionStorage.setItem("RoomSell",ArrayNewSetSendDataRoom);
     sessionStorage.setItem("RegionSell",ArrayNewSetSendDataRegion);
     sessionStorage.setItem("HomeOrFlatSell",ArrayNewSetHomeOrFlat);
@@ -301,7 +301,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
                       <input
                         type="checkbox"
                         name=""
-                        id="28"
+                        id="28 May"
                         ref={(element) => (myRef.current[11] = element)}
                       />
                       <label className="ms-1">28 May Metrosu.</label>
@@ -364,7 +364,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
                       <input
                         type="checkbox"
                         name=""
-                        id="Yanvar"
+                        id="20 Yanvar"
                         ref={(element) => (myRef.current[18] = element)}
                       />
                       <label className="ms-1">20 Yanvar Metrosu</label>

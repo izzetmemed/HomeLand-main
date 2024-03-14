@@ -21,7 +21,7 @@
             text-decoration: $None;
             color: $White;
               &:hover{
-            color:rgb(217, 223, 218);
+            color:$Black;
         }
         }
     }
@@ -36,8 +36,9 @@
 @media(max-width:580px) {
     .header-ul {
         li {
-            margin-top: 10px;
-        }}}
+            margin-top: 6px;
+        }}
+    }
 .logo-in-header {
     @font-face {
         font-family: 'CustomFont';
@@ -57,13 +58,14 @@
     color: $White;
     position: relative;
     background-color:$HomeLandColorWhite;
-    box-shadow: $Black 1px 1px 1px 1px;
+    box-shadow: $Black 0px 0px 1px 1px;
     &:hover{
         background-color:$HomeLandColorBlack ;
         color: $White;
     }
     span{
         display: inline-block;
+        box-shadow: $Black 0px 0px 1px 1px;
         width: 28px;
         height: 28px;
         margin: 3px;
@@ -120,4 +122,10 @@ Body::-webkit-scrollbar-track {
 }
 .HomeLandColor{
     background-color: $HomeLandColorWhite !important;
+}
+.shadowClassic{
+    box-shadow: $BlackWhite 0px 0px 1px 1px;
+}
+.shadowHomeColor{
+    box-shadow: $HomeLandColor 0px 0px 1px 1px;
 }

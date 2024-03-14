@@ -40,7 +40,7 @@ const Pagination = ({ countOfPagenation,setPage }) => {
                   );
                 }}
               >
-                Previous
+                <i class="fa-solid fa-angle-left HomeLandText"></i>
               </button>
             </li>
 
@@ -77,7 +77,7 @@ const Pagination = ({ countOfPagenation,setPage }) => {
                   );
                 }}
               >
-                Next
+                <i class="fa-solid fa-angle-right HomeLandText"></i>
               </button>
             </li>
           </ul>

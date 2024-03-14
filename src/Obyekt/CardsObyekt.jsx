@@ -111,7 +111,7 @@ const [showLoad, setShowLoad] = useState(true);
 
 useEffect(() => {
   if (filteredDataSlice.length === 0) {
-    const timer = setTimeout(() => setShowLoad(false), 5000);
+    const timer = setTimeout(() => setShowLoad(false), 10000);
     return () => clearTimeout(timer);
   } else {
     setShowLoad(false);

@@ -6,10 +6,13 @@ import FetchPostImg from "../MyComponents/FetchPostImg";
 import TurnImgIn from "../MyComponents/TurnImgIn";
 import Coordinate from "../mainpage/answer/coordinate";
 import Scroll from "../MyComponents/Scroll";
+import {useNavigate} from 'react-router-dom'
 import NumberTurn from "../MyComponents/NumberTurn";
 import FetchPut from "../MyComponentsAdmin/FetchPut";
+import UpLoad from "../MyComponents/UpLoad";
 const Sell = ({ Data, IsUpdating, SendFalse}) => {
-
+  const nav=useNavigate();
+  const [IsLoading,setIsLoading]=useState(false);
     Scroll();
   const fileInputRef = useRef(null);
   const [images, setImages] = useState([]);
@@ -129,15 +132,19 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       !isNaN(parseFloat(formData.Area)) &&
       !isNaN(parseFloat(formData.Room))
     ) {
+      if(!IsLoading){
+      setTimeout(() => {
+        setIsLoading(true);
+      }, 500);
       FetchPostAll(formData,"Sell",imgFunc);
-        setTimeout(() => {
-          Swal.fire({
-            title: "Uğurlu",
-            text: "Elanınız yükləndi.",
-            icon: "success"
-          });
-        }, 500);
-      FullName.current.value="";
+      setTimeout(() => {
+        setIsLoading(false)
+        Swal.fire({
+          title: "Uğurlu",
+          text: "Elanınız yükləndi.",
+          icon: "success",
+        });
+        FullName.current.value="";
       Number.current.value="";
       Address.current.value="";
       Floor.current.value="";
@@ -153,6 +160,15 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       İtem.current.value="";
       setImages([]);
       setImagesFile([]);
+        nav("/Sell");
+      }, 10000);
+    }else{
+      Swal.fire({
+        title: "Gözləyin",
+        text: "Elanınız yüklənir...",
+        icon: "info",
+      });
+  } 
     } else {
       Swal.fire({
         title: "Uğursuz",
@@ -258,7 +274,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Ev sahibinin adı və Soyadı:
+                <span className="attention">* </span>Ev sahibinin adı və Soyadı:
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -268,7 +284,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Ev sahibinin əlaqə nömrəsi:(Nömrəniz gizli saxlanılacaq)
+                <span className="attention">* </span>Ev sahibinin əlaqə nömrəsi:(Nömrəniz gizli saxlanılacaq)
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -278,7 +294,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className="d-flex flex-column align-items-center mt-3">
                 <p className="text-danger fs-5">
-                  *Evinizə aid 5-10 şəkil əlavə edin. (Salon, yataq otağı, mətbəxt,
+                  * Evinizə aid 5-10 şəkil əlavə edin. (Salon, yataq otağı, mətbəxt,
                   hamam, tualet, balkon və.s)
                 </p>
                 <div className="custom-file-input" onClick={triggerFileInput}>
@@ -298,17 +314,17 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
               </div>
             </div>
             <div>
-              <div className=" col-12 p-2 mt-4 ps-2">
+              <div className=" col-12 p-2 mt-4 ps-2 ">
                 <div className="answer-images-rent">
-                  <div className="overflow-hidden  ">
-                    <TurnImgIn keepingImgSource={keepingImgSource} />
+                  <div className="overflow-hidden  shadowHomeColor">
+                    <TurnImgIn keepingImgSource={keepingImgSource} Counter={true}/>
                   </div>
                 </div>
               </div>
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Evin yerləşdiyi rayon:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Evin yerləşdiyi rayon:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Region}>
@@ -332,7 +348,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Evin yerləşdiyi küçənin adı:
+                <span className="attention">* </span>Evin yerləşdiyi küçənin adı:
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -341,7 +357,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Evin qiyməti:(Aze)</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Evin qiyməti:(Azn)</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="Number"  ref={Price}/>
@@ -349,19 +365,20 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Mərtəbə:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Mərtəbə:</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="text" ref={Floor} placeholder="1/10"/>
               </div>
             </div>
             <div className="mt-3">
+            <p><span className="attention">* </span>Evin konumunu qeyd edin.</p>
               <Coordinate x={SendX} y={SendY} CanClick={true}/>
             </div>
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Metro:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Metro:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Metro}>
@@ -377,14 +394,14 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Bakmil">Bakmil Metrosu</option>
                   <option value="Nərmanov">Nərman Nərmanov Metrosu</option>
                   <option value="Gənçlik">Gənçlik Metrosu</option>
-                  <option value="28">28 May Metrosu</option>
+                  <option value="28 May">28 May Metrosu</option>
                   <option value="Xətai">Şah İsmayıl Xətai Metrosu</option>
                   <option value="Sahil">Sahil Metrosu</option>
                   <option value="İşərişəhər">İçərişəhər Metrosu</option>
                   <option value="Nizami">Nizami Metrosu</option>
                   <option value="Elmlər">Elmlər Metrosu</option>
                   <option value="İnşaatçlılar">İnşaatçılar Metrosu</option>
-                  <option value="Yanvar">20 Yanvar Metrosu</option>
+                  <option value="20 Yanvar">20 Yanvar Metrosu</option>
                   <option value="Əcəmi">Memar Əcəmi Metrosu</option>
                   <option value="Nəsimi">Nəsimi Metrosu</option>
                   <option value="Azadlıq">Azadlıq Metrosu</option>
@@ -398,7 +415,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Otaq sayı:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Otaq sayı:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Room}>
@@ -429,7 +446,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Təmir:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Təmir:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Repair}>
@@ -442,7 +459,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Bina:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Bina:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Building}>
@@ -455,7 +472,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Sənəd:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Sənəd:</label>
               </div>
 
               <div className="col-12 div-in-select">
@@ -468,7 +485,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Əşya:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Əşya:</label>
               </div>
 
               <div className="col-12 div-in-select">
@@ -483,7 +500,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Evin sahəsi: (m²)</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Evin sahəsi: (m²)</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="Number" ref={Area}/>
@@ -499,6 +516,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="text" ref={Addition}/>
               </div>
             </div>
+            {IsLoading && ( <UpLoad/>)}
             <div className="d-flex justify-content-center col-12 mb-5">
             {!IsUpdating && (
                 <div className=" mt-5">

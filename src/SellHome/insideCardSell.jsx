@@ -98,7 +98,7 @@ const İnsideCardSell = () => {
               <div className="height-for-coordiante mt-2 mb-2 p-4">
                 <Coordinate CanClick={false} Xvalue={getById.coordinateX} Yvalue={getById.coordinateY}/>
               </div>
-              <GetBack Direct={"/Satılıq-ev"}/>
+              <GetBack Direct={"/Sell"}/>
               <div className="d-flex justify-content-center w-100 ">
                 <div >
                   <button className="btn btn-mycolor height-for-calling fs-5 " onClick={()=>{setMaklerNumber(!MaklerNumber)}}>

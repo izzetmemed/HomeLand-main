@@ -148,50 +148,15 @@ const SellInsidePayment = () => {
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                  {(getById.price * 20) / 100}
+                  {(getById.price * 1) / 100}
                   <span>{price}</span>
-                </span>
-              </p>
-              <p>
-                Ev kimə verilir:
-                <span className="time-home">
-                  {[
-                    getById.family && "Ailə",
-                    getById.boy && "Oğlan tələbələrə",
-                    getById.girl && "Xanım tələbələrə",
-                    getById.workingBoy && "İşləyən bəylərə",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")
-                    .replace(/, (?=[^,]*$)/, " və ")}
-                </span>
-              </p>
-              <p>
-                Evdə olan Əşyalar:
-                <span className="time-home">
-                  {[
-                    getById.bed && "Yataq",
-                    getById.wardrobe && "Dolab",
-                    getById.tableChair && "Masa və Stol",
-                    getById.centralHeating && "Mərkəzi İstilik sistemi",
-                    getById.gasHeating && "Qaz İstilik sistemi",
-                    getById.combi && "Kombi",
-                    getById.tv && "Televizor",
-                    getById.washingClothes && "Paltar Yuyan",
-                    getById.airConditioning && "Kondisioner",
-                    getById.sofa && "Divan",
-                    getById.wifi && "Wi-Fi",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")
-                    .replace(/, (?=[^,]*$)/, " və ")}
                 </span>
               </p>
               <p>
                 Tarix:
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
-              <div className="col-12 d-flex justify-content-center h-auto mt-2">
+              <div className="col-12 d-flex justify-content-center h-auto mt-2 ms-1">
                 <div className="col-12 col-sm-6 d-flex ">
                   <table className="table table-dark table-striped">
                     <thead>

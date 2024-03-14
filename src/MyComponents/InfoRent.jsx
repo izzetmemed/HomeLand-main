@@ -12,14 +12,13 @@ const InfoRent = (props) => {
     }
     return inputString.slice(0, maxLength) + "...";
   }
-  const price = "Azn";
-  const teratory = "m²";
+  const price ="Azn";
+  const teratory ="m²";
 
   return (
     <>
       <p>
-        Qiymet:<span>{data.priceHome}</span>
-        <span>{price}</span>
+        Qiymet:<span>{data.priceHome}</span><span >{price}</span>
       </p>
       <p>
         Ünvan:<span>{cutString(data.address, 20)}</span>
@@ -36,8 +35,7 @@ const InfoRent = (props) => {
       <p>
         Sahe:
         <span>
-          {data.measureHome}
-          <span>{teratory}</span>
+          {data.measureHome} <span className="ms-0">{teratory}</span>
         </span>
       </p>
       <p>

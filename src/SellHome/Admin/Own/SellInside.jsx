@@ -112,7 +112,7 @@ const SellInside = () => {
                 <p>
                   Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                   <span className="time-home">
-                    {(getById.price * 20) / 100}
+                    {(getById.price * 1) / 100}
                     <span>{price}</span>
                   </span>
                 </p>

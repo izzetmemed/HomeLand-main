@@ -38,8 +38,8 @@ a {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    padding: 8px 10px;
     border-radius: 5px;
     color: $Black;
-    background-color: $WhiteDark;
-    z-index: 1000;
+    background-color: $WhiteLittle;
+    z-index: 5002;
     @include FlexCenter;
     animation-name: slideDown;
     animation-duration: 1s;
@@ -89,7 +89,7 @@ a {
     bottom: 50%;
     transform: translateY(60%);
     right: 0px; 
-    z-index: 10000;
+    z-index: 1000;
    
       div{
         width: 42px;
@@ -120,6 +120,10 @@ a {
         } 
     }
   }
-  
-  
+  .HomeLandText{
+    color: $HomeLandColor;
+  }
+  .attention{
+    color: red;
+  }
   

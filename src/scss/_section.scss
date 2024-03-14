@@ -2,6 +2,7 @@
     border-radius: 10px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     padding-bottom: 2%;
+    border: 1px $Solid $HomeLandColor;
     height: 400px !important;
      div{
         height: 50%;
@@ -23,10 +24,12 @@
                 height: 28px;
                 border-radius: 50%;
                 background-color:$WhiteDarker;
+                
               
                 i{
                     margin-top: 20%;
                     margin-left: 30%;
+                    color: $HomeLandColor;
                 }
         }
         &:nth-child(2){
@@ -121,4 +124,20 @@
 }
 .BasketİsEmpty{
     height: 50vh !important;
+}
+.CounterOnImg{
+    position: absolute;
+    z-index: 5001;
+    width: max-content !important;
+    bottom:  5%;
+    right:45%;
+    background-color:$HomeLandColor !important;
+    color: $White;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 5px;
+    border-radius: 50%;
+    height: auto !important;
 }

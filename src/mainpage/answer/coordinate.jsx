@@ -48,7 +48,7 @@ const Coordinate = ({x,y,CanClick,Xvalue,Yvalue}) => {
 
     return (
      <>
-     <div className='px-4'>
+     <div className='px-3'>
       
           <div ref={mapContainerRef}  style={{ height: '400px', width: '100%' }}></div>
        

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 const Header = () => {
     const location = useLocation();
-    const backgroundColorStyle = "HomeLandColor";
+  const backgroundColorStyle = "HomeLandColor shadowClassic";
     
     const [isActive, setisActive] = useState(false);
     const [color1, setColor1] = useState();
@@ -55,7 +55,7 @@ const Header = () => {
             <span className="d-lg-block d-none">HomeLand.az</span>
             <ul className="header-ul col-4 ">
               <li className={color1}>
-                <NavLink to="/Sell">Alqı-satqı</NavLink>
+                <NavLink to="/Sell">Satılıq</NavLink>
               </li>
               <li className={color2}>
                 <NavLink to="/">Kiraye</NavLink>

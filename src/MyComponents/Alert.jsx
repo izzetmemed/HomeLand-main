@@ -17,21 +17,25 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk, isRoom
     }
      await FetchPostAll(media,"Media",fake);
     if(Room){
-      Room.map(x=>{
+      const uniqueNumbers = [...new Set(Room)];
+      uniqueNumbers.map(x=>{
        
        return FetchPostCustomer(x,"Media/Room")  
     })
     }
     if(Metro){
-    Metro.map(x=>{
+      const uniqueNumbers = [...new Set(Metro)];
+      uniqueNumbers.map(x=>{
       return FetchPostCustomer(x,"Media/Metro")
     })}
     if(Region){
-    Region.map(x=>{
+      const uniqueNumbers = [...new Set(Region)];
+      uniqueNumbers.map(x=>{
       return FetchPostCustomer(x,"Media/Region")
     })}
     if(HomeOrFlat){
-    HomeOrFlat.map(x=>{
+      const uniqueNumbers = [...new Set(HomeOrFlat)];
+      uniqueNumbers.map(x=>{
       return FetchPostCustomer(x,"Media/Building")
     })}
     setIsActiveFunk();
@@ -172,6 +176,10 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk, isRoom
           <button className="close-btn-media btn me-1" onClick={AddGmail}>
             {" "}
             Əlavə etmək
+          </button>
+          <button className="close-btn-media btn bg-primary me-1" onClick={Refuse}>
+            {" "}
+            Əlavə etmişəm
           </button>
           <button className="close-btn-media btn bg-danger" onClick={Refuse}>
             {" "}

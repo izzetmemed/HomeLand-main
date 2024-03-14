@@ -7,8 +7,11 @@ import TurnImgIn from "../MyComponents/TurnImgIn";
 import Coordinate from "../mainpage/answer/coordinate";
 import NumberTurn from "../MyComponents/NumberTurn";
 import FetchPut from "../MyComponentsAdmin/FetchPut";
+import UpLoad from "../MyComponents/UpLoad";
+import {useNavigate} from 'react-router-dom'
 const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
-
+  const nav=useNavigate();
+  const [IsLoading,setIsLoading]=useState(false);
   const [CoordinateX,setCoordinateX]=useState(null);
   const [CoordinateY,setCoordinateY]=useState(null);
   const SendX=(x)=>{
@@ -141,15 +144,19 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
       !isNaN(parseFloat(formData.Area)) &&
       !isNaN(parseFloat(formData.Room))
     ) {
+      if(!IsLoading){
+      setTimeout(() => {
+        setIsLoading(true);
+      }, 500);
       FetchPostAll(formData,"Obyekt",imgFunc)
       setTimeout(() => {
+        setIsLoading(false)
         Swal.fire({
           title: "Uğurlu",
           text: "Elanınız yükləndi.",
           icon: "success",
         });
-      }, 500);
-      FullName.current.value = "";
+        FullName.current.value = "";
       Number.current.value = "";
       Address.current.value = "";
       Area.current.value = "";
@@ -163,6 +170,15 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
       SellorRent.current.value = "";
       setImages([]);
       setImagesFile([]);
+        nav("/obyekt");
+      }, 10000);
+    }else{
+      Swal.fire({
+        title: "Gözləyin",
+        text: "Elanınız yüklənir...",
+        icon: "info",
+      });
+  } 
     } else {
       Swal.fire({
         title: "Uğursuz",
@@ -266,7 +282,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Obyekt sahibinin adı və Soyadı:
+                <span className="attention">* </span>Obyekt sahibinin adı və Soyadı:
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -276,7 +292,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Obyekt sahibinin əlaqə nömrəsi:(Nömrəniz gizli saxlanılacaq)
+                <span className="attention">* </span>Obyekt sahibinin əlaqə nömrəsi:(Nömrəniz gizli saxlanılacaq)
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -286,7 +302,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             <div>
               <div className="d-flex flex-column align-items-center mt-3">
                 <p className="text-danger fs-5">
-                  *Obyektinizə aid 5-10 şəkil əlavə edin.
+                  * Obyektinizə aid 5-10 şəkil əlavə edin.
                 </p>
                 <div className="custom-file-input" onClick={triggerFileInput}>
                   Şəkil əlavə etmək.
@@ -305,10 +321,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
               </div>
             </div>
             <div>
-              <div className=" col-12 p-2 mt-4 ps-2">
+              <div className=" col-12 p-2 mt-4 ps-2 ">
                 <div className="answer-images-rent">
-                  <div className="overflow-hidden ">
-                  <TurnImgIn keepingImgSource={keepingImgSource}/>
+                  <div className="overflow-hidden shadowHomeColor">
+                  <TurnImgIn keepingImgSource={keepingImgSource} Counter={true}/>
 
                   </div>
                 </div>
@@ -316,7 +332,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Obyektin yerləşdiyi rayon:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Obyektin yerləşdiyi rayon:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Region}>
@@ -340,7 +356,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
-                  *Obyektin yerləşdiyi küçənin adı:
+                <span className="attention">* </span>Obyektin yerləşdiyi küçənin adı:
                 </label>
               </div>
               <div className="col-12 div-in-input">
@@ -350,7 +366,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="sellOrRentSelect">
-                  *Obyektinizi satırsınız yoxsa kiraye verirsiniz:
+                <span className="attention">* </span>Obyektinizi satırsınız yoxsa kiraye verirsiniz:
                 </label>
               </div>
               <div className="col-12 div-in-select">
@@ -365,7 +381,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             {sellOrRent && (
               <div className="mt-3">
                 <div className="div-in-label">
-                  <label htmlFor="documentSelect">*Sənəd:</label>
+                  <label htmlFor="documentSelect"><span className="attention">* </span>Sənəd:</label>
                 </div>
                 <div className="col-12 div-in-select">
                   <select id="documentSelect" ref={Paper}>
@@ -380,7 +396,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
            
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Obyectinin qiyməti:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Obyectinin qiyməti:</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="number" ref={Price} />
@@ -388,7 +404,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Əşya:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Əşya:</label>
               </div>
 
               <div className="col-12 div-in-select">
@@ -401,13 +417,13 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
               </div>
             </div>
             <div className="mt-3">
-            <p>*Evin konumunu qeyd edin.</p>
+            <p><span className="attention">* </span>Evin konumunu qeyd edin.</p>
               <Coordinate x={SendX} y={SendY} CanClick={true}/>
             </div>
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Metro:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Metro:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Metro}>
@@ -425,14 +441,14 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Bakmil">Bakmil Metrosu</option>
                   <option value="Nərmanov">Nərman Nərmanov Metrosu</option>
                   <option value="Gənçlik">Gənçlik Metrosu</option>
-                  <option value="28">28 May Metrosu</option>
+                  <option value="28 May">28 May Metrosu</option>
                   <option value="Xətai">Şah İsmayıl Xətai Metrosu</option>
                   <option value="Sahil">Sahil Metrosu</option>
                   <option value="İçərişəhər">İçərişəhər Metrosu</option>
                   <option value="Nizami">Nizami Metrosu</option>
                   <option value="Elmlər">Elmlər Metrosu</option>
                   <option value="İnşaatçılar">İnşaatçılar Metrosu</option>
-                  <option value="Yanvar">20 Yanvar Metrosu</option>
+                  <option value="20 Yanvar">20 Yanvar Metrosu</option>
                   <option value="Əcəmi">Memar Əcəmi Metrosu</option>
                   <option value="Nəsimi">Nəsimi Metrosu</option>
                   <option value="Azadlıq">Azadlıq Metrosu</option>
@@ -446,7 +462,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Otaq sayı:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Otaq sayı:</label>
               </div>
               <div className="col-12 div-in-select">
               <select name="" id="" ref={Room}>
@@ -477,7 +493,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
             </div>
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Təmir:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Təmir:</label>
               </div>
               <div className="col-12 div-in-select">
                 <select name="" id="" ref={Repair}>
@@ -491,7 +507,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
 
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName">*Obyektin sahəsi: (m²)</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Obyektin sahəsi: (m²)</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="number" ref={Area} />
@@ -507,6 +523,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="text" ref={Addition} />
               </div>
             </div>
+            {IsLoading && ( <UpLoad/>)}
             <div className="d-flex justify-content-center col-12 mb-5">
             {!IsUpdating && (
                 <div className=" mt-5">

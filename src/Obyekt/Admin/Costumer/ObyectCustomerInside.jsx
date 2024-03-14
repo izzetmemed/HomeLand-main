@@ -45,6 +45,8 @@ const ObyektCustomerInside = () => {
         await FetchPostCustomer(customerObject, "ObyektCustomer");
       };
       AddItem();
+      customerName.current.value="";
+      customerNumber.current.value="";
     }else{
       Swal.fire({
         title: "Uğursuz",
@@ -124,7 +126,7 @@ const ObyektCustomerInside = () => {
                 <span className="time-home">{convertDate(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto mt-2">
-                <div className="col-6 d-flex ">
+                <div className="col-12 col-sm-6 d-flex px-1">
                   <table className="table table-dark table-striped">
                     <thead>
                       <tr>
@@ -146,7 +148,7 @@ const ObyektCustomerInside = () => {
                   </table>
                 </div>
               </div>
-              <div className="col-12 d-flex justify-content-center mt-2 h-auto">
+              <div className="col-12 d-flex justify-content-center mt-2 h-auto ms-1">
                 <div className="h-25 ">
                   <input
                     type="Text"
