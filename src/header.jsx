@@ -10,6 +10,8 @@ const Header = () => {
     const [color1, setColor1] = useState();
     const [color2, setColor2] = useState();
     const [color3, setColor3] = useState();
+    const [color4, setColor4] = useState();
+    const [color5, setColor5] = useState();
 
     useEffect(() => {
         const decodedPath = decodeURIComponent(location.pathname);
@@ -18,17 +20,39 @@ const Header = () => {
                 setColor1();
                 setColor2(backgroundColorStyle);
                 setColor3();
+                setColor4();
+                setColor5();
                 break;
             case '/obyekt':
                 setColor1();
                 setColor2();
                 setColor3(backgroundColorStyle);
+                setColor4();
+                setColor5();
                 break;
             
             case '/Sell':
                 setColor1(backgroundColorStyle);
                 setColor2();
                 setColor3();
+                setColor4();
+                setColor5();
+                break;
+            
+            case '/Land':
+                setColor1();
+                setColor2();
+                setColor3();
+                setColor4(backgroundColorStyle);
+                setColor5();
+                break;
+            
+            case '/Office':
+                setColor1();
+                setColor2();
+                setColor3();
+                setColor4();
+                setColor5(backgroundColorStyle);
                 break;
             
             default:
@@ -36,6 +60,8 @@ const Header = () => {
                 setColor1();
                 setColor2();
                 setColor3();
+                setColor4();
+                setColor5();
                 break;
         }
     }, [location]);
@@ -52,8 +78,11 @@ const Header = () => {
             <span className="logo-in-header ">HomeLand</span>
           </div>
           <div className="d-flex flex-column flex-lg-row justify-content-between col-12  align-items-center for-height-header me-0 px-2">
-            <span className="d-lg-block d-none">HomeLand.az</span>
-            <ul className="header-ul col-4 ">
+            <span className="d-lg-block d-none col-2">HomeLand.az</span>
+            <ul className="header-ul col-10 col-sm-6 col-lg-4 ">
+            <li  className={color5}>
+                <NavLink to="/Office">Ofis</NavLink>
+              </li>
               <li className={color1}>
                 <NavLink to="/Sell">Satılıq</NavLink>
               </li>
@@ -63,9 +92,13 @@ const Header = () => {
               <li  className={color3}>
                 <NavLink to="/obyekt">Obyekt</NavLink>
               </li>
+              <li  className={color4}>
+                <NavLink to="/Land">Torpaq</NavLink>
+              </li>
+             
             </ul>
             <button
-              className="download-ads btn"
+              className="download-ads btn col-2"
               onClick={() => {
                 setisActive(!isActive);
               }}
@@ -88,6 +121,14 @@ const Header = () => {
                     <NavLink to="/obyekt-form">
                       {" "}
                       <li>Obyekt</li>
+                    </NavLink>
+                    <NavLink to="/land-form">
+                      {" "}
+                      <li>Torpaq</li>
+                    </NavLink>
+                    <NavLink to="/office-form">
+                      {" "}
+                      <li>Ofis</li>
                     </NavLink>
                   </ul>
                 </div>

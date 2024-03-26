@@ -1,12 +1,12 @@
 
 import { Link } from "react-router-dom";
-import UseFetchData from "../MyComponents/FetchImg";
 import TurnImg from "../MyComponents/TurnImg";
 import Shopping from "../MyComponents/Shopping";
 import InfoObyekt from "../MyComponents/InfoObyekt";
-const SectionObyekt = (props) => {
-  if(props.imgNames.length!==0){
-    var keepingImgSource =UseFetchData(props.imgNames,"RentHomeImg"); 
+import GetImg from "../MyComponents/GetImg";
+const SectionObyekt = ({props}) => {
+  if(props.Img.length!==0){
+    var keepingImgSource =GetImg(props.Img); 
   }else{
     keepingImgSource=[];
   }
@@ -16,10 +16,10 @@ const SectionObyekt = (props) => {
         <div className="card-home">
           <div className="overflow-hidden">
           <TurnImg keepingImgSource={keepingImgSource}/>
-            <Shopping props={props} keepingImgSource={keepingImgSource}/>
+            <Shopping props={props} type={"obyekt"}/>
           </div>
           <div className="pb-2">
-            <Link to={`/Obyekt/Kart/${props.id}`}>
+            <Link to={`/Obyekt/Kart/${props.Id}`}>
             <InfoObyekt props={props}/>
             </Link>
           </div>

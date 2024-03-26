@@ -6,6 +6,8 @@ const MainAdmin = () => {
   Scroll()
   const [isRentHome, setIsRentHome] = useState(false);
   const [isSellHome, setIsSellHome] = useState(false);
+  const [isLandHome, setIsLandHome] = useState(false);
+  const [isOfficeHome, setIsOfficeHome] = useState(false);
   const [isRentWarehouse, setIsRentWarehouse] = useState(false);
   return (
     <div>
@@ -47,6 +49,48 @@ const MainAdmin = () => {
                       </div>
                       <div >
                       <Link to="Sell/Payment">Ödəniş:</Link>
+                      </div>
+                    </div>
+                  </div >
+                )}
+      </div>
+      <div className="col-12 col-lg-3">
+                <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" onClick={() => setIsOfficeHome(!isOfficeHome)}>
+                  <span>Ofis:</span>
+                  <span ><i className="fa-solid fa-chevron-down"></i></span>
+                </div>
+                {isOfficeHome && (
+                  <div className='mt-3 col-12 pe-2'>
+                    <div className='col-12 div-in-select LinkTree ms-1 pe-1'>
+                      <div >
+                       <Link to="Office/Own">Ev sahibi:</Link>
+                      </div>
+                      <div >
+                      <Link to="Office/Customer">Müştəri:</Link>
+                      </div>
+                      <div >
+                      <Link to="Office/Payment">Ödəniş:</Link>
+                      </div>
+                    </div>
+                  </div >
+                )}
+      </div>
+      <div className="col-12 col-lg-3">
+                <div className="d-flex flex-row justify-content-between p-2 MakeHandSelect" onClick={() => setIsLandHome(!isLandHome)}>
+                  <span>Torpaq:</span>
+                  <span ><i className="fa-solid fa-chevron-down"></i></span>
+                </div>
+                {isLandHome && (
+                  <div className='mt-3 col-12 pe-2'>
+                    <div className='col-12 div-in-select LinkTree ms-1 pe-1'>
+                      <div >
+                       <Link to="Land/Own">Ev sahibi:</Link>
+                      </div>
+                      <div >
+                      <Link to="Land/Customer">Müştəri:</Link>
+                      </div>
+                      <div >
+                      <Link to="Land/Payment">Ödəniş:</Link>
                       </div>
                     </div>
                   </div >

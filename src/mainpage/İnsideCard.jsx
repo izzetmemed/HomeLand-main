@@ -9,6 +9,10 @@ import TurnImgIn from "../MyComponents/TurnImgIn";
 import UseFetchData from "../MyComponents/FetchImg";
 import FetchGetId from "../MyComponents/FetchGetId";
 import Share from "../MyComponents/Share";
+import AddTerritory from "../MyComponents/AddTerritory";
+import AddPrice from "../MyComponents/AddTerritory";
+import DateCutting from "../MyComponents/DateCutting";
+import GetImg from "../MyComponents/GetImg";
 const İnsideCard = () => {
   const { id } = useParams();
   const [MaklerNumber,setMaklerNumber]=useState(false)
@@ -23,18 +27,11 @@ const İnsideCard = () => {
    }, [getByIdData]);
    
 
-  const imageUrls = UseFetchData(GetById?.img, 'RentHomeImg');
+  const imageUrls = GetImg(GetById?.img);
 
   useEffect(() => {
    setKeepingImgSource(imageUrls);
-  }, [GetById, imageUrls]);
-  
-  const price = "Azn";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
-
+  }, [GetById]);
   
   return (
     <div>   
@@ -49,8 +46,7 @@ const İnsideCard = () => {
           {GetById && (
             <div className="pb-2 mt-3 pe-2">
               <p>
-                Qiymet:<span className="price-home">{GetById.price}</span>
-                <span>{price}</span>
+                Qiymet:<span className="price-home">{AddPrice(GetById.price)}</span>
               </p>
               <p>
                 Ünvan:<span className="address-home">{GetById.address}</span>
@@ -64,8 +60,7 @@ const İnsideCard = () => {
               <p>
                 Sahe:
                 <span className="measure-home">
-                  {GetById.area}
-                  <span>{teratory}</span>
+                  {AddTerritory(GetById.area,true) }
                 </span>
               </p>
               {GetById.addition
@@ -127,11 +122,11 @@ const İnsideCard = () => {
               <p>
                 Evi tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                {GetById.price * 20 /100}<span>{price}</span>
+                {AddPrice( GetById.price * 20 /100)}
                 </span>
               </p>
               <p>
-                Tarix:<span className="time-home">{convertDate(GetById.date)}</span>
+                Tarix:<span className="time-home">{DateCutting(GetById.date)}</span>
               </p>
               <div className="h-auto my-3">
               <Coordinate  CanClick={false} Xvalue={GetById.coordinateX} Yvalue={GetById.coordinateY}/>

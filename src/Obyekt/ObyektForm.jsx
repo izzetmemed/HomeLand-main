@@ -8,19 +8,18 @@ import Coordinate from "../mainpage/answer/coordinate";
 import NumberTurn from "../MyComponents/NumberTurn";
 import FetchPut from "../MyComponentsAdmin/FetchPut";
 import UpLoad from "../MyComponents/UpLoad";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import CheckEmpty from "../MyComponents/CheckEmpty";
+import CheckLength from "../MyComponents/CheckLength";
+import CheckNumber from "../MyComponents/CheckNumber";
+import WarningComp from "../MyComponents/WarningComp";
+
 const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
   const nav=useNavigate();
   const [IsLoading,setIsLoading]=useState(false);
   const [CoordinateX,setCoordinateX]=useState(null);
   const [CoordinateY,setCoordinateY]=useState(null);
-  const SendX=(x)=>{
-   setCoordinateX(x)
-  };
-  const SendY=(y)=>{
-   setCoordinateY(y)
-  };
-
+  const [warning, setWarning] = useState([]);
   const FullName = useRef(null);
   const Number = useRef(null);
   const Region = useRef(null);
@@ -101,6 +100,7 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
   };
 
   const UploadInformation = () => {
+    setWarning([]);
     const formData = {
       FullName: FullName.current.value,
       Number:NumberTurn(Number.current.value),
@@ -119,35 +119,41 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
       SellorRent: SellorRent.current.value,
       Document: sellOrRent ? Paper.current.value : null ,
     };
-
-    if (
-      formData.FullName !== "" &&
-      formData.FullName.length<50 &&
-      formData.Number !== "" &&
-      formData.Number.length<30 &&
-      formData.Address !== "" &&
-      formData.Address.length<50 &&
-      formData.Metro !== "" &&
-      formData.Price !== "" &&
-      formData.Price<40000000 &&
-      formData.Area !== "" &&
-      formData.Area<30000 &&
-      formData.İtem !== "" &&
-      formData.İtem.length<50 &&
-      formData.Repair !== "" &&
-      formData.Paper !== "" &&
-      formData.Address.length<50 &&
-      formData.Addition.length<500 &&
-      formData.SellorRent !== "" &&
-      images.length > 4 &&
-      !isNaN(parseFloat(formData.Price)) &&
-      !isNaN(parseFloat(formData.Area)) &&
-      !isNaN(parseFloat(formData.Room))
-    ) {
+    const Check = [
+      CheckEmpty(formData.FullName, setWarning, "FullNameWarn"),
+      CheckEmpty(formData.Number, setWarning, "NumberWarn"),
+      CheckEmpty(formData.CoordinateX ? null : "", setWarning, "CoordinateWarn"),
+      CheckEmpty(formData.Address, setWarning, "AddressWarn"),
+      CheckEmpty(formData.Metro, setWarning, "MetroWarn"),
+      CheckEmpty(formData.SellorRent, setWarning, "SellorRentWarn"),
+      CheckEmpty(formData.Price, setWarning, "PriceWarn"),
+      CheckEmpty(formData.İtem, setWarning, "ItemWarn"),
+      CheckEmpty(formData.Room, setWarning, "RoomWarn"),
+      CheckEmpty(formData.Repair, setWarning, "RepairWarn"),
+      CheckEmpty(formData.Region, setWarning, "RegionWarn"),
+      CheckEmpty(formData.Area, setWarning, "AreaWarn"),
+      CheckLength(formData.Number.length, setWarning, 30, "NumberLengthWarn"),
+      CheckLength(formData.Metro.length, setWarning, 50, "MetroLengthWarn"),
+      CheckLength(formData.Address.length, setWarning, 50, "AddressLengthWarn"),
+      CheckLength(formData.SellorRent.length, setWarning, 50, "SellorRentLengthWarn"),
+      CheckLength(formData.İtem.length, setWarning, 50, "ItemLengthWarn"),
+      CheckLength(
+        formData.Addition.length,
+        setWarning,
+        500,
+        "AdditionLengthWarn"
+      ),
+      CheckLength(5, setWarning,images.length , "ImagesLengthWarn"),
+      CheckLength(formData.Price, setWarning, 40000000, "PriceLengthWarn"),
+      CheckLength(formData.Area, setWarning, 30000, "AreaLengthWarn"),
+      CheckNumber(formData.Price, setWarning, "isNaNPriceWarn"),
+      CheckNumber(formData.Area, setWarning, "isNaNAreaWarn"),
+      CheckNumber(formData.Number, setWarning, "isNaNNumberWarn"),
+      CheckNumber(formData.Room, setWarning, "isNaNRoomWarn"),
+    ];
+    if (Check.every((x) => x === true)){
       if(!IsLoading){
-      setTimeout(() => {
         setIsLoading(true);
-      }, 500);
       FetchPostAll(formData,"Obyekt",imgFunc)
       setTimeout(() => {
         setIsLoading(false)
@@ -156,20 +162,6 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
           text: "Elanınız yükləndi.",
           icon: "success",
         });
-        FullName.current.value = "";
-      Number.current.value = "";
-      Address.current.value = "";
-      Area.current.value = "";
-      Addition.current.value = "";
-      Price.current.value = "";
-      Metro.current.value = "";
-      Region.current.value = "";
-      İtem.current.value = "";
-      Room.current.value = "";
-      Repair.current.value = "";
-      SellorRent.current.value = "";
-      setImages([]);
-      setImagesFile([]);
         nav("/obyekt");
       }, 10000);
     }else{
@@ -289,6 +281,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="text" ref={FullName} />
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"FullNameWarn"} Text={"Obyekt sahibinin adı və soyadı daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"FullNameLengthWarn"} Text={"Daha qısa ad və soyad daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
@@ -298,6 +294,11 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-input">
                 <input type="text" placeholder="0xx-xxx-xx-xx" ref={Number} inputmode="numeric"/>
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"NumberWarn"} Text={"Obyekt sahibinin əlaqə nömrəsi daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNNumberWarn"} Text={"Obyekt sahibinin əlaqə nömrəsi rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"NumberLengthWarn"} Text={"Daha qısa əlaqə nömrəsi daxil edilməlidir."}/>
             </div>
             <div>
               <div className="d-flex flex-column align-items-center mt-3">
@@ -330,6 +331,9 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </div>
               </div>
             </div>
+            <div>
+              <WarningComp warning={warning} StringName={"ImagesLengthWarn"} Text={"Ən azı 5 şəkil daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Obyektin yerləşdiyi rayon:</label>
@@ -353,6 +357,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"RegionWarn"} Text={"Obyektin yerləşdiyi rayon daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"RegionLengthWarn"} Text={"Daha qısa rayon adı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
@@ -362,6 +370,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-input">
                 <input type="text" ref={Address} />
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"AddressWarn"} Text={"Obyektin yerləşdiyi ünvan daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"AddressLengthWarn"} Text={"Daha qısa ünvan adı daxil edilməlidir."}/>
             </div>
             <div className="mt-3">
               <div className="div-in-label">
@@ -377,7 +389,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
-  
+            <div>
+            <WarningComp warning={warning} StringName={"SellorRentWarn"} Text={"Satılır yoxsa kirayə verilir ?"}/>
+            <WarningComp warning={warning} StringName={"SellorRentLengthWarn"} Text={"Daha qısa yazı daxil edilməlidir."}/>
+            </div>
             {sellOrRent && (
               <div className="mt-3">
                 <div className="div-in-label">
@@ -392,15 +407,18 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </div>
               </div>
             )}
-        
-           
             <div className="mt-3">
               <div className="div-in-label">
-                <label htmlFor="customerName"><span className="attention">* </span>Obyectinin qiyməti:</label>
+                <label htmlFor="customerName"><span className="attention">* </span>Obyektin qiyməti:</label>
               </div>
               <div className="col-12 div-in-input">
                 <input type="number" ref={Price} />
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"PriceWarn"} Text={"Obyektin qiyməti daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNPriceWarn"} Text={"Obyektin qiyməti rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"PriceLengthWarn"} Text={"Daha az qiymət daxil edilməlidir."}/>
             </div>
             <div className="mt-3">
               <div className="div-in-label">
@@ -416,11 +434,17 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
-            <div className="mt-3">
-            <p><span className="attention">* </span>Evin konumunu qeyd edin.</p>
-              <Coordinate x={SendX} y={SendY} CanClick={true}/>
+            <div>
+            <WarningComp warning={warning} StringName={"ItemWarn"} Text={"Seçim edin."}/>
+            <WarningComp warning={warning} StringName={"ItemLengthWarn"} Text={"Daha qısa əşya adı daxil edilməlidir."}/>
             </div>
-
+            <div className="mt-3">
+            <p><span className="attention">* </span>Obyektin konumunu qeyd edin.</p>
+              <Coordinate x={setCoordinateX} y={setCoordinateY} CanClick={true}/>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"CoordinateWarn"} Text={"Obyektin yerləşdiyi konum daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Metro:</label>
@@ -459,7 +483,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
-
+            <div>
+            <WarningComp warning={warning} StringName={"MetroWarn"} Text={"Obyekə yaxın metro adı daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"MetroLengthWarn"} Text={"Daha qısa metro adı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Otaq sayı:</label>
@@ -491,6 +518,11 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"RoomWarn"} Text={"Otaq sayı daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNRoomWarn"} Text={"Otaq sayı rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"RoomLengthWarn"} Text={"Daha az otaq sayı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Təmir:</label>
@@ -504,7 +536,10 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
-
+            <div>
+            <WarningComp warning={warning} StringName={"RepairWarn"} Text={"Obyektin təmiri daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"RepairLengthWarn"} Text={"Daha qısa ad daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Obyektin sahəsi: (m²)</label>
@@ -512,6 +547,11 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-input">
                 <input type="number" ref={Area} />
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"AreaWarn"} Text={"Obyektin sahəsi daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNAreaWarn"} Text={"Obyektin sahəsi rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"AreaLengthWarn"} Text={"Daha az sahə daxil edilməlidir."}/>
             </div>
             <div className="mt-3">
               <div className="div-in-label">
@@ -522,6 +562,9 @@ const ObyektForm = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-input">
                 <input type="text" ref={Addition} />
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"AdditionLengthWarn"} Text={"Qısa əlavə məlumat daxil edilməlidir."}/>
             </div>
             {IsLoading && ( <UpLoad/>)}
             <div className="d-flex justify-content-center col-12 mb-5">

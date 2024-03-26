@@ -3,10 +3,19 @@ import Section from '../section';
 import SectionObyekt from '../Obyekt/SectionObyekt';
 import SectionSell from '../SellHome/SectionSell';
 import FetchGetAll from '../MyComponents/FetchGetAll';
-
+import SectionLand from '../Land/SectionLand';
+import OfficeSection from "../Office/SectionOffice";
+import { useSelector } from 'react-redux';
+import { Load } from '../Load/Load';
 const Basket = () => {
-  const [getData, setGetData] = useState(JSON.parse(localStorage.getItem("Section")) || []);
+  const [getData,setGetData] = useState(useSelector(state => state.deleteBasket.data));
+
+  useEffect(() => {
+    setGetData(JSON.parse(localStorage.getItem("Section")) || []);
+  }, [useSelector(state => state.deleteBasket.data)]);
   const [getAllRentHome, setGetAllRentHome] = useState([]);
+  const [getAllLand, setGetAllLand] = useState([]);
+  const [getAllOffice, setGetAllOffice] = useState([]);
   const [getAllSell, setGetAllSell] = useState([]);
   const [getAllObyekt, setGetAllObyekt] = useState([]);
  
@@ -14,7 +23,6 @@ const Basket = () => {
   useEffect(() => {
     async function fetchRentHome() {
       try {
-        setTimeout(async() => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'rentHome')
           .map(item => item[0]);
@@ -22,18 +30,47 @@ const Basket = () => {
         const parsedData = resp.data.map(item => JSON.parse(item));
         const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
         setGetAllRentHome(rentData);
-        }, 500);
       } catch (error) {
         console.error('Error fetching RentHome:', error);
       }
     }
     fetchRentHome();
   }, [getData]);
-  
+  useEffect(() => {
+    async function fetchRentHome() {
+      try {
+          const BasketRentIds =await getData
+          .filter(x => x[1] === 'Land')
+          .map(item => item[0]);
+            const resp = await FetchGetAll("Land");
+        const parsedData = resp.data.map(item => JSON.parse(item));
+        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
+        setGetAllLand(rentData);
+      } catch (error) {
+        console.error('Error fetching RentHome:', error);
+      }
+    }
+    fetchRentHome();
+  }, [getData]);
+  useEffect(() => {
+    async function fetchRentHome() {
+      try {
+          const BasketRentIds =await getData
+          .filter(x => x[1] === 'Office')
+          .map(item => item[0]);
+            const resp = await FetchGetAll("Office");
+        const parsedData = resp.data.map(item => JSON.parse(item));
+        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
+        setGetAllOffice(rentData);
+      } catch (error) {
+        console.error('Error fetching RentHome:', error);
+      }
+    }
+    fetchRentHome();
+  }, [getData]);
   useEffect(() => {
     async function fetchObyekt() {
       try {
-        setTimeout(async() => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'obyekt')
           .map(item => item[0]);
@@ -41,18 +78,15 @@ const Basket = () => {
         const parsedData = resp.data.map(item => JSON.parse(item));
         const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
           setGetAllObyekt(rentData);
-        }, 600);
       } catch (error) {
         console.error('Error fetching Obyekt:', error);
       }
     }
     fetchObyekt();
   }, [getData]); 
-  
   useEffect(() => {
     async function fetchSell() {
       try {
-        setTimeout(async() => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'sellHome')
           .map(item => item[0]);
@@ -60,7 +94,6 @@ const Basket = () => {
             const parsedData = resp.data.map(item => JSON.parse(item));
             const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
             setGetAllSell(rentData);
-        }, 700);
       } catch (error) {
         console.error('Error fetching Sell:', error);
       }
@@ -68,18 +101,7 @@ const Basket = () => {
     fetchSell();
   }, [getData]); 
   
-  const handleDelete = (Id,type) => {
-    var DatainLocal=JSON.parse(localStorage.getItem("Section")) || []
-      var index=DatainLocal.findIndex(x=>x[0]===Id && x[1]===type)
-      DatainLocal.splice(index, 1);
-      localStorage.setItem("Section", JSON.stringify(DatainLocal));
-      setGetData(JSON.parse(localStorage.getItem("Section")) || []);
-  };
-
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
-  const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState(true);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -88,6 +110,11 @@ const Basket = () => {
 
     return () => clearTimeout(timeoutId);
   }, []);
+  useEffect(() => {
+      const timer = setTimeout(() => setShowMessage(false), 10000);
+      return () => clearTimeout(timer);
+  }, []);
+  
   return (
     <div>
        <div className="col-12 mt-3 pe-2 ps-2">
@@ -99,57 +126,40 @@ const Basket = () => {
       {getAllObyekt.map((x, index) => (
         <SectionObyekt
           key={index}
-          id={x.Id}
-          priceHome={x.Price}
-          address={x.Address}
-          MetroHome={x.Metro}
-          roomHome={x.Room}
-          SellorRent={x.SellorRent}
-          Region={x.Region}
-          measureHome={x.Area}
-          dateTime={convertDate(x.Date)}
-          imgNames={x.Img}
-          deleteButton={true}
-          deleteBasket={() => handleDelete(x.Id,"obyekt")}
+          props={x}
+         
+        />
+      ))}
+      {getAllOffice.map((x, index) => (
+        <OfficeSection
+          key={index}
+          props={x}
+   
         />
       ))}
       {getAllSell.map((x, index) => (
         <SectionSell
         key={index}
-        id={x.Id}
-        priceHome={x.Price}
-        address={x.Address}
-        MetroHome={x.Metro}
-        roomHome={x.Room}
-        Sənəd={x.Document}
-        Region={x.Region}
-        measureHome={x.Area}
-        dateTime={convertDate(x.Date)}
-        imgNames={x.Img} 
-        deleteButton={true}
-        deleteBasket={() => handleDelete(x.Id,"sellHome")}
+        props={x}
+
+        />
+      ))}
+      {getAllLand.map((x, index) => (
+        <SectionLand
+        key={index}
+        props={x}
+
         />
       ))}
       {getAllRentHome.map((x, index) => (
         <Section
         key={index}
-        id={x.Id}
-        priceHome={x.Price}
-        address={x.Address}
-        MetroHome={x.Metro}
-        roomHome={x.Room}
-        Items={x.Item}
-        region={x.Region}
-        measureHome={x.Area}
-        dateTime={convertDate(x.Date)}
-        imgNames={x.Img}
-        deleteBasket={() => handleDelete(x.Id,"rentHome")}
-        deleteButton={true}
+        props={x}
         />
       ))}
-      {getAllRentHome.length === 0 && getAllSell.length === 0 && getAllObyekt.length === 0 && (
+      {getAllRentHome.length === 0 && getAllSell.length === 0 && getAllObyekt.length === 0 && getAllLand.length=== 0 && getAllOffice.length=== 0 && (
         <div className='w-100 BasketİsEmpty d-flex justify-content-center align-items-center'> 
-         {showMessage && <p className='fs-3'>Səbətiniz boşdur.</p>}
+         {showMessage  ? <Load/> :  <p className='fs-3 '>Səbətiniz boşdur.</p>}
        </div>
       )}
       </div>

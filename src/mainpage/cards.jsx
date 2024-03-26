@@ -6,6 +6,7 @@ import Pagenation from '../pagenation';
 import {Load} from "../Load/Load"
 import FetchGetAll from '../MyComponents/FetchGetAll';
 import Scroll from '../MyComponents/Scroll';
+
 const Cards = () => {
   Scroll();
   const [filteredData, setFilteredData] = useState([]);
@@ -15,24 +16,7 @@ const Cards = () => {
   const [Room, setRoom] = useState([]);
   const [Price, setPrice] = useState([]);
  const [click, setClick]=useState();
-  const ClickFunc=(x)=>{
-    setClick(x)
-  }
-  const sendDataToSelecedids=(x)=>{
-    setSelectedIds(x)
-  }
-  const sendDataToHomeOrFlat=(x)=>{
-    setHomeOrFlat(x)
-  }
-  const sendDataRegion=(x)=>{
-    setRegion(x)
-  }
-  const sendDataRoom=(x)=>{
-    setRoom(x)
-  }
-  const sendDataPrice=(x)=>{
-    setPrice(x);
-  }
+
   var works=true;
   useEffect(() => {
     const RoomInt=Room.map(x=>Number(x));
@@ -91,18 +75,12 @@ const Cards = () => {
   
   const [currentPage, setCurrentPage] = useState(1);
   const [itemCount, setItemCount] = useState(20);
-  
-  const setPage=(x)=>{
-    setCurrentPage(x)
-   }
+
 const lastIndex=currentPage*itemCount;
 const firstItem=lastIndex-itemCount;
 const filteredDataSlice=filteredData.slice(firstItem,lastIndex); 
 const countOfPagenation =Math.ceil(filteredData.length/itemCount);
 
-const convertDate = (x) => {
-  return x.toString().replace("T", " ").substring(0, 16);
-};
 const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
 
 const [showLoad, setShowLoad] = useState(true);
@@ -117,22 +95,12 @@ useEffect(() => {
 }, [filteredDataSlice.length]);
   return (
     <div>
-      <Search   setFunc={sendDataToSelecedids} setHomeOrFlat={sendDataToHomeOrFlat} setRegion={sendDataRegion} setRoom={sendDataRoom} setPrice={sendDataPrice} setClick={ClickFunc}/>
+      <Search   setFunc={setSelectedIds} setHomeOrFlat={setHomeOrFlat} setRegion={setRegion} setRoom={setRoom} setPrice={setPrice} setClick={setClick}/>
       <div className='d-flex flex-wrap'>
-        {parsedData.map((x) => (
+        {parsedData.map((x,index) => (
           <Section
-            id={x.Id}
-            type={"rentHome"}
-            priceHome={x.Price}
-            address={x.Address}
-            MetroHome={x.Metro}
-            Items={x.Item}
-            roomHome={x.Room}
-            region={x.Region}
-            measureHome={x.Area}
-            dateTime={convertDate(x.Date)}
-            imgNames={x.Img}
-            key={x.Id} 
+            props={x}
+            key={index} 
           />
         ))}
         {filteredDataSlice.length === 0 && (
@@ -143,7 +111,7 @@ useEffect(() => {
       </div>
       
       <Outlet />
-      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage}/>
+      <Pagenation countOfPagenation={countOfPagenation} setPage={setCurrentPage}/>
     </div>
   )
 }

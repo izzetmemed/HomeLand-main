@@ -8,7 +8,6 @@ const UpLoad = () => {
     const interval = setInterval(() => {
       setCounter(prevCounter => {
         const newCounter = prevCounter + 1;
-        console.log(newCounter); // Log the updated value
         if (newCounter > 99) {
           clearInterval(interval);
         }

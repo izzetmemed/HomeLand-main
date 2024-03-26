@@ -37,6 +37,24 @@ import ObyektinsidePayment from "../Obyekt/Admin/Payment/ObyektInsidePayment";
 import ProtectedRoute from "./ProtectedRoute";
 import MapSection from "../mainpage/MapSection";
 import OnlyMyPage from "../Director/OnlyMyPage";
+import LandCard from "../Land/CardsLand";
+import LandForm from "../Land/LandForm";
+import InsideLand from "../Land/İnsideCard";
+import LandCustomer from "../Land/Admin/Customer/LandCustomer";
+import LandInsideCustomer from "../Land/Admin/Customer/LandInsideCustomer";
+import LandOwn from "../Land/Admin/Own/LandOwn";
+import LandInsideOwn from "../Land/Admin/Own/LandInsideOwn";
+import LandPayment from "../Land/Admin/Payment/LandPayment";
+import LandInsidePayment from "../Land/Admin/Payment/LandInsidePayment";
+import Office from "../Office/CardsOffice";
+import InsideCardOfffice from "../Office/InsideCardOfffice";
+import OfficeForm from "../Office/OfficeForm";
+import OfficeCustomer from "../Office/Admin/Costumer/OfficeCustomer";
+import OfficeInsideCustomer from "../Office/Admin/Costumer/OfficeInsideCustomer";
+import OfficeInsideOwn from "../Office/Admin/Own/OfficeInsideOwn";
+import OfficeOwn from "../Office/Admin/Own/OfficeOwn";
+import OfficePayment from "../Office/Admin/Payment/OfficePayment";
+import OfficeInsidePayment from "../Office/Admin/Payment/OfficeInsidePayment";
 const route = () => {
   return (
     <div>
@@ -48,6 +66,8 @@ const route = () => {
           <Route path="/Sell" element={<CardsSell />} />
           <Route path="/Sell/Kart/:id" element={<InsideCardsSell />} />
           <Route path="/Sell/səbət" element={<Basket />} />
+          <Route path="/Office/səbət" element={<Basket />} />
+          <Route path="/Land/səbət" element={<Basket />} />
           <Route path="/kiraye-ev-form" element={<Rent />} />
 
           <Route path="*" element={<Error />} />
@@ -56,13 +76,24 @@ const route = () => {
           <Route path="/səbət" element={<Basket />} />
           <Route path="/mapSearch" element={<MapSection link={"RentHome/Coordinate"} Rent={true}/>} />
           <Route path="/Sell/mapSearch" element={<MapSection link={"Sell/Coordinate"} Sell={true}/>} />
+          <Route path="/Office/mapSearch" element={<MapSection link={"Office/Coordinate"} Office={true}/>} />
+          <Route path="/Land/mapSearch" element={<MapSection link={"Land/Coordinate"} Land={true}/>} />
           <Route path="Obyekt/mapSearch" element={<MapSection link={"Obyekt/Coordinate"} Obyekt={true}/>} />
           <Route path="/Obyekt" element={<Obyekt />} />
           <Route path="/obyekt/Kart/:id" element={<InsideCardsObyekt />} />
           <Route path="/Obyekt/səbət" element={<Basket />} />
           <Route path="/Obyekt-form" element={<ObyektForm />} />
           <Route path="/HomeLogin" element={<Login />} />
+          <Route path="/Land" element={<LandCard/>}/>
+          <Route path="/land-form" element={<LandForm/>}/>
+          <Route path="/Land/Kart/:id" element={<InsideLand />} />
+
+          <Route path="/Office" element={<Office/>}/>
+          <Route path="/Office-form" element={<OfficeForm/>}/>
+          <Route path="/Office/Kart/:id" element={<InsideCardOfffice />} />
+
           <Route path="/HomeLogin/MainAdmin/Director" element={<ProtectedRoute><OnlyMyPage/></ProtectedRoute>} />
+         
           <Route
             path="/HomeLogin/MainAdmin"
             element={
@@ -143,6 +174,54 @@ const route = () => {
           <Route
             path="/HomeLogin/MainAdmin/Obyekt/Payment/Kart/:id"
             element={<ProtectedRoute><ObyektinsidePayment /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Land/Customer"
+            element={<ProtectedRoute><LandCustomer /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Land/Customer/Kart/:id"
+            element={<ProtectedRoute><LandInsideCustomer /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Land/Own"
+            element={<ProtectedRoute><LandOwn /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Land/Own/Kart/:id"
+            element={<ProtectedRoute><LandInsideOwn /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Land/Payment"
+            element={<ProtectedRoute><LandPayment /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Land/Payment/Kart/:id"
+            element={<ProtectedRoute><LandInsidePayment /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Office/Customer"
+            element={<ProtectedRoute><OfficeCustomer /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Office/Customer/Kart/:id"
+            element={<ProtectedRoute><OfficeInsideCustomer /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Office/Own"
+            element={<ProtectedRoute><OfficeOwn /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Office/Own/Kart/:id"
+            element={<ProtectedRoute><OfficeInsideOwn /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Office/Payment"
+            element={<ProtectedRoute><OfficePayment /></ProtectedRoute>}
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Office/Payment/Kart/:id"
+            element={<ProtectedRoute><OfficeInsidePayment /></ProtectedRoute>}
           />
         </Route>
       </Routes>

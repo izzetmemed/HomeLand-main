@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import Coordinate from "../mainpage/answer/coordinate";
-import CardsSell from "./CardsSell";
 import { useParams } from "react-router-dom";
 import GetBack from "../MyComponents/GetBack";
 import Scroll from "../MyComponents/Scroll";
@@ -10,6 +9,9 @@ import CallToMakler from "../MyComponents/CallToMakler";
 import FetchGetId from "../MyComponents/FetchGetId";
 import UseFetchData from "../MyComponents/FetchImg";
 import Share from '../MyComponents/Share';
+import DateCutting from "../MyComponents/DateCutting"
+import AddPrice from "../MyComponents/AddPrice";
+import AddTerritory from "../MyComponents/AddTerritory";
 const İnsideCardSell = () => {
   const { id } = useParams();
   Scroll();
@@ -27,13 +29,8 @@ const İnsideCardSell = () => {
 
   useEffect(() => {
    setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
+  }, [getById]);
   
-  const price = "Azn";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
@@ -47,8 +44,7 @@ const İnsideCardSell = () => {
           {getById && ( 
             <div className="pb-2 mt-3 pe-2">
               <p>
-                Qiymet:<span className="price-home">{getById.price}</span>
-                <span>{price}</span>
+                Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
               </p>
               <p>
                 Ünvan:<span className="address-home">{getById.address}</span>
@@ -62,8 +58,7 @@ const İnsideCardSell = () => {
               <p>
                 Sahe:
                 <span className="measure-home">
-                  {getById.area}
-                  <span>{teratory}</span>
+                  {AddTerritory(getById.area)}
                 </span>
               </p>
               {getById.addition
@@ -89,11 +84,11 @@ const İnsideCardSell = () => {
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                {getById.price * 1 /100}<span>{price}</span>
+                {AddPrice(getById.price * 1 /100)}
                 </span>
               </p>
               <p>
-                Tarix:<span className="time-home">{convertDate(getById.date)}</span>
+                Tarix:<span className="time-home">{DateCutting(getById.date)}</span>
               </p>
               <div className="height-for-coordiante mt-2 mb-2 p-4">
                 <Coordinate CanClick={false} Xvalue={getById.coordinateX} Yvalue={getById.coordinateY}/>

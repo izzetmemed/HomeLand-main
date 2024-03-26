@@ -6,10 +6,12 @@ import UseFetchData from "../../../MyComponents/FetchImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
 import FetchPostAll from "../../../MyComponents/FetchPostAll";
 import GetBack from "../../../MyComponents/GetBack";
-import FetchPutImg from "../../../MyComponents/FetchPutImg";
+import DateCutting from "../../../MyComponents/DateCutting";
+import GetImg from "../../../MyComponents/GetImg";
+import AddPrice from "../../../MyComponents/AddPrice";
+import AddTerritory from "../../../MyComponents/AddTerritory";
 const ObyektinsidePayment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,17 +23,14 @@ const ObyektinsidePayment = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  const imageUrls = UseFetchData(getById?.img, "ObyektImg");
-
+  if(getById){
+    var imageUrls =GetImg(getById.img);
+  }else{
+    imageUrls=[];
+  }
   useEffect(() => {
     setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
-
-  const price = "Aze";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
 
   const Reload = async () => {
     const ReloadData = {
@@ -95,8 +94,7 @@ const ObyektinsidePayment = () => {
           {getById && (
             <div className="pb-2 mt-3">
               <p>
-                Qiymet:<span className="price-home">{getById.price}</span>
-                <span>{price}</span>
+                Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
               </p>
               <p>
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
@@ -119,8 +117,7 @@ const ObyektinsidePayment = () => {
               <p>
                 Sahe:
                 <span className="measure-home">
-                  {getById.area}
-                  <span>{teratory}</span>
+                  {AddTerritory(getById.area) }
                 </span>
               </p>
               {getById.addition && (
@@ -148,19 +145,17 @@ const ObyektinsidePayment = () => {
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 {getById.sellorRent === "Satılır" ? (
                   <span className="time-home">
-                    {(getById.price * 1) / 100}
-                    <span>{price}</span>
+                    {AddPrice((getById.price * 1) / 100)}
                   </span>
                 ) : (
                   <span className="time-home">
-                    {(getById.price * 20) / 100}
-                    <span>{price}</span>
+                    {(AddPrice(getById.price * 20) / 100)}
                   </span>
                 )}
               </p>
               <p>
                 Tarix:
-                <span className="time-home">{convertDate(getById.date)}</span>
+                <span className="time-home">{DateCutting(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto">
                 <div className="col-12 col-sm-6 d-flex px-1">
@@ -178,7 +173,7 @@ const ObyektinsidePayment = () => {
                           <tr key={index}>
                             <td>{x.fullName}</td>
                             <td>{x.number}</td>
-                            <td>{convertDate(x.directCustomerDate)}</td>
+                            <td>{DateCutting(x.directCustomerDate)}</td>
                           </tr>
                         ))}
                     </tbody>

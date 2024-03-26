@@ -7,7 +7,7 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
 import {useNavigate} from 'react-router-dom';
 
-const MapSearch = ({Array ,Rent,Sell,Obyekt}) => {
+const MapSearch = ({Array ,Rent,Sell,Obyekt,Land,Office}) => {
     var nav=useNavigate();
     var StringParse;
     if(Array.length>0){
@@ -41,6 +41,10 @@ const MapSearch = ({Array ,Rent,Sell,Obyekt}) => {
                             nav(`/Kart/${StringParse[index].Id}`);
                         }else if(Sell){
                             nav(`/Sell/Kart/${StringParse[index].Id}`);
+                        }else if(Land){
+                            nav(`/Land/Kart/${StringParse[index].Id}`);
+                        }else if(Office){
+                            nav(`/Office/Kart/${StringParse[index].Id}`);
                         }else if(Obyekt){
                             nav(`/Obyekt/Kart/${StringParse[index].Id}`);
                         } 

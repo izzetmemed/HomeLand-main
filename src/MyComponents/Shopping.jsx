@@ -1,14 +1,15 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
-const Shopping = (props) => {
-    var data=props.props;
-
+import { useDispatch } from 'react-redux';
+import { setData } from '../Redux/DeleteBasket';
+const Shopping = ({props,type}) => {
+  const dispatch = useDispatch();
   const [changeColor, setchangeColor] = useState(false);
   const [CheckRptrData, setCheckRptrData] = useState(true);
   const newData = [
     [
-      data.id,
-      data.type,
+      props.Id,
+      type,
     ],
   ];
     const SendBasket = () => {
@@ -22,42 +23,42 @@ const Shopping = (props) => {
           setCheckRptrData(false);
         } else {
           setchangeColor(false);
-          const updatedData = LastinfoLocal;
-          const indexToRemove = updatedData.findIndex(
-            (item) => item[0] === data.id && item[1] === data.type
+          const indexToRemove = LastinfoLocal.findIndex(
+            (item) => item[0] === props.Id && item[1] === type
           );
             setCheckRptrData(true);
           if (indexToRemove !== -1) {
-            updatedData.splice(indexToRemove, 1);
-            localStorage.setItem("Section", JSON.stringify(updatedData));
+            LastinfoLocal.splice(indexToRemove, 1);
+            localStorage.setItem("Section", JSON.stringify(LastinfoLocal));
           }
         }
+        dispatch(setData(JSON.parse(localStorage.getItem("Section")) || []));
       };
       useEffect(() => {
         const isHave = (JSON.parse(localStorage.getItem("Section")) || []).some(
-          (x) => x[0] === props.props.id && x[1] === props.props.type
+          (x) => x[0] === props.Id && x[1] === type
         );
         if (isHave) {
           setchangeColor(true);
           setCheckRptrData(false);
         }
-      }, []);
+      }, [props]);
       const mybasketOnImg = {
-        display:data.deleteButton? "none": "block"
+        display:changeColor? "none": "block"
       };
       const MyTrashonImg={
-        display:data.deleteButton? "block": "none"
+        display:changeColor? "block": "none"
       }
   return (
     <>
             <span
-              className={"mybasketOnImg " + (changeColor ? "HomeLandColor" : "")}
+              className={"mybasketOnImg "}
               style={mybasketOnImg}
               onClick={SendBasket}
             >
               <i className="fa-solid fa-basket-shopping"></i>
             </span>
-            <span className="mydeleteOnImg" style={MyTrashonImg} onClick={data.deleteBasket}>
+            <span className="mydeleteOnImg" style={MyTrashonImg} onClick={SendBasket}>
               <i className="fa-solid fa-trash"></i>
             </span>
     </>

@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
-import UseFetchData from "../../../MyComponents/FetchImg";
+import GetImg from "../../../MyComponents/GetImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchPostAll from "../../../MyComponents/FetchPostAll";
-import FetchPutImg from "../../../MyComponents/FetchPutImg";
-import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
+
 import Swal from "sweetalert2";
 import { useNavigate } from 'react-router-dom';
 import GetBack from "../../../MyComponents/GetBack";
+import AddPrice from "../../../MyComponents/AddPrice";
+import AddTerritory from "../../../MyComponents/AddTerritory";
+import DateCutting from "../../../MyComponents/DateCutting";
 const İnsideCardPayment = () => {
   const { id } = useParams();
  const navigate = useNavigate();
@@ -22,18 +24,14 @@ const İnsideCardPayment = () => {
     setGetById(getByIdData);
    }, [getByIdData]);
    
-
-  const imageUrls = UseFetchData(getById?.img, 'RentHomeImg');
-
+   if(getById){
+    var imageUrls =GetImg(getById.img);
+  }else{
+    imageUrls=[];
+  }
   useEffect(() => {
    setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
-  
-  const price = "Aze";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
 
   const Reload=async()=>{
     const ReloadData = {
@@ -117,8 +115,7 @@ executeSequentially();
           {getById && (
             <div className="pb-2 mt-3">
               <p>
-                Qiymet:<span className="price-home">{getById.price}</span>
-                <span>{price}</span>
+                Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
               </p>
               <p>
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
@@ -141,8 +138,7 @@ executeSequentially();
               <p>
                 Sahe:
                 <span className="measure-home">
-                  {getById.area}
-                  <span>{teratory}</span>
+                  {AddTerritory(getById.area)}
                 </span>
               </p>
               {getById.addition && (
@@ -167,8 +163,7 @@ executeSequentially();
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                  {(getById.price * 20) / 100}
-                  <span>{price}</span>
+                  {(AddPrice(getById.price * 20) / 100)}
                 </span>
               </p>
               <p>
@@ -208,7 +203,7 @@ executeSequentially();
               </p>
               <p>
                 Tarix:
-                <span className="time-home">{convertDate(getById.date)}</span>
+                <span className="time-home">{DateCutting(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto mt-3">
             <div className="col-12 col-sm-6 d-flex px-1">
@@ -226,7 +221,7 @@ executeSequentially();
                       <tr key={index}>
                         <td>{x.fullName}</td>
                         <td>{x.number}</td>
-                        <td>{convertDate(x.directCustomerDate)}</td>
+                        <td>{DateCutting(x.directCustomerDate)}</td>
                       </tr>
                     ))}
                 </tbody>

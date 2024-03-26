@@ -9,19 +9,16 @@ import TurnImgIn from "../../MyComponents/TurnImgIn";
 import NumberTurn from "../../MyComponents/NumberTurn";
 import FetchPut from "../../MyComponentsAdmin/FetchPut";
 import UpLoad from "../../MyComponents/UpLoad";
+import CheckEmpty from "../../MyComponents/CheckEmpty";
+import CheckLength from "../../MyComponents/CheckLength";
+import CheckNumber from "../../MyComponents/CheckNumber";
+import WarningComp from "../../MyComponents/WarningComp";
 const Rent = ({ Data, IsUpdating, SendFalse}) => {
   const nav=useNavigate();
   const [IsLoading,setIsLoading]=useState(false);
    const [CoordinateX,setCoordinateX]=useState(null);
  const [CoordinateY,setCoordinateY]=useState(null);
-
- const SendX=(x)=>{
-  setCoordinateX(x)
- };
- const SendY=(y)=>{
-  setCoordinateY(y)
- };
-
+ const [warning, setWarning] = useState([]);
   const FullName = useRef(null);
   const Number = useRef(null);
   const Region = useRef(null);
@@ -115,6 +112,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
   };
 
   const UploadInformation = () => {
+    setWarning([]);
     const formData = {
       FullName: FullName.current.value,
       Number:NumberTurn(Number.current.value),
@@ -147,35 +145,43 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       WorkingBoy: WorkingBoy.current.checked,
       Addition: Addition.current.value,
     };
-    if (
-      formData.FullName !== "" &&
-      formData.FullName.length<50 &&
-      formData.Number !== "" &&
-      formData.Number.length<30 &&
-      formData.Address !== "" &&
-      formData.Address.length<50 &&
-      formData.Metro !== "" &&
-      formData.Price !== "" &&
-      formData.Price<40000000 &&
-      formData.Floor !== "" &&
-      formData.Floor.length<50 &&
-      formData.Area !== "" &&
-      formData.Area<30000 &&
-      formData.İtem !== "" &&
-      formData.İtem.length<50 &&
-      formData.Repair !== "" &&
-      formData.Address !== "" &&
-      formData.Address.length<50 &&
-      formData.Addition.length<500 &&
-      images.length > 4 &&
-      !isNaN(parseFloat(formData.Price)) &&
-      !isNaN(parseFloat(formData.Area)) &&
-      !isNaN(parseFloat(formData.Room)) 
-    ) {
+    const Check = [
+      CheckEmpty(formData.FullName, setWarning, "FullNameWarn"),
+      CheckEmpty(formData.Number, setWarning, "NumberWarn"),
+      CheckEmpty(formData.CoordinateX ? null : "", setWarning, "CoordinateWarn"),
+      CheckEmpty(formData.Address, setWarning, "AddressWarn"),
+      CheckEmpty(formData.Metro, setWarning, "MetroWarn"),
+      CheckEmpty(formData.Price, setWarning, "PriceWarn"),
+      CheckEmpty(formData.İtem, setWarning, "ItemWarn"),
+      CheckEmpty(formData.Room, setWarning, "RoomWarn"),
+      CheckEmpty(formData.Repair, setWarning, "RepairWarn"),
+      CheckEmpty(formData.Floor, setWarning, "FloorWarn"),
+      CheckEmpty(formData.Building, setWarning, "BuildingWarn"),
+      CheckEmpty(formData.Region, setWarning, "RegionWarn"),
+      CheckEmpty(formData.Area, setWarning, "AreaWarn"),
+      CheckLength(formData.Number.length, setWarning, 30, "NumberLengthWarn"),
+      CheckLength(formData.Building.length, setWarning, 30, "BuildingLengthWarn"),
+      CheckLength(formData.Metro.length, setWarning, 50, "MetroLengthWarn"),
+      CheckLength(formData.Floor.length, setWarning, 50, "FloorLengthWarn"),
+      CheckLength(formData.Address.length, setWarning, 50, "AddressLengthWarn"),
+      CheckLength(formData.İtem.length, setWarning, 50, "ItemLengthWarn"),
+      CheckLength(
+        formData.Addition.length,
+        setWarning,
+        500,
+        "AdditionLengthWarn"
+      ),
+      CheckLength(5, setWarning,images.length , "ImagesLengthWarn"),
+      CheckLength(formData.Price, setWarning, 40000000, "PriceLengthWarn"),
+      CheckLength(formData.Area, setWarning, 30000, "AreaLengthWarn"),
+      CheckNumber(formData.Price, setWarning, "isNaNPriceWarn"),
+      CheckNumber(formData.Area, setWarning, "isNaNAreaWarn"),
+      CheckNumber(formData.Number, setWarning, "isNaNNumberWarn"),
+      CheckNumber(formData.Room, setWarning, "isNaNRoomWarn"),
+    ];
+    if (Check.every((x) => x === true)){
       if(!IsLoading){
-        setTimeout(() => {
           setIsLoading(true);
-        }, 500);
         FetchPostAll(formData,"RentHome",imgFunc);
         
         setTimeout(() => {
@@ -185,35 +191,6 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             text: "Elanınız yükləndi.",
             icon: "success",
           });
-          FullName.current.value = "";
-          Number.current.value = "";
-          Address.current.value = "";
-          Floor.current.value = "";
-          Area.current.value = "";
-          Addition.current.value = "";
-          Price.current.value = "";
-          Metro.current.value = "";
-          Region.current.value = "";
-          Building.current.value = "";
-          Room.current.value = "";
-          Repair.current.value = "";
-          İtem.current.value = "";
-          Bed.current.checked = false;
-          wardrobe.current.checked = false;
-          TableChair.current.checked = false;
-          HeatingSystem.current.checked = false;
-          GasHeating.current.checked = false;
-          Combi.current.checked = false;
-          Tv.current.checked = false;
-          WashingClothes.current.checked = false;
-          AirConditioning.current.checked = false;
-          Sofa.current.checked = false;
-          Wifi.current.checked = false;
-          Boy.current.checked = false;
-          Girl.current.checked = false;
-          Family.current.checked = false;
-          WorkingBoy.current.checked = false;
-       
           nav("/");
         }, 10000);
       }else{
@@ -295,38 +272,6 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
           icon: "success",
         });
       }, 500);
-
-      FullName.current.value = "";
-      Number.current.value = "";
-      Address.current.value = "";
-      Floor.current.value = "";
-      Area.current.value = "";
-      Addition.current.value = "";
-      Price.current.value = "";
-      Metro.current.value = "";
-      Region.current.value = "";
-      Building.current.value = "";
-      Room.current.value = "";
-      Repair.current.value = "";
-      İtem.current.value = "";
-      Bed.current.checked = false;
-      wardrobe.current.checked = false;
-      TableChair.current.checked = false;
-      HeatingSystem.current.checked = false;
-      GasHeating.current.checked = false;
-      Combi.current.checked = false;
-      Tv.current.checked = false;
-      WashingClothes.current.checked = false;
-      AirConditioning.current.checked = false;
-      Sofa.current.checked = false;
-      Wifi.current.checked = false;
-      Boy.current.checked = false;
-      Girl.current.checked = false;
-      Family.current.checked = false;
-      WorkingBoy.current.checked = false;
-      setImages([]);
-      setImagesFile([]);
-
       SendFalse();
 
     } else {
@@ -372,6 +317,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="text" ref={FullName} />
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"FullNameWarn"} Text={"Ev sahibinin adı və soyadı daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"FullNameLengthWarn"} Text={"Daha qısa ad və soyad daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
@@ -381,6 +330,11 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-input">
                 <input type="text" placeholder="0xx-xxx-xx-xx" ref={Number} inputmode="numeric"/>
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"NumberWarn"} Text={"Ev sahibinin əlaqə nömrəsi daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNNumberWarn"} Text={"Ev sahibinin əlaqə nömrəsi rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"NumberLengthWarn"} Text={"Daha qısa əlaqə nömrəsi daxil edilməlidir."}/>
             </div>
             <div>
               <div className="d-flex flex-column align-items-center mt-3">
@@ -413,6 +367,9 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </div>
               </div>
             </div>
+            <div>
+              <WarningComp warning={warning} StringName={"ImagesLengthWarn"} Text={"Ən azı 5 şəkil daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Evin yerləşdiyi rayon:</label>
@@ -436,6 +393,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"RegionWarn"} Text={"Evin yerləşdiyi rayon daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"RegionLengthWarn"} Text={"Daha qısa rayon adı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
@@ -446,6 +407,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="text" ref={Address} />
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"AddressWarn"} Text={"Evin yerləşdiyi ünvan daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"AddressLengthWarn"} Text={"Daha qısa ünvan adı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Mərtəbə:</label>
@@ -454,11 +419,18 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="text" placeholder=" 1/10" ref={Floor} />
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"FloorWarn"} Text={"Mərtəbə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"FloorLengthWarn"} Text={"Daha qısa mərtəbə adı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
             <p><span className="attention">* </span>Evin konumunu qeyd edin.</p>
-              <Coordinate x={SendX} y={SendY} CanClick={true} />
+              <Coordinate x={setCoordinateX} y={setCoordinateY} CanClick={true} />
             </div>
-
+            <div>
+            <WarningComp warning={warning} StringName={"CoordinateWarn"} Text={"Evin yerləşdiyi konum daxil edilməlidir."}/>
+            </div>
+            
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Metro:</label>
@@ -497,7 +469,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
-
+            <div>
+            <WarningComp warning={warning} StringName={"MetroWarn"} Text={"Evə yaxın metro adı daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"MetroLengthWarn"} Text={"Daha qısa metro adı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Otaq sayı:</label>
@@ -529,6 +504,11 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"RoomWarn"} Text={"Otaq sayı daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNRoomWarn"} Text={"Otaq sayı rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"RoomLengthWarn"} Text={"Daha az otaq sayı daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Təmir:</label>
@@ -542,6 +522,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 </select>
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"RepairWarn"} Text={"Evin təmiri daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"RepairLengthWarn"} Text={"Daha qısa ad daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Bina:</label>
@@ -554,6 +538,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Köhnə tikili bina.">Köhnə tikili bina.</option>
                 </select>
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"BuildingWarn"} Text={"Evin binası daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"BuildingLengthWarn"} Text={"Daha qısa bina adı daxil edilməlidir."}/>
             </div>
             <div className="mt-3">
               <div className="div-in-label">
@@ -571,6 +559,10 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                   <option value="Ev əşyalı verilir.">Ev əşyalı verilir.</option>
                 </select>
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"ItemWarn"} Text={"Seçim edin."}/>
+            <WarningComp warning={warning} StringName={"ItemLengthWarn"} Text={"Daha qısa əşya adı daxil edilməlidir."}/>
             </div>
             <div className="mt-3">
               <div className="div-in-label">
@@ -635,6 +627,11 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="Number" ref={Area} inputmode="numeric"/>
               </div>
             </div>
+            <div>
+            <WarningComp warning={warning} StringName={"AreaWarn"} Text={"Evin sahəsi daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNAreaWarn"} Text={"Evin sahəsi rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"AreaLengthWarn"} Text={"Daha az sahə daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName"><span className="attention">* </span>Evin Aylıq qiyməti:(Azn)</label>
@@ -643,7 +640,11 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <input type="number" ref={Price} inputmode="numeric" />
               </div>
             </div>
-
+            <div>
+            <WarningComp warning={warning} StringName={"PriceWarn"} Text={"Evin qiyməti daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"isNaNPriceWarn"} Text={"Evin qiyməti rəqəmlərlə daxil edilməlidir."}/>
+            <WarningComp warning={warning} StringName={"PriceLengthWarn"} Text={"Daha az qiymət daxil edilməlidir."}/>
+            </div>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">
@@ -678,6 +679,9 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
               <div className="col-12 div-in-input">
                 <input type="text" ref={Addition} />
               </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"AdditionLengthWarn"} Text={"Qısa əlavə məlumat daxil edilməlidir."}/>
             </div>
             {IsLoading && ( <UpLoad/>)}
            

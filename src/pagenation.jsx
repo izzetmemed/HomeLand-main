@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Scroll from "./MyComponents/Scroll";
 
 const Pagination = ({ countOfPagenation,setPage }) => {
   var pages=countOfPagenation;
@@ -24,6 +25,10 @@ const Pagination = ({ countOfPagenation,setPage }) => {
   ) {
     numOfPages.push(i);
   }
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [currentPage, countOfPagenation]);
+
   return (
     <div>
       <nav className="mt-5 mb-5">

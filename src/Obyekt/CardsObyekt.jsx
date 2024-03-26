@@ -16,32 +16,13 @@ const CardsObyekt = () => {
   const [Room, setRoom] = useState([]);
   const [Price, setPrice] = useState([]);
   const [click, setClick] = useState();
-
-  const ClickFunc = (x) => {
-    setClick(x);
-  };
-  const sendDataToSelecedids = (x) => {
-    setSelectedIds(x);
-  };
-  const sendDataToHomeOrFlat = (x) => {
-    setHomeOrFlat(x);
-  };
-  const sendDataRegion = (x) => {
-    setRegion(x);
-  };
-  const sendDataRoom = (x) => {
-    setRoom(x);
-  };
-  const sendDataPrice = (x) => {
-    setPrice(x);
-  };
   var works=true;
   useEffect(() => {
   
     const fetchData = async () => {
       try {
         if(click){
-          works=true
+          works=true;
         }
         if(works){
           works=false;
@@ -99,12 +80,6 @@ const CardsObyekt = () => {
   const filteredDataSlice = filteredData.slice(firstItem, lastIndex);
   const countOfPagenation = Math.ceil(filteredData.length / itemCount);
 
- const setPage=(x)=>{
-  setCurrentPage(x)
- }
- const convertDate = (x) => {
-  return x.toString().replace("T", " ").substring(0, 16);
-};
 const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
 
 const [showLoad, setShowLoad] = useState(true);
@@ -120,31 +95,18 @@ useEffect(() => {
   return (
     <div>
       <SearchObyekt
-      setFunc={sendDataToSelecedids}
-      setHomeOrFlat={sendDataToHomeOrFlat}
-      setRegion={sendDataRegion}
-      setRoom={sendDataRoom}
-      setPrice={sendDataPrice}
-      setClick={ClickFunc}
+      setFunc={setSelectedIds}
+      setHomeOrFlat={setHomeOrFlat}
+      setRegion={setRegion}
+      setRoom={setRoom}
+      setPrice={setPrice}
+      setClick={setClick}
       />
       <div className='d-flex flex-wrap'>
-      {parsedData.map((x) => (
+      {parsedData.map((x,index) => (
           <SectionObyect
-            id={x.Id}
-            type={"obyekt"}
-            priceHome={x.Price}
-            Region={x.Region}
-            address={x.Address}
-            SellorRent={x.SellorRent}
-            MetroHome={x.Metro}
-            Items={x.İtem}
-            roomHome={x.Room}
-            WhoCanTake={x.WhoCan}
-            measureHome={x.Area}
-            Sənəd={x.Document}
-            dateTime={convertDate(x.Date)}
-            imgNames={x.Img}
-            key={x.Id}
+            props={x}
+            key={index}
           />
         ))}
       
@@ -157,7 +119,7 @@ useEffect(() => {
       </div>
       <Outlet/>
       
-         <Pagenation countOfPagenation={countOfPagenation} setPage={setPage} />
+         <Pagenation countOfPagenation={countOfPagenation} setPage={setCurrentPage} />
     </div>
   )
 }

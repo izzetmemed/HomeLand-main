@@ -2,14 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
-import UseFetchData from "../../../MyComponents/FetchImg";
+import GetImg from "../../../MyComponents/GetImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
-import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
 import FetchPostAll from "../../../MyComponents/FetchPostAll";
-import FetchPutImg from "../../../MyComponents/FetchPutImg";
 import GetBack from "../../../MyComponents/GetBack";
+import DateCutting from "../../../MyComponents/DateCutting"
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import AddPrice from "../../../MyComponents/AddPrice";
+import AddTerritory from "../../../MyComponents/AddTerritory";
 const SellInsidePayment = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -22,17 +23,15 @@ const SellInsidePayment = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  const imageUrls = UseFetchData(getById?.img, "SellImg");
-
+  if(getById){
+    var imageUrls =GetImg(getById.img);
+  }else{
+    imageUrls=[];
+  }
   useEffect(() => {
     setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
 
-  const price = "Aze";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
   const Reload = async () => {
     const ReloadData = {
       Id:getById.id,
@@ -98,8 +97,7 @@ const SellInsidePayment = () => {
           {getById && (
             <div className="pb-2 mt-3">
               <p>
-                Qiymet:<span className="price-home">{getById.price}</span>
-                <span>{price}</span>
+                Qiymet:<span className="price-home">{AddPrice(getById.price) }</span>
               </p>
               <p>
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
@@ -122,8 +120,7 @@ const SellInsidePayment = () => {
               <p>
                 Sahe:
                 <span className="measure-home">
-                  {getById.area}
-                  <span>{teratory}</span>
+                  {AddTerritory(getById.area)}
                 </span>
               </p>
               {getById.addition && (
@@ -148,13 +145,12 @@ const SellInsidePayment = () => {
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                  {(getById.price * 1) / 100}
-                  <span>{price}</span>
+                  {AddPrice((getById.price * 1) / 100)}
                 </span>
               </p>
               <p>
                 Tarix:
-                <span className="time-home">{convertDate(getById.date)}</span>
+                <span className="time-home">{DateCutting(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto mt-2 ms-1">
                 <div className="col-12 col-sm-6 d-flex ">
@@ -172,7 +168,7 @@ const SellInsidePayment = () => {
                           <tr key={index}>
                             <td>{x.fullName}</td>
                             <td>{x.number}</td>
-                            <td>{convertDate(x.directCustomerDate)}</td>
+                            <td>{DateCutting(x.directCustomerDate)}</td>
                           </tr>
                         ))}
                     </tbody>
@@ -180,7 +176,6 @@ const SellInsidePayment = () => {
                 </div>
               </div>
               <GetBack Direct={"/HomeLogin/MainAdmin/Sell/payment"} />
-
               <button className="p-2 m-3 bg-success text-white" onClick={Reload}>
                 Yenidən yüklə
               </button>

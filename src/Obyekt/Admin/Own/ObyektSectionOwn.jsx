@@ -1,32 +1,18 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FetchPut from '../../../MyComponentsAdmin/FetchPut';
-import UseFetchData from '../../../MyComponents/FetchImg';
+import GetImg from '../../../MyComponents/GetImg';
 import TurnImg from '../../../MyComponents/TurnImg';
-const ObyektSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,measureHome,Sənəd,dateTime,deleteBasket,imgNames,data}) => {
-  const [keepingImgSource, setKeepingImgSource] = useState([]);
-
-  const imageUrls = UseFetchData(imgNames, 'ObyektImg');
-  
-  useEffect(() => {
-   setKeepingImgSource(imageUrls);
-  }, [imgNames, imageUrls]);
-
-    const price="Azn";
-
-   function cutString(inputString, maxLength) {
-    if (typeof inputString !== 'string') {
-      console.error("Error: Input is not a string");
-      return inputString;
-    }
-  
-    if (inputString.length <= maxLength) {
-      return inputString;
-    }
-  
-    return inputString.slice(0, maxLength) + '...';
+import StringCutting from "../../../MyComponents/StringCutting";
+import DateCutting from "../../../MyComponents/DateCutting";
+import AddPrice from '../../../MyComponents/AddPrice';
+const ObyektSectionOwn = ({props}) => {
+  if(props.Img.length!==0){
+    var keepingImgSource =GetImg(props.Img);
+  }else{
+    keepingImgSource=[];
   }
-  var Data=data
+  var Data=props;
  
   const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnFirstStep)
   const handleButtonClick = () => {
@@ -55,13 +41,13 @@ const ObyektSectionOwn = ({id,type,priceHome,address,MetroHome,roomHome,Region,m
                   <TurnImg keepingImgSource={keepingImgSource}/>
                 </div>
                   
-                <div className='pb-2'><Link to={`/Homelogin/MainAdmin/Obyekt/Own/Kart/${id}`}>
-                   <p>Qiymet:<span >{priceHome}</span><span>{price}</span></p> 
-                   <p>Ünvan:<span >{cutString(address,20)}</span></p> 
-                   <p>Metro:<span >{MetroHome}</span></p> 
-                    <p>Otaq sayi:<span>{roomHome}</span></p> 
-                    <p>Region:<span >{Region}</span></p>
-                    <p>Tarix:<span >{dateTime}</span></p>
+                <div className='pb-2'><Link to={`/Homelogin/MainAdmin/Obyekt/Own/Kart/${props.Id}`}>
+                   <p>Qiymet:<span >{AddPrice(props.Price)}</span></p> 
+                   <p>Ünvan:<span >{StringCutting(props.Address,20)}</span></p> 
+                   <p>Metro:<span >{props.Metro}</span></p> 
+                    <p>Otaq sayi:<span>{props.Room}</span></p> 
+                    <p>Region:<span >{props.Region}</span></p>
+                    <p>Tarix:<span >{DateCutting(props.Date)}</span></p>
                      </Link>
                      <button className='btn col-5' style={buttonStyle} onClick={handleButtonClick}> Ev sahibi ilə danışıldı</button>
 

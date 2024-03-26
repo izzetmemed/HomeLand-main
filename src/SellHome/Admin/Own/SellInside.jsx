@@ -4,10 +4,13 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Update from "../../../SellHome/Sell";
 import FetchGetId from "../../../MyComponents/FetchGetId";
-import UseFetchData from "../../../MyComponents/FetchImg";
+import GetImg from "../../../MyComponents/GetImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
 import GetBack from "../../../MyComponents/GetBack";
+import DateCutting from "../../../MyComponents/DateCutting"
+import AddTerritory from "../../../MyComponents/AddTerritory";
+import AddPrice from "../../../MyComponents/AddPrice";
 const SellInside = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -19,17 +22,15 @@ const SellInside = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  const imageUrls = UseFetchData(getById?.img, "SellImg");
-
+  if(getById){
+    var imageUrls =GetImg(getById.img);
+  }else{
+    imageUrls=[];
+  }
   useEffect(() => {
     setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
 
-  const price = "Aze";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
   const deleteItem = async () => {
     await FetchDelete(getById.id, "Sell");
     navigate("/HomeLogin/MainAdmin/Sell/own");
@@ -55,8 +56,7 @@ const SellInside = () => {
                 <GetBack Direct={"/HomeLogin/MainAdmin/Sell/Own"} />
 
                 <p>
-                  Qiymet:<span className="price-home">{getById.price}</span>
-                  <span>{price}</span>
+                  Qiymet:<span className="price-home">{AddPrice(getById.price) }</span>
                 </p>
                 <p>
                   Ev sahibi:
@@ -80,8 +80,7 @@ const SellInside = () => {
                 <p>
                   Sahe:
                   <span className="measure-home">
-                    {getById.area}
-                    <span>{teratory}</span>
+                     {AddTerritory(getById.area)}
                   </span>
                 </p>
                 {getById.addition && (
@@ -112,13 +111,12 @@ const SellInside = () => {
                 <p>
                   Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                   <span className="time-home">
-                    {(getById.price * 1) / 100}
-                    <span>{price}</span>
+                    {AddPrice((getById.price * 1) / 100)}
                   </span>
                 </p>
                 <p>
                   Tarix:
-                  <span className="time-home">{convertDate(getById.date)}</span>
+                  <span className="time-home">{DateCutting(getById.date)}</span>
                 </p>
                 <div className="p-2 m-3 d-flex h-auto">
               <button

@@ -29,9 +29,7 @@ const RentHomeOwn = () => {
   const firstItem = lastIndex - itemCount;
   const filteredDataSlice = filteredData.slice(firstItem, lastIndex);
   const countOfPagenation = Math.ceil(filteredData.length / itemCount);
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
+
   const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
 
  const setPage=(x)=>{
@@ -54,19 +52,8 @@ useEffect(() => {
       <div className="d-flex flex-wrap">
         {parsedData.map((x) => ( 
           <SectionSell
-            id={x.Id}
-            priceHome={x.Price}
-            address={x.Address}
-            MetroHome={x.Metro}
-            Items={x.Item}
-            roomHome={x.Room}
-            Region={x.Region}
-            measureHome={x.Area}
-            Sənəd={x.Document}
-            dateTime={convertDate(x.Date)}
-            imgNames={x.Img}
             key={x.Id}
-            data={x}
+            props={x}
           />
         ))}
         {filteredDataSlice.length === 0 && (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FetchGetAll from '../MyComponents/FetchGetAll';
 import MapSearch from './MapSearch';
 
-const MapSection = ({link,Rent,Sell,Obyekt}) => {
+const MapSection = ({link,Rent,Sell,Obyekt,Land, Office}) => {
     const [coordinate, setCoordinate] = useState(null);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const MapSection = ({link,Rent,Sell,Obyekt}) => {
 
     return (
         <div>
-            {coordinate ? <MapSearch Array={coordinate} Rent={Rent} Sell={Sell} Obyekt={Obyekt}/> : <div className='w-100  d-flex justify-content-center py-5'><p >Loading...</p></div>}
+            {coordinate ? <MapSearch Array={coordinate} Rent={Rent} Sell={Sell} Obyekt={Obyekt} Land={Land} Office={Office}/> : <div className='w-100  d-flex justify-content-center py-5'><p >Loading...</p></div>}
         </div>
     );
 }

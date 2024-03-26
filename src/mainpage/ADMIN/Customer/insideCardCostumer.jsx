@@ -3,10 +3,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
 import Swal from 'sweetalert2';
-import UseFetchData from "../../../MyComponents/FetchImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchPostCustomer from "../../../MyComponentsAdmin/FetchPostCustomer";
 import GetBack from "../../../MyComponents/GetBack";
+import GetImg from "../../../MyComponents/GetImg";
+import AddPrice from "../../../MyComponents/AddPrice";
+import AddTerritory from "../../../MyComponents/AddTerritory";
+import DateCutting from "../../../MyComponents/DateCutting";
 const İnsideCardCostumer = () => {
   const { id } = useParams();
 
@@ -21,20 +24,15 @@ const İnsideCardCostumer = () => {
     setGetById(getByIdData);
    }, [getByIdData]);
    
-
-  const imageUrls = UseFetchData(getById?.img, 'RentHomeImg');
-
+   if(getById){
+    var imageUrls =GetImg(getById.img);
+  }else{
+    imageUrls=[];
+  }
   useEffect(() => {
    setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
   
-
-  const price = "Aze";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
-
   const addCustomer=()=>{
     setstate(!state);
     const customerObject={
@@ -71,8 +69,7 @@ const İnsideCardCostumer = () => {
             <div className="pb-2 mt-3">
                 
               <p>
-                Qiymet:<span className="price-home">{getById.price}</span>
-                <span>{price}</span>
+                Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
               </p>
               <p>
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
@@ -95,8 +92,7 @@ const İnsideCardCostumer = () => {
               <p>
                 Sahe:
                 <span className="measure-home">
-                  {getById.area}
-                  <span>{teratory}</span>
+                  {AddTerritory(getById.area)}
                 </span>
               </p>
               {getById.addition && (
@@ -121,8 +117,7 @@ const İnsideCardCostumer = () => {
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                  {(getById.price * 20) / 100}
-                  <span>{price}</span>
+                  {AddPrice((getById.price * 20) / 100)}
                 </span>
               </p>
               <p>
@@ -162,7 +157,7 @@ const İnsideCardCostumer = () => {
               </p>
               <p>
                 Tarix:
-                <span className="time-home">{convertDate(getById.date)}</span>
+                <span className="time-home">{DateCutting(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto mt-3">
             <div className="col-12 col-sm-6 d-flex px-1">
@@ -180,7 +175,7 @@ const İnsideCardCostumer = () => {
                       <tr key={index}>
                         <td>{x.fullName}</td>
                         <td>{x.number}</td>
-                        <td>{convertDate(x.directCustomerDate)}</td>
+                        <td>{DateCutting(x.directCustomerDate)}</td>
                       </tr>
                     ))}
                 </tbody>

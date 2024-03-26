@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import React from 'react';
 import FetchGetId from "../../../MyComponents/FetchGetId";
-import UseFetchData from "../../../MyComponents/FetchImg";
+import GetImg from "../../../MyComponents/GetImg";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import Update from '../../../mainpage/answer/rent';
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
 import GetBack from "../../../MyComponents/GetBack";
+import AddPrice from "../../../MyComponents/AddPrice";
+import AddTerritory from "../../../MyComponents/AddTerritory";
+import DateCutting from "../../../MyComponents/DateCutting";
 const İnsideCardOwn = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [keepingImgSource,setKeepingImgSource] = useState([]);
-  
-
     var [getById, setGetById] = useState(null);
   
     const getByIdData = FetchGetId(id, 'RentHome/Admin');
@@ -21,18 +22,14 @@ const İnsideCardOwn = () => {
       setGetById(getByIdData);
      }, [getByIdData]);
      
-  
-    const imageUrls = UseFetchData(getById?.img, 'RentHomeImg');
-  
+     if(getById){
+      var imageUrls =GetImg(getById.img);
+    }else{
+      imageUrls=[];
+    }
     useEffect(() => {
      setKeepingImgSource(imageUrls);
     }, [getById, imageUrls]);
-
-    const price = "Aze";
-    const teratory = "m²";
-    const convertDate = (x) => {
-      return x.toString().replace("T", " ").substring(0, 16);
-    };
     const deleteItem = async () => {
       await FetchDelete(getById.id, "RentHome");
         navigate('/HomeLogin/MainAdmin/RentHome/own');
@@ -59,8 +56,7 @@ const İnsideCardOwn = () => {
          <div className="pb-2 mt-3">
              <GetBack Direct={"/HomeLogin/MainAdmin/RentHome/Own"}/>
            <p>
-             Qiymet:<span className="price-home">{getById.price}</span>
-             <span>{price}</span>
+             Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
            </p>
            <p>
              Ev sahibi:<span className="price-home">{getById.fullname}</span>
@@ -86,8 +82,7 @@ const İnsideCardOwn = () => {
            <p>
              Sahe:
              <span className="measure-home">
-               {getById.area}
-               <span>{teratory}</span>
+               {AddTerritory(getById.area)}
              </span>
            </p>
            {getById.addition
@@ -116,7 +111,7 @@ const İnsideCardOwn = () => {
            <p>
              Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
              <span className="time-home">
-             {getById.price * 20 /100}<span>{price}</span>
+             {AddPrice(getById.price * 20 /100)}
              </span>
            </p>
            <p>
@@ -155,7 +150,7 @@ const İnsideCardOwn = () => {
              </span>
            </p>
            <p>
-             Tarix:<span className="time-home">{convertDate(getById.date)}</span>
+             Tarix:<span className="time-home">{DateCutting(getById.date)}</span>
            </p>
            <div className='p-2 m-3 d-flex h-auto mt-5'>
                       <button className='btn btn-danger me-2 h-100' onClick={deleteItem} >Silmək</button>

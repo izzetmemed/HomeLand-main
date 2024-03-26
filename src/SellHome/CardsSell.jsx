@@ -16,31 +16,13 @@ const CardsSell = () => {
   const [Price, setPrice] = useState([]);
   const [click, setClick] = useState();
   Scroll();
-  const ClickFunc = (x) => {
-    setClick(x);
-  };
-  const sendDataToSelecedids = (x) => {
-    setSelectedIds(x);
-  };
-  const sendDataToHomeOrFlat = (x) => {
-    setHomeOrFlat(x);
-  };
-  const sendDataRegion = (x) => {
-    setRegion(x);
-  };
-  const sendDataRoom = (x) => {
-    setRoom(x);
-  };
-  const sendDataPrice = (x) => {
-    setPrice(x);
-  };
   var works=true;
   useEffect(() => {
     const fetchData = async () => {
       const RoomInt=Room.map(x=>Number(x));
       try {
         if(click){
-          works=true
+          works=true;
         }
         if(works){
           works=false;
@@ -70,36 +52,6 @@ const CardsSell = () => {
           
             return true;
           });
-          //   if (
-          //     !(
-          //       Number(JSON.parse(x).Price) > Array.from(Price)[1] &&
-          //       Number(JSON.parse(x).Price) < Array.from(Price)[0]
-          //     )
-          //   ) {
-          //     console.log("price")
-          //     return false;
-          //   }
-          //   console.log(JSON.parse(x).Building)
-          //   if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(JSON.parse(x).Building)) {
-          //     console.log(HomeOrFlat)
-              
-          //     return false;
-          //   }
-
-          //   if (Room.length !== 0 && !Room.includes(JSON.parse(x).Room)) {
-          //     return false;
-          //   }
-
-          //   if (Region.length !== 0 && !Region.includes(JSON.parse(x).Region)) {
-          //     return false;
-          //   }
-
-          //   if (selectedIds.length !== 0 && !selectedIds.includes(JSON.parse(x).Metro)) {
-          //     return false;
-          //   }
-
-          //   return true;
-          // });
           ArrayData.push(...filteredArray);
 
           setFilteredData(ArrayData);
@@ -122,15 +74,8 @@ const CardsSell = () => {
   const firstItem = lastIndex - itemCount;
   const filteredDataSlice = filteredData.slice(firstItem, lastIndex);
   const countOfPagenation = Math.ceil(filteredData.length / itemCount);
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
   const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
-
- const setPage=(x)=>{
-  setCurrentPage(x)
- }
- const [showLoad, setShowLoad] = useState(true);
+  const [showLoad, setShowLoad] = useState(true);
 
 useEffect(() => {
   if (filteredDataSlice.length === 0) {
@@ -145,29 +90,18 @@ useEffect(() => {
   return (
     <div>
       <Search
-        setFunc={sendDataToSelecedids}
-        setHomeOrFlat={sendDataToHomeOrFlat}
-        setRegion={sendDataRegion}
-        setRoom={sendDataRoom}
-        setPrice={sendDataPrice}
-        setClick={ClickFunc}
+        setFunc={setSelectedIds}
+        setHomeOrFlat={setHomeOrFlat}
+        setRegion={setRegion}
+        setRoom={setRoom}
+        setPrice={setPrice}
+        setClick={setClick}
       />
       <div className="d-flex flex-wrap">
-        {parsedData.map((x) => (
+        {parsedData.map((x,index) => (
           <SectionSell
-            id={x.Id}
-            type={"sellHome"}
-            priceHome={x.Price}
-            address={x.Address}
-            MetroHome={x.Metro}
-            Items={x.Item}
-            roomHome={x.Room}
-            Region={x.Region}
-            measureHome={x.Area}
-            Sənəd={x.Document}
-            dateTime={convertDate(x.Date)}
-            imgNames={x.Img}
-            key={x.Id}
+            props={x}
+            key={index}
           />
         ))}
         {filteredDataSlice.length === 0 && (
@@ -177,7 +111,7 @@ useEffect(() => {
         )}
       </div>
       <Outlet />
-      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage} />
+      <Pagenation countOfPagenation={countOfPagenation} setPage={setCurrentPage} />
     </div>
   );
 };

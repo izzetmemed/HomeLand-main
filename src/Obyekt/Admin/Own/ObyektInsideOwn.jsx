@@ -8,6 +8,10 @@ import UseFetchData from "../../../MyComponents/FetchImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
 import GetBack from "../../../MyComponents/GetBack";
+import DateCutting from "../../../MyComponents/DateCutting";
+import GetImg from "../../../MyComponents/GetImg";
+import AddPrice from "../../../MyComponents/AddPrice";
+import AddTerritory from "../../../MyComponents/AddTerritory";
 const ObyektInsideOwn = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -19,17 +23,15 @@ const ObyektInsideOwn = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  const imageUrls = UseFetchData(getById?.img, "ObyektImg");
-
+  if(getById){
+    var imageUrls =GetImg(getById.img);
+  }else{
+    imageUrls=[];
+  }
   useEffect(() => {
     setKeepingImgSource(imageUrls);
   }, [getById, imageUrls]);
 
-  const price = "Aze";
-  const teratory = "m²";
-  const convertDate = (x) => {
-    return x.toString().replace("T", " ").substring(0, 16);
-  };
   const deleteItem = async () => {
     await FetchDelete(getById.id, "Obyekt");
     navigate("/HomeLogin/MainAdmin/Obyekt/own");
@@ -54,8 +56,7 @@ const ObyektInsideOwn = () => {
               <div className="pb-2 mt-3">
                 <GetBack Direct={"/HomeLogin/MainAdmin/Obyekt/Own"} />
                 <p>
-                  Qiymet:<span className="price-home">{getById.price}</span>
-                  <span>{price}</span>
+                  Qiymet:<span className="price-home">{AddPrice(getById.price) }</span>
                 </p>
                 <p>
                   Ev sahibi:
@@ -79,8 +80,7 @@ const ObyektInsideOwn = () => {
                 <p>
                   Sahe:
                   <span className="measure-home">
-                    {getById.area}
-                    <span>{teratory}</span>
+                    {AddTerritory(getById.area) }
                   </span>
                 </p>
                 {getById.addition && (
@@ -91,9 +91,6 @@ const ObyektInsideOwn = () => {
                 )}
                 <p>
                   Əşya:<span className="time-home">{getById.İtem}</span>
-                </p>
-                <p>
-                  Sənəd:<span className="time-home">{getById.document}</span>
                 </p>
                 <p>
                   Təmir:<span className="time-home">{getById.repair}</span>
@@ -111,19 +108,17 @@ const ObyektInsideOwn = () => {
                   Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                   {getById.sellorRent === "Satılır" ? (
                     <span className="time-home">
-                      {(getById.price * 1) / 100}
-                      <span>{price}</span>
+                      {AddPrice((getById.price * 1) / 100)}
                     </span>
                   ) : (
                     <span className="time-home">
-                      {(getById.price * 20) / 100}
-                      <span>{price}</span>
+                      {AddTerritory((getById.price * 20) / 100)}
                     </span>
                   )}
                 </p>
                 <p>
                   Tarix:
-                  <span className="time-home">{convertDate(getById.date)}</span>
+                  <span className="time-home">{DateCutting(getById.date)}</span>
                 </p>
                 <div className="p-2 m-2 d-flex h-auto">
               <button

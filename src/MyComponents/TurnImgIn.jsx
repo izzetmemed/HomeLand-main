@@ -1,6 +1,9 @@
 import { useState } from "react";
 import React from "react";
-const TurnImgIn = ({ keepingImgSource, WeightTrue ,Counter}) => {
+const TurnImgIn = ({ keepingImgSource ,Counter}) => {
+  if(!keepingImgSource){
+    keepingImgSource=[]
+  }
   const [ImgSourceIndex, setImgSourceIndex] = useState(0);
   const btnLeftIcon = () => {
     if (ImgSourceIndex < keepingImgSource.length - 1) {

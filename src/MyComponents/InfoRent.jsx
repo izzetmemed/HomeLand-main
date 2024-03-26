@@ -1,48 +1,37 @@
 import React from "react";
-
-const InfoRent = (props) => {
-  var data = props.props;
-  function cutString(inputString, maxLength) {
-    if (typeof inputString !== "string") {
-      console.error("Error: Input is not a string");
-      return inputString;
-    }
-    if (inputString.length <= maxLength) {
-      return inputString;
-    }
-    return inputString.slice(0, maxLength) + "...";
-  }
-  const price ="Azn";
-  const teratory ="m²";
-
+import StringCutting from "./StringCutting";
+import DateCutting from "./DateCutting";
+import AddPrice from "./AddPrice";
+import AddTerritory from "./AddTerritory";
+const InfoRent = ({props}) => {
   return (
     <>
       <p>
-        Qiymet:<span>{data.priceHome}</span><span >{price}</span>
+        Qiymet:<span>{AddPrice(props.Price)}</span>
       </p>
       <p>
-        Ünvan:<span>{cutString(data.address, 20)}</span>
+        Ünvan:<span>{StringCutting(props.Address, 20)}</span>
       </p>
       <p>
-        Metro:<span>{data.MetroHome}</span>
+        Metro:<span>{props.Metro}</span>
       </p>
       <p>
-        Otaq sayi:<span>{data.roomHome}</span>
+        Otaq sayi:<span>{props.Room}</span>
       </p>
       <p>
-        Rayon:<span>{data.region}</span>
+        Rayon:<span>{props.Region}</span>
       </p>
       <p>
         Sahe:
         <span>
-          {data.measureHome} <span className="ms-0">{teratory}</span>
+          {AddTerritory(props.Area)}
         </span>
       </p>
       <p>
-        Əşya:<span>{data.Items}</span>
+        Əşya:<span>{props.Item}</span>
       </p>
       <p>
-        Tarix:<span>{data.dateTime}</span>
+        Tarix:<span>{DateCutting(props.Date)}</span>
       </p>
     </>
   );

@@ -1,7 +1,7 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FetchPut from '../../../MyComponentsAdmin/FetchPut';
-import UseFetchData from '../../../MyComponents/FetchImg';
+import GetImg from '../../../MyComponents/GetImg';
 import TurnImg from '../../../MyComponents/TurnImg';
 const ObyektSectionPayment = ({id,Name,Number,Code , data}) => {
     
@@ -39,14 +39,11 @@ const ObyektSectionPayment = ({id,Name,Number,Code , data}) => {
      }
      PutData();
   }
-  const [keepingImgSource, setKeepingImgSource] = useState([]);
-
-  const imageUrls = UseFetchData(data?.Img, 'ObyektImg');
-  
-  useEffect(() => {
-   setKeepingImgSource(imageUrls);
-  }, [data, imageUrls]);
-
+  if(data.Img.length!==0){
+    var keepingImgSource =GetImg(data.Img);
+  }else{
+    keepingImgSource=[];
+  }
     const buttonStyle = {
         backgroundColor:  sendTrueOrFalse ? 'green' : 'red',
         borderRadius: '5px',

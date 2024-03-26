@@ -2,7 +2,7 @@ import React from "react";
 import { useState,useRef } from "react";
 import FetchPostAll from "./FetchPostAll";
 import FetchPostCustomer from "../MyComponentsAdmin/FetchPostCustomer";
-const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk, isRoom,isObyekt,Kind}) => {
+const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk,Kind}) => {
   const [count, setCount] = useState(5);
    const numberRef=useRef(null);
    const fake=()=>{}
@@ -61,9 +61,8 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk, isRoom
     <div className="Alert-media col-11 col-md-9 col-lg-7 col-xl-5">
       <div className="col-12">
         <div className="col-12">
-          <p className="text-center mb-0">Bu şərtlərə uyğun ev axtardınız.</p>
+          <p className="text-center mb-0">Bu şərtlərə uyğun elan axtardınız.</p>
           <div className="col-12 d-flex flex-wrap">
-            {isRoom && (
               <div className="col-4 p-1">
               <label>Otaq:</label>
               {Room && (
@@ -76,23 +75,6 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk, isRoom
                 </ul>
               )}
             </div>
-            )}
-            
-            {isObyekt && (
-               <div className="col-4 p-1">
-              <label>Obyekt:</label>
-              {Room && (
-                <ul>
-                  {Room.slice(0, 2).map((x, index) => (
-                    <li key={index}>{x}</li>
-                  ))}
-                  {Room.length > 2 && <li>...</li>}
-                  {Room.length === 0 && <li>Bütün</li>}
-                </ul>
-              )}
-            </div>
-            )}
-           
 
             <div className="col-4 p-1">
               <label>Metro:</label>
@@ -119,7 +101,7 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk, isRoom
               )}
             </div>
             <div className="col-8 p-1">
-              <label>Ev:</label>
+              <label>Elan növü:</label>
               {HomeOrFlat && (
                 <ul>
                   {HomeOrFlat.slice(0, 1).map((x, index) => (
