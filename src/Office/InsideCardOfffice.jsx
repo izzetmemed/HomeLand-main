@@ -7,7 +7,7 @@ import Scroll from "../MyComponents/Scroll";
 import TurnImgIn from "../MyComponents/TurnImgIn";
 import CallToMakler from "../MyComponents/CallToMakler";
 import FetchGetId from "../MyComponents/FetchGetId";
-import UseFetchData from "../MyComponents/FetchImg";
+import GetImg from "../MyComponents/GetImg";
 import Share from '../MyComponents/Share';
 import DateCutting from "../MyComponents/DateCutting"
 import AddPrice from "../MyComponents/AddPrice";
@@ -25,7 +25,7 @@ const InsideCardOfffice = () => {
    }, [getByIdData]);
    
 
-  const imageUrls = UseFetchData(getById?.img, 'SellImg');
+  const imageUrls = GetImg(getById?.img);
 
   useEffect(() => {
    setKeepingImgSource(imageUrls);
@@ -43,6 +43,11 @@ const InsideCardOfffice = () => {
         </div>
         {getById && ( 
           <div className="pb-2 mt-3 pe-2">
+             <div className="w-100 h-auto d-flex justify-content-center">
+              <p>
+                Baxış:<span className="address-home ms-1">{getById.looking}</span>
+              </p>
+              </div>
             <p>
               Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
             </p>
@@ -51,6 +56,9 @@ const InsideCardOfffice = () => {
             </p>
             <p>
               Metro:<span className="address-home">{getById.metro}</span>
+            </p>
+            <p>
+              RAyon:<span className="address-home">{getById.region}</span>
             </p>
             <p>
               Otaq sayi:<span className="room-home">{getById.room}</span>
@@ -68,12 +76,12 @@ const InsideCardOfffice = () => {
             <p>
               Təmir:<span className="time-home">{getById.repair}</span>
             </p>
-            <p>
+            {/* <p>
               Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
               <span className="time-home">
               {AddPrice(getById.price * 1 /100)}
               </span>
-            </p>
+            </p> */}
             {getById.addition
              && (
               <p>

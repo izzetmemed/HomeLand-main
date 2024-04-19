@@ -1,10 +1,9 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FetchPut from '../../../MyComponentsAdmin/FetchPut';
 import TurnImg from '../../../MyComponents/TurnImg';
 import GetImg from '../../../MyComponents/GetImg';
 const SectionPayment = ({id,Name,Number,Code , data}) => {
-    
     var Data=data
     const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnThirdStep)
     const [isButtonTwoClicked, setIsButtonTwoClicked] = useState(Data.IsCalledWithCustomerFirstStep);
@@ -13,22 +12,26 @@ const SectionPayment = ({id,Name,Number,Code , data}) => {
   
   const handleButtonClick = () => {
     Data.IsCalledWithHomeOwnThirdStep=!sendTrueOrFalse;
+    Data.İtem=Data.Item;
     setSendTrueOrFalse(!sendTrueOrFalse);
     fetchFunc();
   };
 
   const handleTwoButtonClick = () => {
     Data.IsCalledWithCustomerFirstStep=!isButtonTwoClicked;
+    Data.İtem=Data.Item;
     setIsButtonTwoClicked(!isButtonTwoClicked);
     fetchFunc();
   };
   const handleThreeButtonClick = () => {
     Data.IsPaidHomeOwnFirstStep=!isButtonThreeClicked;
+    Data.İtem=Data.Item;
     setIsButtonThreeClicked(!isButtonThreeClicked);
     fetchFunc();
   };
   const handleFourButtonClick = () => {
     Data.IsPaidCustomerFirstStep=!isButtonFourClicked;
+    Data.İtem=Data.Item;
     setIsButtonFourClicked(!isButtonFourClicked);
     fetchFunc();
   };

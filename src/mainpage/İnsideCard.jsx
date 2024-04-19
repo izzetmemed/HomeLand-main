@@ -6,11 +6,10 @@ import GetBack from "../MyComponents/GetBack";
 import Scroll from "../MyComponents/Scroll";
 import CallToMakler from "../MyComponents/CallToMakler";
 import TurnImgIn from "../MyComponents/TurnImgIn";
-import UseFetchData from "../MyComponents/FetchImg";
 import FetchGetId from "../MyComponents/FetchGetId";
 import Share from "../MyComponents/Share";
 import AddTerritory from "../MyComponents/AddTerritory";
-import AddPrice from "../MyComponents/AddTerritory";
+import AddPrice from "../MyComponents/AddPrice";
 import DateCutting from "../MyComponents/DateCutting";
 import GetImg from "../MyComponents/GetImg";
 const İnsideCard = () => {
@@ -18,8 +17,7 @@ const İnsideCard = () => {
   const [MaklerNumber,setMaklerNumber]=useState(false)
   const [keepingImgSource,setKeepingImgSource] = useState([]);
 
- Scroll();
-
+  Scroll();
   var [GetById, setGetById] = useState(null);
   const getByIdData = FetchGetId(id, 'RentHome');
   useEffect(() => {
@@ -45,6 +43,11 @@ const İnsideCard = () => {
           </div>
           {GetById && (
             <div className="pb-2 mt-3 pe-2">
+              <div className="w-100 h-auto d-flex justify-content-center">
+              <p>
+                Baxış:<span className="address-home ms-1">{GetById.looking}</span>
+              </p>
+              </div>
               <p>
                 Qiymet:<span className="price-home">{AddPrice(GetById.price)}</span>
               </p>
@@ -55,22 +58,17 @@ const İnsideCard = () => {
                 Metro:<span className="address-home">{GetById.metro}</span>
               </p>
               <p>
+                Rayon:<span className="address-home">{GetById.region}</span>
+              </p>
+              <p>
                 Otaq sayi:<span className="room-home">{GetById.room}</span>
               </p>
               <p>
                 Sahe:
                 <span className="measure-home">
-                  {AddTerritory(GetById.area,true) }
+                  {AddTerritory(GetById.area) }
                 </span>
               </p>
-              {GetById.addition
-               && (
-                <p>
-                Ətraflı:<span className="measure-home">{GetById.addition}</span>
-              </p>
-               )
-               }
-             
               <p>
                 Ev kimə verilir:
                 <span className="time-home">
@@ -119,12 +117,19 @@ const İnsideCard = () => {
                     .replace(/, (?=[^,]*$)/, " və ")}
                 </span>
               </p>
-              <p>
+              {/* <p>
                 Evi tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
                 {AddPrice( GetById.price * 20 /100)}
                 </span>
+              </p> */}
+              {GetById.addition
+               && (
+                <p>
+                Ətraflı:<span className="measure-home">{GetById.addition}</span>
               </p>
+               )
+               }
               <p>
                 Tarix:<span className="time-home">{DateCutting(GetById.date)}</span>
               </p>

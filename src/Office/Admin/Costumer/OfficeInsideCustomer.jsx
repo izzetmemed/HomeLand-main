@@ -74,6 +74,9 @@ const OfficeInsideCustomer = () => {
               Nömrəsi:<span className="price-home">{getById.number}</span>
             </p>
             <p>
+                Email:<span className="price-home">{getById.email}</span>
+              </p>
+            <p>
               Kod:<span className="price-home">{getById.id}</span>
             </p>
             <p>

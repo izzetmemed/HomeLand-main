@@ -23,15 +23,12 @@ const ObyektinsidePayment = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  if(getById){
-    var imageUrls =GetImg(getById.img);
-  }else{
-    imageUrls=[];
-  }
   useEffect(() => {
-    setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
-
+    if (getById) {
+      const imageUrls = GetImg(getById.img ?? []);
+      setKeepingImgSource(imageUrls);
+    }
+  }, [getById]);
   const Reload = async () => {
     const ReloadData = {
       Id:getById.id,
@@ -44,6 +41,8 @@ const ObyektinsidePayment = () => {
       Metro: getById.metro,
       Room: getById.room,
       Repair: getById.repair,
+      Email:getById.email,
+      Looking:getById.looking, 
       İtem: getById.İtem,
       Area: getById.area,
       Price: getById.price,
@@ -101,6 +100,9 @@ const ObyektinsidePayment = () => {
               </p>
               <p>
                 Nömrəsi:<span className="price-home">{getById.number}</span>
+              </p>
+              <p>
+                Email:<span className="price-home">{getById.email}</span>
               </p>
               <p>
                 Kod:<span className="price-home">{getById.id}</span>

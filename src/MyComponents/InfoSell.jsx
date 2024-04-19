@@ -19,7 +19,7 @@ const InfoSell = ({props}) => {
         Otaq sayi:<span>{props.Room}</span>
       </p>
       <p>
-        Region:<span>{props.Region}</span>
+        Rayon:<span>{props.Region}</span>
       </p>
       <p>
         Sahe:

@@ -21,6 +21,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
  const [warning, setWarning] = useState([]);
   const FullName = useRef(null);
   const Number = useRef(null);
+  const Email = useRef(null);
   const Region = useRef(null);
   const Address = useRef(null);
   const Floor = useRef(null);
@@ -59,6 +60,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       
       FullName.current.value = Data.fullname;
       Number.current.value = Data.number;
+      Email.current.value = Data.email;
       Region.current.value = Data.region;
       Address.current.value = Data.address;
       setCoordinateX(Data.coordinateX);
@@ -115,6 +117,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     setWarning([]);
     const formData = {
       FullName: FullName.current.value,
+      Email: Email.current.value,
       Number:NumberTurn(Number.current.value),
       CoordinateX:CoordinateX,
       CoordinateY:CoordinateY,
@@ -152,6 +155,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       CheckEmpty(formData.Address, setWarning, "AddressWarn"),
       CheckEmpty(formData.Metro, setWarning, "MetroWarn"),
       CheckEmpty(formData.Price, setWarning, "PriceWarn"),
+      CheckEmpty(formData.Email, setWarning, "EmailWarn"),
       CheckEmpty(formData.İtem, setWarning, "ItemWarn"),
       CheckEmpty(formData.Room, setWarning, "RoomWarn"),
       CheckEmpty(formData.Repair, setWarning, "RepairWarn"),
@@ -181,6 +185,11 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     ];
     if (Check.every((x) => x === true)){
       if(!IsLoading){
+        Swal.fire({
+          title: "Gözləyin",
+          text: "Elan tam yüklənməmiş çıxmayın !!!",
+          icon: "info",
+        });
           setIsLoading(true);
         FetchPostAll(formData,"RentHome",imgFunc);
         
@@ -220,6 +229,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     Data.fullname = FullName.current.value;
     Data.number = Number.current.value;
     Data.region = Region.current.value;
+    Data.email = Email.current.value;
     Data.coordinateX=CoordinateX;
     Data.coordinateY=CoordinateY;
     Data.address = Address.current.value;
@@ -320,6 +330,19 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
             <div>
             <WarningComp warning={warning} StringName={"FullNameWarn"} Text={"Ev sahibinin adı və soyadı daxil edilməlidir."}/>
             <WarningComp warning={warning} StringName={"FullNameLengthWarn"} Text={"Daha qısa ad və soyad daxil edilməlidir."}/>
+            </div>
+            <div className="mt-3">
+              <div className="div-in-label">
+                <label htmlFor="customerName">
+                  <span className="attention">* </span>Emailinizi qeyd edin:
+                </label>
+              </div>
+              <div className="col-12 div-in-input">
+                <input type="email" ref={Email} placeholder="Homeland.az@gmail.com"/>
+              </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"EmailWarn"} Text={"Emailinizi daxil edin."}/>
             </div>
             <div className="mt-3">
               <div className="div-in-label">

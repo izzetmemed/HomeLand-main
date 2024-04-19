@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Scroll from "./MyComponents/Scroll";
 
 const Pagination = ({ countOfPagenation,setPage }) => {
   var pages=countOfPagenation;

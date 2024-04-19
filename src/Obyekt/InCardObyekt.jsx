@@ -44,6 +44,11 @@ const InCardObyekt = () => {
           </div>
           {GetById && (
             <div className="pb-2 mt-3 pe-2">
+               <div className="w-100 h-auto d-flex justify-content-center">
+              <p>
+                Baxış:<span className="address-home ms-1">{GetById.looking}</span>
+              </p>
+              </div>
               <p>
                 Qiymet:<span className="price-home">{AddPrice(GetById.price) }</span>
               </p>
@@ -54,6 +59,9 @@ const InCardObyekt = () => {
                 Metro:<span className="address-home">{GetById.metro}</span>
               </p>
               <p>
+                Rayon:<span className="address-home">{GetById.region}</span>
+              </p>
+              <p>
                 Otaq sayi:<span className="room-home">{GetById.room}</span>
               </p>
               <p>
@@ -62,13 +70,7 @@ const InCardObyekt = () => {
                   {AddTerritory(GetById.area)}
                 </span>
               </p>
-              {GetById.addition
-               && (
-                <p>
-                Ətraflı:<span className="measure-home">{GetById.addition}</span>
-              </p>
-               )
-               }
+              
               <p>
                 Obyekt:<span className="time-home">{GetById.sellorRent}</span>
               </p>
@@ -81,14 +83,21 @@ const InCardObyekt = () => {
               <p>
                 Təmir:<span className="time-home">{GetById.repair}</span>
               </p>
-              <p>
+              {/* <p>
               Obyekti tutduğunuz halda əmlakçıya verəcəyiniz ödəniş:
              
             {GetById.sellorRent==='Satılır' ?  <span className="time-home">{AddPrice(GetById.price * 1 /100) }
              </span> :  <span className="time-home">{AddPrice(GetById.price * 20 /100) }
              </span>}
             
-           </p>
+           </p> */}
+            {GetById.addition
+               && (
+                <p>
+                Ətraflı:<span className="measure-home">{GetById.addition}</span>
+              </p>
+               )
+               }
               <p>
                 Tarix:<span className="time-home">{DateCutting(GetById.date)}</span>
               </p>

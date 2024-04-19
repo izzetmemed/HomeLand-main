@@ -25,6 +25,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
   const FullName = useRef(null);
   const Number = useRef(null);
   const Region = useRef(null);
+  const Email = useRef(null);
   const Address = useRef(null);
   const Area = useRef(null);
   const Price = useRef(null);
@@ -41,6 +42,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
       setCoordinateX(Data.coordinateX);
       setCoordinateY(Data.coordinateY);
       Region.current.value = Data.region;
+      Email.current.value = Data.email;
       Address.current.value = Data.address;
       Area.current.value = Data.area;
       Price.current.value = Data.price;
@@ -79,6 +81,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
       CoordinateX: CoordinateX,
       CoordinateY: CoordinateY,
       Region: Region.current.value,
+      Email: Email.current.value,
       Address: Address.current.value,
       Area: Area.current.value,
       Price: Price.current.value,
@@ -90,6 +93,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
       CheckEmpty(formData.Number, setWarning, "NumberWarn"),
       CheckEmpty(formData.CoordinateX ? null : "", setWarning, "CoordinateWarn"),
       CheckEmpty(formData.Address, setWarning, "AddressWarn"),
+      CheckEmpty(formData.Email, setWarning, "EmailWarn"),
       CheckEmpty(formData.Price, setWarning, "PriceWarn"),
       CheckEmpty(formData.Region, setWarning, "RegionWarn"),
       CheckEmpty(formData.Area, setWarning, "AreaWarn"),
@@ -124,6 +128,11 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
     ];
     if (Check.every((x) => x === true)) {
       if (!IsLoading) {
+        Swal.fire({
+          title: "Gözləyin",
+          text: "Elan tam yüklənməmiş çıxmayın !!!",
+          icon: "info",
+        });
         setIsLoading(true);
         FetchPostAll(formData, "Land", imgFunc);
         setTimeout(() => {
@@ -162,6 +171,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
     Data.fullname = FullName.current.value;
     Data.number = Number.current.value;
     Data.region = Region.current.value;
+    Data.email = Email.current.value;
     Data.coordinateX = CoordinateX;
     Data.coordinateY = CoordinateY;
     Data.address = Address.current.value;
@@ -243,6 +253,21 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
             <WarningComp warning={warning} StringName={"FullNameWarn"} Text={"Torpaq sahibinin adı və soyadı daxil edilməlidir."}/>
             <WarningComp warning={warning} StringName={"FullNameLengthWarn"} Text={"Daha qısa ad və soyad daxil edilməlidir."}/>
             </div>
+            <div className="mt-3">
+              <div className="div-in-label">
+                <label htmlFor="customerName">
+                  <span className="attention">* </span> Emailinizi daxil edin.
+                </label>
+              </div>
+              <div className="col-12 div-in-input">
+                <input
+                  type="email"
+                  placeholder="Homeland.az@gmail.com"
+                  ref={Email}
+                />
+              </div>
+            </div>
+            <WarningComp warning={warning} StringName={"EmailWarn"} Text={"Email daxil edin."}/>
             <div className="mt-3">
               <div className="div-in-label">
                 <label htmlFor="customerName">

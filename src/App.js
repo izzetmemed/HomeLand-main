@@ -3,7 +3,11 @@ import "./fontawesome-free-6.4.2-web/fontawesome-free-6.4.2-web/css/fontawesome.
 import "./fontawesome-free-6.4.2-web/fontawesome-free-6.4.2-web/css/solid.min.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "./scss/main.css";
+import ReactGa from 'react-ga';
 function App() {
+  const TrackingId="G-637F94HHEK";
+  ReactGa.initialize(TrackingId);
+  ReactGa.pageview(document.location.pathname);
   return (
     <div>
       <div className="d-flex flex-column align-items-center">

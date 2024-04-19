@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Update from "../../LandForm";
 import FetchGetId from "../../../MyComponents/FetchGetId";
-import UseFetchData from "../../../MyComponents/FetchImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchDelete from "../../../MyComponentsAdmin/FetchDelete";
 import GetBack from "../../../MyComponents/GetBack";
@@ -15,6 +14,9 @@ import AddTerritory from "../../../MyComponents/AddTerritory";
 const LandInsideOwn = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+    const handleClick = () => {
+      navigate(`/HomeLogin/MainAdmin/Land/Img/Update/${id}`);
+    };
   const [keepingImgSource, setKeepingImgSource] = useState([]);
   var [getById, setGetById] = useState(null);
 
@@ -64,6 +66,9 @@ const LandInsideOwn = () => {
                   Ev sahibi:
                   <span className="price-home">{getById.fullname}</span>
                 </p>
+                <p>
+                Email:<span className="price-home">{getById.email}</span>
+              </p>
                 <p>
                   Nömrəsi:<span className="price-home">{getById.number}</span>
                 </p>
@@ -115,6 +120,7 @@ const LandInsideOwn = () => {
               >
                 Yeniləmək
               </button>
+              <button className='btn btn-primary me-2 h-100' onClick={handleClick} >Şəkil əlavə etmək</button>
             </div>
               </div>
             )}

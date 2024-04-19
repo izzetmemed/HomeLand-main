@@ -7,7 +7,7 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk,Kind}) 
    const numberRef=useRef(null);
    const fake=()=>{}
   const AddGmail = async() => {
-    const media={
+       const media={
       Type:Kind,
       Counter:count.toString(),
       Number:numberRef.current.value,
@@ -18,26 +18,20 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk,Kind}) 
      await FetchPostAll(media,"Media",fake);
     if(Room){
       const uniqueNumbers = [...new Set(Room)];
-      uniqueNumbers.map(x=>{
-       
-       return FetchPostCustomer(x,"Media/Room")  
-    })
+      FetchPostCustomer(uniqueNumbers,"Media/Room")  
     }
     if(Metro){
       const uniqueNumbers = [...new Set(Metro)];
-      uniqueNumbers.map(x=>{
-      return FetchPostCustomer(x,"Media/Metro")
-    })}
+      FetchPostCustomer(uniqueNumbers,"Media/Metro")
+      }
     if(Region){
       const uniqueNumbers = [...new Set(Region)];
-      uniqueNumbers.map(x=>{
-      return FetchPostCustomer(x,"Media/Region")
-    })}
+      FetchPostCustomer(uniqueNumbers,"Media/Region")
+      }
     if(HomeOrFlat){
       const uniqueNumbers = [...new Set(HomeOrFlat)];
-      uniqueNumbers.map(x=>{
-      return FetchPostCustomer(x,"Media/Building")
-    })}
+      FetchPostCustomer(uniqueNumbers,"Media/Building")
+    }
     setIsActiveFunk();
   };
 
@@ -89,7 +83,7 @@ const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk,Kind}) 
               )}
             </div>
             <div className="col-4 p-1">
-              <label>Reyon:</label>
+              <label>Rayon:</label>
               {Region && (
                 <ul>
                   {Region.slice(0, 2).map((x, index) => (

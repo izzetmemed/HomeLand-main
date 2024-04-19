@@ -27,6 +27,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
   const Number = useRef(null);
   const Region = useRef(null);
   const Address = useRef(null);
+  const Email = useRef(null);
   const Floor = useRef(null);
   const Metro = useRef(null);
   const Room = useRef(null);
@@ -48,6 +49,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       setCoordinateX(Data.coordinateX);
       setCoordinateY(Data.coordinateY);
       Region.current.value = Data.region;
+      Email.current.value = Data.email;
       Address.current.value = Data.address;
       Floor.current.value = Data.floor;
       Metro.current.value = Data.metro;
@@ -92,6 +94,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       CoordinateX:CoordinateX,
       CoordinateY:CoordinateY,
       Region:Region.current.value,
+      Email:Email.current.value,
       Address: Address.current.value,
       Floor:Floor.current.value,
       Metro: Metro.current.value,
@@ -111,6 +114,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       CheckEmpty(formData.Address, setWarning, "AddressWarn"),
       CheckEmpty(formData.Metro, setWarning, "MetroWarn"),
       CheckEmpty(formData.Price, setWarning, "PriceWarn"),
+      CheckEmpty(formData.Email, setWarning, "EmailWarn"),
       CheckEmpty(formData.İtem, setWarning, "ItemWarn"),
       CheckEmpty(formData.Document, setWarning, "DocumentWarn"),
       CheckEmpty(formData.Room, setWarning, "RoomWarn"),
@@ -142,6 +146,11 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
     ];
     if (Check.every((x) => x === true)) {
       if(!IsLoading){
+        Swal.fire({
+          title: "Gözləyin",
+          text: "Elan tam yüklənməmiş çıxmayın !!!",
+          icon: "info",
+        });
         setIsLoading(true);
       FetchPostAll(formData,"Sell",imgFunc);
       setTimeout(() => {
@@ -189,6 +198,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       Data.coordinateY=CoordinateY;
       Data.address = Address.current.value;
       Data.floor = Floor.current.value;
+      Data.email = Email.current.value;
       Data.metro = Metro.current.value;
       Data.room = Room.current.value;
       Data.repair = Repair.current.value;
@@ -275,6 +285,19 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
             <div>
             <WarningComp warning={warning} StringName={"FullNameWarn"} Text={"Ev sahibinin adı və soyadı daxil edilməlidir."}/>
             <WarningComp warning={warning} StringName={"FullNameLengthWarn"} Text={"Daha qısa ad və soyad daxil edilməlidir."}/>
+            </div>
+            <div className="mt-3">
+              <div className="div-in-label">
+                <label htmlFor="customerName">
+                <span className="attention">* </span>Emailinizi daxil edin :
+                </label>
+              </div>
+              <div className="col-12 div-in-input">
+                <input type="email" ref={Email} placeholder="Homeland.az@gmail.com"/>
+              </div>
+            </div>
+            <div>
+            <WarningComp warning={warning} StringName={"EmailWarn"} Text={"Emailinizi daxil edin."}/>
             </div>
             <div className="mt-3">
               <div className="div-in-label">

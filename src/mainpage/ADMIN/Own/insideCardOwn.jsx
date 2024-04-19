@@ -14,6 +14,9 @@ import DateCutting from "../../../MyComponents/DateCutting";
 const İnsideCardOwn = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const handleClick = () => {
+      navigate(`/HomeLogin/MainAdmin/RentHome/Img/Update/${id}`);
+    };
     const [keepingImgSource,setKeepingImgSource] = useState([]);
     var [getById, setGetById] = useState(null);
   
@@ -62,6 +65,9 @@ const İnsideCardOwn = () => {
              Ev sahibi:<span className="price-home">{getById.fullname}</span>
        
            </p>
+           <p>
+                Email:<span className="price-home">{getById.email}</span>
+              </p>
            <p>
              Nömrəsi:<span className="price-home">{getById.number}</span>
           
@@ -155,10 +161,9 @@ const İnsideCardOwn = () => {
            <div className='p-2 m-3 d-flex h-auto mt-5'>
                       <button className='btn btn-danger me-2 h-100' onClick={deleteItem} >Silmək</button>
                       <button className='btn btn-success me-2 h-100' onClick={UpdateItem} >Yeniləmək</button>
+                      <button className='btn btn-primary me-2 h-100' onClick={handleClick} >Şəkil əlavə etmək</button>
                 </div>
-           {/* <div className="height-for-coordiante mt-2 mb-2 p-4">
-             <Coordinate />
-           </div> */}
+           
          </div>
        )}
                 

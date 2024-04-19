@@ -7,11 +7,11 @@ import Scroll from "../MyComponents/Scroll";
 import TurnImgIn from "../MyComponents/TurnImgIn";
 import CallToMakler from "../MyComponents/CallToMakler";
 import FetchGetId from "../MyComponents/FetchGetId";
-import UseFetchData from "../MyComponents/FetchImg";
 import Share from '../MyComponents/Share';
 import DateCutting from "../MyComponents/DateCutting"
 import AddPrice from "../MyComponents/AddPrice";
 import AddTerritory from "../MyComponents/AddTerritory";
+import GetImg from "../MyComponents/GetImg";
 const İnsideCardSell = () => {
   const { id } = useParams();
   Scroll();
@@ -25,7 +25,7 @@ const İnsideCardSell = () => {
    }, [getByIdData]);
    
 
-  const imageUrls = UseFetchData(getById?.img, 'SellImg');
+  const imageUrls = GetImg(getById?.img);;
 
   useEffect(() => {
    setKeepingImgSource(imageUrls);
@@ -43,6 +43,11 @@ const İnsideCardSell = () => {
           </div>
           {getById && ( 
             <div className="pb-2 mt-3 pe-2">
+               <div className="w-100 h-auto d-flex justify-content-center">
+              <p>
+                Baxış:<span className="address-home ms-1">{getById.looking}</span>
+              </p>
+              </div>
               <p>
                 Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
               </p>
@@ -53,6 +58,9 @@ const İnsideCardSell = () => {
                 Metro:<span className="address-home">{getById.metro}</span>
               </p>
               <p>
+                Rayon:<span className="address-home">{getById.region}</span>
+              </p>
+              <p>
                 Otaq sayi:<span className="room-home">{getById.room}</span>
               </p>
               <p>
@@ -61,13 +69,6 @@ const İnsideCardSell = () => {
                   {AddTerritory(getById.area)}
                 </span>
               </p>
-              {getById.addition
-               && (
-                <p>
-                Ətraflı:<span className="measure-home">{getById.addition}</span>
-              </p>
-               )
-               }
               <p>
                 Əşya:<span className="time-home">{getById.item}</span>
               </p>
@@ -81,12 +82,19 @@ const İnsideCardSell = () => {
                 Bina:<span className="time-home">{getById.building}</span>
               </p>
               
-              <p>
+              {/* <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
                 {AddPrice(getById.price * 1 /100)}
                 </span>
+              </p> */}
+              {getById.addition
+               && (
+                <p>
+                Ətraflı:<span className="measure-home">{getById.addition}</span>
               </p>
+               )
+               }
               <p>
                 Tarix:<span className="time-home">{DateCutting(getById.date)}</span>
               </p>

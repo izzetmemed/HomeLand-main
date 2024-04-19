@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
@@ -22,15 +22,12 @@ const OfficeInsidePayment = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  if(getById){
-    var imageUrls =GetImg(getById.img);
-  }else{
-    imageUrls=[];
-  }
   useEffect(() => {
-    setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
-
+    if (getById) {
+      const imageUrls = GetImg(getById.img ?? []);
+      setKeepingImgSource(imageUrls);
+    }
+  }, [getById]);
   const Reload = async () => {
     const ReloadData = {
       Id:getById.id,
@@ -44,6 +41,8 @@ const OfficeInsidePayment = () => {
       Room: getById.room,
       Repair: getById.repair,
       Item: getById.İtem,
+      Email:getById.email,
+      Looking:getById.looking, 
       Area: getById.area,
       Price: getById.price,
       Addition: getById.addition,
@@ -51,6 +50,7 @@ const OfficeInsidePayment = () => {
       SellOrRent: getById.sellOrRent,
       IsCalledWithHomeOwnFirstStep: true,
     };
+    console.log(ReloadData)
     if (
       ReloadData.FullName !== "" &&
       ReloadData.Number !== "" &&
@@ -104,6 +104,9 @@ const OfficeInsidePayment = () => {
             <p>
               Kod:<span className="price-home">{getById.id}</span>
             </p>
+            <p>
+                Email:<span className="price-home">{getById.email}</span>
+              </p>
             <p>
               Ünvan:<span className="address-home">{getById.address}</span>
             </p>

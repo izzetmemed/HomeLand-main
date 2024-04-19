@@ -14,6 +14,9 @@ import AddPrice from "../../../MyComponents/AddPrice";
 const SellInside = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/HomeLogin/MainAdmin/Sell/Img/Update/${id}`);
+  };
   const [keepingImgSource, setKeepingImgSource] = useState([]);
   var [getById, setGetById] = useState(null);
 
@@ -65,6 +68,9 @@ const SellInside = () => {
                 <p>
                   Nömrəsi:<span className="price-home">{getById.number}</span>
                 </p>
+                <p>
+                Email:<span className="price-home">{getById.email}</span>
+              </p>
                 <p>
                   Kod:<span className="price-home">{getById.id}</span>
                 </p>
@@ -131,6 +137,7 @@ const SellInside = () => {
               >
                 Yeniləmək
               </button>
+              <button className='btn btn-primary me-2 h-100' onClick={handleClick} >Şəkil əlavə etmək</button>
             </div>
               </div>
             )}

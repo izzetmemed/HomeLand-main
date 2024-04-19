@@ -55,6 +55,8 @@ import OfficeInsideOwn from "../Office/Admin/Own/OfficeInsideOwn";
 import OfficeOwn from "../Office/Admin/Own/OfficeOwn";
 import OfficePayment from "../Office/Admin/Payment/OfficePayment";
 import OfficeInsidePayment from "../Office/Admin/Payment/OfficeInsidePayment";
+import UpdateImg from "../MyComponents/UpdateImg";
+import SendMail from "../MyComponents/SendMail";
 const route = () => {
   return (
     <div>
@@ -74,26 +76,49 @@ const route = () => {
 
           <Route path="/satılıq-ev-form" element={<Sell />} />
           <Route path="/səbət" element={<Basket />} />
-          <Route path="/mapSearch" element={<MapSection link={"RentHome/Coordinate"} Rent={true}/>} />
-          <Route path="/Sell/mapSearch" element={<MapSection link={"Sell/Coordinate"} Sell={true}/>} />
-          <Route path="/Office/mapSearch" element={<MapSection link={"Office/Coordinate"} Office={true}/>} />
-          <Route path="/Land/mapSearch" element={<MapSection link={"Land/Coordinate"} Land={true}/>} />
-          <Route path="Obyekt/mapSearch" element={<MapSection link={"Obyekt/Coordinate"} Obyekt={true}/>} />
+          <Route
+            path="/mapSearch"
+            element={<MapSection link={"RentHome/Coordinate"} Rent={true} />}
+          />
+          <Route
+            path="/Sell/mapSearch"
+            element={<MapSection link={"Sell/Coordinate"} Sell={true} />}
+          />
+          <Route
+            path="/Office/mapSearch"
+            element={<MapSection link={"Office/Coordinate"} Office={true} />}
+          />
+          <Route
+            path="/Land/mapSearch"
+            element={<MapSection link={"Land/Coordinate"} Land={true} />}
+          />
+          <Route
+            path="Obyekt/mapSearch"
+            element={<MapSection link={"Obyekt/Coordinate"} Obyekt={true} />}
+          />
           <Route path="/Obyekt" element={<Obyekt />} />
           <Route path="/obyekt/Kart/:id" element={<InsideCardsObyekt />} />
           <Route path="/Obyekt/səbət" element={<Basket />} />
           <Route path="/Obyekt-form" element={<ObyektForm />} />
           <Route path="/HomeLogin" element={<Login />} />
-          <Route path="/Land" element={<LandCard/>}/>
-          <Route path="/land-form" element={<LandForm/>}/>
+          <Route path="/Land" element={<LandCard />} />
+          <Route path="/land-form" element={<LandForm />} />
           <Route path="/Land/Kart/:id" element={<InsideLand />} />
 
-          <Route path="/Office" element={<Office/>}/>
-          <Route path="/Office-form" element={<OfficeForm/>}/>
+          <Route path="/Office" element={<Office />} />
+          <Route path="/Office-form" element={<OfficeForm />} />
           <Route path="/Office/Kart/:id" element={<InsideCardOfffice />} />
+          <Route path="/SendMail" element={<SendMail />} />
 
-          <Route path="/HomeLogin/MainAdmin/Director" element={<ProtectedRoute><OnlyMyPage/></ProtectedRoute>} />
-         
+          <Route
+            path="/HomeLogin/MainAdmin/Director"
+            element={
+              <ProtectedRoute>
+                <OnlyMyPage />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/HomeLogin/MainAdmin"
             element={
@@ -104,124 +129,291 @@ const route = () => {
           />
           <Route
             path="/HomeLogin/MainAdmin/Renthome/Customer"
-            element={<ProtectedRoute><Costumer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <Costumer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Renthome/Customer/Kart/:id"
-            element={<ProtectedRoute><InsideCostumer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <InsideCostumer />
+              </ProtectedRoute>
+            }
           />
 
-          <Route path="/HomeLogin/MainAdmin/Renthome/Own" element={<ProtectedRoute><Own /></ProtectedRoute>} />
+          <Route
+            path="/HomeLogin/MainAdmin/Renthome/Own"
+            element={
+              <ProtectedRoute>
+                <Own />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/HomeLogin/MainAdmin/Renthome/Own/Kart/:id"
-            element={<ProtectedRoute><InsideCardOwn /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <InsideCardOwn />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Renthome/Payment"
-            element={<ProtectedRoute><Payment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Renthome/Payment/Kart/:id"
-            element={<ProtectedRoute><InsideCardPayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <InsideCardPayment />
+              </ProtectedRoute>
+            }
           />
 
-          <Route path="/HomeLogin/MainAdmin/Sell/Own" element={<ProtectedRoute><SellOwn /> </ProtectedRoute>} />
+          <Route
+            path="/HomeLogin/MainAdmin/Sell/Own"
+            element={
+              <ProtectedRoute>
+                <SellOwn />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/HomeLogin/MainAdmin/Sell/Own/Kart/:id"
-            element={<ProtectedRoute><SellInside /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <SellInside />
+              </ProtectedRoute>
+            }
           />
 
           <Route
             path="/HomeLogin/MainAdmin/Sell/Customer"
-            element={<ProtectedRoute><SellCustomer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <SellCustomer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Sell/Customer/Kart/:id"
-            element={<ProtectedRoute><SellinsideCustomer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <SellinsideCustomer />
+              </ProtectedRoute>
+            }
           />
 
           <Route
             path="/HomeLogin/MainAdmin/Sell/Payment"
-            element={<ProtectedRoute><SellPayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <SellPayment />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Sell/Payment/Kart/:id"
-            element={<ProtectedRoute><SellinsidePayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <SellinsidePayment />
+              </ProtectedRoute>
+            }
           />
 
           <Route
             path="/HomeLogin/MainAdmin/Obyekt/Own"
-            element={<ProtectedRoute><ObyektOwn /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <ObyektOwn />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Obyekt/Own/Kart/:id"
-            element={<ProtectedRoute><ObyektInsideOwn /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <ObyektInsideOwn />
+              </ProtectedRoute>
+            }
           />
 
           <Route
             path="/HomeLogin/MainAdmin/Obyekt/Customer"
-            element={<ProtectedRoute><ObyektCustomer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <ObyektCustomer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Obyekt/Customer/Kart/:id"
-            element={<ProtectedRoute><ObyektCustomerInside /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <ObyektCustomerInside />
+              </ProtectedRoute>
+            }
           />
 
           <Route
             path="/HomeLogin/MainAdmin/Obyekt/Payment"
-            element={<ProtectedRoute><ObyektPayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <ObyektPayment />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Obyekt/Payment/Kart/:id"
-            element={<ProtectedRoute><ObyektinsidePayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <ObyektinsidePayment />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Land/Customer"
-            element={<ProtectedRoute><LandCustomer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <LandCustomer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Land/Customer/Kart/:id"
-            element={<ProtectedRoute><LandInsideCustomer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <LandInsideCustomer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Land/Own"
-            element={<ProtectedRoute><LandOwn /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <LandOwn />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Land/Own/Kart/:id"
-            element={<ProtectedRoute><LandInsideOwn /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <LandInsideOwn />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Land/Payment"
-            element={<ProtectedRoute><LandPayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <LandPayment />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Land/Payment/Kart/:id"
-            element={<ProtectedRoute><LandInsidePayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <LandInsidePayment />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Office/Customer"
-            element={<ProtectedRoute><OfficeCustomer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <OfficeCustomer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Office/Customer/Kart/:id"
-            element={<ProtectedRoute><OfficeInsideCustomer /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <OfficeInsideCustomer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Office/Own"
-            element={<ProtectedRoute><OfficeOwn /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <OfficeOwn />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Office/Own/Kart/:id"
-            element={<ProtectedRoute><OfficeInsideOwn /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <OfficeInsideOwn />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Office/Payment"
-            element={<ProtectedRoute><OfficePayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <OfficePayment />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/HomeLogin/MainAdmin/Office/Payment/Kart/:id"
-            element={<ProtectedRoute><OfficeInsidePayment /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <OfficeInsidePayment />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/HomeLogin/MainAdmin/RentHome/Img/Update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateImg Kind={"RentHomeImg"}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Land/Img/Update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateImg Kind={"LandImg"}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Office/Img/Update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateImg Kind={"OfficeImg"}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Sell/Img/Update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateImg Kind={"SellImg"}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/HomeLogin/MainAdmin/Obyekt/Img/Update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateImg Kind={"ObyektImg"}/>
+              </ProtectedRoute>
+            }
           />
         </Route>
       </Routes>

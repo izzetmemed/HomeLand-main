@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
@@ -22,17 +22,13 @@ const LandInsidePayment = () => {
   useEffect(() => {
     setGetById(getByIdData);
   }, [getByIdData]);
-
-  if(getById){
-    var imageUrls =GetImg(getById.img);
-  }else{
-    imageUrls=[];
-  }
-
+  
   useEffect(() => {
-    setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
-
+    if (getById) {
+      const imageUrls = GetImg(getById.img ?? []);
+      setKeepingImgSource(imageUrls);
+    }
+  }, [getById]);
   const Reload = async () => {
     const ReloadData = {
       Id:getById.id,
@@ -46,6 +42,8 @@ const LandInsidePayment = () => {
       Metro: getById.metro,
       Room: getById.room,
       Repair: getById.repair,
+      Email:getById.email,
+      Looking:getById.looking, 
       Building: getById.building,
       İtem: getById.İtem,
       Area: getById.area,
@@ -102,6 +100,9 @@ const LandInsidePayment = () => {
               </p>
               <p>
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
+              </p>
+              <p>
+                Email:<span className="price-home">{getById.email}</span>
               </p>
               <p>
                 Nömrəsi:<span className="price-home">{getById.number}</span>

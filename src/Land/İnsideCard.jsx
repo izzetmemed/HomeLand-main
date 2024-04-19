@@ -40,11 +40,19 @@ const İnsideCard = () => {
         </div>
         {getById && ( 
           <div className="pb-2 mt-3 pe-2">
+             <div className="w-100 h-auto d-flex justify-content-center">
+              <p>
+                Baxış:<span className="address-home ms-1">{getById.looking}</span>
+              </p>
+              </div>
             <p>
               Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
             </p>
             <p>
               Ünvan:<span className="address-home">{getById.address}</span>
+            </p>
+            <p>
+              Rayon:<span className="address-home">{getById.region}</span>
             </p>
             <p>
               Sənəd:<span className="address-home">{getById.document}</span>
@@ -53,22 +61,23 @@ const İnsideCard = () => {
             <p>
               Sahe:
               <span className="measure-home">
-                {AddTerritory(getById.area)}
+                {AddTerritory(getById.area,true)}
               </span>
             </p>
-            {getById.addition
+           
+            {/* <p>
+              Torpağı aldığınız halda əmlakçıya verəcəyiniz ödəniş:
+              <span className="time-home">
+              {AddPrice(getById.price * 1 /100)}
+              </span>
+            </p> */}
+             {getById.addition
              && (
               <p>
               Ətraflı:<span className="measure-home">{getById.addition}</span>
             </p>
              )
              }
-            <p>
-              Torpağı aldığınız halda əmlakçıya verəcəyiniz ödəniş:
-              <span className="time-home">
-              {AddPrice(getById.price * 1 /100)}
-              </span>
-            </p>
             <p>
               Tarix:<span className="time-home">{DateCutting(getById.date)}</span>
             </p>

@@ -75,6 +75,9 @@ const İnsideCardCostumer = () => {
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
               </p>
               <p>
+                Email:<span className="price-home">{getById.email}</span>
+              </p>
+              <p>
                 Nömrəsi:<span className="price-home">{getById.number}</span>
               </p>
               <p>

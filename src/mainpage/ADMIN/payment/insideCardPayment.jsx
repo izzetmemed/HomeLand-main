@@ -23,15 +23,13 @@ const İnsideCardPayment = () => {
   useEffect(() => {
     setGetById(getByIdData);
    }, [getByIdData]);
-   
-   if(getById){
-    var imageUrls =GetImg(getById.img);
-  }else{
-    imageUrls=[];
-  }
-  useEffect(() => {
-   setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
+  
+   useEffect(() => {
+    if (getById) {
+      const imageUrls = GetImg(getById.img ?? []);
+      setKeepingImgSource(imageUrls);
+    }
+  }, [getById]);
 
   const Reload=async()=>{
     const ReloadData = {
@@ -61,6 +59,8 @@ const İnsideCardPayment = () => {
       Wifi: getById.wifi,
       Area: getById.area,
       Price: getById.price,
+      Email:getById.email,
+      Looking:getById.looking,
       Boy: getById.boy,
       Girl: getById.girl,
       Family: getById.family,
@@ -118,10 +118,16 @@ executeSequentially();
                 Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
               </p>
               <p>
+                Email:<span className="price-home">{getById.email}</span>
+              </p>
+              <p>
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
               </p>
               <p>
                 Nömrəsi:<span className="price-home">{getById.number}</span>
+              </p>
+              <p>
+                Baxxış:<span className="price-home">{getById.looking}</span>
               </p>
               <p>
                 Kod:<span className="price-home">{getById.id}</span>
@@ -163,7 +169,7 @@ executeSequentially();
               <p>
                 Evi aldığınız halda əmlakçıya verəcəyiniz ödəniş:
                 <span className="time-home">
-                  {(AddPrice(getById.price * 20) / 100)}
+                  {((getById.price * 20) / 100)}
                 </span>
               </p>
               <p>
