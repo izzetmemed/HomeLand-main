@@ -20,7 +20,7 @@ const UpLoad = () => {
   return (
 <div className="Alert-media col-4 col-sm-2 d-flex flex-column">
       <p className="mb-1">Gözləyin:{counter}%</p>
-      <p className="text-danger">Çıxmayın !!!</p>
+
       <div className="d-flex justify-content-center">
       <div class="loader"></div> 
       </div>

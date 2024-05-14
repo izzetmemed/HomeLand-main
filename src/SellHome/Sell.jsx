@@ -85,8 +85,11 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
   useEffect(() => {
     setkeepingImgSource(images);
    },[images]) 
-
+   let DataImg = new FormData();
   const UploadInformation = () => {
+    for (let i = 0; i < imagesFile.length; i++) {
+      DataImg.append(`image`, imagesFile[i]);
+    }
     setWarning([]);
     const formData = {
       FullName: FullName.current.value,
@@ -105,6 +108,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       Area: Area.current.value,
       Price: Price.current.value,
       Addition: Addition.current.value,
+      VideoPath:null,
       Document: Paper.current.value
     };
     const Check = [
@@ -146,15 +150,10 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
     ];
     if (Check.every((x) => x === true)) {
       if(!IsLoading){
-        Swal.fire({
-          title: "Gözləyin",
-          text: "Elan tam yüklənməmiş çıxmayın !!!",
-          icon: "info",
-        });
-        setIsLoading(true);
+      setIsLoading(true);
       FetchPostAll(formData,"Sell",imgFunc);
       setTimeout(() => {
-        setIsLoading(false)
+      setIsLoading(false)
         Swal.fire({
           title: "Uğurlu",
           text: "Elanınız yükləndi.",
@@ -182,12 +181,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
 
   }
   const imgFunc=()=>{
-    let formData = new FormData();
-    for (let i = 0; i < imagesFile.length; i++) {
-     
-        formData.append(`image`, imagesFile[i]);
-    }
-    FetchPostImg(formData,"SellImg");
+    FetchPostImg(DataImg,"SellImg");
     };
 
     const updateload = () => {

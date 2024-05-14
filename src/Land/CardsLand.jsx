@@ -7,6 +7,7 @@ import { Outlet } from "react-router-dom";
 import Pagenation from "../pagenation";
 import {Load} from "../Load/Load";
 import Scroll from "../MyComponents/Scroll";
+import RecommendLand from './RecommendLand';
 const CardsLand = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
@@ -99,6 +100,7 @@ const CardsLand = () => {
         setPrice={setPrice}
         setClick={setClick}
       />
+      <RecommendLand/>
       <div className="d-flex flex-wrap">
         {parsedData.map((x,index) => (
           <SectionLand

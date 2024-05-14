@@ -6,6 +6,7 @@ import Pagenation from '../pagenation';
 import {Load} from "../Load/Load"
 import FetchGetAll from '../MyComponents/FetchGetAll';
 import Scroll from '../MyComponents/Scroll';
+import RecommendRent from './RecommendRent';
 
 const Cards = () => {
   Scroll();
@@ -96,6 +97,7 @@ useEffect(() => {
   return (
     <div>
       <Search   setFunc={setSelectedIds} setHomeOrFlat={setHomeOrFlat} setRegion={setRegion} setRoom={setRoom} setPrice={setPrice} setClick={setClick}/>
+     <RecommendRent/>
       <div className='d-flex flex-wrap'>
         {parsedData.map((x,index) => (
           <Section

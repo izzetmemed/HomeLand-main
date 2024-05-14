@@ -112,8 +112,11 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
     }
   };
-
+  let DataImg= new FormData();
   const UploadInformation = () => {
+    for (let i = 0; i < imagesFile.length; i++) {
+      DataImg.append(`image`, imagesFile[i]);
+    }
     setWarning([]);
     const formData = {
       FullName: FullName.current.value,
@@ -185,11 +188,6 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     ];
     if (Check.every((x) => x === true)){
       if(!IsLoading){
-        Swal.fire({
-          title: "Gözləyin",
-          text: "Elan tam yüklənməmiş çıxmayın !!!",
-          icon: "info",
-        });
           setIsLoading(true);
         FetchPostAll(formData,"RentHome",imgFunc);
         
@@ -218,11 +216,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     }
   };
   const imgFunc = () => {
-    let formData = new FormData();
-    for (let i = 0; i < imagesFile.length; i++) {
-      formData.append(`image`, imagesFile[i]);
-    }
-    FetchPostImg(formData,"RentHomeImg");
+    FetchPostImg(DataImg,"RentHomeImg");
   };
 
   const updateload = () => {

@@ -12,6 +12,7 @@ import DateCutting from "../MyComponents/DateCutting"
 import AddPrice from "../MyComponents/AddPrice";
 import AddTerritory from "../MyComponents/AddTerritory";
 import GetImg from "../MyComponents/GetImg";
+import VideoSection from "../MyComponents/VideoSection";
 const İnsideCardSell = () => {
   const { id } = useParams();
   Scroll();
@@ -34,7 +35,7 @@ const İnsideCardSell = () => {
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
-        <div className="insideCard-home">
+        <div className={ getById && getById.videoPath ? 'insideCard-homeTwo insideCard-home' : 'insideCard-home'}>
           <div className="overflow-hidden">
           <TurnImgIn keepingImgSource={keepingImgSource}/>
             <div className="logo-on-images d-flex justify-content-center ">
@@ -98,6 +99,11 @@ const İnsideCardSell = () => {
               <p>
                 Tarix:<span className="time-home">{DateCutting(getById.date)}</span>
               </p>
+              {getById.videoPath!=null && (
+                <VideoSection videoUrl={getById.videoPath}/>
+              )
+                
+              }
               <div className="height-for-coordiante mt-2 mb-2 p-4">
                 <Coordinate CanClick={false} Xvalue={getById.coordinateX} Yvalue={getById.coordinateY}/>
               </div>

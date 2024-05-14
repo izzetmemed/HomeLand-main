@@ -2,6 +2,7 @@
     border-radius: 10px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     padding-bottom: 2%;
+    background-color: white !important;
     border: 1px $Solid $HomeLandColor;
     height: 400px !important;
      div{
@@ -117,6 +118,11 @@
         color: $White;
     }
 }
+.myVideoOnImg{
+    
+    right:18% !important;
+  
+}
 .mydeleteOnImg{
     display: $None;
     background-color: red !important;
@@ -140,4 +146,43 @@
     padding: 3px 5px;
     border-radius: 50%;
     height: auto !important;
+}
+.Recommend{
+    padding-bottom: 3%;
+    border:3px solid $HomeLandColor;
+    border-radius: 10px;
+    position: relative;
+    padding-top: 5%;
+    margin:8px;
+}
+.RecommendSections{
+    width: auto;
+    overflow-x:scroll;
+    overflow-y: hidden;
+}
+.RecommendSections::-webkit-scrollbar {
+    height: 10px;
+    background-color:$ScrollbarColor ;
+}
+
+.RecommendSections::-webkit-scrollbar-thumb {
+    background-color:$WhiteDark; 
+}
+
+.RecommendSections::-webkit-scrollbar-track {
+    background-color:$ScrollbarColor;
+}
+.RecommendText{
+    margin-top: 2%;
+    @include FlexJustify;
+    position: absolute;
+    top: 0.5%;
+    right: 50%;
+    transform: translateX(50%);
+    p{
+        margin-bottom: 0 !important;
+        font-size: 130%;
+        color: $HomeLandColor;
+
+    }
 }

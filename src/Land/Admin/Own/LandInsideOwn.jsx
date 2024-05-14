@@ -25,16 +25,12 @@ const LandInsideOwn = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  if(getById){
-    var imageUrls =GetImg(getById.img);
-  }else{
-    imageUrls=[];
-  }
-
   useEffect(() => {
-    setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
-
+    if (getById) {
+      const imageUrls = GetImg(getById.img ?? []);
+      setKeepingImgSource(imageUrls);
+    }
+  }, [getById]);
   const deleteItem = async () => {
     await FetchDelete(getById.id, "Land");
     navigate("/HomeLogin/MainAdmin/Land/own");

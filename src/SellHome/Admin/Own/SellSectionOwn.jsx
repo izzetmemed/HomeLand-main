@@ -15,6 +15,7 @@ const SellSectionOwn = ({props}) => {
 
   var Data=props;
   const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnFirstStep)
+  const [recommendBool, setRecommendBool]=useState(Data.Recommend)
   const handleButtonClick = () => {
     Data.İtem=Data.Item;
     Data.IsCalledWithHomeOwnFirstStep=!sendTrueOrFalse;
@@ -24,8 +25,26 @@ const SellSectionOwn = ({props}) => {
      }
      PutData();
   };
+  const recommendSell = () => {
+    Data.İtem=Data.Item;
+    Data.Recommend=!recommendBool;
+    setRecommendBool(!recommendBool);
+    const PutData=async()=>{
+      await FetchPut(Data,"Sell/Recommend");
+     }
+     PutData();
+  };
   const buttonStyle = {
     backgroundColor: Data.IsCalledWithHomeOwnFirstStep ?  'green' :'red',
+    borderRadius: '5px',
+    padding:'0',
+    cursor: 'pointer',
+    marginLeft:'5px',
+    height:'50px',
+    color:'white',
+  };
+  const buttonRecommendStyle = {
+    backgroundColor: Data.Recommend ?  'green' :'red',
     borderRadius: '5px',
     padding:'0',
     cursor: 'pointer',
@@ -50,6 +69,7 @@ const SellSectionOwn = ({props}) => {
                     <p>Tarix:<span >{DateCutting(props.Date)}</span></p>
                      </Link>
                      <button className='btn col-5' style={buttonStyle} onClick={handleButtonClick}> Ev sahibi ilə danışıldı</button>
+                     <button className='btn col-5' style={buttonRecommendStyle} onClick={recommendSell}> Tövsiyə et</button>
 
                 </div>
 

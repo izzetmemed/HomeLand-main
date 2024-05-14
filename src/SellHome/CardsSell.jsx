@@ -7,6 +7,7 @@ import { Outlet } from "react-router-dom";
 import Pagenation from "../pagenation";
 import {Load} from "../Load/Load";
 import Scroll from "../MyComponents/Scroll";
+import RecommendSell from "./RecommendSell";
 const CardsSell = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -97,6 +98,7 @@ useEffect(() => {
         setPrice={setPrice}
         setClick={setClick}
       />
+          <RecommendSell/>
       <div className="d-flex flex-wrap">
         {parsedData.map((x,index) => (
           <SectionSell

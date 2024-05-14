@@ -54,6 +54,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
+  var DataImg = new FormData();
   const onImageChange = (event) => {
     if (event.target.files) {
       const selectedImages = Array.from(event.target.files).slice(0, 10);
@@ -65,6 +66,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
       }
       setImages((prevImages) => [...prevImages, ...newImageUrls]);
       setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
+   
     }
   };
 
@@ -74,6 +76,9 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
   }, [images]);
 
   const UploadInformation = () => {
+    for (let i = 0; i < imagesFile.length; i++) {
+      DataImg.append(`image`, imagesFile[i]);
+    }
     setWarning([]);
     const formData = {
       FullName: FullName.current.value,
@@ -128,11 +133,6 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
     ];
     if (Check.every((x) => x === true)) {
       if (!IsLoading) {
-        Swal.fire({
-          title: "Gözləyin",
-          text: "Elan tam yüklənməmiş çıxmayın !!!",
-          icon: "info",
-        });
         setIsLoading(true);
         FetchPostAll(formData, "Land", imgFunc);
         setTimeout(() => {
@@ -160,11 +160,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
     }
   };
   const imgFunc = () => {
-    let formData = new FormData();
-    for (let i = 0; i < imagesFile.length; i++) {
-      formData.append(`image`, imagesFile[i]);
-    }
-    FetchPostImg(formData, "LandImg");
+    FetchPostImg(DataImg, "LandImg");
   };
 
   const updateload = () => {

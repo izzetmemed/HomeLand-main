@@ -7,6 +7,7 @@ import { Outlet } from "react-router-dom";
 import Pagenation from "../pagenation";
 import {Load} from "../Load/Load";
 import Scroll from "../MyComponents/Scroll";
+import RecommendOffice from "./RecommendOffice";
 const CardsOffice = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
@@ -97,6 +98,7 @@ const CardsOffice = () => {
       setPrice={setPrice}
       setClick={setClick}
     />
+    <RecommendOffice/>
     <div className="d-flex flex-wrap">
       {parsedData.map((x,index) => (
         <SectionOffice

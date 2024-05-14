@@ -7,6 +7,7 @@ import Pagenation from '../pagenation';
 import FetchGetAll from '../MyComponents/FetchGetAll';
 import {Load} from '../Load/Load';
 import Scroll from '../MyComponents/Scroll';
+import RecommendObyekt from './RecommendObyekt';
 const CardsObyekt = () => {
   Scroll();
   const [filteredData, setFilteredData] = useState([]);
@@ -102,6 +103,7 @@ useEffect(() => {
       setPrice={setPrice}
       setClick={setClick}
       />
+      <RecommendObyekt/>
       <div className='d-flex flex-wrap'>
       {parsedData.map((x,index) => (
           <SectionObyect

@@ -15,7 +15,6 @@ import InsideCardOwn from "../mainpage/ADMIN/Own/insideCardOwn";
 import InsideCardPayment from "../mainpage/ADMIN/payment/insideCardPayment";
 import Payment from "../mainpage/ADMIN/RentPayment";
 import Basket from "../Sebet/Basket";
-import CardsSell from "../SellHome/CardsSell";
 import Sell from "../SellHome/Sell";
 import Obyekt from "../Obyekt/CardsObyekt";
 import ObyektForm from "../Obyekt/ObyektForm";
@@ -57,6 +56,8 @@ import OfficePayment from "../Office/Admin/Payment/OfficePayment";
 import OfficeInsidePayment from "../Office/Admin/Payment/OfficeInsidePayment";
 import UpdateImg from "../MyComponents/UpdateImg";
 import SendMail from "../MyComponents/SendMail";
+import UploadVideo from "../MyComponentsAdmin/UploadVideo";
+import CardsSell from "../SellHome/CardsSell";
 const route = () => {
   return (
     <div>
@@ -412,6 +413,14 @@ const route = () => {
             element={
               <ProtectedRoute>
                 <UpdateImg Kind={"ObyektImg"}/>
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/HomeLogin/MainAdmin/Sell/Video/:id"
+            element={
+              <ProtectedRoute>
+              <UploadVideo/>
               </ProtectedRoute>
             }
           />

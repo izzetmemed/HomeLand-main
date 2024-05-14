@@ -187,7 +187,7 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
       </div>
       <div className="col-12 mt-3 pe-2 ps-2">
         <Link to="Səbət" className='btn w-100 text-white  search-btn-click' >
-          Mənim səbətim
+        <i className="fa-solid fa-basket-shopping"></i> Mənim səbətim 
         </Link>
       </div>
       <div className="col-12 mt-3 pe-2 ps-2 ">

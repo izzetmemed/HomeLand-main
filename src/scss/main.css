@@ -301,6 +301,7 @@ Body::-webkit-scrollbar-track {
   border-radius: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding-bottom: 2%;
+  background-color: white !important;
   border: 1px solid rgb(79, 189, 89);
   height: 400px !important;
 }
@@ -418,6 +419,10 @@ Body::-webkit-scrollbar-track {
   color: white;
 }
 
+.myVideoOnImg {
+  right: 18% !important;
+}
+
 .mydeleteOnImg {
   display: none;
   background-color: red !important;
@@ -444,6 +449,49 @@ Body::-webkit-scrollbar-track {
   padding: 3px 5px;
   border-radius: 50%;
   height: auto !important;
+}
+
+.Recommend {
+  padding-bottom: 3%;
+  border: 3px solid rgb(79, 189, 89);
+  border-radius: 10px;
+  position: relative;
+  padding-top: 5%;
+  margin: 8px;
+}
+
+.RecommendSections {
+  width: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.RecommendSections::-webkit-scrollbar {
+  height: 10px;
+  background-color: rgb(208, 212, 209);
+}
+
+.RecommendSections::-webkit-scrollbar-thumb {
+  background-color: rgb(163, 163, 163);
+}
+
+.RecommendSections::-webkit-scrollbar-track {
+  background-color: rgb(208, 212, 209);
+}
+
+.RecommendText {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0.5%;
+  right: 50%;
+  transform: translateX(50%);
+}
+.RecommendText p {
+  margin-bottom: 0 !important;
+  font-size: 130%;
+  color: rgb(79, 189, 89);
 }
 
 .div-in-input input {
@@ -945,6 +993,128 @@ a {
 @media (max-width: 320px) {
   .insideCard-home {
     height: 520vw !important;
+  }
+}
+.insideCard-homeTwo {
+  height: 175vw !important;
+}
+.insideCard-homeTwo div {
+  height: 25%;
+}
+
+@media (max-width: 2300px) {
+  .insideCard-homeTwo {
+    height: 90vw !important;
+  }
+}
+@media (max-width: 2100px) {
+  .insideCard-homeTwo {
+    height: 100vw !important;
+  }
+}
+@media (max-width: 1900px) {
+  .insideCard-homeTwo {
+    height: 120vw !important;
+  }
+}
+@media (max-width: 1700px) {
+  .insideCard-homeTwo {
+    height: 150vw !important;
+  }
+}
+@media (max-width: 1500px) {
+  .insideCard-homeTwo {
+    height: 170vw !important;
+  }
+}
+@media (max-width: 1250px) {
+  .insideCard-homeTwo {
+    height: 200vw !important;
+  }
+}
+@media (max-width: 1100px) {
+  .insideCard-homeTwo {
+    height: 235vw !important;
+  }
+}
+@media (max-width: 1040px) {
+  .insideCard-homeTwo {
+    height: 260vw !important;
+  }
+}
+@media (max-width: 970px) {
+  .insideCard-homeTwo {
+    height: 210vw !important;
+  }
+  .insideCard-homeTwo div {
+    height: 20%;
+  }
+}
+@media (max-width: 870px) {
+  .insideCard-homeTwo {
+    height: 250vw !important;
+  }
+}
+@media (max-width: 800px) {
+  .insideCard-homeTwo {
+    height: 285vw !important;
+  }
+}
+@media (max-width: 700px) {
+  .insideCard-homeTwo {
+    height: 320vw !important;
+  }
+}
+@media (max-width: 600px) {
+  .insideCard-homeTwo {
+    height: 340vw !important;
+  }
+}
+@media (max-width: 500px) {
+  .insideCard-homeTwo {
+    height: 380vw !important;
+  }
+}
+@media (max-width: 450px) {
+  .insideCard-homeTwo {
+    height: 470vw !important;
+  }
+  .insideCard-homeTwo div {
+    height: 23%;
+  }
+}
+@media (max-width: 430px) {
+  .insideCard-homeTwo {
+    height: 460vw !important;
+  }
+  .insideCard-homeTwo div {
+    height: 20%;
+  }
+}
+@media (max-width: 400px) {
+  .insideCard-homeTwo {
+    height: 480vw !important;
+  }
+  .insideCard-homeTwo div {
+    height: 20%;
+  }
+}
+@media (max-width: 370px) {
+  .insideCard-homeTwo {
+    height: 510vw !important;
+  }
+  .insideCard-homeTwo div {
+    height: 18%;
+  }
+}
+@media (max-width: 350px) {
+  .insideCard-homeTwo {
+    height: 560vw !important;
+  }
+}
+@media (max-width: 320px) {
+  .insideCard-homeTwo {
+    height: 620vw !important;
   }
 }
 .logo-on-images {

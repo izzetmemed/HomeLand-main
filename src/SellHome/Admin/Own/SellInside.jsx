@@ -17,6 +17,9 @@ const SellInside = () => {
   const handleClick = () => {
     navigate(`/HomeLogin/MainAdmin/Sell/Img/Update/${id}`);
   };
+  const handleClickVideo = () => {
+    navigate(`/HomeLogin/MainAdmin/Sell/Video/${id}`);
+  };
   const [keepingImgSource, setKeepingImgSource] = useState([]);
   var [getById, setGetById] = useState(null);
 
@@ -25,15 +28,12 @@ const SellInside = () => {
     setGetById(getByIdData);
   }, [getByIdData]);
 
-  if(getById){
-    var imageUrls =GetImg(getById.img);
-  }else{
-    imageUrls=[];
-  }
   useEffect(() => {
-    setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
-
+    if (getById) {
+      const imageUrls = GetImg(getById.img ?? []);
+      setKeepingImgSource(imageUrls);
+    }
+  }, [getById]);
   const deleteItem = async () => {
     await FetchDelete(getById.id, "Sell");
     navigate("/HomeLogin/MainAdmin/Sell/own");
@@ -138,6 +138,7 @@ const SellInside = () => {
                 Yeniləmək
               </button>
               <button className='btn btn-primary me-2 h-100' onClick={handleClick} >Şəkil əlavə etmək</button>
+              <button className='btn btn-info me-2 h-100 text-white' onClick={handleClickVideo} >Vidio əlavə etmək</button>
             </div>
               </div>
             )}

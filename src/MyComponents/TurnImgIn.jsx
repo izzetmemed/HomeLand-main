@@ -32,7 +32,7 @@ const TurnImgIn = ({ keepingImgSource ,Counter}) => {
         </span>
      
       </div>
-      <div className="d-flex justify-content-center w-auto h-auto">
+      <div className="d-flex justify-content-center w-auto h-100">
         <img
         decoding="async"
           src={

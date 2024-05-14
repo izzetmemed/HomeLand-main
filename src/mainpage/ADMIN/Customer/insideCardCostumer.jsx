@@ -24,15 +24,12 @@ const İnsideCardCostumer = () => {
     setGetById(getByIdData);
    }, [getByIdData]);
    
-   if(getById){
-    var imageUrls =GetImg(getById.img);
-  }else{
-    imageUrls=[];
-  }
-  useEffect(() => {
-   setKeepingImgSource(imageUrls);
-  }, [getById, imageUrls]);
-  
+   useEffect(() => {
+    if (getById) {
+      const imageUrls = GetImg(getById.img ?? []);
+      setKeepingImgSource(imageUrls);
+    }
+  }, [getById]);
   const addCustomer=()=>{
     setstate(!state);
     const customerObject={
