@@ -8,8 +8,7 @@ import HomeOrFlatObyekt from "../MyComponents/HomeOrFlat";
 import RegionJsx from '../MyComponents/Region';
 import PriceJsx from '../MyComponents/Price';
 import RoomCount from '../MyComponents/RoomCount';
-const SearchOffice = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) => {
-    const nav=useNavigate();
+const SearchOffice = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice , RefuseFunction}) => {
     const [isActive, setIsActive] = useState(false);
     const [isMedia, setIsMedia] = useState(false);
     const myRef = useRef([]);
@@ -18,7 +17,7 @@ const SearchOffice = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setCl
     const Room = useRef([]);
     const Price = useRef([]);
     var isMediaPrice=true;
-  
+    var Refuse=RefuseFunction;
     const ArrayNewBool = [];
     const ArrayNewSetHomeOrFlat = [];
     const ArrayNewSetSendDataRegion = [];
@@ -70,7 +69,6 @@ const SearchOffice = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setCl
           ArrayNewSetSendDataPrice.push(Price.current[i].value);
         }
       }
-      setClick(true);
       setPrice(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
       setRoom(ArrayNewSetSendDataRoom);
       setRegion(ArrayNewSetSendDataRegion);
@@ -88,56 +86,18 @@ const SearchOffice = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setCl
         sessionStorage.setItem("FirstMediaOffice",true);
       }
       if(isMediaPrice){
-      sessionStorage.setItem("PriceOffice",ArrayNewSetSendDataPrice.sort((a, b) => b - a));
-      sessionStorage.setItem("RoomOffice",ArrayNewSetSendDataRoom);
-      sessionStorage.setItem("RegionOffice",ArrayNewSetSendDataRegion);
-      sessionStorage.setItem("HomeOrFlatOffice",ArrayNewSetHomeOrFlat);
-      sessionStorage.setItem("MetroOffice",ArrayNewBool);
       sessionStorage.setItem("SearchOffice",true);
       }
     };
     useEffect(()=>{
       if(sessionStorage.getItem("SearchOffice")){
-        setClick(true);
-        var sessionPrice=sessionStorage.getItem("PriceOffice")
-        var sessionRoom=sessionStorage.getItem("RoomOffice")
-        var sessionRegion=sessionStorage.getItem("RegionOffice")
-        var sessionMetro=sessionStorage.getItem("MetroOffice")
-        var sessionHomeOrFlat=sessionStorage.getItem("HomeOrFlatOffice")
-  
-        if(sessionPrice!==""){
-           setPrice(sessionPrice.split(","));
-        }
-        if (sessionRoom !== "") {
-          const rooms = sessionRoom.split(",");
-          setRoom(rooms); 
-      }
-      
-        if(sessionRegion!==""){
-          const Region = sessionRegion.split(",");
-          setRegion(Region);
-        }
-        if(sessionMetro!==""){
-          const Metro = sessionMetro.split(",");
-          setFunc(Metro);
-        }
-        if(sessionHomeOrFlat!==""){
-          const HomeOrFlat = sessionHomeOrFlat.split(",");
-          setHomeOrFlat(HomeOrFlat);
-        }
         setIsActive(true);
       }
     },[])
    const RefuseSearch =()=>{
     sessionStorage.removeItem("SearchOffice");
-    sessionStorage.removeItem("PriceOffice");
-    sessionStorage.removeItem("RoomOffice");
-    sessionStorage.removeItem("MetroOffice");
-    sessionStorage.removeItem("HomeOrFlatOffice");
-    sessionStorage.removeItem("RegionOffice");
-    setClick(false);
     setIsActive(false);
-    nav("/Office");
+    Refuse();
    }
   return (
     <div>

@@ -1,7 +1,6 @@
 import React, { useState, useRef,useEffect } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import {useNavigate} from "react-router-dom"
 import Alert from "./MyComponents/Alert";
 import RoomCount from "./MyComponents/RoomCount";
 import HomeKind from "./MyComponents/HomeKind";
@@ -14,9 +13,8 @@ const Search = ({
   setRegion,
   setRoom,
   setPrice,
-  setClick,
+  RefuseFunction
 }) => {
-  const nav=useNavigate();
   const [isActive, setIsActive] = useState(false);
   const [isMedia, setIsMedia] = useState(false);
   var isMediaPrice=true;
@@ -26,6 +24,7 @@ const Search = ({
   const Room = useRef([]);
   const Price = useRef([]);
   
+  var Refuse=RefuseFunction;
 
   const ArrayNewBool = [];
   const ArrayNewSetHomeOrFlat = [];
@@ -80,7 +79,6 @@ const Search = ({
         ArrayNewSetSendDataPrice.push(Price.current[i].value);
       }
     }
-    setClick(true);
     setPrice(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     setRoom(ArrayNewSetSendDataRoom);
     setRegion(ArrayNewSetSendDataRegion);
@@ -94,12 +92,7 @@ const Search = ({
     setMetro2(ArrayNewBool);
     setRoom2(ArrayNewSetSendDataRoom);
     
-   if(isMediaPrice){
-    sessionStorage.setItem("Price",ArrayNewSetSendDataPrice.sort((a, b) => b - a));
-    sessionStorage.setItem("Room",ArrayNewSetSendDataRoom);
-    sessionStorage.setItem("Region",ArrayNewSetSendDataRegion);
-    sessionStorage.setItem("HomeOrFlat",ArrayNewSetHomeOrFlat);
-    sessionStorage.setItem("Metro",ArrayNewBool);
+   if(isMediaPrice){;
     sessionStorage.setItem("Search",true);
    }
     if(!sessionStorage.getItem("FirstMediaRent") && isMediaPrice){
@@ -110,46 +103,13 @@ const Search = ({
   };
   useEffect(()=>{
     if(sessionStorage.getItem("Search")){
-      setClick(true);
-      var sessionPrice=sessionStorage.getItem("Price")
-      var sessionRoom=sessionStorage.getItem("Room")
-      var sessionRegion=sessionStorage.getItem("Region")
-      var sessionMetro=sessionStorage.getItem("Metro")
-      var sessionHomeOrFlat=sessionStorage.getItem("HomeOrFlat")
-
-      if(sessionPrice!==""){
-         setPrice(sessionPrice.split(","));
-      }
-      if (sessionRoom !== "") {
-        const rooms = sessionRoom.split(",");
-        setRoom(rooms); 
-    }
-    
-      if(sessionRegion!==""){
-        const Region = sessionRegion.split(",");
-        setRegion(Region);
-      }
-      if(sessionMetro!==""){
-        const Metro = sessionMetro.split(",");
-        setFunc(Metro);
-      }
-      if(sessionHomeOrFlat!==""){
-        const HomeOrFlat = sessionHomeOrFlat.split(",");
-        setHomeOrFlat(HomeOrFlat);
-      }
       setIsActive(true);
     }
   },[])
  const RefuseSearch =()=>{
   sessionStorage.removeItem("Search");
-  sessionStorage.removeItem("Price");
-  sessionStorage.removeItem("Room");
-  sessionStorage.removeItem("Metro");
-  sessionStorage.removeItem("HomeOrFlat");
-  sessionStorage.removeItem("Region");
-  setClick(false);
   setIsActive(false);
-  nav("/");
+  Refuse();
  }
   return (
     <div>

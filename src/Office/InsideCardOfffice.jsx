@@ -58,7 +58,7 @@ const InsideCardOfffice = () => {
               Metro:<span className="address-home">{getById.metro}</span>
             </p>
             <p>
-              RAyon:<span className="address-home">{getById.region}</span>
+              Rayon:<span className="address-home">{getById.region}</span>
             </p>
             <p>
               Otaq sayi:<span className="room-home">{getById.room}</span>

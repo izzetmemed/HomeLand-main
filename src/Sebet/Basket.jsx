@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Section from '../section';
 import SectionObyekt from '../Obyekt/SectionObyekt';
 import SectionSell from '../SellHome/SectionSell';
-import FetchGetAll from '../MyComponents/FetchGetAll';
 import SectionLand from '../Land/SectionLand';
 import OfficeSection from "../Office/SectionOffice";
 import { useSelector } from 'react-redux';
 import { Load } from '../Load/Load';
+import FetchGetSearch from '../MyComponents/FetchGetSearch';
 const Basket = () => {
   const [getData,setGetData] = useState(useSelector(state => state.deleteBasket.data));
 
@@ -18,7 +18,6 @@ const Basket = () => {
   const [getAllOffice, setGetAllOffice] = useState([]);
   const [getAllSell, setGetAllSell] = useState([]);
   const [getAllObyekt, setGetAllObyekt] = useState([]);
- 
 
   useEffect(() => {
     async function fetchRentHome() {
@@ -26,10 +25,9 @@ const Basket = () => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'rentHome')
           .map(item => item[0]);
-            const resp = await FetchGetAll("RentHome");
-        const parsedData = resp.data.map(item => JSON.parse(item));
-        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-        setGetAllRentHome(rentData);
+            const resp = await FetchGetSearch(BasketRentIds,"RentHome/GetAll");
+        const parsedData = resp.map(item => JSON.parse(item));
+        setGetAllRentHome(parsedData);
       } catch (error) {
         console.error('Error fetching RentHome:', error);
       }
@@ -42,10 +40,9 @@ const Basket = () => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'Land')
           .map(item => item[0]);
-            const resp = await FetchGetAll("Land");
-        const parsedData = resp.data.map(item => JSON.parse(item));
-        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-        setGetAllLand(rentData);
+            const resp = await FetchGetSearch(BasketRentIds,"Land/GetAll");
+        const parsedData = resp.map(item => JSON.parse(item));
+        setGetAllLand(parsedData);
       } catch (error) {
         console.error('Error fetching RentHome:', error);
       }
@@ -58,10 +55,9 @@ const Basket = () => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'Office')
           .map(item => item[0]);
-            const resp = await FetchGetAll("Office");
-        const parsedData = resp.data.map(item => JSON.parse(item));
-        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-        setGetAllOffice(rentData);
+            const resp = await FetchGetSearch(BasketRentIds,"Office/GetAll");
+        const parsedData = resp.map(item => JSON.parse(item));
+        setGetAllOffice(parsedData);
       } catch (error) {
         console.error('Error fetching RentHome:', error);
       }
@@ -74,10 +70,9 @@ const Basket = () => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'obyekt')
           .map(item => item[0]);
-            const resp = await FetchGetAll("Obyekt");
-        const parsedData = resp.data.map(item => JSON.parse(item));
-        const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-          setGetAllObyekt(rentData);
+            const resp = await FetchGetSearch(BasketRentIds,"Obyekt/GetAll");
+        const parsedData = resp.map(item => JSON.parse(item));
+          setGetAllObyekt(parsedData);
       } catch (error) {
         console.error('Error fetching Obyekt:', error);
       }
@@ -90,10 +85,9 @@ const Basket = () => {
           const BasketRentIds =await getData
           .filter(x => x[1] === 'sellHome')
           .map(item => item[0]);
-            const resp = await FetchGetAll("Sell");
-            const parsedData = resp.data.map(item => JSON.parse(item));
-            const rentData = parsedData.filter(x => BasketRentIds.includes(x.Id));
-            setGetAllSell(rentData);
+            const resp = await FetchGetSearch(BasketRentIds,"Sell/GetAll");
+            const parsedData = resp.map(item => JSON.parse(item));
+            setGetAllSell(parsedData);
       } catch (error) {
         console.error('Error fetching Sell:', error);
       }

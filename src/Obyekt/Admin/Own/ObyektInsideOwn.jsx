@@ -12,6 +12,8 @@ import DateCutting from "../../../MyComponents/DateCutting";
 import GetImg from "../../../MyComponents/GetImg";
 import AddPrice from "../../../MyComponents/AddPrice";
 import AddTerritory from "../../../MyComponents/AddTerritory";
+import DownloadImage from "../../../MyComponentsAdmin/DownloadImage";
+import Swal from "sweetalert2";
 const ObyektInsideOwn = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,8 +33,25 @@ const ObyektInsideOwn = () => {
     }
   }, [getById]);
   const deleteItem = async () => {
-    await FetchDelete(getById.id, "Obyekt");
-    navigate("/HomeLogin/MainAdmin/Obyekt/own");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        FetchDelete(getById.id, "Obyekt");
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+        navigate("/HomeLogin/MainAdmin/Obyekt/own");
+      }
+    });
   };
   const [isTrueUpdate, setIsTrueUpdate] = useState(false);
   const UpdateItem = () => {
@@ -53,6 +72,7 @@ const ObyektInsideOwn = () => {
             {getById && (
               <div className="pb-2 mt-3">
                 <GetBack Direct={"/HomeLogin/MainAdmin/Obyekt/Own"} />
+                <DownloadImage ImageUrl={keepingImgSource}/>
                 <p>
                   Qiymet:<span className="price-home">{AddPrice(getById.price) }</span>
                 </p>
@@ -91,7 +111,7 @@ const ObyektInsideOwn = () => {
                   </p>
                 )}
                 <p>
-                  Əşya:<span className="time-home">{getById.İtem}</span>
+                  Əşya:<span className="time-home">{getById.item}</span>
                 </p>
                 <p>
                   Təmir:<span className="time-home">{getById.repair}</span>
@@ -123,12 +143,6 @@ const ObyektInsideOwn = () => {
                 </p>
                 <div className="p-2 m-2 d-flex h-auto">
               <button
-                className="btn btn-danger me-2 h-100"
-                onClick={deleteItem}
-              >
-                Silmək
-              </button>
-              <button
                 className="btn btn-success me-2 h-100"
                 onClick={UpdateItem}
               >
@@ -136,6 +150,14 @@ const ObyektInsideOwn = () => {
               </button>
               <button className='btn btn-primary me-2 h-100' onClick={handleClick} >Şəkil əlavə etmək</button>
 
+            </div>
+            <div className="p-2 m-2 d-flex h-auto">
+              <button
+                className="btn btn-danger me-2 h-100"
+                onClick={deleteItem}
+              >
+                Silmək
+              </button>
             </div>
               </div>
             )}

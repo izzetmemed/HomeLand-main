@@ -65,6 +65,9 @@ const InCardObyekt = () => {
                 Otaq sayi:<span className="room-home">{GetById.room}</span>
               </p>
               <p>
+                Əşya:<span className="room-home">{GetById.item}</span>
+              </p>
+              <p>
                 Sahe:
                 <span className="measure-home">
                   {AddTerritory(GetById.area)}

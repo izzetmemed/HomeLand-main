@@ -13,7 +13,6 @@ const ObyektSectionOwn = ({props}) => {
     keepingImgSource=[];
   }
   var Data=props;
- 
   const [sendTrueOrFalse, setSendTrueOrFalse]=useState(Data.IsCalledWithHomeOwnFirstStep)
   const [recommendBool, setRecommendBool]=useState(Data.Recommend)
 

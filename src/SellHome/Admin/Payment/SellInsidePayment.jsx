@@ -45,7 +45,7 @@ const SellInsidePayment = () => {
       Room: getById.room,
       Repair: getById.repair,
       Building: getById.building,
-      İtem: getById.İtem,
+      Item: getById.item,
       Area: getById.area,
       Price: getById.price,
       Addition: getById.addition,
@@ -61,7 +61,7 @@ const SellInsidePayment = () => {
       ReloadData.Floor !== "" &&
       ReloadData.Building !== "" &&
       ReloadData.Area !== "" &&
-      ReloadData.İtem !== "" &&
+      ReloadData.Item !== "" &&
       ReloadData.Repair !== "" &&
       ReloadData.Document !== "" &&
       ReloadData.Address !== ""
@@ -132,7 +132,7 @@ const SellInsidePayment = () => {
                 </p>
               )}
               <p>
-                Əşya:<span className="time-home">{getById.İtem}</span>
+                Əşya:<span className="time-home">{getById.item}</span>
               </p>
               <p>
                 Təmir:<span className="time-home">{getById.repair}</span>

@@ -43,7 +43,7 @@ const ObyektinsidePayment = () => {
       Repair: getById.repair,
       Email:getById.email,
       Looking:getById.looking, 
-      İtem: getById.İtem,
+      Item: getById.item,
       Area: getById.area,
       Price: getById.price,
       Addition: getById.addition,
@@ -58,7 +58,7 @@ const ObyektinsidePayment = () => {
       ReloadData.Metro !== "" &&
       ReloadData.Price !== "" &&
       ReloadData.Area !== "" &&
-      ReloadData.İtem !== "" &&
+      ReloadData.Item !== "" &&
       ReloadData.Repair !== "" &&
       ReloadData.SellOrRent !== "" &&
       ReloadData.Address !== ""
@@ -129,7 +129,7 @@ const ObyektinsidePayment = () => {
                 </p>
               )}
               <p>
-                Əşya:<span className="time-home">{getById.İtem}</span>
+                Əşya:<span className="time-home">{getById.item}</span>
               </p>
               <p>
                 Təmir:<span className="time-home">{getById.repair}</span>

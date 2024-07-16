@@ -35,7 +35,7 @@ const OfficeForm = ({ Data, IsUpdating, SendFalse}) => {
   const SellorRent = useRef(null);
   const Item = useRef(null);
 
-
+  let DataImg = new FormData();
   const fileInputRef = useRef(null);
   const [images, setImages] = useState([]);
   const [imagesFile, setImagesFile] = useState([]);
@@ -52,7 +52,9 @@ const OfficeForm = ({ Data, IsUpdating, SendFalse}) => {
         return;
       }
       setImages((prevImages) => [...prevImages, ...newImageUrls]);
-      setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
+      selectedImages.forEach(x=>{
+        setImagesFile((prevImages) => [...prevImages, x]);
+      })
     }
   };
 
@@ -79,7 +81,7 @@ const OfficeForm = ({ Data, IsUpdating, SendFalse}) => {
       Room.current.value = Data.room;
       SellorRent.current.value=Data.sellOrRent;
       Repair.current.value = Data.repair;
-      Item.current.value = Data.İtem;
+      Item.current.value = Data.item;
       Area.current.value = Data.area;
       Price.current.value = Data.price;
       Addition.current.value = Data.addition;   
@@ -94,7 +96,6 @@ const OfficeForm = ({ Data, IsUpdating, SendFalse}) => {
     }
     
   };
-  let DataImg = new FormData();
   const UploadInformation = () => {
     for (let i = 0; i < imagesFile.length; i++) {
       DataImg.append(`image`, imagesFile[i]);
@@ -153,7 +154,12 @@ const OfficeForm = ({ Data, IsUpdating, SendFalse}) => {
     ];
     if (Check.every((x) => x === true)){
       if(!IsLoading){
-        setIsLoading(true);
+        Swal.fire({
+          title: "Diqqət",
+          text: "Elanın tam (100%) yüklənməsini gözləyin.",
+          icon: "info",
+        });
+      setIsLoading(true);
       FetchPostAll(formData,"Office",imgFunc)
       setTimeout(() => {
         setIsLoading(false)

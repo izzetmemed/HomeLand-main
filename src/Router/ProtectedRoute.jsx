@@ -1,25 +1,12 @@
 import React from "react";
-import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const token = sessionStorage.getItem("Resp");
-  let isAuthenticated = false;
-
+  const [token,setToken] =useState(sessionStorage.getItem("Resp"));
   if (token) {
-    try {
     
-      const decodedToken = jwtDecode(token);
-      const currentTime = Date.now() / 1000;
-
-      if (decodedToken.exp > currentTime) {
-        isAuthenticated = true;
-      }
-    } catch (error) {
-      console.error("Token decoding failed:", error);
-    }
-  }
-  if (!isAuthenticated) {
+  }else{
     return <Navigate to="/HomeLogin" />;
   }
 

@@ -1,20 +1,21 @@
 import React from 'react';
 import { useEffect,useState } from 'react';
-import FetchGetAll from '../MyComponents/FetchGetAll';
 import Section from '../section';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../Redux/RentRecommendRedux';
 const RecommendRent = () => {
     const [Data, setData] = useState([]);
-    useEffect(() => {
-      const GetRecommend = async () => {
-        try {
-          const resp = await FetchGetAll("RentHome/Recommend");
-          setData(resp.data);
-        } catch (error) {
-          console.error("Error fetching data: GetRecommend");
-        }
-      };
-      GetRecommend(); 
-    }, []);
+    const dispatch = useDispatch();
+    const GetData = useSelector((state) => state.RentRecommend.data);
+    const hasFetched = useSelector((state) => state.RentRecommend.hasFetched);
+    
+  useEffect(() => {
+    if (!hasFetched) {
+      dispatch(fetchData());
+    }
+    setData(GetData)
+  }, [dispatch, hasFetched]);
+
     var parsedData = Data.map((jsonString) => JSON.parse(jsonString));
   return (
     <>

@@ -1,50 +1,41 @@
 import React from "react";
 import SectionSell from "./Own/sectionOwn";
 import { useState, useEffect } from "react";
-import FetchGetAll from "../../MyComponents/FetchGetAll";
 import Pagenation from "../../pagenation";
 import {Load} from "../../Load/Load";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData, setPage } from '../../Redux/RentAdmin';
 const RentHomeOwn = () => {
   const [filteredData, setFilteredData] = useState([]);
 
+  const dispatch = useDispatch();
+  const GetData = useSelector((state) => state.RentAdmin.data);
+  const currentPageR = useSelector((state) => state.RentAdmin.currentPage);
+  const totalPages = useSelector((state) => state.RentAdmin.totalPages);
+  const hasFetched = useSelector((state) => state.RentAdmin.hasFetched);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resp = await FetchGetAll('RentHome/Normal');
-        const data = resp.data;
-        setFilteredData(data);
-      } catch (error) {
-        setFilteredData([]);
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemCount, setItemCount] = useState(20);
-
-  const lastIndex = currentPage * itemCount;
-  const firstItem = lastIndex - itemCount;
-  const filteredDataSlice = filteredData.slice(firstItem, lastIndex);
-  const countOfPagenation = Math.ceil(filteredData.length / itemCount);
-
-  const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
-
- const setPage=(x)=>{
-  setCurrentPage(x)
- }
+    if (!hasFetched) {
+      dispatch(fetchData({ page: currentPageR }));
+    }
+  }, [dispatch, hasFetched, currentPageR]);
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      dispatch(setPage(newPage));
+      dispatch(fetchData({ page: newPage }));
+    }
+  };
+  const parsedData = GetData.data.map((jsonString) => JSON.parse(jsonString));
  const [showLoad, setShowLoad] = useState(true);
 
 useEffect(() => {
-  if (filteredDataSlice.length === 0) {
+  if (parsedData.length === 0) {
     const timer = setTimeout(() => setShowLoad(false), 5000);
     return () => clearTimeout(timer);
   } else {
     setShowLoad(false);
   }
-}, [filteredDataSlice.length]);
+}, [parsedData.length]);
 
 
   return (
@@ -56,13 +47,13 @@ useEffect(() => {
             props={x}
           />
         ))}
-        {filteredDataSlice.length === 0 && (
+        {parsedData.length === 0 && (
           <div className="w-100 BasketİsEmpty d-flex justify-content-center align-items-center">
             {showLoad ? <Load/> :  <p className='fs-3 text-danger'>Ev tapılmadı!!!</p>} 
           </div>
         )}
       </div>
-      <Pagenation countOfPagenation={countOfPagenation} setPage={setPage} />;
+      <Pagenation countOfPagination={totalPages} setPage={handlePageChange} current={currentPageR}/>  
     </div>
   );
 };

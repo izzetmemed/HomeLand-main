@@ -58,6 +58,7 @@ import UpdateImg from "../MyComponents/UpdateImg";
 import SendMail from "../MyComponents/SendMail";
 import UploadVideo from "../MyComponentsAdmin/UploadVideo";
 import CardsSell from "../SellHome/CardsSell";
+import HeaderAdmin from "../MyComponentsAdmin/HeaderAdmin";
 const route = () => {
   return (
     <div>
@@ -132,7 +133,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Renthome/Customer"
             element={
               <ProtectedRoute>
+                <>
+                <HeaderAdmin />
                 <Costumer />
+                </>
               </ProtectedRoute>
             }
           />
@@ -140,7 +144,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Renthome/Customer/Kart/:id"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <InsideCostumer />
+                </>
+               
               </ProtectedRoute>
             }
           />
@@ -149,7 +157,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Renthome/Own"
             element={
               <ProtectedRoute>
+                <>
+                <HeaderAdmin />
                 <Own />
+                </>
               </ProtectedRoute>
             }
           />
@@ -157,7 +168,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Renthome/Own/Kart/:id"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <InsideCardOwn />
+                </>
               </ProtectedRoute>
             }
           />
@@ -165,7 +179,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Renthome/Payment"
             element={
               <ProtectedRoute>
+                
+                <>
+                <HeaderAdmin />
                 <Payment />
+                </>
               </ProtectedRoute>
             }
           />
@@ -173,7 +191,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Renthome/Payment/Kart/:id"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <InsideCardPayment />
+                </>
               </ProtectedRoute>
             }
           />
@@ -182,7 +203,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Own"
             element={
               <ProtectedRoute>
-                <SellOwn />{" "}
+                <>
+                <HeaderAdmin />
+                <SellOwn />
+                </>
               </ProtectedRoute>
             }
           />
@@ -190,7 +214,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Own/Kart/:id"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <SellInside />
+                </>
               </ProtectedRoute>
             }
           />
@@ -199,7 +226,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Customer"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <SellCustomer />
+                </>
               </ProtectedRoute>
             }
           />
@@ -207,7 +237,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Customer/Kart/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <SellinsideCustomer />
+                </>
               </ProtectedRoute>
             }
           />
@@ -216,7 +249,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Payment"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <SellPayment />
+                </>
               </ProtectedRoute>
             }
           />
@@ -224,7 +260,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Payment/Kart/:id"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <SellinsidePayment />
+                </>
               </ProtectedRoute>
             }
           />
@@ -233,7 +272,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Obyekt/Own"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <ObyektOwn />
+                </>
               </ProtectedRoute>
             }
           />
@@ -241,7 +283,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Obyekt/Own/Kart/:id"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <ObyektInsideOwn />
+                </>
               </ProtectedRoute>
             }
           />
@@ -250,7 +295,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Obyekt/Customer"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <ObyektCustomer />
+                </>
               </ProtectedRoute>
             }
           />
@@ -258,7 +306,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Obyekt/Customer/Kart/:id"
             element={
               <ProtectedRoute>
+                   <>
+                <HeaderAdmin />
                 <ObyektCustomerInside />
+                </>
               </ProtectedRoute>
             }
           />
@@ -267,7 +318,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Obyekt/Payment"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <ObyektPayment />
+                </>
               </ProtectedRoute>
             }
           />
@@ -275,7 +329,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Obyekt/Payment/Kart/:id"
             element={
               <ProtectedRoute>
+                <>
+                <HeaderAdmin />
                 <ObyektinsidePayment />
+                </>
               </ProtectedRoute>
             }
           />
@@ -283,7 +340,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Land/Customer"
             element={
               <ProtectedRoute>
+                <>
+                <HeaderAdmin />
                 <LandCustomer />
+                </>
               </ProtectedRoute>
             }
           />
@@ -291,7 +351,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Land/Customer/Kart/:id"
             element={
               <ProtectedRoute>
+                 <>
+                <HeaderAdmin />
                 <LandInsideCustomer />
+                </>
               </ProtectedRoute>
             }
           />
@@ -299,7 +362,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Land/Own"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <LandOwn />
+                </>
               </ProtectedRoute>
             }
           />
@@ -307,7 +373,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Land/Own/Kart/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <LandInsideOwn />
+                </>
+                
               </ProtectedRoute>
             }
           />
@@ -315,7 +385,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Land/Payment"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <LandPayment />
+                </>
+
               </ProtectedRoute>
             }
           />
@@ -323,7 +397,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Land/Payment/Kart/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <LandInsidePayment />
+                </>
+              
               </ProtectedRoute>
             }
           />
@@ -331,7 +409,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Office/Customer"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <OfficeCustomer />
+                </>
+              
               </ProtectedRoute>
             }
           />
@@ -339,7 +421,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Office/Customer/Kart/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <OfficeInsideCustomer />
+                </>
+ 
               </ProtectedRoute>
             }
           />
@@ -347,7 +433,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Office/Own"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <OfficeOwn />
+                </>
+ 
               </ProtectedRoute>
             }
           />
@@ -355,7 +445,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Office/Own/Kart/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <OfficeInsideOwn />
+                </>
+
               </ProtectedRoute>
             }
           />
@@ -363,7 +457,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Office/Payment"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <OfficePayment />
+                </>
+     
               </ProtectedRoute>
             }
           />
@@ -371,7 +469,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Office/Payment/Kart/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <OfficeInsidePayment />
+                </>
+               
               </ProtectedRoute>
             }
           />
@@ -380,7 +482,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/RentHome/Img/Update/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <UpdateImg Kind={"RentHomeImg"}/>
+                </>
+  
               </ProtectedRoute>
             }
           />
@@ -388,7 +494,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Land/Img/Update/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <UpdateImg Kind={"LandImg"}/>
+                </>
+   
               </ProtectedRoute>
             }
           />
@@ -396,7 +506,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Office/Img/Update/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <UpdateImg Kind={"OfficeImg"}/>
+                </>
+          
               </ProtectedRoute>
             }
           />
@@ -404,7 +518,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Img/Update/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <UpdateImg Kind={"SellImg"}/>
+                </>
               </ProtectedRoute>
             }
           />
@@ -412,7 +529,10 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Obyekt/Img/Update/:id"
             element={
               <ProtectedRoute>
+                  <>
+                <HeaderAdmin />
                 <UpdateImg Kind={"ObyektImg"}/>
+                </>
               </ProtectedRoute>
             }
           />
@@ -420,7 +540,11 @@ const route = () => {
             path="/HomeLogin/MainAdmin/Sell/Video/:id"
             element={
               <ProtectedRoute>
-              <UploadVideo/>
+                  <>
+                <HeaderAdmin />
+                <UploadVideo/>
+                </>
+
               </ProtectedRoute>
             }
           />

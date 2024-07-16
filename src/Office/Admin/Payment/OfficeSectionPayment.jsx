@@ -94,6 +94,9 @@ if(data.Img.length!==0){
            <p>Ev sahibi:<span >{Name}</span></p> 
                <p>Kod:<span>{Code}</span></p> 
                <p>Nömrəsi<span >{Number}</span></p>
+               <p className={Data.Customer.length > 0 ? "text-danger" : ""}>
+                Müştəri sayı: <span>{Data.Customer.length}</span>
+              </p>
                </Link>
                <div className=' d-flex flex-wrap'>
                     <button className='btn col-5' style={buttonStyle} onClick={handleButtonClick}> Ev sahibi <br /> ilə danışıldı</button>

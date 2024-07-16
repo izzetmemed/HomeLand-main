@@ -40,7 +40,7 @@ const OfficeInsidePayment = () => {
       Metro: getById.metro,
       Room: getById.room,
       Repair: getById.repair,
-      Item: getById.İtem,
+      Item: getById.item,
       Email:getById.email,
       Looking:getById.looking, 
       Area: getById.area,
@@ -129,7 +129,7 @@ const OfficeInsidePayment = () => {
               </p>
             )}
             <p>
-              Əşya:<span className="time-home">{getById.İtem}</span>
+              Əşya:<span className="time-home">{getById.item}</span>
             </p>
             <p>
               Təmir:<span className="time-home">{getById.repair}</span>

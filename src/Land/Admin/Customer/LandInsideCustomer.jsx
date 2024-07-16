@@ -16,6 +16,7 @@ const LandInsideCustomer = () => {
 
   const customerName = useRef(null);
   const customerNumber = useRef(null);
+  const customerGmail = useRef(null);
   const [keepingImgSource, setKeepingImgSource] = useState([]);
   const [state, setstate] = useState(true);
 
@@ -24,7 +25,6 @@ const LandInsideCustomer = () => {
   useEffect(() => {
     setGetById(getByIdData);
   }, [getByIdData]);
-
   useEffect(() => {
     if (getById) {
       const imageUrls = GetImg(getById.img ?? []);
@@ -37,6 +37,7 @@ const LandInsideCustomer = () => {
       SecondStepCustomerForeignId: id,
       FullName: customerName.current.value,
       Number: customerNumber.current.value,
+      Email: customerGmail.current.value,
     };
     if(customerObject.FullName.length>0 &&  !isNaN(parseFloat(customerObject.Number))){
       const AddItem = async () => {
@@ -45,6 +46,12 @@ const LandInsideCustomer = () => {
       AddItem();
       customerName.current.value="";
       customerNumber.current.value="";
+      customerGmail.current.value="";
+      Swal.fire({
+        title: "Yüklənirdi",
+        text: "Uğurlu.",
+        icon: "success"
+      });
     }else{
       Swal.fire({
         title: "Uğursuz",
@@ -111,6 +118,7 @@ const LandInsideCustomer = () => {
                     <tr>
                       <th>Müştərinin adı soyadı</th>
                       <th>Nömrə</th>
+                      <th>Gmail</th>
                       <th>Tarix</th>
                     </tr>
                   </thead>
@@ -120,6 +128,7 @@ const LandInsideCustomer = () => {
                         <tr key={index}>
                           <td>{x.fullName}</td>
                           <td>{x.number}</td>
+                          <td>{x.Email}</td>
                           <td>{DateCutting(x.directCustomerDate)}</td>
                         </tr>
                       ))}
@@ -139,6 +148,11 @@ const LandInsideCustomer = () => {
                   type="number"
                   placeholder="Nömrəsi:"
                   ref={customerNumber}
+                />
+                <input
+                  type="email"
+                  placeholder="Gmail:"
+                  ref={customerGmail}
                 />
                 <button className="btn btn-success ms-1" onClick={addCustomer}>
                   {" "}

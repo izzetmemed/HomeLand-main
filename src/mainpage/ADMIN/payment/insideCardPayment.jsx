@@ -45,7 +45,7 @@ const İnsideCardPayment = () => {
       Room: getById.room,
       Repair: getById.repair,
       Building: getById.building,
-      İtem: getById.İtem,
+      Item: getById.item,
       Bed: getById.bed,
       wardrobe: getById.wardrobe,
       TableChair: getById.tableChair,
@@ -77,7 +77,7 @@ const İnsideCardPayment = () => {
       ReloadData.Floor !== "" &&
       ReloadData.Building !== "" &&
       ReloadData.Area !== "" &&
-      ReloadData.İtem !== "" &&
+      ReloadData.Item !== "" &&
       ReloadData.Repair !== "" &&
       ReloadData.Address !== "" 
     ) {
@@ -154,7 +154,7 @@ executeSequentially();
                 </p>
               )}
               <p>
-                Əşya:<span className="time-home">{getById.İtem}</span>
+                Əşya:<span className="time-home">{getById.item}</span>
               </p>
               <p>
                 Təmir:<span className="time-home">{getById.repair}</span>

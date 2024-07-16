@@ -9,7 +9,7 @@ const LandSectionCustomer = ({props}) => {
   const imageUrls =GetImg(props.Img);
   useEffect(() => {
    setKeepingImgSource(imageUrls);
-  }, [props, imageUrls]);
+  }, [props]);
   return (
     <div className='col-md-4 col-sm-6 col-12 col-lg-3'>
     <div className=' p-2 mt-4'>

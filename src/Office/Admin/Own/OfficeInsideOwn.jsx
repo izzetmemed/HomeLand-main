@@ -11,6 +11,8 @@ import GetBack from "../../../MyComponents/GetBack";
 import DateCutting from "../../../MyComponents/DateCutting"
 import AddPrice from "../../../MyComponents/AddPrice";
 import AddTerritory from "../../../MyComponents/AddTerritory";
+import DownloadImage from "../../../MyComponentsAdmin/DownloadImage";
+import Swal from "sweetalert2";
 const OfficeInsideOwn = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -30,8 +32,26 @@ const OfficeInsideOwn = () => {
       }
     }, [getById]);
     const deleteItem = async () => {
-      await FetchDelete(getById.id, "Office");
-      navigate("/HomeLogin/MainAdmin/Office/own");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          FetchDelete(getById.id, "Office");
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+          navigate("/HomeLogin/MainAdmin/Office/own");
+        }
+      });
+
     };
     const [isTrueUpdate, setIsTrueUpdate] = useState(false);
     const UpdateItem = () => {
@@ -52,6 +72,7 @@ const OfficeInsideOwn = () => {
             {getById && (
               <div className="pb-2 mt-3">
                 <GetBack Direct={"/HomeLogin/MainAdmin/Office/Own"} />
+                <DownloadImage ImageUrl={keepingImgSource}/>
                 <p>
                   Qiymet:<span className="price-home">{AddPrice(getById.price)}</span>
                 </p>
@@ -90,7 +111,7 @@ const OfficeInsideOwn = () => {
                   </p>
                 )}
                 <p>
-                  Əşya:<span className="time-home">{getById.İtem}</span>
+                  Əşya:<span className="time-home">{getById.item}</span>
                 </p>
                 <p>
                   Sənəd:<span className="time-home">{getById.document}</span>
@@ -125,12 +146,6 @@ const OfficeInsideOwn = () => {
                 </p>
                 <div className="p-2 m-2 d-flex h-auto">
               <button
-                className="btn btn-danger me-2 h-100"
-                onClick={deleteItem}
-              >
-                Silmək
-              </button>
-              <button
                 className="btn btn-success me-2 h-100"
                 onClick={UpdateItem}
               >
@@ -138,6 +153,14 @@ const OfficeInsideOwn = () => {
               </button>
               <button className='btn btn-primary me-2 h-100' onClick={handleClick} >Şəkil əlavə etmək</button>
 
+            </div>
+            <div className="p-2 m-2 d-flex h-auto">
+              <button
+                className="btn btn-danger me-2 h-100"
+                onClick={deleteItem}
+              >
+                Silmək
+              </button>
             </div>
               </div>
             )}

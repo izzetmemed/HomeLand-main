@@ -16,9 +16,9 @@ import WarningComp from "../../MyComponents/WarningComp";
 const Rent = ({ Data, IsUpdating, SendFalse}) => {
   const nav=useNavigate();
   const [IsLoading,setIsLoading]=useState(false);
-   const [CoordinateX,setCoordinateX]=useState(null);
- const [CoordinateY,setCoordinateY]=useState(null);
- const [warning, setWarning] = useState([]);
+  const [CoordinateX,setCoordinateX]=useState(null);
+  const [CoordinateY,setCoordinateY]=useState(null);
+  const [warning, setWarning] = useState([]);
   const FullName = useRef(null);
   const Number = useRef(null);
   const Email = useRef(null);
@@ -29,7 +29,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
   const Room = useRef(null);
   const Repair = useRef(null);
   const Building = useRef(null);
-  const İtem = useRef(null);
+  const Item = useRef(null);
   const Bed = useRef(null);
   const wardrobe = useRef(null);
   const TableChair = useRef(null);
@@ -70,7 +70,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       Room.current.value = Data.room;
       Repair.current.value = Data.repair;
       Building.current.value = Data.building;
-      İtem.current.value = Data.İtem;
+      Item.current.value = Data.item;
       Bed.current.checked = Data.bed;
       wardrobe.current.checked = Data.wardrobe;
       TableChair.current.checked = Data.tableChair;
@@ -99,6 +99,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
+  let DataImg= new FormData();
   const onImageChange = (event) => {
     if (event.target.files) {
       const selectedImages = Array.from(event.target.files).slice(0, 10);
@@ -109,10 +110,12 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
         return;
       }
       setImages((prevImages) => [...prevImages, ...newImageUrls]);
-      setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
+      selectedImages.forEach(x=>{
+        setImagesFile((prevImages) => [...prevImages, x]);
+      })
     }
   };
-  let DataImg= new FormData();
+
   const UploadInformation = () => {
     for (let i = 0; i < imagesFile.length; i++) {
       DataImg.append(`image`, imagesFile[i]);
@@ -131,7 +134,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       Room: Room.current.value,
       Repair: Repair.current.value,
       Building: Building.current.value,
-      İtem: İtem.current.value,
+      Item: Item.current.value,
       Bed: Bed.current.checked,
       wardrobe: wardrobe.current.checked,
       TableChair: TableChair.current.checked,
@@ -159,7 +162,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       CheckEmpty(formData.Metro, setWarning, "MetroWarn"),
       CheckEmpty(formData.Price, setWarning, "PriceWarn"),
       CheckEmpty(formData.Email, setWarning, "EmailWarn"),
-      CheckEmpty(formData.İtem, setWarning, "ItemWarn"),
+      CheckEmpty(formData.Item, setWarning, "ItemWarn"),
       CheckEmpty(formData.Room, setWarning, "RoomWarn"),
       CheckEmpty(formData.Repair, setWarning, "RepairWarn"),
       CheckEmpty(formData.Floor, setWarning, "FloorWarn"),
@@ -171,7 +174,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
       CheckLength(formData.Metro.length, setWarning, 50, "MetroLengthWarn"),
       CheckLength(formData.Floor.length, setWarning, 50, "FloorLengthWarn"),
       CheckLength(formData.Address.length, setWarning, 50, "AddressLengthWarn"),
-      CheckLength(formData.İtem.length, setWarning, 50, "ItemLengthWarn"),
+      CheckLength(formData.Item.length, setWarning, 50, "ItemLengthWarn"),
       CheckLength(
         formData.Addition.length,
         setWarning,
@@ -188,7 +191,12 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     ];
     if (Check.every((x) => x === true)){
       if(!IsLoading){
-          setIsLoading(true);
+        Swal.fire({
+          title: "Diqqət",
+          text: "Elanın tam (100%) yüklənməsini gözləyin.",
+          icon: "info",
+        });
+        setIsLoading(true);
         FetchPostAll(formData,"RentHome",imgFunc);
         
         setTimeout(() => {
@@ -232,7 +240,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
     Data.room = Room.current.value;
     Data.repair = Repair.current.value;
     Data.building = Building.current.value;
-    Data.İtem = İtem.current.value;
+    Data.item = Item.current.value;
     Data.bed = Bed.current.checked;
     Data.wardrobe = wardrobe.current.checked;
     Data.tableChair = TableChair.current.checked;
@@ -565,7 +573,7 @@ const Rent = ({ Data, IsUpdating, SendFalse}) => {
                 <label htmlFor="customerName"><span className="attention">* </span>Əşya:</label>
               </div>
               <div className="col-12 div-in-select">
-                <select name="" id="" ref={İtem}>
+                <select name="" id="" ref={Item}>
                   <option value=""></option>
                   <option value="Ev əşyasız verilir.">
                     Ev əşyasız verilir.

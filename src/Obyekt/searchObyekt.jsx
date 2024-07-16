@@ -14,9 +14,8 @@ const Search = ({
   setRegion,
   setRoom,
   setPrice,
-  setClick,
+  RefuseFunction
 }) => {
-  const nav=useNavigate();
   const [isActive, setIsActive] = useState(false);
   const [isMedia, setIsMedia] = useState(false);
   const myRef = useRef([]);
@@ -25,7 +24,7 @@ const Search = ({
   const Room = useRef([]);
   const Price = useRef([]);
   var isMediaPrice=true;
-
+  var Refuse=RefuseFunction;
   const ArrayNewBool = [];
   const ArrayNewSetHomeOrFlat = [];
   const ArrayNewSetSendDataRegion = [];
@@ -77,7 +76,6 @@ const Search = ({
         ArrayNewSetSendDataPrice.push(Price.current[i].value);
       }
     }
-    setClick(true);
     setPrice(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     setRoom(ArrayNewSetSendDataRoom);
     setRegion(ArrayNewSetSendDataRegion);
@@ -95,56 +93,18 @@ const Search = ({
       sessionStorage.setItem("FirstMediaObyekt",true);
     }
     if(isMediaPrice){
-    sessionStorage.setItem("PriceObyekt",ArrayNewSetSendDataPrice.sort((a, b) => b - a));
-    sessionStorage.setItem("RoomObyekt",ArrayNewSetSendDataRoom);
-    sessionStorage.setItem("RegionObyekt",ArrayNewSetSendDataRegion);
-    sessionStorage.setItem("HomeOrFlatObyekt",ArrayNewSetHomeOrFlat);
-    sessionStorage.setItem("MetroObyekt",ArrayNewBool);
     sessionStorage.setItem("SearchObyekt",true);
     }
   };
   useEffect(()=>{
     if(sessionStorage.getItem("SearchObyekt")){
-      setClick(true);
-      var sessionPrice=sessionStorage.getItem("PriceObyekt")
-      var sessionRoom=sessionStorage.getItem("RoomObyekt")
-      var sessionRegion=sessionStorage.getItem("RegionObyekt")
-      var sessionMetro=sessionStorage.getItem("MetroObyekt")
-      var sessionHomeOrFlat=sessionStorage.getItem("HomeOrFlatObyekt")
-
-      if(sessionPrice!==""){
-         setPrice(sessionPrice.split(","));
-      }
-      if (sessionRoom !== "") {
-        const rooms = sessionRoom.split(",");
-        setRoom(rooms); 
-    }
-    
-      if(sessionRegion!==""){
-        const Region = sessionRegion.split(",");
-        setRegion(Region);
-      }
-      if(sessionMetro!==""){
-        const Metro = sessionMetro.split(",");
-        setFunc(Metro);
-      }
-      if(sessionHomeOrFlat!==""){
-        const HomeOrFlat = sessionHomeOrFlat.split(",");
-        setHomeOrFlat(HomeOrFlat);
-      }
       setIsActive(true);
     }
   },[])
  const RefuseSearch =()=>{
   sessionStorage.removeItem("SearchObyekt");
-  sessionStorage.removeItem("PriceObyekt");
-  sessionStorage.removeItem("RoomObyekt");
-  sessionStorage.removeItem("MetroObyekt");
-  sessionStorage.removeItem("HomeOrFlatObyekt");
-  sessionStorage.removeItem("RegionObyekt");
-  setClick(false);
   setIsActive(false);
-  nav("/obyekt");
+  Refuse();
  }
   return (
     <div>

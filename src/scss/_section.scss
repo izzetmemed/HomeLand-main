@@ -19,7 +19,7 @@
             justify-content: space-between;
          
             span{
-               z-index: 500;
+               z-index: 5001;
                 display: inline-block;
                 width: 28px;
                 height: 28px;
@@ -130,6 +130,23 @@
 }
 .BasketİsEmpty{
     height: 50vh !important;
+}
+.FullScreen{
+    position: absolute;
+    z-index: 5001;
+    width: fit-content !important;
+    top:  7%;
+    right:5%;
+    color:$HomeLandColor !important;
+    width: max-content !important;
+    padding: 3px 6px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border-radius: 50%;
+    height: auto !important;
+    i{
+        margin-top: 0px !important;
+        margin-left: 0px !important;
+    }
 }
 .CounterOnImg{
     position: absolute;

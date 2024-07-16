@@ -1,26 +1,24 @@
 import React, { useState, useRef ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import {useNavigate} from "react-router-dom";
 import Alert from '../../src/MyComponents/Alert';
 import PriceJsx from '../MyComponents/Price';
 import RegionJsx from '../MyComponents/Region';
-const SearchLand = ({setRegion,setPrice ,setClick}) => {
+const SearchLand = ({setRegion,setPrice ,RefuseFunction}) => {
     const [isActive, setIsActive] = useState(false);
     const [isMedia, setIsMedia] = useState(false);
     const Region = useRef([]);
     const Price= useRef([]);
-    const nav=useNavigate();
     const ArrayNewSetSendDataRegion=[]
     const ArrayNewSetSendDataPrice=[]
     var isMediaPrice=true;
     const[Price2, setPrice2]=useState([]);
     const[Region2, setRegion2]=useState([]);
-  
-   const setIsActiveFunk=(x)=>{
+    var Refuse=RefuseFunction;
+   const setIsActiveFunk=()=>{
       setIsMedia(!isMedia)
    }
-    const GetDataFromSearch = (e) => {  
+    const GetDataFromSearch = () => {  
       isMediaPrice=true
    
       for (var i = 1; i < Region.current.length; i++) {
@@ -41,18 +39,13 @@ const SearchLand = ({setRegion,setPrice ,setClick}) => {
         }
         
       } 
-      setClick(true);
       setPrice(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
       setRegion(ArrayNewSetSendDataRegion);
   
-         
-
       setPrice2(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
       setRegion2(ArrayNewSetSendDataRegion);
       
       if(isMediaPrice){
-      sessionStorage.setItem("PriceLand",ArrayNewSetSendDataPrice.sort((a, b) => b - a));
-      sessionStorage.setItem("RegionLand",ArrayNewSetSendDataRegion);
       sessionStorage.setItem("SearchLand",true);
       }
       if(!sessionStorage.getItem("FirstMediaLand") && isMediaPrice){
@@ -62,27 +55,13 @@ const SearchLand = ({setRegion,setPrice ,setClick}) => {
     };
     useEffect(()=>{
       if(sessionStorage.getItem("SearchLand")){
-        setClick(true);
-        var sessionPrice=sessionStorage.getItem("PriceLand")
-        var sessionRegion=sessionStorage.getItem("RegionLand")
-  
-        if(sessionPrice!==""){
-           setPrice(sessionPrice.split(","));
-        }
-        if(sessionRegion!==""){
-          const Region = sessionRegion.split(",");
-          setRegion(Region);
-        }
         setIsActive(true);
       }
     },[])
    const RefuseSearch =()=>{
     sessionStorage.removeItem("SearchLand");
-    sessionStorage.removeItem("PriceLand");
-    sessionStorage.removeItem("RegionLand");
-    setClick(false);
     setIsActive(false);
-    nav("/Land");
+    Refuse();
    }
   return (
     <div>

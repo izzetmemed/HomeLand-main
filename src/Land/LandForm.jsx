@@ -20,7 +20,6 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
   Scroll();
   const fileInputRef = useRef(null);
   const [images, setImages] = useState([]);
-  const [imagesFile, setImagesFile] = useState([]);
   const [warning, setWarning] = useState([]);
   const FullName = useRef(null);
   const Number = useRef(null);
@@ -54,6 +53,7 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
+  const [imagesFile, setImagesFile] = useState([]);
   var DataImg = new FormData();
   const onImageChange = (event) => {
     if (event.target.files) {
@@ -65,8 +65,9 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
         return;
       }
       setImages((prevImages) => [...prevImages, ...newImageUrls]);
-      setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
-   
+      selectedImages.forEach(x=>{
+        setImagesFile((prevImages) => [...prevImages, x]);
+      })
     }
   };
 
@@ -133,6 +134,11 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
     ];
     if (Check.every((x) => x === true)) {
       if (!IsLoading) {
+        Swal.fire({
+          title: "Diqqət",
+          text: "Elanın tam (100%) yüklənməsini gözləyin.",
+          icon: "info",
+        });
         setIsLoading(true);
         FetchPostAll(formData, "Land", imgFunc);
         setTimeout(() => {
@@ -199,7 +205,6 @@ const LandForm = ({ Data, IsUpdating, SendFalse }) => {
       }, 500);
 
       setImages([]);
-      setImagesFile([]);
 
       SendFalse();
     } else {

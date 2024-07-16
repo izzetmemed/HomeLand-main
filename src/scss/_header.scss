@@ -141,3 +141,23 @@ Body::-webkit-scrollbar-track {
 .shadowHomeColor{
     box-shadow: $HomeLandColor 0px 0px 1px 1px;
 }
+.Cookie{
+    position: fixed;
+    z-index: 5002;
+    top: 70%;
+    background-color: $HomeLandColorWhite;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 30px;
+
+    @include FlexCenter;
+    flex-direction: column;
+    button{
+        background-color: white;
+        color:$HomeLandColor ;
+    }
+    p{
+        color: white;
+        text-align: center;
+    }
+}

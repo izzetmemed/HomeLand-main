@@ -17,7 +17,6 @@ const SectionOwn = ({props}) => {
   const [recommendBool, setRecommendBool]=useState(Data.Recommend);
 
   const handleButtonClick = () => {
-    Data.İtem=Data.Item;
     Data.IsCalledWithHomeOwnFirstStep=!sendTrueOrFalse;
     setSendTrueOrFalse(!sendTrueOrFalse);
     const PutData=async()=>{
@@ -26,7 +25,6 @@ const SectionOwn = ({props}) => {
      PutData();
   };
   const recommendSell = () => {
-    Data.İtem=Data.Item;
     Data.Recommend=!recommendBool;
     setRecommendBool(!recommendBool);
     const PutData=async()=>{

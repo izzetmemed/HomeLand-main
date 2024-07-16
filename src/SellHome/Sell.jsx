@@ -33,12 +33,12 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
   const Room = useRef(null);
   const Repair = useRef(null);
   const Building = useRef(null);
-  const İtem = useRef(null);
+  const Item = useRef(null);
   const Area = useRef(null);
   const Price = useRef(null);
   const Addition = useRef(null);
   const Paper = useRef(null);
- 
+  let DataImg = new FormData();
   const [CoordinateX,setCoordinateX]=useState(null);
   const [CoordinateY,setCoordinateY]=useState(null);
   useEffect(() => {
@@ -56,7 +56,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       Room.current.value = Data.room;
       Repair.current.value = Data.repair;
       Building.current.value = Data.building;
-      İtem.current.value = Data.İtem;
+      Item.current.value = Data.item;
       Area.current.value = Data.area;
       Price.current.value = Data.price;
       Addition.current.value = Data.addition;
@@ -77,7 +77,9 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
         return;
       }
       setImages((prevImages) => [...prevImages, ...newImageUrls]);
-       setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
+      selectedImages.forEach(x=>{
+        setImagesFile((prevImages) => [...prevImages, x]);
+      })
     }
   };
 
@@ -85,7 +87,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
   useEffect(() => {
     setkeepingImgSource(images);
    },[images]) 
-   let DataImg = new FormData();
+
   const UploadInformation = () => {
     for (let i = 0; i < imagesFile.length; i++) {
       DataImg.append(`image`, imagesFile[i]);
@@ -104,7 +106,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       Room:Room.current.value,
       Repair: Repair.current.value,
       Building: Building.current.value,
-      İtem: İtem.current.value,
+      Item: Item.current.value,
       Area: Area.current.value,
       Price: Price.current.value,
       Addition: Addition.current.value,
@@ -119,7 +121,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       CheckEmpty(formData.Metro, setWarning, "MetroWarn"),
       CheckEmpty(formData.Price, setWarning, "PriceWarn"),
       CheckEmpty(formData.Email, setWarning, "EmailWarn"),
-      CheckEmpty(formData.İtem, setWarning, "ItemWarn"),
+      CheckEmpty(formData.Item, setWarning, "ItemWarn"),
       CheckEmpty(formData.Document, setWarning, "DocumentWarn"),
       CheckEmpty(formData.Room, setWarning, "RoomWarn"),
       CheckEmpty(formData.Repair, setWarning, "RepairWarn"),
@@ -133,7 +135,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       CheckLength(formData.Floor.length, setWarning, 50, "FloorLengthWarn"),
       CheckLength(formData.Document.length, setWarning, 50, "DocumentLengthWarn"),
       CheckLength(formData.Address.length, setWarning, 50, "AddressLengthWarn"),
-      CheckLength(formData.İtem.length, setWarning, 50, "ItemLengthWarn"),
+      CheckLength(formData.Item.length, setWarning, 50, "ItemLengthWarn"),
       CheckLength(
         formData.Addition.length,
         setWarning,
@@ -150,6 +152,11 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
     ];
     if (Check.every((x) => x === true)) {
       if(!IsLoading){
+        Swal.fire({
+          title: "Diqqət",
+          text: "Elanın tam (100%) yüklənməsini gözləyin.",
+          icon: "info",
+        });
       setIsLoading(true);
       FetchPostAll(formData,"Sell",imgFunc);
       setTimeout(() => {
@@ -197,7 +204,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
       Data.room = Room.current.value;
       Data.repair = Repair.current.value;
       Data.building = Building.current.value;
-      Data.İtem = İtem.current.value;
+      Data.item = Item.current.value;
       Data.area = Area.current.value;
       Data.price = Price.current.value;
       Data.addition = Addition.current.value;
@@ -548,7 +555,7 @@ const Sell = ({ Data, IsUpdating, SendFalse}) => {
               </div>
 
               <div className="col-12 div-in-select">
-                <select name="" id="" ref={İtem}>
+                <select name="" id="" ref={Item}>
                   <option value=""></option>
                   <option value="Ev əşyasız verilir.">Ev əşyasız satılır.</option>
                   <option value="Bəzi əşya ilə birlikdə verilir.">Bəzi əşya ilə birlikdə satılır.</option>

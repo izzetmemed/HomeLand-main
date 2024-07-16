@@ -26,7 +26,6 @@ const OfficeSectionOwn = ({props}) => {
      PutData();
   };
   const recommendSell = () => {
-    Data.İtem=Data.Item;
     Data.Recommend=!recommendBool;
     setRecommendBool(!recommendBool);
     const PutData=async()=>{

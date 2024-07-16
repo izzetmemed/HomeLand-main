@@ -12,26 +12,22 @@ const SectionPayment = ({id,Name,Number,Code , data}) => {
   
   const handleButtonClick = () => {
     Data.IsCalledWithHomeOwnThirdStep=!sendTrueOrFalse;
-    Data.İtem=Data.Item;
     setSendTrueOrFalse(!sendTrueOrFalse);
     fetchFunc();
   };
 
   const handleTwoButtonClick = () => {
     Data.IsCalledWithCustomerFirstStep=!isButtonTwoClicked;
-    Data.İtem=Data.Item;
     setIsButtonTwoClicked(!isButtonTwoClicked);
     fetchFunc();
   };
   const handleThreeButtonClick = () => {
     Data.IsPaidHomeOwnFirstStep=!isButtonThreeClicked;
-    Data.İtem=Data.Item;
     setIsButtonThreeClicked(!isButtonThreeClicked);
     fetchFunc();
   };
   const handleFourButtonClick = () => {
     Data.IsPaidCustomerFirstStep=!isButtonFourClicked;
-    Data.İtem=Data.Item;
     setIsButtonFourClicked(!isButtonFourClicked);
     fetchFunc();
   };
@@ -97,6 +93,9 @@ const SectionPayment = ({id,Name,Number,Code , data}) => {
                 <p>Ev sahibi:<span >{Name}</span></p> 
                     <p>Kod:<span>{Code}</span></p> 
                     <p>Nömrəsi<span >{Number}</span></p>
+                    <p className={Data.Customer.length > 0 ? "text-danger" : ""}>
+                Müştəri sayı: <span>{Data.Customer.length}</span>
+              </p>
                     </Link>
                     <div className=' d-flex flex-wrap'>
                          <button className='btn col-5' style={buttonStyle} onClick={handleButtonClick}> Ev sahibi <br /> ilə danışıldı</button>

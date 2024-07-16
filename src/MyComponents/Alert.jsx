@@ -1,46 +1,31 @@
 import React from "react";
 import { useState,useRef } from "react";
-import FetchPostAll from "./FetchPostAll";
 import FetchPostCustomer from "../MyComponentsAdmin/FetchPostCustomer";
 const Alert = ({ Price, Room, Metro, Region, HomeOrFlat, setIsActiveFunk,Kind}) => {
   const [count, setCount] = useState(5);
-   const numberRef=useRef(null);
-   const fake=()=>{}
+  const numberRef=useRef(null);
   const AddGmail = async() => {
-       const media={
+      const media={
       Type:Kind,
       Counter:count.toString(),
       Number:numberRef.current.value,
       MaxPrice: (Price ? Price[0]:null),
       MinPrice: (Price ? Price[1]:null),
-     
     }
-     await FetchPostAll(media,"Media",fake);
-    if(Room){
-      const uniqueNumbers = [...new Set(Room)];
-      FetchPostCustomer(uniqueNumbers,"Media/Room")  
+    const MediaDTO={
+      mediaType:media,
+      Building:HomeOrFlat,
+      Region:Region,
+      Room:Room,
+      Metro:Metro
     }
-    if(Metro){
-      const uniqueNumbers = [...new Set(Metro)];
-      FetchPostCustomer(uniqueNumbers,"Media/Metro")
-      }
-    if(Region){
-      const uniqueNumbers = [...new Set(Region)];
-      FetchPostCustomer(uniqueNumbers,"Media/Region")
-      }
-    if(HomeOrFlat){
-      const uniqueNumbers = [...new Set(HomeOrFlat)];
-      FetchPostCustomer(uniqueNumbers,"Media/Building")
-    }
+    console.log(MediaDTO);
+     await FetchPostCustomer(MediaDTO,"Media");
     setIsActiveFunk();
   };
-
-
   const Refuse = () => {
     setIsActiveFunk();
   };
-
-
   const increment = () => {
     if (count < 20) {
       setCount(count + 1);

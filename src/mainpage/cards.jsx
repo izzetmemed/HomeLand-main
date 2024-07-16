@@ -4,9 +4,10 @@ import Section from '../section';
 import Search from '../search';
 import Pagenation from '../pagenation';
 import {Load} from "../Load/Load"
-import FetchGetAll from '../MyComponents/FetchGetAll';
 import Scroll from '../MyComponents/Scroll';
 import RecommendRent from './RecommendRent';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData, setPage } from '../Redux/RentGet';
 
 const Cards = () => {
   Scroll();
@@ -16,87 +17,60 @@ const Cards = () => {
   const [Region, setRegion] = useState([]);
   const [Room, setRoom] = useState([]);
   const [Price, setPrice] = useState([]);
- const [click, setClick]=useState();
-
-  var works=true;
+  const [click, setClick]=useState();
+  const dispatch = useDispatch();
+  const GetData = useSelector((state) => state.GetAll.data);
+  const currentPageR = useSelector((state) => state.GetAll.currentPage);
+  const totalPages = useSelector((state) => state.GetAll.totalPages);
+  const hasFetched = useSelector((state) => state.GetAll.hasFetched);
+  const SearchFalse = useSelector((state) => state.GetAll.SearchBool);
+  const SearchRedux = useSelector((state) => state.GetAll.SearchModel);
+  var obj = {
+    "minPrice": parseInt(Price[1], 10),
+    "maxPrice": parseInt(Price[0], 10),
+    "metro": selectedIds,
+    "region": Region,
+    "room": Room,
+    "building": HomeOrFlat
+  };
   useEffect(() => {
-    const RoomInt=Room.map(x=>Number(x));
-    const fetchData = async () => {
-      try {
-        if(click){
-          works=true
-        }
-        if(works){
-         works=false;
-          
-          const ArrayData=[];
-          const resp = await FetchGetAll("RentHome");
-            if(click){
-              const filteredArray = Array.from(resp.data).filter((x) => {
-                
-                if (!(Number(JSON.parse(x).Price) > Array.from(Price)[1] && Number(JSON.parse(x).Price) < Array.from(Price)[0])) {
-                  return false;
-                }
-                if (HomeOrFlat.length !== 0 && !HomeOrFlat.includes(JSON.parse(x).Building)) {
-                  return false;
-                }
-              
-                if (RoomInt.length !== 0 && !RoomInt.includes(JSON.parse(x).Room)) {
-                  return false;
-                }
-              
-                if (Region.length !== 0 && !Region.includes(JSON.parse(x).Region)) {
-                  return false;
-                }
-              
-                if (selectedIds.length !== 0 && !selectedIds.includes(JSON.parse(x).Metro)) {
-                  return false;
-                }
-              
-                return true;
-              });
-              ArrayData.push(...filteredArray);
-              
-             setFilteredData(ArrayData);
-            }else{
-              setFilteredData(resp.data)
-            }
-           
-        }
-       
+    if (!hasFetched) {
+      dispatch(fetchData({ page: currentPageR,SearchBool:false}));
+    }
+  }, [dispatch, hasFetched, currentPageR]);
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      dispatch(setPage(newPage));
+      dispatch(fetchData({ page: newPage,SearchBool:SearchFalse,searchModel:SearchRedux}));
+    }
+  };
+  const RefuseSearch=()=>{
+    dispatch(setPage(1));
+    dispatch(fetchData({ page: 1,SearchBool:false}));
+  }
+  useEffect(() => {
+    if(Price.length>0){
+      dispatch(setPage(1));
+      console.log(obj)
+      dispatch(fetchData({ page: 1,SearchBool: true ,searchModel:obj}));
+    }
+  }, [Region,Price,selectedIds,Room,HomeOrFlat]);
+  const parsedData = GetData.data.map((jsonString) => JSON.parse(jsonString));
 
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-      
-    };
-  
-    fetchData();
-  }, [click,selectedIds]);
-  
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemCount, setItemCount] = useState(20);
-
-const lastIndex=currentPage*itemCount;
-const firstItem=lastIndex-itemCount;
-const filteredDataSlice=filteredData.slice(firstItem,lastIndex); 
-const countOfPagenation =Math.ceil(filteredData.length/itemCount);
-
-const parsedData = filteredDataSlice.map((jsonString) => JSON.parse(jsonString));
 
 const [showLoad, setShowLoad] = useState(true);
 
 useEffect(() => {
-  if (filteredDataSlice.length === 0) {
+  if (parsedData.length === 0) {
     const timer = setTimeout(() => setShowLoad(false), 10000);
     return () => clearTimeout(timer);
   } else {
     setShowLoad(false);
   }
-}, [filteredDataSlice.length]);
+}, [parsedData.length]);
   return (
     <div>
-      <Search   setFunc={setSelectedIds} setHomeOrFlat={setHomeOrFlat} setRegion={setRegion} setRoom={setRoom} setPrice={setPrice} setClick={setClick}/>
+      <Search RefuseFunction={RefuseSearch}  setFunc={setSelectedIds} setHomeOrFlat={setHomeOrFlat} setRegion={setRegion} setRoom={setRoom} setPrice={setPrice} setClick={setClick}/>
      <RecommendRent/>
       <div className='d-flex flex-wrap'>
         {parsedData.map((x,index) => (
@@ -105,15 +79,14 @@ useEffect(() => {
             key={index} 
           />
         ))}
-        {filteredDataSlice.length === 0 && (
+        {parsedData.length === 0 && (
           <div className='w-100 BasketİsEmpty d-flex justify-content-center align-items-center'> 
            {showLoad ? <Load/> :  <p className='fs-3'>Ev tapılmadı.</p>} 
           </div>
         )}
       </div>
-      
       <Outlet />
-      <Pagenation countOfPagenation={countOfPagenation} setPage={setCurrentPage}/>
+      <Pagenation countOfPagination={totalPages} setPage={handlePageChange} current={currentPageR}/>
     </div>
   )
 }

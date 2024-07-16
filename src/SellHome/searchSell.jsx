@@ -1,14 +1,13 @@
 import React, { useState, useRef ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import {useNavigate} from "react-router-dom";
 import Alert from '../../src/MyComponents/Alert';
 import Metro from '../MyComponents/Metro';
 import HomeKind from '../MyComponents/HomeKind';
 import RegionJsx from '../MyComponents/Region';
 import PriceJsx from '../MyComponents/Price';
 import RoomCount from '../MyComponents/RoomCount';
-const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) => {
+const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,RefuseFunction}) => {
   const [isActive, setIsActive] = useState(false);
   const [isMedia, setIsMedia] = useState(false);
   const myRef = useRef([]);
@@ -16,14 +15,13 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
   const Region = useRef([]);
   const Room = useRef([]);
   const Price= useRef([]);
-  const nav=useNavigate();
   const ArrayNewBool=[]
   const ArrayNewSetHomeOrFlat=[]
   const ArrayNewSetSendDataRegion=[]
   const ArrayNewSetSendDataRoom=[]
   const ArrayNewSetSendDataPrice=[]
   var isMediaPrice=true;
-
+  var Refuse=RefuseFunction;
   const[Metro2, setMetro2]=useState([]);
   const[Price2, setPrice2]=useState([]);
   const[Room2, setRoom2]=useState([]);
@@ -72,7 +70,6 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
       }
       
     } 
-    setClick(true);
     setPrice(ArrayNewSetSendDataPrice.sort((a, b) => b - a));
     setRoom(ArrayNewSetSendDataRoom);
     setRegion(ArrayNewSetSendDataRegion);
@@ -87,11 +84,6 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
     setRoom2(ArrayNewSetSendDataRoom);
     
     if(isMediaPrice){
-    sessionStorage.setItem("PriceSell",ArrayNewSetSendDataPrice.sort((a, b) => b - a));
-    sessionStorage.setItem("RoomSell",ArrayNewSetSendDataRoom);
-    sessionStorage.setItem("RegionSell",ArrayNewSetSendDataRegion);
-    sessionStorage.setItem("HomeOrFlatSell",ArrayNewSetHomeOrFlat);
-    sessionStorage.setItem("MetroSell",ArrayNewBool);
     sessionStorage.setItem("SearchSell",true);
     }
     if(!sessionStorage.getItem("FirstMediaSell") && isMediaPrice){
@@ -101,46 +93,13 @@ const Search = ({  setFunc,setHomeOrFlat,setRegion,setRoom,setPrice ,setClick}) 
   };
   useEffect(()=>{
     if(sessionStorage.getItem("SearchSell")){
-      setClick(true);
-      var sessionPrice=sessionStorage.getItem("PriceSell")
-      var sessionRoom=sessionStorage.getItem("RoomSell")
-      var sessionRegion=sessionStorage.getItem("RegionSell")
-      var sessionMetro=sessionStorage.getItem("MetroSell")
-      var sessionHomeOrFlat=sessionStorage.getItem("HomeOrFlatSell")
-
-      if(sessionPrice!==""){
-         setPrice(sessionPrice.split(","));
-      }
-      if (sessionRoom !== "") {
-        const rooms = sessionRoom.split(",");
-        setRoom(rooms); 
-    }
-    
-      if(sessionRegion!==""){
-        const Region = sessionRegion.split(",");
-        setRegion(Region);
-      }
-      if(sessionMetro!==""){
-        const Metro = sessionMetro.split(",");
-        setFunc(Metro);
-      }
-      if(sessionHomeOrFlat!==""){
-        const HomeOrFlat = sessionHomeOrFlat.split(",");
-        setHomeOrFlat(HomeOrFlat);
-      }
       setIsActive(true);
     }
   },[])
  const RefuseSearch =()=>{
-  sessionStorage.removeItem("SearchSell");
-  sessionStorage.removeItem("PriceSell");
-  sessionStorage.removeItem("RoomSell");
-  sessionStorage.removeItem("MetroSell");
-  sessionStorage.removeItem("HomeOrFlatSell");
-  sessionStorage.removeItem("RegionSell");
-  setClick(false);
+  sessionStorage.removeItem("SearchSell");;
   setIsActive(false);
-  nav("/Sell");
+  Refuse();
  }
   return (
     <div>

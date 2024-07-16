@@ -8,7 +8,6 @@
     &:nth-child(1){
         border-radius: 5px;
         position: relative;
-    
         .imgDivInside{
             width: 90%;
             height: 100%;
@@ -310,3 +309,11 @@
         opacity: 0.8;
     }
 }
+.bigScreen {
+    display: block;
+}
+.smallScreen {
+    display: none;
+}
+
+

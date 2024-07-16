@@ -27,7 +27,9 @@ const UpdateImg = ({Kind}) => {
         return;
       }
       setImages((prevImages) => [...prevImages, ...newImageUrls]);
-      setImagesFile((prevImages) => [...prevImages, event.target.files[0]]);
+      selectedImages.forEach(x=>{
+        setImagesFile((prevImages) => [...prevImages, x]);
+      })
     }
   };
   const imgFunc = () => {
