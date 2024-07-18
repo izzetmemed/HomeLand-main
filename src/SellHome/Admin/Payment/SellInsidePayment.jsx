@@ -6,11 +6,12 @@ import GetImg from "../../../MyComponents/GetImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import FetchPostAll from "../../../MyComponents/FetchPostAll";
 import GetBack from "../../../MyComponents/GetBack";
-import DateCutting from "../../../MyComponents/DateCutting"
+import DateCutting from "../../../MyComponents/DateCutting";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import AddPrice from "../../../MyComponents/AddPrice";
 import AddTerritory from "../../../MyComponents/AddTerritory";
+import FetchPostCustomer from "../../../MyComponentsAdmin/FetchPostCustomer";
 const SellInsidePayment = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -29,9 +30,29 @@ const SellInsidePayment = () => {
       setKeepingImgSource(imageUrls);
     }
   }, [getById]);
+  const ReloadCheck = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Send!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Reload();
+        Swal.fire({
+          title: "Uğurlu!",
+          text: "Göndərildi",
+          icon: "success",
+        });
+      }
+    });
+  };
   const Reload = async () => {
     const ReloadData = {
-      Id:getById.id,
+      Id: getById.id,
       FullName: getById.fullname,
       Number: getById.number,
       CoordinateX: getById.coordinateX,
@@ -39,8 +60,8 @@ const SellInsidePayment = () => {
       Region: getById.region,
       Address: getById.address,
       Floor: getById.floor,
-      Email:getById.email,
-      Looking:getById.looking, 
+      Email: getById.email,
+      Looking: getById.looking,
       Metro: getById.metro,
       Room: getById.room,
       Repair: getById.repair,
@@ -69,14 +90,13 @@ const SellInsidePayment = () => {
       const fake = async () => {};
       async function executeSequentially() {
         try {
-            await FetchPostAll(ReloadData, "Sell/Admin", fake);
-           
+          await FetchPostAll(ReloadData, "Sell/Admin", fake);
         } catch (error) {
-            console.error("An error occurred:", error);
+          console.error("An error occurred:", error);
         }
-    }
-    
-    executeSequentially();
+      }
+
+      executeSequentially();
       navigate("/HomeLogin/MainAdmin/Sell/Payment");
     } else {
       Swal.fire({
@@ -86,6 +106,85 @@ const SellInsidePayment = () => {
       });
     }
   };
+  const customerTake = (id) => {
+    var CustomerName = getById.customer.filter((x) => x.isTake === true);
+    if (
+      CustomerName.length < 1 ||
+      id === CustomerName[0].secondStepCustomerId
+    ) {
+      let kind = `SellCustomer/${id}`;
+      FetchPostCustomer(null, kind);
+      Swal.fire({
+        title: "Uğurlu",
+        text: "Göndərildi",
+        icon: "success",
+      });
+    } else {
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Verildi kimi qeyd etdiyiniz 1 müştəri var",
+        icon: "error",
+      });
+    }
+  };
+  const CustomerBank = () => {
+    var CustomerName = getById.customer.filter((x) => x.isTake === true);
+    if (CustomerName.length === 1) {
+      const obj = {
+        Name: CustomerName[0].fullName,
+        Number: CustomerName[0].email,
+      };
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Send!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          FetchPostCustomer(obj, "EmailSend");
+          Swal.fire({
+            title: "Uğurlu!",
+            text: "Göndərildi.",
+            icon: "success",
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Ya müştəri yoxdur ya da 2 müştəri var",
+        icon: "error",
+      });
+    }
+  };
+  const OwnerBank = () => {
+    const obj = {
+      name: getById.fullname,
+      number: getById.email,
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Send!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        FetchPostCustomer(obj, "EmailSend");
+        Swal.fire({
+          title: "Uğurlu!",
+          text: "Göndərildi",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
@@ -96,7 +195,8 @@ const SellInsidePayment = () => {
           {getById && (
             <div className="pb-2 mt-3">
               <p>
-                Qiymet:<span className="price-home">{AddPrice(getById.price) }</span>
+                Qiymet:
+                <span className="price-home">{AddPrice(getById.price)}</span>
               </p>
               <p>
                 Ev sahibi:<span className="price-home">{getById.fullname}</span>
@@ -155,12 +255,15 @@ const SellInsidePayment = () => {
                 <span className="time-home">{DateCutting(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto mt-2 ms-1">
-                <div className="col-12 col-sm-6 d-flex ">
+                <div className="col-12 col-sm-11 d-flex ">
                   <table className="table table-dark table-striped">
                     <thead>
                       <tr>
                         <th>Müştərinin adı soyadı</th>
                         <th>Nömrə</th>
+                        <th>Email</th>
+                        <th>Götürürüb ?</th>
+                        <th>Qeyd etmək</th>
                         <th>Tarix</th>
                       </tr>
                     </thead>
@@ -170,6 +273,19 @@ const SellInsidePayment = () => {
                           <tr key={index}>
                             <td>{x.fullName}</td>
                             <td>{x.number}</td>
+                            <td>{x.email}</td>
+                            <td>{x.isTake ? "Verilib" : "Verilməyib"}</td>
+                            <td>
+                              <button
+                                className="p-1"
+                                onClick={() => {
+                                  customerTake(x.secondStepCustomerId);
+                                  x.isTake = !x.isTake;
+                                }}
+                              >
+                                {x.isTake ? "Verilib" : " verildi qeyd etmək"}{" "}
+                              </button>
+                            </td>
                             <td>{DateCutting(x.directCustomerDate)}</td>
                           </tr>
                         ))}
@@ -178,8 +294,23 @@ const SellInsidePayment = () => {
                 </div>
               </div>
               <GetBack Direct={"/HomeLogin/MainAdmin/Sell/payment"} />
-              <button className="p-2 m-3 bg-success text-white" onClick={Reload}>
+              <button
+                className="p-2 m-3 bg-success text-white"
+                onClick={ReloadCheck}
+              >
                 Yenidən yüklə
+              </button>
+              <button
+                className="p-2 m-3 bg-info text-white"
+                onClick={CustomerBank}
+              >
+                Müştəriyə kart göndərmək
+              </button>
+              <button
+                className="p-2 m-3 bg-primary text-white"
+                onClick={OwnerBank}
+              >
+                ev sahibinə kart göndərmək
               </button>
             </div>
           )}

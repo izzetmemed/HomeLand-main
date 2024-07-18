@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import FetchGetId from "../../../MyComponents/FetchGetId";
-import UseFetchData from "../../../MyComponents/FetchImg";
 import TurnImgIn from "../../../MyComponents/TurnImgIn";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +11,7 @@ import DateCutting from "../../../MyComponents/DateCutting";
 import GetImg from "../../../MyComponents/GetImg";
 import AddPrice from "../../../MyComponents/AddPrice";
 import AddTerritory from "../../../MyComponents/AddTerritory";
+import FetchPostCustomer from "../../../MyComponentsAdmin/FetchPostCustomer";
 const ObyektinsidePayment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -29,6 +29,26 @@ const ObyektinsidePayment = () => {
       setKeepingImgSource(imageUrls);
     }
   }, [getById]);
+  const ReloadCheck = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Send!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Reload();
+        Swal.fire({
+          title: "Uğurlu!",
+          text: "Göndərildi",
+          icon: "success",
+        });
+      }
+    });
+  };
   const Reload = async () => {
     const ReloadData = {
       Id:getById.id,
@@ -78,11 +98,90 @@ const ObyektinsidePayment = () => {
     } else {
       Swal.fire({
         title: "Uğursuz",
-        text: "Bütün (*) xanaları doldurun.",
+        text: "Bəzi məlumat yoxdur.",
         icon: "error",
       });
     }
   };
+  const customerTake = (id) => {
+    var CustomerName = getById.customer.filter((x) => x.isTake === true);
+    if (
+      CustomerName.length < 1 ||
+      id === CustomerName[0].secondStepCustomerId
+    ) {
+      let kind = `ObyektCustomer/${id}`;
+      FetchPostCustomer(null, kind);
+      Swal.fire({
+        title: "Uğurlu",
+        text: "Göndərildi",
+        icon: "success",
+      });
+    } else {
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Verildi kimi qeyd etdiyiniz 1 müştəri var",
+        icon: "error",
+      });
+    }
+  };
+  const CustomerBank = () => {
+    var CustomerName = getById.customer.filter((x) => x.isTake === true);
+    if (CustomerName.length === 1) {
+      const obj = {
+        Name: CustomerName[0].fullName,
+        Number: CustomerName[0].email,
+      };
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Send!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          FetchPostCustomer(obj, "EmailSend");
+          Swal.fire({
+            title: "Uğurlu!",
+            text: "Göndərildi.",
+            icon: "success",
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Uğursuz",
+        text: "Ya müştəri yoxdur ya da 2 müştəri var",
+        icon: "error",
+      });
+    }
+  };
+  const OwnerBank = () => {
+    const obj = {
+      name: getById.fullname,
+      number: getById.email,
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Send!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        FetchPostCustomer(obj, "EmailSend");
+        Swal.fire({
+          title: "Uğurlu!",
+          text: "Göndərildi",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <div className=" col-12 p-2 mt-4 ps-2">
@@ -160,12 +259,15 @@ const ObyektinsidePayment = () => {
                 <span className="time-home">{DateCutting(getById.date)}</span>
               </p>
               <div className="col-12 d-flex justify-content-center h-auto">
-                <div className="col-12 col-sm-6 d-flex px-1">
+                <div className="col-12 col-sm-11 d-flex px-1">
                   <table className="table table-dark table-striped ">
                     <thead>
                       <tr>
                         <th>Müştərinin adı soyadı</th>
                         <th>Nömrə</th>
+                        <th>Email</th>
+                        <th>Götürürüb ?</th>
+                        <th>Qeyd etmək</th>
                         <th>Tarix</th>
                       </tr>
                     </thead>
@@ -175,6 +277,12 @@ const ObyektinsidePayment = () => {
                           <tr key={index}>
                             <td>{x.fullName}</td>
                             <td>{x.number}</td>
+                            <td>{x.email}</td>
+                            <td>{x.isTake ? "Verilib" : "Verilməyib"}</td>
+                            <td><button className="p-1" onClick={() => {
+                                  customerTake(x.secondStepCustomerId);
+                                  x.isTake = !x.isTake;
+                                }}>{x.isTake ? "Verilib" : " verildi qeyd etmək"} </button></td>
                             <td>{DateCutting(x.directCustomerDate)}</td>
                           </tr>
                         ))}
@@ -183,8 +291,14 @@ const ObyektinsidePayment = () => {
                 </div>
               </div>
               <GetBack Direct={"/HomeLogin/MainAdmin/Obyekt/Payment"} />
-              <button className="p-2 m-3 bg-success text-white" onClick={Reload}>
+              <button className="p-2 m-3 bg-success text-white" onClick={ReloadCheck}>
                 Yenidən yüklə
+              </button>
+              <button className="p-2 m-3 bg-info text-white" onClick={CustomerBank}>
+                Müştəriyə kart göndərmək
+              </button>
+              <button className="p-2 m-3 bg-primary text-white" onClick={OwnerBank}>
+              ev sahibinə kart göndərmək
               </button>
             </div>
           )}

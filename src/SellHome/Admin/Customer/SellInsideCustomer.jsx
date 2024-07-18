@@ -111,13 +111,14 @@ const SellinsideCustomer = () => {
               <span className="time-home">{DateCutting(getById.date)}</span>
             </p>
             <div className="col-12 d-flex justify-content-center h-auto">
-              <div className="col-12 col-sm-6 d-flex px-1">
+              <div className="col-12 col-sm-11 d-flex px-1">
                 <table className="table table-dark table-striped">
                   <thead>
                     <tr>
                       <th>Müştərinin adı soyadı</th>
                       <th>Nömrə</th>
                       <th>Gmail</th>
+                      <th>Verilib ?</th>
                       <th>Tarix</th>
                     </tr>
                   </thead>
@@ -128,6 +129,7 @@ const SellinsideCustomer = () => {
                           <td>{x.fullName}</td>
                           <td>{x.number}</td>
                           <td>{x.email}</td>
+                          <td>{x.isTake ? "Verilib" : "Verilməyib"}</td>
                           <td>{DateCutting(x.directCustomerDate)}</td>
                         </tr>
                       ))}
